@@ -54,6 +54,11 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
             return View(productViewModel);
         }
 
+        /// <summary>
+        /// Save Product.
+        /// </summary>
+        // Author: Mod Nattasit
+        // Updated: 07/07/2019
         [HttpPost]
         public IActionResult Save(ProductViewModel productViewModel)
         {
@@ -74,6 +79,11 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
             return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
         }
 
+        /// <summary>
+        /// Update Product.
+        /// </summary>
+        // Author: Mod Nattasit
+        // Updated: 07/07/2019
         [HttpPost]
         public IActionResult Update(Product product)
         {
@@ -94,6 +104,11 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
             return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
         }
 
+        /// <summary>
+        /// Delete Product.
+        /// </summary>
+        // Author: Mod Nattasit
+        // Updated: 07/07/2019
         [HttpPost]
         public JsonResult Delete(Product product)
         {
@@ -114,6 +129,11 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
             return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
         }
 
+        /// <summary>
+        /// Update Table of Product.
+        /// </summary>
+        // Author: Mod Nattasit
+        // Updated: 07/07/2019
         public PartialViewResult UpdateTable()
         {
             ProductViewModel productViewModel = new ProductViewModel();
