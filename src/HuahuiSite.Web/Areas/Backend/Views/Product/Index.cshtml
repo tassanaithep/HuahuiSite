@@ -1,0 +1,186 @@
+﻿@model HuahuiSite.Web.Areas.Backend.Models.ProductViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+
+    <div class="col-md-8">
+        <h4 class="card-title">News Management</h4>
+        <h6 class="card-subtitle m-b-20 text-muted">you can make News like this</h6>
+    </div>
+
+    <div class="col-md-4 text-right">
+
+        <button class="btn btn-info waves-effect waves-light" type="button" data-toggle="modal" data-target="#create-news-modal"><span class="btn-label"><i class="fa fa-plus"></i></span>Create News</button>
+    </div>
+    <div class="modal fade modal-news" id="create-news-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <form id="form-create-news" asp-controller="News" asp-action="SaveNews" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSaveSuccess" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel1">Add News</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="row">
+
+                        <hr />
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="modal-body">
+                                <h3 class="card-title"><span class="text-info">Thai Language</span></h3>
+
+                                <div class="form-group">
+                                    <label asp-for="TitleNameEn" class="control-label">Titile Name (TH):</label>
+                                    <input class="form-control" asp-for="TitleNameEn">
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="DescriptionEn" class="control-label">Description (TH):</label>
+                                    <div class="form-group">
+                                        <textarea class="textarea_editor form-control" rows="5" placeholder="Enter text ..." asp-for="DescriptionEn"></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        @*<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="modal-body">
+                                <h3 class="card-title"><span class="text-warning">English Language</span></h3>
+                                <div class="form-group">
+                                    <label asp-for="TitleNameTh" class="control-label">Titile Name (EN):</label>
+                                    <input class="form-control" asp-for="TitleNameTh">
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="DescriptionTh" class="control-label">Description (EN):</label>
+                                    <div class="form-group">
+                                        <textarea class="textarea_editor form-control" rows="5" placeholder="Enter text ..." asp-for="DescriptionTh"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+
+                    </div>
+                    @*<div class="col-md-12 col-lg-12">
+                        <div class="form-group">
+                            <label asp-for="NewsCreatModel.TitlePictureImageFile" class="control-label">Picture Upload</label>
+                            <input class="dropify" asp-for="NewsCreatModel.TitlePictureImageFile" />
+                        </div>
+                    </div>*@
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i>Success</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<div class="row" id="parent-product-table">
+    <partial name="_ProductTable" model="Model" />
+</div>
+
+@section Scripts {
+
+    <script>
+
+        ClearForm = () => {
+            $("#form-create-news")[0].reset();
+            $(".dropify-preview, .dropify-clear").remove();
+        };
+
+        HideModal = () => {
+            $(".modal-news").modal("hide");
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+        };
+
+        UpdateNewsTable = () => {
+            $.ajax({
+                url: "/Backend/News/UpdateNewsTable",
+                success: function (res) {
+                    $("#parent-news-table").html(res);
+                },
+                error: function () { }
+            });
+        };
+
+        ChangeImageFile = (element, formId) => {
+            let $inputPictureFile = $("#" + formId).find(".title-picture-file-update");
+
+            let file = element.files[0];
+            let reader = new FileReader();
+
+            reader.onload = (function (theFile) {
+                return function (e) {
+                    let binaryData = e.target.result;
+
+                    let base64String = "data:image/jpeg;base64," + window.btoa(binaryData);
+
+                    $inputPictureFile.val(base64String);
+                };
+            })(file);
+
+            reader.readAsBinaryString(file);
+        };
+
+        DeleteNews = (formId) => {
+            let $updateForm = $("#" + formId);
+            let $id = $updateForm.find(".id-update").val();
+            let $titlePictureFile = $updateForm.find(".title-picture-file-update").val();
+
+            let $form = $("<form></form>");
+            $form.append("<input type='hidden' name='Id' value=" + $id + " />");
+            $form.append("<input type='hidden' name='TitlePictureFile' value=" + $titlePictureFile + " />");
+
+            $.ajax({
+                type: "POST",
+                url: "/Backend/News/DeleteNews",
+                data: $form.serialize(),
+                success: function (res) {
+                    if (res.isSuccess) {
+                        UpdateNewsTable();
+                        swal("Delete Success", "", "success");
+                    } else {
+                        swal("Delete Failed", "", "error");
+                    }
+                },
+                error: function () { }
+            });
+        };
+
+        OnSaveSuccess = (res) => {
+            if (res.isSuccess) {
+                $("body").removeAttr("style");
+                HideModal();
+                ClearForm();
+                UpdateNewsTable();
+                swal("Save Success", "", "success");
+                DropifyScriptRender();
+            } else {
+                swal("Save Failed", "", "error");
+            }
+        };
+
+        OnUpdateSuccess = (res) => {
+            if (res.isSuccess) {
+                HideModal();
+                ClearForm();
+                UpdateNewsTable();
+                swal("Update Success", "", "success");
+                DropifyScriptRender();
+            } else {
+                swal("Update Success", "", "error");
+            }
+        };
+
+    </script>
+
+}
+

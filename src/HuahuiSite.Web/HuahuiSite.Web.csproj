@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Backend\Data\" />
+    <Folder Include="Areas\Frontend\Controllers\" />
+    <Folder Include="Areas\Frontend\Data\" />
+    <Folder Include="Areas\Frontend\Models\" />
+    <Folder Include="Areas\Frontend\Views\" />
+    <Folder Include="wwwroot\images\backend\background\" />
+    <Folder Include="wwwroot\images\backend\upload\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HuahuiSite.Core\HuahuiSite.Core.csproj" />
+    <ProjectReference Include="..\HuahuiSite.Infrastructure\HuahuiSite.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

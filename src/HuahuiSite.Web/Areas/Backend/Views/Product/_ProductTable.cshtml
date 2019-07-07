@@ -1,0 +1,151 @@
+﻿@model HuahuiSite.Web.Areas.Backend.Models.ProductViewModel
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-actions">
+                <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+            </div>
+
+        </div>
+        <div class="card-body collapse show">
+            <div class="table-responsive">
+                <table class="table product-overview">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>TitleName</th>
+                            <th>Description</th>
+                            @*<th>TitleName[TH]</th>
+                            <th>Description[TH]</th>
+                            <th>Description[EN]</th>
+                            <th>TitleName[EN]</th>*@
+                            <th>Picture</th>
+                            <th>Datetime</th>
+                            <th>UpdateByUser</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{ int No = 1; }
+
+                        @foreach (var item in Model.ProductList)
+                        {
+                            string modalId = "modal-update-news" + No;
+                            string formId = "form-update-news-" + No;
+
+                            <tr>
+                                <td>@No</td>
+                                <td>@item.TitleNameEn</td>
+                                @if (@item.TitleNameEn.Length > 50)
+                                {
+                                    <td>@item.DescriptionEn.Substring(0, 50) .....</td>
+                                }
+                                else
+                                {
+                                    <td>@item.DescriptionEn</td>
+                                }
+
+                                @*<td>@item.TitleNameEN</td>
+
+                                @if (@item.DescriptionEN.Length > 50)
+                                {
+                                    <td>@item.DescriptionEN.Substring(0, 50) .....</td>
+                                }
+                                else
+                                {
+                                    <td>@item.DescriptionEN</td>
+                                }*@
+
+                                @*<td><img src="~/images/upload/@item.TitlePictureFileName" alt="user" width="80"> </td>*@
+                                <td>@item.CreatedDate</td>
+                                <td>Admin</td>
+                                <td>
+                                    <a href="#" data-toggle="modal" data-target="#@modalId"> <i class="fas fa-pencil-alt text-inverse m-r-10"></i> </a>
+                                    <div class="modal fade modal-news" id="@modalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <form id="@formId" asp-controller="News" asp-action="UpdateNews" data-ajax="true" data-ajax-method="post" data-ajax-success="OnUpdateSuccess" enctype="multipart/form-data">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title text-warning" id="exampleModalLabel1">Edit News</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                    </div>
+                                                    <input type="hidden" class="id-update" name="Id" value="@item.Id" />
+                                                    @*<input type="hidden" class="title-picture-file-update" name="TitlePictureFile" value="@item.TitlePictureFileName" />*@
+                                                    <input type="hidden" name="Active" value="@item.IsActive" />
+                                                    <input type="hidden" name="CreatedDate" value="@item.CreatedDate" />
+                                                    <input type="hidden" name="UpdatedDate" value="@DateTime.Now" />
+                                                    <div class="row">
+
+                                                        <hr />
+                                                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                                            <div class="modal-body">
+                                                                <h3 class="card-title"><span class="text-info">Thai Language</span></h3>
+
+                                                                <div class="form-group">
+                                                                    <label for="Banner-name" class="control-label">Titile Name (TH):</label>
+                                                                    <input type="text" class="form-control" name="TitleNameTH" value="@item.TitleNameEn">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="message-text" class="control-label">Content Description (TH):</label>
+                                                                    <div class="form-group">
+                                                                        <textarea class="textarea_editor form-control" rows="15" placeholder="Enter text ..." name="DescriptionTH">@item.DescriptionEn</textarea>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        @*<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                                            <div class="modal-body">
+                                                                <h3 class="card-title"><span class="text-warning">English Language</span></h3>
+                                                                <div class="form-group">
+                                                                    <label for="Banner-name" class="control-label">Titile Name (EN):</label>
+                                                                    <input type="text" class="form-control" name="TitleNameEN" value="@item.TitleNameTh">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="message-text" class="control-label">Content Description (EN):</label>
+
+                                                                    <div class="form-group">
+                                                                        <textarea class="textarea_editor form-control" rows="15" placeholder="Enter text ..." name="DescriptionEN">@item.TitleNameTh</textarea>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>*@
+
+                                                    </div>
+                                                    <div class="col-md-12 col-lg-12">
+                                                        <div class="form-group">
+                                                            <label for="Banner-name" class="control-label">File Upload</label>
+                                                            <label for="input-file-now">Your so fresh input file</label>
+                                                            <input type="file" class="dropify" onchange="ChangeImageFile(this, '@formId')" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Success</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="#" onclick="DeleteNews('@formId')"><i class="fas fa-trash-alt text-inverse m-r-10"></i></a>
+                                </td>
+                            </tr>
+
+                            No++;
+
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
