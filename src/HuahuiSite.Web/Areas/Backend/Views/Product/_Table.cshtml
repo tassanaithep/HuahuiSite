@@ -1,0 +1,112 @@
+﻿@model HuahuiSite.Web.Areas.Backend.Models.ProductViewModel
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-actions">
+                <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+            </div>
+        </div>
+        <div class="card-body collapse show">
+            <div class="table-responsive">
+                <table class="table product-overview">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>TitleName</th>
+                            <th>Description</th>
+                            <th>Picture</th>
+                            <th>Datetime</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{ int No = 1; }
+
+                        @foreach (var item in Model.ProductList)
+                        {
+
+                            string modalId = "modal-update" + No;
+
+                            <tr>
+                                <td>@No</td>
+                                <td>@item.TitleNameTh</td>
+
+                                @if (@item.DescriptionTh.Length > 50)
+                                {
+                                    <td>@item.DescriptionTh.Substring(0, 50) .....</td>
+                                }
+                                else
+                                {
+                                    <td>@item.DescriptionTh</td>
+                                }
+
+                                @*<td><img src="~/images/upload/@item.TitlePictureFileName" alt="user" width="80"> </td>*@
+
+                                <td>@item.CreatedDate</td>
+                                <td>Admin</td>
+                                <td>
+                                    <a href="#" data-toggle="modal" data-target="#@modalId"> <i class="fas fa-pencil-alt text-inverse m-r-10"></i> </a>
+                                    <div class="modal fade modal-news" id="@modalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <form class="form-row-table" asp-controller="Product" asp-action="Update" data-ajax="true" data-ajax-method="post" data-ajax-success="OnUpdateSuccess" enctype="multipart/form-data">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="exampleModalLabel1">Edit Product</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                    </div>
+                                                    <input type="hidden" name="Id" value="@item.Id" />
+                                                    <input type="hidden" name="TitlePictureFileName" value="@item.TitlePictureFileName" />
+                                                    <input type="hidden" name="CreatedDate" value="@item.CreatedDate" />
+                                                    <input type="hidden" name="UpdatedDate" value="@DateTime.Now" />
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Titile Name</label>
+                                                                    <input type="text" class="form-control" name="TitleNameTh" value="@item.TitleNameTh">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Content Description</label>
+                                                                    <div class="form-group">
+                                                                        <textarea class="textarea_editor form-control" rows="15" placeholder="Enter text ..." name="DescriptionTh">@item.DescriptionTh</textarea>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @*<div class="col-md-12 col-lg-12">
+            <div class="form-group">
+                <label for="Banner-name" class="control-label">File Upload</label>
+                <label for="input-file-now">Your so fresh input file</label>
+                <input type="file" class="dropify" onchange="ChangeImageFile(this, '@formId')" />
+            </div>
+        </div>*@
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Success</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="#" onclick="Delete(this)"><i class="fas fa-trash-alt text-inverse m-r-10"></i></a>
+                                </td>
+                            </tr>
+
+                            No++;
+
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,6 +4,7 @@ using HuahuiSite.Web.Areas.Backend.Models;
 using HuahuiSite.Web.Areas.Backend.Services.Interface;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -38,21 +39,29 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
             productViewModel.ProductList = _unitOfWork.Products.GetAll();
         }
 
-        //public void SaveProduct(ProductViewModel productViewModel)
-        //{
-        //    Product Product = new Product()
-        //    {
-        //        Id = 0,
-        //        TitleNameEN = productViewModel.TitleNameEN,
-        //        TitleNameTH = productViewModel.TitleNameTH,
-        //        DescriptionEN = productViewModel.DescriptionEN,
-        //        DescriptionTH = productViewModel.DescriptionTH,
-        //        Active = false,
-        //        CreatedDate = DateTime.Now,
-        //    };
+        public void SaveProduct(ProductViewModel productViewModel)
+        {
+            string TitlePictureImageFileName = Guid.NewGuid().ToString() + Path.GetExtension(productViewModel.TitlePictureImageFile.FileName);
 
-        //    _unitOfWork.Products.Add(Product);
-        //}
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\backend\upload", TitlePictureImageFileName);
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                productViewModel.TitlePictureImageFile.CopyTo(fileStream);
+            }
+
+            Product Product = new Product()
+            {
+                //TitleNameEN = productViewModel.TitleNameEN,
+                TitleNameTh = productViewModel.TitleNameTh,
+                //DescriptionEN = productViewModel.DescriptionEN,
+                DescriptionTh = productViewModel.DescriptionTh,
+                TitlePictureFileName = TitlePictureImageFileName,
+                IsActive = true,
+                CreatedDate = DateTime.Now,
+            };
+
+            _unitOfWork.Products.Add(Product);
+        }
 
         /// <summary>
         /// Update Product.

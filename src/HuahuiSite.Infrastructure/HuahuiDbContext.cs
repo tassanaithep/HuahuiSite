@@ -35,17 +35,18 @@ namespace HuahuiSite.Infrastructure
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.DescriptionEn)
-                    .IsRequired()
                     .HasColumnName("DescriptionEN");
 
-                entity.Property(e => e.DescriptionTh).HasColumnName("DescriptionTH");
+                entity.Property(e => e.DescriptionTh)
+                    .IsRequired()
+                    .HasColumnName("DescriptionTH");
 
                 entity.Property(e => e.TitleNameEn)
-                    .IsRequired()
                     .HasColumnName("TitleNameEN")
                     .HasMaxLength(50);
 
                 entity.Property(e => e.TitleNameTh)
+                    .IsRequired()
                     .HasColumnName("TitleNameTH")
                     .HasMaxLength(50);
 

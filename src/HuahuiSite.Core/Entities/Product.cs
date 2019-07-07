@@ -10,6 +10,7 @@ namespace HuahuiSite.Core.Entities
         public string TitleNameTh { get; set; }
         public string DescriptionEn { get; set; }
         public string DescriptionTh { get; set; }
+        public string TitlePictureFileName { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }

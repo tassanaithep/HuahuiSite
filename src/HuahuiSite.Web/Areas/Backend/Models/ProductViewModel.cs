@@ -1,4 +1,5 @@
 ﻿using HuahuiSite.Core.Entities;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,8 @@ namespace HuahuiSite.Web.Areas.Backend.Models
         public string TitleNameTh { get; set; }
         public string DescriptionEn { get; set; }
         public string DescriptionTh { get; set; }
+        public IFormFile TitlePictureImageFile { get; set; }
         public bool IsActive { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime? UpdatedDate { get; set; }
 
         public IEnumerable<Product> ProductList { get; set; }
     }
