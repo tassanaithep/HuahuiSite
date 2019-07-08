@@ -27,6 +27,8 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
         #endregion
 
+        #region Views
+
         /// <summary>
         /// Index of Product Page.
         /// </summary>
@@ -53,6 +55,10 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
             return View(productViewModel);
         }
+
+        #endregion
+
+        #region Actions
 
         /// <summary>
         /// Save Product.
@@ -149,5 +155,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
             return PartialView("_Table", productViewModel);
         }
+
+        #endregion
     }
 }
