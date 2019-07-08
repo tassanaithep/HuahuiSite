@@ -43,13 +43,12 @@
                                     <td>@item.DescriptionTh</td>
                                 }
 
-                                @*<td><img src="~/images/upload/@item.TitlePictureFileName" alt="user" width="80"> </td>*@
+                                <td><img src="~/images/upload/@item.TitlePictureFileName" alt="user" width="80" /></td>
 
                                 <td>@item.CreatedDate</td>
-                                <td>Admin</td>
                                 <td>
                                     <a href="#" data-toggle="modal" data-target="#@modalId"> <i class="fas fa-pencil-alt text-inverse m-r-10"></i> </a>
-                                    <div class="modal fade modal-news" id="@modalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;" aria-hidden="true">
+                                    <div class="modal fade" id="@modalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;" aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content">
                                                 <form class="form-row-table" asp-controller="Product" asp-action="Update" data-ajax="true" data-ajax-method="post" data-ajax-success="OnUpdateSuccess" enctype="multipart/form-data">
@@ -79,13 +78,13 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    @*<div class="col-md-12 col-lg-12">
-            <div class="form-group">
-                <label for="Banner-name" class="control-label">File Upload</label>
-                <label for="input-file-now">Your so fresh input file</label>
-                <input type="file" class="dropify" onchange="ChangeImageFile(this, '@formId')" />
-            </div>
-        </div>*@
+                                                    <div class="col-md-12 col-lg-12">
+                                                        <div class="form-group">
+                                                            <label class="control-label">File Upload</label>
+                                                            <label for="input-file-now">Your so fresh input file</label>
+                                                            <input type="file" class="dropify" name="TitlePictureImageFile" />
+                                                        </div>
+                                                    </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                         <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Success</button>

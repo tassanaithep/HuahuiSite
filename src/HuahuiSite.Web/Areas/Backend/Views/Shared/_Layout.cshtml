@@ -364,6 +364,10 @@
 
     <script>
 
+        $(function () {
+            DropifyScriptRender();
+        });
+
         $(document).ajaxStart(function () {
             $(".preloader").show();
         });
@@ -372,7 +376,7 @@
             $(".preloader").hide();
         });
 
-        function DropifyScriptRender() {
+        DropifyScriptRender = () => {
             // Basic
             $('.dropify').dropify();
 
@@ -411,11 +415,7 @@
                     drDestroy.init();
                 }
             })
-        }
-
-        $(function () {
-            DropifyScriptRender();
-        });
+        };
 
     </script>
 

@@ -17,7 +17,7 @@
     <Folder Include="Areas\Frontend\Models\" />
     <Folder Include="Areas\Frontend\Views\" />
     <Folder Include="wwwroot\images\backend\background\" />
-    <Folder Include="wwwroot\images\backend\upload\" />
+    <Folder Include="wwwroot\images\upload\" />
   </ItemGroup>
 
   <ItemGroup>

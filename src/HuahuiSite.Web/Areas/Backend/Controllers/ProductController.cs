@@ -85,14 +85,14 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         // Author: Mod Nattasit
         // Updated: 07/07/2019
         [HttpPost]
-        public IActionResult Update(Product product)
+        public IActionResult Update(ProductViewModel productViewModel)
         {
             bool isSuccess;
             string exceptionMessage = string.Empty;
 
             try
             {
-                _productService.UpdateProduct(product);
+                _productService.UpdateProduct(productViewModel);
                 isSuccess = true;
             }
             catch (Exception ex)

@@ -1,4 +1,38 @@
-﻿/**
+﻿// #region On Load
+
+/**
+  * @desc On Page Load
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+$(function () {
+    RenderImage();
+});
+
+// #endregion
+
+// #region Render
+
+/**
+  * @desc Render Image of Datatable
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+RenderImage = () => {
+    $(".form-row-table").each(function (index, element) {
+        let $titlePictureFileName = $(element).find("[name='TitlePictureFileName']").val();
+
+        if ($titlePictureFileName !== "") {
+            $(element).find(".dropify-preview").css("display", "block");
+            $(element).find(".dropify-clear").css("display", "block");
+            $(element).find(".dropify-render").append("<img src='/images/upload/" + $titlePictureFileName + "' />");
+        }
+    });
+};
+
+// #endregion
+
+// #region Affect
+
+/**
   * @desc opens a modal window to display a message
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
@@ -31,26 +65,15 @@ UpdateTable = () => {
     });
 };
 
-ChangeImageFile = (element, formId) => {
-    let $inputPictureFile = $("#" + formId).find(".title-picture-file-update");
+// #endregion
 
-    let file = element.files[0];
-    let reader = new FileReader();
+// #region Action
 
-    reader.onload = (function (theFile) {
-        return function (e) {
-            let binaryData = e.target.result;
-
-            let base64String = "data:image/jpeg;base64," + window.btoa(binaryData);
-
-            $inputPictureFile.val(base64String);
-        };
-    })(file);
-
-    reader.readAsBinaryString(file);
-};
-
-
+/**
+  * @desc opens a modal window to display a message
+  * @param {Object} e - Element of Delete Button
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
 Delete = (e) => {
     let $form = $(e).closest("tr").find(".form-row-table");
 
@@ -77,6 +100,15 @@ Delete = (e) => {
     });
 };
 
+// #endregion
+
+// #region Response
+
+/**
+  * @desc On Form Action Save Success
+  * @param {Object} res - Json of Result
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
 OnSaveSuccess = (res) => {
     if (res.isSuccess) {
         $("body").removeAttr("style");
@@ -90,7 +122,11 @@ OnSaveSuccess = (res) => {
     }
 };
 
-
+/**
+  * @desc On Form Action Update Success
+  * @param {Object} res - Json of Result
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
 OnUpdateSuccess = (res) => {
     if (res.isSuccess) {
         HideModal();
@@ -102,3 +138,5 @@ OnUpdateSuccess = (res) => {
         swal("Update Success", "", "error");
     }
 };
+
+// #endregion
