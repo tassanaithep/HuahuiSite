@@ -12,10 +12,9 @@
 
   <ItemGroup>
     <Folder Include="Areas\Backend\Data\" />
-    <Folder Include="Areas\Frontend\Controllers\" />
     <Folder Include="Areas\Frontend\Data\" />
     <Folder Include="Areas\Frontend\Models\" />
-    <Folder Include="Areas\Frontend\Views\" />
+    <Folder Include="Areas\Frontend\test\" />
     <Folder Include="wwwroot\images\backend\background\" />
     <Folder Include="wwwroot\images\upload\" />
   </ItemGroup>
