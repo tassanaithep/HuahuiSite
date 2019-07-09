@@ -33,16 +33,17 @@ RenderImage = () => {
 // #region Affect
 
 /**
-  * @desc opens a modal window to display a message
+  * @desc Clear Create Form
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
 ClearForm = () => {
     $("#form-create")[0].reset();
-    $(".dropify-preview, .dropify-clear").remove();
+    $("#form-create").find(".dropify-wrapper").remove();
+    $("#parent-form-group-title-picture").append("<input class='dropify' type='file' id='TitlePictureImageFile' name='TitlePictureImageFile'>");
 };
 
 /**
-  * @desc opens a modal window to display a message
+  * @desc Hide Modal
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
 HideModal = () => {
@@ -52,7 +53,7 @@ HideModal = () => {
 };
 
 /**
-  * @desc opens a modal window to display a message
+  * @desc Update Table of Data
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
 UpdateTable = () => {
@@ -70,7 +71,7 @@ UpdateTable = () => {
 // #region Action
 
 /**
-  * @desc opens a modal window to display a message
+  * @desc Delete Data
   * @param {Object} e - Element of Delete Button
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
@@ -115,8 +116,8 @@ OnSaveSuccess = (res) => {
         HideModal();
         ClearForm();
         UpdateTable();
-        swal("Save Success", "", "success");
         DropifyScriptRender();
+        swal("Save Success", "", "success");
     } else {
         swal("Save Failed", "", "error");
     }
@@ -132,8 +133,8 @@ OnUpdateSuccess = (res) => {
         HideModal();
         ClearForm();
         UpdateTable();
-        swal("Update Success", "", "success");
         DropifyScriptRender();
+        swal("Update Success", "", "success");
     } else {
         swal("Update Success", "", "error");
     }
