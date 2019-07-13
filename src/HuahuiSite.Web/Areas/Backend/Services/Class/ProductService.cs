@@ -29,6 +29,54 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
         #region CRUD
 
+        #region Create
+
+        /// <summary>
+        /// Save Product.
+        /// </summary>
+        // Author: Mod Nattasit
+        // Updated: 07/07/2019
+        public void SaveProduct(ProductViewModel productViewModel)
+        {
+            string titlePictureImageFileName = string.Empty;
+
+            #region Save Image
+
+            if (productViewModel.TitlePictureImageFile != null)
+            {
+                titlePictureImageFileName = Guid.NewGuid().ToString() + Path.GetExtension(productViewModel.TitlePictureImageFile.FileName);
+
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\upload", titlePictureImageFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    productViewModel.TitlePictureImageFile.CopyTo(fileStream);
+                }
+            }
+
+            #endregion
+
+            #region Create Object to Save
+
+            Product Product = new Product()
+            {
+                //TitleNameEN = productViewModel.TitleNameEN,
+                TitleNameTh = productViewModel.TitleNameTh,
+                //DescriptionEN = productViewModel.DescriptionEN,
+                DescriptionTh = productViewModel.DescriptionTh,
+                TitlePictureFileName = productViewModel.TitlePictureImageFile != null ? titlePictureImageFileName : null,
+                IsActive = true,
+                CreatedDate = DateTime.Now,
+            };
+
+            #endregion
+
+            _unitOfWork.Products.Add(Product);
+        }
+
+        #endregion
+
+        #region Read
+
         /// <summary>
         /// Get Product List.
         /// </summary>
@@ -39,29 +87,9 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
             productViewModel.ProductList = _unitOfWork.Products.GetAll();
         }
 
-        public void SaveProduct(ProductViewModel productViewModel)
-        {
-            string TitlePictureImageFileName = Guid.NewGuid().ToString() + Path.GetExtension(productViewModel.TitlePictureImageFile.FileName);
+        #endregion
 
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\upload", TitlePictureImageFileName);
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                productViewModel.TitlePictureImageFile.CopyTo(fileStream);
-            }
-
-            Product Product = new Product()
-            {
-                //TitleNameEN = productViewModel.TitleNameEN,
-                TitleNameTh = productViewModel.TitleNameTh,
-                //DescriptionEN = productViewModel.DescriptionEN,
-                DescriptionTh = productViewModel.DescriptionTh,
-                TitlePictureFileName = TitlePictureImageFileName,
-                IsActive = true,
-                CreatedDate = DateTime.Now,
-            };
-
-            _unitOfWork.Products.Add(Product);
-        }
+        #region Update
 
         /// <summary>
         /// Update Product.
@@ -70,35 +98,38 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void UpdateProduct(ProductViewModel productViewModel)
         {
-            string TitlePictureImageFileName = string.Empty;
+            string titlePictureImageFileName = string.Empty;
 
             #region Update Image
 
-            if (productViewModel.TitlePictureImageFile != null)
-            {
-                #region Delete Old Image
+            #region Delete Old Image
 
+            if ((productViewModel.TitlePictureImageFile != null || productViewModel.IsRemoveImage) && productViewModel.TitlePictureFileName != null)
+            {
                 string imagePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\upload", productViewModel.TitlePictureFileName);
 
                 if (System.IO.File.Exists(imagePath))
                 {
                     System.IO.File.Delete(imagePath);
                 }
+            }
 
-                #endregion
+            #endregion
 
-                #region Save New Image
-                
-                TitlePictureImageFileName = Guid.NewGuid().ToString() + Path.GetExtension(productViewModel.TitlePictureImageFile.FileName);
+            #region Save New Image
 
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\upload", TitlePictureImageFileName);
+            if (!productViewModel.IsRemoveImage)
+            {
+                titlePictureImageFileName = Guid.NewGuid().ToString() + Path.GetExtension(productViewModel.TitlePictureImageFile.FileName);
+
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\upload", titlePictureImageFileName);
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
                     productViewModel.TitlePictureImageFile.CopyTo(fileStream);
                 }
-
-                #endregion
             }
+
+            #endregion
 
             #endregion
 
@@ -111,7 +142,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
                 TitleNameTh = productViewModel.TitleNameTh,
                 //DescriptionEN = productViewModel.DescriptionEN,
                 DescriptionTh = productViewModel.DescriptionTh,
-                TitlePictureFileName = productViewModel.TitlePictureImageFile == null ? productViewModel.TitlePictureFileName : TitlePictureImageFileName,
+                TitlePictureFileName = productViewModel.TitlePictureImageFile == null && !productViewModel.IsRemoveImage ? productViewModel.TitlePictureFileName : productViewModel.TitlePictureImageFile == null && productViewModel.IsRemoveImage ? null : titlePictureImageFileName,
                 //IsActive = true,
                 CreatedDate = productViewModel.CreatedDate,
                 UpdatedDate = DateTime.Now
@@ -121,6 +152,10 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             _unitOfWork.Products.Update(Product);
         }
+
+        #endregion
+
+        #region Delete
 
         /// <summary>
         /// Delete Product.
@@ -138,6 +173,8 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
                 System.IO.File.Delete(imagePath);
             }
         }
+
+        #endregion
 
         #endregion
     }

@@ -9,7 +9,7 @@
         </div>
         <div class="card-body collapse show">
             <div class="table-responsive">
-                <table class="table product-overview">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -43,7 +43,14 @@
                                     <td>@item.DescriptionTh</td>
                                 }
 
-                                <td><img src="~/images/upload/@item.TitlePictureFileName" alt="user" width="80" /></td>
+                                <td>
+
+                                @if (@item.TitlePictureFileName != null)
+	                            {
+                                    <img src="~/images/upload/@item.TitlePictureFileName" alt="Title Picture" width="80" />
+                                }
+
+                                </td>
 
                                 <td>@item.CreatedDate</td>
                                 <td>
@@ -59,6 +66,7 @@
                                                     <input type="hidden" name="Id" value="@item.Id" />
                                                     <input type="hidden" name="TitlePictureFileName" value="@item.TitlePictureFileName" />
                                                     <input type="hidden" name="CreatedDate" value="@item.CreatedDate" />
+                                                    <input type="hidden" name="IsRemoveImage" />
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                                             <div class="modal-body">
@@ -83,7 +91,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Success</button>
+                                                        <button type="submit" class="btn btn-success" onclick="return ValidateUpdateSubmit(this)"><i class="fa fa-check"></i>Success</button>
                                                     </div>
                                                 </form>
                                             </div>

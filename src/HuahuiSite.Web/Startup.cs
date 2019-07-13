@@ -39,7 +39,7 @@ namespace HuahuiSite.Web
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            #region Session
+            #region Initialize Session
 
             // Add Session
             services.AddDistributedMemoryCache();
@@ -63,9 +63,9 @@ namespace HuahuiSite.Web
             // Initialize UnitOfWork
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            #region Services
+            #region Initialize Services
 
-            // Service of Backend
+            // Initialize Service
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IProductService, ProductService>();
 

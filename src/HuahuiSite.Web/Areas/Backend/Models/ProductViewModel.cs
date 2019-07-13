@@ -19,6 +19,7 @@ namespace HuahuiSite.Web.Areas.Backend.Models
         public DateTime CreatedDate { get; set; }
 
         public IFormFile TitlePictureImageFile { get; set; }
+        public bool IsRemoveImage { get; set; }
 
         public IEnumerable<Product> ProductList { get; set; }
     }
