@@ -1,28 +1,28 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - HuahuiSite.Web</title>
+    <title> @ViewData["Title"] - HuahuiSite.Web</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-        <link rel="shortcut icon" type="image/x-icon" href="~/FrontendTheme/assets/img/favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="~/lib/FrontendTheme/assets/img/favicon.ico">
 
         <!-- CSS
-    ========================= -->
+        ========================= -->
         <!-- Plugins CSS -->
-        <link rel="stylesheet" href="~/FrontendTheme/assets/css/plugins.css">
+        <link rel="stylesheet" href="~/lib/FrontendTheme/assets/css/plugins.css">
 
         <!-- Main Style CSS -->
-        <link rel="stylesheet" href="~/FrontendTheme/assets/css/style.css">
+        <link rel="stylesheet" href="~/lib/FrontendTheme/assets/css/style.css">
     </environment>
 
     <environment include="Staging, Production">
         <link rel="shortcut icon" type="image/x-icon" href="~/FrontendTheme/assets/img/favicon.ico">
 
         <!-- CSS
-    ========================= -->
+        ========================= -->
         <!-- Plugins CSS -->
         <link rel="stylesheet" href="~/FrontendTheme/assets/css/plugins.css">
 
@@ -31,39 +31,41 @@
     </environment>
 </head>
 <body class="fix-header fix-sidebar card-no-border">
-   
 
-   
 
-    
+
+
+
     <div class="page-wrapper">
         <div class="container-fluid">
-            
 
-            @RenderBody()
 
-            <footer class="footer">
-                © 2019 Management System by HYPER SOFT SOLUTION CO.,LTD
-            </footer>
-        </div>
-    </div>
 
-    <environment include="Development">
-        <script src="~/FrontendTheme/assets/js/plugins.js"></script>
+@RenderBody()
 
-        <!-- Main JS -->
-        <script src="~/FrontendTheme/assets/js/main.js"></script>
-    </environment>
+<footer class="footer">
+    © 2019 Management System by HYPER SOFT SOLUTION CO.,LTD
+</footer>
+</div>
+</div>
 
-    <environment include="Staging, Production">
-        <script src="~/FrontendTheme/assets/js/plugins.js"></script>
+<environment include="Development">
+    <script src="~/FrontendTheme/assets/js/plugins.js"></script>
 
-        <!-- Main JS -->
-        <script src="~/FrontendTheme/assets/js/main.js"></script>
-    </environment>
+    <!-- Main JS -->
+    <script src="~/FrontendTheme/assets/js/main.js"></script>
+</environment>
 
-    
+<environment include="Staging, Production">
+    <script src="~/FrontendTheme/assets/js/plugins.js"></script>
 
-    @RenderSection("Scripts", required: false)
+    <!-- Main JS -->
+    <script src="~/FrontendTheme/assets/js/main.js"></script>
+</environment>
+
+
+
+
+@RenderSection("Scripts", required: false)
 </body>
 </html>
