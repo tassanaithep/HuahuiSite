@@ -33,6 +33,20 @@ RenderImage = () => {
 // #region Affect
 
 /**
+  * @desc Update Page
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+UpdatePage = () => {
+    HideModal();
+    ClearForm();
+    UpdateTable();
+    DropifyScriptRender();
+    RenderImage();
+
+    $("body").removeAttr("style");
+};
+
+/**
   * @desc Clear Create Form
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
@@ -59,6 +73,7 @@ HideModal = () => {
 UpdateTable = () => {
     $.ajax({
         url: "/Backend/Product/UpdateTable",
+        async: false,
         success: function (res) {
             $("#parent-table").html(res);
         },
@@ -91,7 +106,7 @@ Delete = (e) => {
         data: jsonObject,
         success: function (res) {
             if (res.isSuccess) {
-                UpdateTable();
+                UpdatePage();
                 swal("Delete Success", "", "success");
             } else {
                 swal("Delete Failed", "", "error");
@@ -112,11 +127,7 @@ Delete = (e) => {
 */
 OnSaveSuccess = (res) => {
     if (res.isSuccess) {
-        $("body").removeAttr("style");
-        HideModal();
-        ClearForm();
-        UpdateTable();
-        DropifyScriptRender();
+        UpdatePage();
         swal("Save Success", "", "success");
     } else {
         swal("Save Failed", "", "error");
@@ -130,10 +141,7 @@ OnSaveSuccess = (res) => {
 */
 OnUpdateSuccess = (res) => {
     if (res.isSuccess) {
-        HideModal();
-        ClearForm();
-        UpdateTable();
-        DropifyScriptRender();
+        UpdatePage();
         swal("Update Success", "", "success");
     } else {
         swal("Update Success", "", "error");
