@@ -1,446 +1,11 @@
-﻿@{ 
-
-    Layout ="~/Areas/Frontend/Shared/_Layout.cshtml";
-    }
-
+﻿@{
+    Layout = "~/Areas/Frontend/Shared/_Layout.cshtml";
 }
-<!-- Main Wrapper Start -->
-<!--header area start-->
-<header class="header_area pb-sm-90">
-    <!--header top start-->
-    <div class="header_top">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 col-md-12">
-                    <div class="welcome_text">
-                         @*<p> HUAHUI INTER COMPANY</p>*@
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12">
-                    <div class="top_right text-right">
-                        <ul>
-                            <li><a asp-controller="Login"><i class="ion-key"></i> เข้าสู่ระบบ </a></li>
 
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--header top start-->
-    <!--header middel start-->
-    <div class="header_middle">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-3 col-md-12">
-                    <div class="logo" style="border-radius: 0 30px 30px 0;">
-                        <a href="index.html"><img src="~/lib/FrontendTheme/assets/img/logo/logo.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-9 col-md-12">
-                    <div class="middel_right">
-                        <div class="search-container">
-                            <form action="#">
-                                <div class="hover_category">
-                                    <select class="select_option" name="select" id="categori">
-                                        <option selected value="1">All Categories</option>
-                                        <option value="2">สินค้า Lamp & LED </option>
-                                        <option value="3">กล้องติดรถ</option>
-                                        <option value="4">ท่อ</option>
-                                        <option value="5">สินค้าแต่งรถทั่วไป </option>
-                                        <option value="6">กระจกรถ</option>
-                                        <option value="7">เซนเซอร์</option>
-                                        <!--<option value="8">Laptops</option>
-                                        <option value="9">Handbags</option>
-                                        <option value="10">Headphone & Speaker</option>
-                                        <option value="11">Herbs & botanicals</option>
-                                        <option value="12">Vegetables</option>
-                                        <option value="13">Shop</option>
-                                        <option value="14">Laptops & Desktops</option>
-                                        <option value="15">Watchs</option>
-                                        <option value="16">Electronic</option>-->
-                                    </select>
-                                </div>
-                                <div class="search_box">
-                                    <input placeholder="Search" type="text">
-                                    <button type="submit">Search</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="middel_right_info">
-                            <div class="header_account">
-                                <a href="my-account.html"><i class="ion-android-people"></i></a>
-                            </div>
-                            <div class="header_wishlist">
-                                <a href="wishlist.html"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-                            </div>
-                            <div class="mini_cart_wrapper">
-                                <a href="#"><i class="ion-bag"></i>$138.00</a>
-                                <span class="cart_quantity">2</span>
-                                <!--mini cart-->
-                                <div class="mini_cart">
-                                    <div class="cart_item">
-                                        <div class="cart_img">
-                                            <a href="#"><img src="~/lib/FrontendTheme/assets/img/s-product/product.jpg" alt=""></a>
-                                        </div>
-                                        <div class="cart_info">
-                                            <a href="#">Aenean eu tristique</a>
-                                            <span class="quantity">Qty: 1</span>
-                                            <span class="price_cart">$60.00</span>
-                                        </div>
-                                        <div class="cart_remove">
-                                            <a href="#"><i class="ion-android-close"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="cart_item">
-                                        <div class="cart_img">
-                                            <a href="#"><img src="~/lib/FrontendTheme/assets/img/s-product/product2.jpg" alt=""></a>
-                                        </div>
-                                        <div class="cart_info">
-                                            <a href="#">Lid Cover Cookware</a>
-                                            <span class="quantity">Qty: 1</span>
-                                            <span class="price_cart">$69.00</span>
-                                        </div>
-                                        <div class="cart_remove">
-                                            <a href="#"><i class="ion-android-close"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="mini_cart_table">
-                                        <div class="cart_total">
-                                            <span>Sub total:</span>
-                                            <span class="price">$138.00</span>
-                                        </div>
-                                        <div class="cart_total mt-10">
-                                            <span>total:</span>
-                                            <span class="price">$138.00</span>
-                                        </div>
-                                    </div>
-                                    <div class="mini_cart_footer">
-                                        <div class="cart_button">
-                                            <a href="cart.html">View cart</a>
-                                        </div>
-                                        <div class="cart_button">
-                                            <a href="checkout.html">Checkout</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--mini cart end-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--header middel end-->
-    <!--header bottom satrt-->
-    <div class="header_bottom sticky-header">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-12">
-                    <div class="categories_menu_inner">
-                        <div class="categories_menu">
-                            <div class="category_toggle">
-                                <a href="#">categories<i class="fa fa-angle-down"></i></a>
-                            </div>
-                            <nav class="categories_menu_toggle">
-                                <ul>
-                                    <li class="menu_item_children">
-                                        <a href="shop.html">
-                                            <img src="~/lib/FrontendTheme/assets/img/icon/menu1.png" alt="">
-                                            <span> สินค้า Lamp & LED <i class="fa fa-angle-down"></i></span>
-                                        </a>
-                                        <ul class="mega_menu">
-                                            <li class="menu_item_children">
-                                                <a href="#">หลอดไฟส่่องสว่าง</a>
-                                                <ul>
-                                                    <li><a href="shop.html">ไฟหรี่</a></li>
-                                                    <li><a href="shop.html">ไฟเพดาน</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="menu_item_children">
-                                                <a href="shop.html">ไฟซีนอล</a>
-                                                <ul>
-                                                    <li><a href="shop.html">ชุดไฟซีนอล</a></li>
-                                                    <li><a href="shop.html">หลอดไฟซีนอล</a></li>
-                                                    <li><a href="shop.html">กล่องไฟซีนอล</a></li>
-                                                    <li><a href="shop.html">ไฟตัดหมอก</a></li>
-                                                    <li><a href="shop.html">ไฟหน้าXENON</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="menu_item_children">
-                                                <a href="shop.html">หลอดไฟเบรค & ไฟเลี้ยว</a>
-                                                <ul>
-                                                    <li><a href="shop.html">ไฟเบรคกระพริบ</a></li>
-                                                    <li><a href="shop.html">ไฟเบรคหน้า</a></li>
-                                                    <li><a href="shop.html">ไฟไซเรน</a></li>
-                                                    <li><a href="shop.html">ไฟท้าย</a></li>
-                                                    <li><a href="shop.html">ไฟถอย</a></li>
-                                                    <li><a href="shop.html">ไฟเลี้ยว</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu_item_children">
-                                        <a href="shop.html">
-                                            <img src="~/lib/FrontendTheme/assets/img/icon/menu2.png" alt="">
-                                            <span> กล้องติดรถ <i class="fa fa-angle-down"></i></span>
-                                        </a>
-                                        <ul class="sub_menu">
-                                            <li><a href="shop.html">กล้องติดรถ</a></li>
-                                            <li><a href="shop.html">กระจก</a></li>
-                                            <li><a href="shop.html">เซนเซอร์</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu_item_children">
-                                        <a href="shop.html">
-                                            <img src="~/lib/FrontendTheme/assets/img/icon/menu3.png" alt="">
-                                            <span> ท่อ <i class="fa fa-angle-down"></i></span>
-                                        </a>
-                                        <ul class="sub_menu pages">
-                                            <li><a href="shop.html">ท่อตรง</a></li>
-                                            <li><a href="shop.html">ท่องอ</a></li>
-                                            <li><a href="shop.html">สายแวคค่ำ</a></li>
-                                            <li><a href="shop.html">ท่อยาง</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="shop.html">
-                                            <img src="~/lib/FrontendTheme/assets/img/icon/menu4.png" alt="">
-                                            <span> สินค้าแต่งรถทั่วไป </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="shop.html">
-                                            <img src="~/lib/FrontendTheme/assets/img/icon/menu5.png" alt="">
-                                            <span>กระจกรถ </span>
-                                        </a>
-                                        <ul class="sub_menu pages">
-                                            <li><a href="shop.html">กระจกติดรถยนต์1</a></li>
-                                            <li><a href="shop.html">กระจกติดรถยนต์2</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="shop.html">
-                                            <img src="~/lib/FrontendTheme/assets/img/icon/menu6.png" alt="">
-                                            <span> เซนเซอร์</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--header bottom end-->
-</header>
-<!--header area end-->
-<!--header menu area start-->
-<div class="header_main_menu">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="main_menu menu_one">
-                    <nav>
-                        <ul>
-                            <li>
-                                <a href="index.html">หน้าแรก<!--<i class="fa fa-angle-down"></i>--></a>
-                                <!--<ul class="sub_menu">
-                                    <li><a href="index.html">Home 1</a></li>
-                                    <li><a href="index-2.html">Home 2</a></li>
-                                    <li><a href="index-3.html">Home 3</a></li>
-                                    <li><a href="index-4.html">Home 4</a></li>
-                                </ul>-->
-                            </li>
-                            <li>
-                                <a href="shop.html">สินค้าทั้งหมด<!--<i class="fa fa-angle-down"></i>--></a>
-                                <!--<ul class="mega_menu">
-                                    <li>
-                                        <a href="#">Shop Layouts</a>
-                                        <ul>
-                                            <li><a href="shop-fullwidth.html">Full Width</a></li>
-                                            <li><a href="shop-fullwidth-list.html">Full Width list</a></li>
-                                            <li><a href="shop-right-sidebar.html">Right Sidebar </a></li>
-                                            <li><a href="shop-right-sidebar-list.html"> Right Sidebar list</a></li>
-                                            <li><a href="shop-list.html">List View</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">other Pages</a>
-                                        <ul>
-                                            <li><a href="cart.html">cart</a></li>
-                                            <li><a href="checkout.html">Checkout</a></li>
-                                            <li><a href="my-account.html">my account</a></li>
-
-
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">Product Types</a>
-                                        <ul>
-                                            <li><a href="product-details.html">product details</a></li>
-                                            <li><a href="product-sidebar.html">product sidebar</a></li>
-                                            <li><a href="product-grouped.html">product grouped</a></li>
-                                            <li><a href="variable-product.html">product variable</a></li>
-
-                                        </ul>
-                                    </li>
-                                </ul>-->
-                            </li>
-                            <li><a href="shop.html">โปรโมชั่น<!--<i class="fa fa-angle-down"></i>--></a></li>
-                            <!--<li>
-                                <a href="blog.html">blog<i class="fa fa-angle-down"></i></a>
-                                <ul class="sub_menu pages">
-                                    <li><a href="blog-details.html">blog details</a></li>
-                                    <li><a href="blog-fullwidth.html">blog fullwidth</a></li>
-                                    <li><a href="blog-sidebar.html">blog sidebar</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="portfolio.html">pages <i class="fa fa-angle-down"></i></a>
-                                <ul class="sub_menu pages">
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="services.html">services</a></li>
-                                    <li><a href="faq.html">Frequently Questions</a></li>
-                                    <li><a href="contact.html">contact</a></li>
-                                    <li><a href="login.html">login</a></li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                    <li><a href="404.html">Error 404</a></li>
-                                </ul>
-                            </li>-->
-                            <li><a href="about.html">เกี่ยวกับเรา</a></li>
-                            <li><a href="contact.html"> ติดต่อเรา</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--header menu area end-->
-<!--Offcanvas menu area start-->
-<div class="Offcanvas_menu">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="canvas_open">
-                    <span>MENU</span>
-                    <a href="javascript:void(0)"><i class="ion-navicon"></i></a>
-                </div>
-                <div class="Offcanvas_menu_wrapper">
-                    <div class="canvas_close">
-                        <a href="javascript:void(0)"><i class="ion-arrow-left-c"></i></a>
-                    </div>
-                    <div class="welcome_text">
-                        <p> Welcom to HUAHUI INTER COMPANY Glad to see you in our store</p>
-                    </div>
-                    <div class="canvas_search_container">
-                        <form action="#">
-                            <div class="hover_category">
-                                <select class="select_option" name="select" id="categori1">
-                                    <option selected value="1">All Categories</option>
-                                    <option value="2">Accessories</option>
-                                    <option value="3">Accessories & More</option>
-                                    <option value="4">Butters & Eggs</option>
-                                    <option value="5">Camera & Video </option>
-                                    <option value="6">Mornitors</option>
-                                    <option value="7">Tablets</option>
-                                    <option value="8">Laptops</option>
-                                    <option value="9">Handbags</option>
-                                    <option value="10">Headphone & Speaker</option>
-                                    <option value="11">Herbs & botanicals</option>
-                                    <option value="12">Vegetables</option>
-                                    <option value="13">Shop</option>
-                                    <option value="14">Laptops & Desktops</option>
-                                    <option value="15">Watchs</option>
-                                    <option value="16">Electronic</option>
-                                </select>
-                            </div>
-                            <div class="search_box">
-                                <input placeholder="Search" type="text">
-                                <button type="submit">Search</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div id="menu" class="text-left ">
-                        <ul>
-                            <li>
-                                <a href="index.html">home</a>
-                                <ul class="sub_menu">
-                                    <li><a href="index.html">Home 1</a></li>
-                                    <li><a href="index-2.html">Home 2</a></li>
-                                    <li><a href="index-3.html">Home 3</a></li>
-                                    <li><a href="index-4.html">Home 4</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="shop.html">shop</a>
-                                <ul>
-                                    <li>
-                                        <a href="#">Shop Layouts</a>
-                                        <ul>
-                                            <li><a href="shop-fullwidth.html">Full Width</a></li>
-                                            <li><a href="shop-fullwidth-list.html">Full Width list</a></li>
-                                            <li><a href="shop-right-sidebar.html">Right Sidebar </a></li>
-                                            <li><a href="shop-right-sidebar-list.html"> Right Sidebar list</a></li>
-                                            <li><a href="shop-list.html">List View</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">other Pages</a>
-                                        <ul>
-                                            <li><a href="cart.html">cart</a></li>
-                                            <li><a href="checkout.html">Checkout</a></li>
-                                            <li><a href="my-account.html">my account</a></li>
-
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">Product Types</a>
-                                        <ul>
-                                            <li><a href="product-details.html">product details</a></li>
-                                            <li><a href="product-sidebar.html">product sidebar</a></li>
-                                            <li><a href="product-grouped.html">product grouped</a></li>
-                                            <li><a href="variable-product.html">product variable</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="blog.html">blog</a>
-                                <ul>
-                                    <li><a href="blog-details.html">blog details</a></li>
-                                    <li><a href="blog-fullwidth.html">blog fullwidth</a></li>
-                                    <li><a href="blog-sidebar.html">blog sidebar</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="portfolio.html">pages</a>
-                                <ul>
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="services.html">services</a></li>
-                                    <li><a href="faq.html">Frequently Questions</a></li>
-                                    <li><a href="contact.html">contact</a></li>
-                                    <li><a href="login.html">login</a></li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                    <li><a href="404.html">Error 404</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="about.html">about Us</a></li>
-                            <li><a href="contact.html"> Contact Us</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--Offcanvas menu area end-->
 <!--slider area start-->
 <section class="slider_area slider_nav owl-carousel">
-    <div class="single_slider" data-bgimg="/FrontendTheme/assets/img/slider/Promoslider1.jpg">
+    <div class="single_slider" data-bgimg="/lib/FrontendTheme/assets/img/slider/Promoslider1.jpg">
+
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-12">
@@ -454,11 +19,12 @@
             </div>
         </div>
     </div>
-    <div class="single_slider" data-bgimg="/FrontendTheme/assets/img/slider/slider2.jpg">
+    <div class="single_slider" data-bgimg="/lib/FrontendTheme/assets/img/slider/slider2.jpg">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-12">
                     <div class="slider_content">
+
                         <h1>PLAYSTATION</h1>
                         <H2>OVER 100 GAMES</H2>
                         <p>With gamers in mind, PlayStation delivers a new world of unexpected gaming experiences through PlayStation VR. </p>
@@ -469,9 +35,10 @@
         </div>
     </div>
 </section>
+
 <!--slider area end-->
 <!--header tags area-->
-<!--<div class="header_tags">
+@*<div class="header_tags">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -491,10 +58,10 @@
             </div>
         </div>
     </div>
-</div>-->
+</div>*@
 <!--header tags end-->
 <!--shipping area start-->
-<!--<section class="shipping_area">
+@*<section class="shipping_area">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-6">
@@ -543,7 +110,7 @@
             </div>
         </div>
     </div>
-</section>-->
+</section>*@
 <!--shipping area end-->
 <!--home product wrapper star-->
 <section class="home_product_wrapper">
@@ -553,7 +120,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section_title">
-                        <h2> โปรโมชั่น !!!</h2>
+                        <h2> Deal Of The Day</h2>
                         <div class="icone_img">
                             <img src="~/lib/FrontendTheme/assets/img/icon/product_icone.png" alt="">
                         </div>
@@ -598,6 +165,7 @@
                                         </ul>
                                     </div>
                                 </div>
+
                                 <div class="product_timing">
                                     <h3>Ends in</h3>
                                     <div data-countdown="2020/12/15"></div>
@@ -643,6 +211,7 @@
                                         </ul>
                                     </div>
                                 </div>
+
                                 <div class="product_timing">
                                     <h3>Ends in</h3>
                                     <div data-countdown="2020/12/15"></div>
@@ -688,6 +257,7 @@
                                         </ul>
                                     </div>
                                 </div>
+
                                 <div class="product_timing">
                                     <h3>Ends in</h3>
                                     <div data-countdown="2020/12/15"></div>
@@ -733,6 +303,7 @@
                                         </ul>
                                     </div>
                                 </div>
+
                                 <div class="product_timing">
                                     <h3>Ends in</h3>
                                     <div data-countdown="2020/12/15"></div>
@@ -778,6 +349,7 @@
                                         </ul>
                                     </div>
                                 </div>
+
                                 <div class="product_timing">
                                     <h3>Ends in</h3>
                                     <div data-countdown="2020/12/15"></div>
@@ -823,6 +395,7 @@
                                         </ul>
                                     </div>
                                 </div>
+
                                 <div class="product_timing">
                                     <h3>Ends in</h3>
                                     <div data-countdown="2020/12/15"></div>
@@ -855,11 +428,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section_title">
-                        <h2>สินค้าแต่งรถ </h2>
+                        <h2>Laptops & Desktops </h2>
                         <div class="icone_img">
                             <img src="~/lib/FrontendTheme/assets/img/icon/product_icone2.png" alt="">
                         </div>
-                        <!--<ul class="product_tab_button nav" role="tablist">
+                        <ul class="product_tab_button nav" role="tablist">
                             <li>
                                 <a class="active" data-toggle="tab" href="#Tablets" role="tab" aria-controls="Tablets" aria-selected="true">Tab</a>
                             </li>
@@ -869,8 +442,9 @@
                             <li>
                                 <a data-toggle="tab" href="#Laptops" role="tab" aria-controls="Laptops" aria-selected="false">Desktop</a>
                             </li>
-                        </ul>-->
+                        </ul>
                     </div>
+
                 </div>
             </div>
             <div class="row">
@@ -886,7 +460,7 @@
                                 <div class="col-lg-3">
                                     <div class="single_product">
                                         <div class="product_thumb">
-                                            <a class="primary_img" href="product-details.html"><img src="~/lib/FrontendTheme/assets/img/product/product1.jpg" alt=""></a>
+                                            <a class="primary_img" href="product-details.html"><img src="~/lib/FrontendTheme/assets/img/product/product12.jpg" alt=""></a>
                                             <a class="secondary_img" href="product-details.html"><img src="~/lib/FrontendTheme/assets/img/product/product13.jpg" alt=""></a>
                                             <div class="quick_button">
                                                 <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
@@ -1380,6 +954,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                         <div class="tab-pane fade" id="Laptops" role="tabpanel">
                             <div class="product_carousel product_column2 owl-carousel">
@@ -1631,9 +1206,12 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
                 </div>
             </div>
+
         </div>
         <!--product area end-->
         <!--product area start-->
@@ -1657,6 +1235,7 @@
                             </li>
                         </ul>
                     </div>
+
                 </div>
             </div>
             <div class="row">
@@ -2166,6 +1745,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                         <div class="tab-pane fade" id="Crown" role="tabpanel">
                             <div class="product_carousel product_column2 owl-carousel">
@@ -2417,9 +1997,13 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
                 </div>
             </div>
+
+
 
         </div>
         <!--product area end-->
@@ -2428,7 +2012,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section_title">
-                        <h2>กล้องติดรถ </h2>
+                        <h2>Camera & Video </h2>
                         <div class="icone_img">
                             <img src="~/lib/FrontendTheme/assets/img/icon/product_icone4.png" alt="">
                         </div>
@@ -2444,6 +2028,7 @@
                             </li>
                         </ul>
                     </div>
+
                 </div>
             </div>
             <div class="row">
@@ -2953,6 +2538,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                         <div class="tab-pane fade" id="lg2" role="tabpanel">
                             <div class="product_carousel product_column2 owl-carousel">
@@ -3204,9 +2790,13 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
                 </div>
             </div>
+
+
 
         </div>
         <!--product area end-->
@@ -3228,6 +2818,7 @@
                             </li>
                         </ul>
                     </div>
+
                 </div>
             </div>
             <div class="tab-content">
@@ -3736,6 +3327,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <!--product area end-->
         <!--blog testimonial area-->
@@ -3808,6 +3400,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                     <!--blog area end-->
                 </div>
@@ -3822,6 +3415,7 @@
                         <div class="testimonial_container owl-carousel">
                             <div class="single_testimonial">
                                 <div class="testimonial_banner">
+
                                 </div>
                                 <div class="testimonial_images">
                                     <img src="~/lib/FrontendTheme/assets/img/about/s_testi.jpg" alt="">
@@ -3833,6 +3427,7 @@
                             </div>
                             <div class="single_testimonial">
                                 <div class="testimonial_banner">
+
                                 </div>
                                 <div class="testimonial_images">
                                     <img src="~/lib/FrontendTheme/assets/img/about/s_testi2.jpg" alt="">
@@ -3844,6 +3439,7 @@
                             </div>
                             <div class="single_testimonial">
                                 <div class="testimonial_banner">
+
                                 </div>
                                 <div class="testimonial_images">
                                     <img src="~/lib/FrontendTheme/assets/img/about/s_testi3.jpg" alt="">
@@ -3859,8 +3455,11 @@
             </div>
         </div>
         <!--blog testimonial start-->
+
     </div>
+
 </section>
+
 <!--home product wrapper end-->
 <!--brand area start-->
 <div class="brand_area">
@@ -3922,284 +3521,3 @@
     </div>
 </div>
 <!--brand area end-->
-<!--footer area start-->
-<footer class="footer_widgets">
-    <div class="container">
-        <div class="footer_top">
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="widgets_container contact_us">
-                        <div class="footer_logo">
-                            <a href="#"><img src="~/lib/FrontendTheme/assets/img/logo/logo-2.png" alt=""></a>
-                        </div>
-                        <div class="footer_contact">
-                            <p>
-                                We are a team of designers and developers that
-                                create high quality Magento, Prestashop, Opencart...
-                            </p>
-                            <p><span>Add:</span> 6688Princess Road, London, Greater London BAS 23JK, UK</p>
-                            <ul>
-                                <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li class="googleplus"><a href="#"><i class="ion-social-googleplus"></i></a></li>
-                                <li class="behance"><a href="#"><i class="fa fa-behance"></i></a></li>
-                                <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                <li class="youtube"><a href="#"><i class="ion-social-youtube"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6">
-                    <div class="widgets_container widget_menu">
-                        <h3>Information</h3>
-                        <div class="footer_menu">
-                            <ul>
-                                <li><a href="about.html">About Us</a></li>
-                                <li><a href="blog.html">Delivery Information</a></li>
-                                <li><a href="contact.html">Privacy Policy</a></li>
-                                <li><a href="services.html">Terms & Conditions</a></li>
-                                <li><a href="#">Returns</a></li>
-                                <li><a href="portfolio.html">Gift Certificates</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4">
-                    <div class="widgets_container widget_menu">
-                        <h3>My Account</h3>
-                        <div class="footer_menu">
-                            <ul>
-                                <li><a href="my-account.html">My Account</a></li>
-                                <li><a href="#">Order History</a></li>
-                                <li><a href="wishlist.html">Wish List</a></li>
-                                <li><a href="#">Newsletter</a></li>
-                                <li><a href="#">Affiliate</a></li>
-                                <li><a href="faq.html">Specials</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4">
-                    <div class="widgets_container widget_menu">
-                        <h3>Extras</h3>
-                        <div class="footer_menu">
-                            <ul>
-                                <li><a href="#">Returns</a></li>
-                                <li><a href="#">Gift Certificates</a></li>
-                                <li><a href="#">Affiliate</a></li>
-                                <li><a href="#">Specials</a></li>
-                                <li><a href="my-account.html">My Account</a></li>
-                                <li><a href="#">Order History</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4">
-                    <div class="widgets_container widget_menu">
-                        <h3>Customer Service</h3>
-                        <div class="footer_menu">
-                            <ul>
-                                <li><a href="contact.html">Contact Us</a></li>
-                                <li><a href="#">Returns</a></li>
-                                <li><a href="#">Site Map</a></li>
-                                <li><a href="#">Affiliate</a></li>
-                                <li><a href="#">Newsletter</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="newletter_area">
-            <div class="row">
-                <div class="col-lg-5 col-md-5">
-                    <div class="newletter_title">
-                        <img src="~/lib/FrontendTheme/assets/img/about/icon-newletter.png" alt="">
-                        <div class="newletter_content">
-                            <h2>Join Our Newsletter Now</h2>
-                            <p>Be the First to Know. Sign up to newsletter today</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-7 col-md-7">
-                    <div class="newletter_subscribe">
-                        <form action="#">
-                            <input placeholder="Enter you email address here..." type="text">
-                            <button type="submit">Subscribe</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer_bottom">
-            <div class="row">
-                <div class="col-lg-6 col-md-12">
-                    <div class="copyright_area">
-                        <p>Copyright &copy; 2019 <a href="#">Venezo</a>  All Right Reserved.</p>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12">
-                    <div class="footer_paypal">
-                        <ul>
-                            <li><a href="#"><img src="~/lib/FrontendTheme/assets/img/icon/paypal.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="~/lib/FrontendTheme/assets/img/icon/paypal1.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="~/lib/FrontendTheme/assets/img/icon/paypal2.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="~/lib/FrontendTheme/assets/img/icon/paypal3.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="~/lib/FrontendTheme/assets/img/icon/paypal4.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="~/lib/FrontendTheme/assets/img/icon/paypal5.jpg" alt=""></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-<!--footer area end-->
-<!-- modal area start-->
-<div class="modal fade" id="modal_box" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <div class="modal_body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-5 col-md-5 col-sm-12">
-                            <div class="modal_tab">
-                                <div class="tab-content product-details-large">
-                                    <div class="tab-pane fade show active" id="tab1" role="tabpanel">
-                                        <div class="modal_tab_img">
-                                            <a href="#"><img src="~/lib/FrontendTheme/assets/img/product/product1.jpg" alt=""></a>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="tab2" role="tabpanel">
-                                        <div class="modal_tab_img">
-                                            <a href="#"><img src="~/lib/FrontendTheme/assets/img/product/product2.jpg" alt=""></a>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="tab3" role="tabpanel">
-                                        <div class="modal_tab_img">
-                                            <a href="#"><img src="~/lib/FrontendTheme/assets/img/product/product3.jpg" alt=""></a>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="tab4" role="tabpanel">
-                                        <div class="modal_tab_img">
-                                            <a href="#"><img src="~/lib/FrontendTheme/assets/img/product/product5.jpg" alt=""></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal_tab_button">
-                                    <ul class="nav product_navactive owl-carousel" role="tablist">
-                                        <li>
-                                            <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false"><img src="~/lib/FrontendTheme/assets/img/product/product1.jpg" alt=""></a>
-                                        </li>
-                                        <li>
-                                            <a class="nav-link" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false"><img src="~/lib/FrontendTheme/assets/img/product/product2.jpg" alt=""></a>
-                                        </li>
-                                        <li>
-                                            <a class="nav-link button_three" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false"><img src="~/lib/FrontendTheme/assets/img/product/product3.jpg" alt=""></a>
-                                        </li>
-                                        <li>
-                                            <a class="nav-link" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false"><img src="~/lib/FrontendTheme/assets/img/product/product5.jpg" alt=""></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-7 col-md-7 col-sm-12">
-                            <div class="modal_right">
-                                <div class="modal_title mb-10">
-                                    <h2>Handbag feugiat</h2>
-                                </div>
-                                <div class="modal_price mb-10">
-                                    <span class="new_price">$64.99</span>
-                                    <span class="old_price">$78.99</span>
-                                </div>
-                                <div class="modal_description mb-15">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste laborum ad impedit pariatur esse optio tempora sint ullam autem deleniti nam in quos qui nemo ipsum numquam, reiciendis maiores quidem aperiam, rerum vel recusandae </p>
-                                </div>
-                                <div class="variants_selects">
-                                    <div class="variants_size">
-                                        <h2>size</h2>
-                                        <select class="select_option">
-                                            <option selected value="1">s</option>
-                                            <option value="1">m</option>
-                                            <option value="1">l</option>
-                                            <option value="1">xl</option>
-                                            <option value="1">xxl</option>
-                                        </select>
-                                    </div>
-                                    <div class="variants_color">
-                                        <h2>color</h2>
-                                        <select class="select_option">
-                                            <option selected value="1">purple</option>
-                                            <option value="1">violet</option>
-                                            <option value="1">black</option>
-                                            <option value="1">pink</option>
-                                            <option value="1">orange</option>
-                                        </select>
-                                    </div>
-                                    <div class="modal_add_to_cart">
-                                        <form action="#">
-                                            <input min="0" max="100" step="2" value="1" type="number">
-                                            <button type="submit">add to cart</button>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="modal_social">
-                                    <h2>Share this product</h2>
-                                    <ul>
-                                        <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                        <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                        <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- modal area end-->
-<!--news letter popup start-->
-<!--<div class="newletter-popup">
-   <div id="boxes" class="newletter-container">
-       <div id="dialog" class="window">
-           <div id="popup2">
-               <span class="b-close"><span>close</span></span>
-           </div>
-           <div class="box">
-               <div class="newletter-title">
-                   <h2>Newsletter</h2>
-               </div>
-               <div class="box-content newleter-content">
-                   <label class="newletter-label">Enter your email address to subscribe our notification of our new post &amp; features by email.</label>
-                   <div id="frm_subscribe">
-                       <form name="subscribe" id="subscribe_popup">
-                               <input type="text" value="" name="subscribe_pemail" id="subscribe_pemail" placeholder="Enter you email address here...">
-                               <input type="hidden" value="" name="subscribe_pname" id="subscribe_pname">
-                               <div id="notification"></div>
-                               <a class="theme-btn-outlined" onclick="email_subscribepopup()"><span>Subscribe</span></a>
-                       </form>
-                       <div class="subscribe-bottom">
-                           <input type="checkbox" id="newsletter_popup_dont_show_again">
-                           <label for="newsletter_popup_dont_show_again">Don't show this popup again</label>
-                       </div>
-                   </div>
-                   <!-- /#frm_subscribe -->
-<!--</div>-->
-<!-- /.box-content -->
-<!--</div>
-</div>-->
-<!--</div>-->
-<!-- /.box -->
-<!--</div-->
-<!--news letter popup start-->
-<!-- JS
-============================================ -->
-<!-- Plugins JS -->
