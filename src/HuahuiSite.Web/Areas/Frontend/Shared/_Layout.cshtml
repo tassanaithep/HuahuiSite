@@ -516,63 +516,25 @@
                     </div>
                     <div class="col-lg-2 col-md-6">
                         <div class="widgets_container widget_menu">
-                            <h3>Information</h3>
+                            <h3>Menu</h3>
                             <div class="footer_menu">
                                 <ul>
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="blog.html">Delivery Information</a></li>
-                                    <li><a href="contact.html">Privacy Policy</a></li>
-                                    <li><a href="services.html">Terms & Conditions</a></li>
-                                    <li><a href="#">Returns</a></li>
-                                    <li><a href="portfolio.html">Gift Certificates</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4">
-                        <div class="widgets_container widget_menu">
-                            <h3>My Account</h3>
-                            <div class="footer_menu">
-                                <ul>
-                                    <li><a href="my-account.html">My Account</a></li>
-                                    <li><a href="#">Order History</a></li>
-                                    <li><a href="wishlist.html">Wish List</a></li>
-                                    <li><a href="#">Newsletter</a></li>
-                                    <li><a href="#">Affiliate</a></li>
-                                    <li><a href="faq.html">Specials</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4">
-                        <div class="widgets_container widget_menu">
-                            <h3>Extras</h3>
-                            <div class="footer_menu">
-                                <ul>
-                                    <li><a href="#">Returns</a></li>
-                                    <li><a href="#">Gift Certificates</a></li>
-                                    <li><a href="#">Affiliate</a></li>
-                                    <li><a href="#">Specials</a></li>
-                                    <li><a href="my-account.html">My Account</a></li>
-                                    <li><a href="#">Order History</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4">
-                        <div class="widgets_container widget_menu">
-                            <h3>Customer Service</h3>
-                            <div class="footer_menu">
-                                <ul>
-                                    <li><a href="contact.html">Contact Us</a></li>
-                                    <li><a href="#">Returns</a></li>
+                                    <li>
+                                        <a asp-action="Home" asp-controller="Main">หน้าแรก<!--<i class="fa fa-angle-down"></i>--></a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Shoplist" asp-action="index">สินค้าทั้งหมด<!--<i class="fa fa-angle-down"></i>--></a>  
+                                    </li>
+                                    <li><a asp-controller="Promotion" asp-action="index">โปรโมชั่น<!--<i class="fa fa-angle-down"></i>--></a></li>
+
+                                    <li><a asp-controller="AboutUs" asp-action="index">เกี่ยวกับเรา</a></li>
+                                    <li><a asp-controller="ContactUs" asp-action="index"> ติดต่อเรา</a></li>
                                     <li><a href="#">Site Map</a></li>
-                                    <li><a href="#">Affiliate</a></li>
-                                    <li><a href="#">Newsletter</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
+                 
                 </div>
             </div>
             @*<div class="newletter_area">
