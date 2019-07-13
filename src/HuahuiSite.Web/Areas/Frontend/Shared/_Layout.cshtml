@@ -74,14 +74,14 @@
                                             <option value="6">กระจกรถ</option>
                                             <option value="7">เซนเซอร์</option>
                                             <!--<option value="8">Laptops</option>
-                                        <option value="9">Handbags</option>
-                                        <option value="10">Headphone & Speaker</option>
-                                        <option value="11">Herbs & botanicals</option>
-                                        <option value="12">Vegetables</option>
-                                        <option value="13">Shop</option>
-                                        <option value="14">Laptops & Desktops</option>
-                                        <option value="15">Watchs</option>
-                                        <option value="16">Electronic</option>-->
+                                            <option value="9">Handbags</option>
+                                            <option value="10">Headphone & Speaker</option>
+                                            <option value="11">Herbs & botanicals</option>
+                                            <option value="12">Vegetables</option>
+                                            <option value="13">Shop</option>
+                                            <option value="14">Laptops & Desktops</option>
+                                            <option value="15">Watchs</option>
+                                            <option value="16">Electronic</option>-->
                                         </select>
                                     </div>
                                     <div class="search_box">
@@ -143,10 +143,10 @@
 
                                         <div class="mini_cart_footer">
                                             <div class="cart_button">
-                                                <a href="cart.html">View cart</a>
+                                                <a asp-controller="cart" asp-action="index">View cart</a>
                                             </div>
                                             <div class="cart_button">
-                                                <a href="checkout.html">Checkout</a>
+                                                <a asp-controller="login" asp-action="logout">Checkout</a>
                                             </div>
 
                                         </div>
@@ -282,75 +282,74 @@
                     <div class="main_menu menu_one">
                         <nav>
                             <ul>
-
                                 <li>
-                                    <a href="index.html">หน้าแรก<!--<i class="fa fa-angle-down"></i>--></a>
+                                    <a asp-action="Home" asp-controller="Main">หน้าแรก<!--<i class="fa fa-angle-down"></i>--></a>
                                     <!--<ul class="sub_menu">
-                                    <li><a href="index.html">Home 1</a></li>
-                                    <li><a href="index-2.html">Home 2</a></li>
-                                    <li><a href="index-3.html">Home 3</a></li>
-                                    <li><a href="index-4.html">Home 4</a></li>
-                                </ul>-->
+                                        <li><a href="index.html">Home 1</a></li>
+                                        <li><a href="index-2.html">Home 2</a></li>
+                                        <li><a href="index-3.html">Home 3</a></li>
+                                        <li><a href="index-4.html">Home 4</a></li>
+                                    </ul>-->
                                 </li>
                                 <li>
-                                    <a href="shop.html">สินค้าทั้งหมด<!--<i class="fa fa-angle-down"></i>--></a>
+                                    <a asp-controller="Shoplist" asp-action="index">สินค้าทั้งหมด<!--<i class="fa fa-angle-down"></i>--></a>
                                     <!--<ul class="mega_menu">
-                                    <li>
-                                        <a href="#">Shop Layouts</a>
-                                        <ul>
-                                            <li><a href="shop-fullwidth.html">Full Width</a></li>
-                                            <li><a href="shop-fullwidth-list.html">Full Width list</a></li>
-                                            <li><a href="shop-right-sidebar.html">Right Sidebar </a></li>
-                                            <li><a href="shop-right-sidebar-list.html"> Right Sidebar list</a></li>
-                                            <li><a href="shop-list.html">List View</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">other Pages</a>
-                                        <ul>
-                                            <li><a href="cart.html">cart</a></li>
-                                            <li><a href="checkout.html">Checkout</a></li>
-                                            <li><a href="my-account.html">my account</a></li>
+        <li>
+            <a href="#">Shop Layouts</a>
+            <ul>
+                <li><a href="shop-fullwidth.html">Full Width</a></li>
+                <li><a href="shop-fullwidth-list.html">Full Width list</a></li>
+                <li><a href="shop-right-sidebar.html">Right Sidebar </a></li>
+                <li><a href="shop-right-sidebar-list.html"> Right Sidebar list</a></li>
+                <li><a href="shop-list.html">List View</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">other Pages</a>
+            <ul>
+                <li><a href="cart.html">cart</a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+                <li><a href="my-account.html">my account</a></li>
 
 
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">Product Types</a>
-                                        <ul>
-                                            <li><a href="product-details.html">product details</a></li>
-                                            <li><a href="product-sidebar.html">product sidebar</a></li>
-                                            <li><a href="product-grouped.html">product grouped</a></li>
-                                            <li><a href="variable-product.html">product variable</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">Product Types</a>
+            <ul>
+                <li><a href="product-details.html">product details</a></li>
+                <li><a href="product-sidebar.html">product sidebar</a></li>
+                <li><a href="product-grouped.html">product grouped</a></li>
+                <li><a href="variable-product.html">product variable</a></li>
 
-                                        </ul>
-                                    </li>
-                                </ul>-->
+            </ul>
+        </li>
+    </ul>-->
                                 </li>
-                                <li><a href="shop.html">โปรโมชั่น<!--<i class="fa fa-angle-down"></i>--></a></li>
+                                <li><a asp-controller="Promotion" asp-action="index">โปรโมชั่น<!--<i class="fa fa-angle-down"></i>--></a></li>
                                 <!--<li>
-                                <a href="blog.html">blog<i class="fa fa-angle-down"></i></a>
-                                <ul class="sub_menu pages">
-                                    <li><a href="blog-details.html">blog details</a></li>
-                                    <li><a href="blog-fullwidth.html">blog fullwidth</a></li>
-                                    <li><a href="blog-sidebar.html">blog sidebar</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="portfolio.html">pages <i class="fa fa-angle-down"></i></a>
-                                <ul class="sub_menu pages">
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="services.html">services</a></li>
-                                    <li><a href="faq.html">Frequently Questions</a></li>
-                                    <li><a href="contact.html">contact</a></li>
-                                    <li><a href="login.html">login</a></li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                    <li><a href="404.html">Error 404</a></li>
-                                </ul>
-                            </li>-->
+                                    <a href="blog.html">blog<i class="fa fa-angle-down"></i></a>
+                                    <ul class="sub_menu pages">
+                                        <li><a href="blog-details.html">blog details</a></li>
+                                        <li><a href="blog-fullwidth.html">blog fullwidth</a></li>
+                                        <li><a href="blog-sidebar.html">blog sidebar</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="portfolio.html">pages <i class="fa fa-angle-down"></i></a>
+                                    <ul class="sub_menu pages">
+                                        <li><a href="about.html">About Us</a></li>
+                                        <li><a href="services.html">services</a></li>
+                                        <li><a href="faq.html">Frequently Questions</a></li>
+                                        <li><a href="contact.html">contact</a></li>
+                                        <li><a href="login.html">login</a></li>
+                                        <li><a href="wishlist.html">Wishlist</a></li>
+                                        <li><a href="404.html">Error 404</a></li>
+                                    </ul>
+                                </li>-->
 
-                                <li><a href="about.html">เกี่ยวกับเรา</a></li>
-                                <li><a href="contact.html"> ติดต่อเรา</a></li>
+                                <li><a asp-controller="AboutUs" asp-action="index">เกี่ยวกับเรา</a></li>
+                                <li><a asp-controller="ContactUs" asp-action="index"> ติดต่อเรา</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -406,74 +405,74 @@
                         </div>
                         <div id="menu" class="text-left ">
                             <ul>
-
                                 <li>
-                                    <a href="index.html">home</a>
-                                    <ul class="sub_menu">
-                                        <li><a href="index.html">Home 1</a></li>
-                                        <li><a href="index-2.html">Home 2</a></li>
-                                        <li><a href="index-3.html">Home 3</a></li>
-                                        <li><a href="index-4.html">Home 4</a></li>
-                                    </ul>
+                                    <a asp-action="Home" asp-controller="Main">หน้าแรก<!--<i class="fa fa-angle-down"></i>--></a>
+                                    <!--<ul class="sub_menu">
+            <li><a href="index.html">Home 1</a></li>
+            <li><a href="index-2.html">Home 2</a></li>
+            <li><a href="index-3.html">Home 3</a></li>
+            <li><a href="index-4.html">Home 4</a></li>
+        </ul>-->
                                 </li>
                                 <li>
-                                    <a href="shop.html">shop</a>
-                                    <ul>
-                                        <li>
-                                            <a href="#">Shop Layouts</a>
-                                            <ul>
-                                                <li><a href="shop-fullwidth.html">Full Width</a></li>
-                                                <li><a href="shop-fullwidth-list.html">Full Width list</a></li>
-                                                <li><a href="shop-right-sidebar.html">Right Sidebar </a></li>
-                                                <li><a href="shop-right-sidebar-list.html"> Right Sidebar list</a></li>
-                                                <li><a href="shop-list.html">List View</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="#">other Pages</a>
-                                            <ul>
-                                                <li><a href="cart.html">cart</a></li>
-                                                <li><a href="checkout.html">Checkout</a></li>
-                                                <li><a href="my-account.html">my account</a></li>
+                                    <a asp-controller="Shoplist" asp-action="index">สินค้าทั้งหมด<!--<i class="fa fa-angle-down"></i>--></a>
+                                    <!--<ul class="mega_menu">
+            <li>
+                <a href="#">Shop Layouts</a>
+                <ul>
+                    <li><a href="shop-fullwidth.html">Full Width</a></li>
+                    <li><a href="shop-fullwidth-list.html">Full Width list</a></li>
+                    <li><a href="shop-right-sidebar.html">Right Sidebar </a></li>
+                    <li><a href="shop-right-sidebar-list.html"> Right Sidebar list</a></li>
+                    <li><a href="shop-list.html">List View</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">other Pages</a>
+                <ul>
+                    <li><a href="cart.html">cart</a></li>
+                    <li><a href="checkout.html">Checkout</a></li>
+                    <li><a href="my-account.html">my account</a></li>
 
 
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="#">Product Types</a>
-                                            <ul>
-                                                <li><a href="product-details.html">product details</a></li>
-                                                <li><a href="product-sidebar.html">product sidebar</a></li>
-                                                <li><a href="product-grouped.html">product grouped</a></li>
-                                                <li><a href="variable-product.html">product variable</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Product Types</a>
+                <ul>
+                    <li><a href="product-details.html">product details</a></li>
+                    <li><a href="product-sidebar.html">product sidebar</a></li>
+                    <li><a href="product-grouped.html">product grouped</a></li>
+                    <li><a href="variable-product.html">product variable</a></li>
 
-                                            </ul>
-                                        </li>
-                                    </ul>
+                </ul>
+            </li>
+        </ul>-->
                                 </li>
-                                <li>
-                                    <a href="blog.html">blog</a>
-                                    <ul>
-                                        <li><a href="blog-details.html">blog details</a></li>
-                                        <li><a href="blog-fullwidth.html">blog fullwidth</a></li>
-                                        <li><a href="blog-sidebar.html">blog sidebar</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="portfolio.html">pages</a>
-                                    <ul>
-                                        <li><a href="about.html">About Us</a></li>
-                                        <li><a href="services.html">services</a></li>
-                                        <li><a href="faq.html">Frequently Questions</a></li>
-                                        <li><a href="contact.html">contact</a></li>
-                                        <li><a href="login.html">login</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                        <li><a href="404.html">Error 404</a></li>
-                                    </ul>
-                                </li>
+                                <li><a asp-controller="Promotion" asp-action="index">โปรโมชั่น<!--<i class="fa fa-angle-down"></i>--></a></li>
+                                <!--<li>
+        <a href="blog.html">blog<i class="fa fa-angle-down"></i></a>
+        <ul class="sub_menu pages">
+            <li><a href="blog-details.html">blog details</a></li>
+            <li><a href="blog-fullwidth.html">blog fullwidth</a></li>
+            <li><a href="blog-sidebar.html">blog sidebar</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="portfolio.html">pages <i class="fa fa-angle-down"></i></a>
+        <ul class="sub_menu pages">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">services</a></li>
+            <li><a href="faq.html">Frequently Questions</a></li>
+            <li><a href="contact.html">contact</a></li>
+            <li><a href="login.html">login</a></li>
+            <li><a href="wishlist.html">Wishlist</a></li>
+            <li><a href="404.html">Error 404</a></li>
+        </ul>
+    </li>-->
 
-                                <li><a href="about.html">about Us</a></li>
-                                <li><a href="contact.html"> Contact Us</a></li>
+                                <li><a asp-controller="AboutUs" asp-action="index">เกี่ยวกับเรา</a></li>
+                                <li><a asp-controller="ContactUs" asp-action="index"> ติดต่อเรา</a></li>
                             </ul>
                         </div>
                     </div>
@@ -577,26 +576,26 @@
                 </div>
             </div>
             @*<div class="newletter_area">
-                <div class="row">
-                    <div class="col-lg-5 col-md-5">
-                        <div class="newletter_title">
-                            <img src="assets/img/about/icon-newletter.png" alt="">
-                            <div class="newletter_content">
-                                <h2>Join Our Newsletter Now</h2>
-                                <p>Be the First to Know. Sign up to newsletter today</p>
+                    <div class="row">
+                        <div class="col-lg-5 col-md-5">
+                            <div class="newletter_title">
+                                <img src="assets/img/about/icon-newletter.png" alt="">
+                                <div class="newletter_content">
+                                    <h2>Join Our Newsletter Now</h2>
+                                    <p>Be the First to Know. Sign up to newsletter today</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-7 col-md-7">
+                            <div class="newletter_subscribe">
+                                <form action="#">
+                                    <input placeholder="Enter you email address here..." type="text">
+                                    <button type="submit">Subscribe</button>
+                                </form>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-7 col-md-7">
-                        <div class="newletter_subscribe">
-                            <form action="#">
-                                <input placeholder="Enter you email address here..." type="text">
-                                <button type="submit">Subscribe</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
+                </div>*@
             <div class="footer_bottom">
                 <div class="row">
                     <div class="col-lg-6 col-md-12">
@@ -736,39 +735,39 @@
     <!-- modal area end-->
     <!--news letter popup start-->
     @*<div class="newletter-popup">
-        <div id="boxes" class="newletter-container">
-            <div id="dialog" class="window">
-                <div id="popup2">
-                    <span class="b-close"><span>close</span></span>
-                </div>
-                <div class="box">
-                    <div class="newletter-title">
-                        <h2>Newsletter</h2>
+            <div id="boxes" class="newletter-container">
+                <div id="dialog" class="window">
+                    <div id="popup2">
+                        <span class="b-close"><span>close</span></span>
                     </div>
-                    <div class="box-content newleter-content">
-                        <label class="newletter-label">Enter your email address to subscribe our notification of our new post &amp; features by email.</label>
-                        <div id="frm_subscribe">
-                            <form name="subscribe" id="subscribe_popup">
-                                <!-- <span class="required">*</span><span>Enter you email address here...</span>-->
-                                <input type="text" value="" name="subscribe_pemail" id="subscribe_pemail" placeholder="Enter you email address here...">
-                                <input type="hidden" value="" name="subscribe_pname" id="subscribe_pname">
-                                <div id="notification"></div>
-                                <a class="theme-btn-outlined" onclick="email_subscribepopup()"><span>Subscribe</span></a>
-                            </form>
-                            <div class="subscribe-bottom">
-                                <input type="checkbox" id="newsletter_popup_dont_show_again">
-                                <label for="newsletter_popup_dont_show_again">Don't show this popup again</label>
-                            </div>
+                    <div class="box">
+                        <div class="newletter-title">
+                            <h2>Newsletter</h2>
                         </div>
-                        <!-- /#frm_subscribe -->
+                        <div class="box-content newleter-content">
+                            <label class="newletter-label">Enter your email address to subscribe our notification of our new post &amp; features by email.</label>
+                            <div id="frm_subscribe">
+                                <form name="subscribe" id="subscribe_popup">
+                                    <!-- <span class="required">*</span><span>Enter you email address here...</span>-->
+                                    <input type="text" value="" name="subscribe_pemail" id="subscribe_pemail" placeholder="Enter you email address here...">
+                                    <input type="hidden" value="" name="subscribe_pname" id="subscribe_pname">
+                                    <div id="notification"></div>
+                                    <a class="theme-btn-outlined" onclick="email_subscribepopup()"><span>Subscribe</span></a>
+                                </form>
+                                <div class="subscribe-bottom">
+                                    <input type="checkbox" id="newsletter_popup_dont_show_again">
+                                    <label for="newsletter_popup_dont_show_again">Don't show this popup again</label>
+                                </div>
+                            </div>
+                            <!-- /#frm_subscribe -->
+                        </div>
+                        <!-- /.box-content -->
                     </div>
-                    <!-- /.box-content -->
                 </div>
-            </div>
 
-        </div>
-        <!-- /.box -->
-    </div>*@
+            </div>
+            <!-- /.box -->
+        </div>*@
 
     <!--news letter popup start-->
 
