@@ -70,22 +70,39 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void UpdateProduct(ProductViewModel productViewModel)
         {
-            // Delete Old Image
-            string imagePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\upload", productViewModel.TitlePictureFileName);
+            string TitlePictureImageFileName = string.Empty;
 
-            if (System.IO.File.Exists(imagePath))
+            #region Update Image
+
+            if (productViewModel.TitlePictureImageFile != null)
             {
-                System.IO.File.Delete(imagePath);
+                #region Delete Old Image
+
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\upload", productViewModel.TitlePictureFileName);
+
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+
+                #endregion
+
+                #region Save New Image
+                
+                TitlePictureImageFileName = Guid.NewGuid().ToString() + Path.GetExtension(productViewModel.TitlePictureImageFile.FileName);
+
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\upload", TitlePictureImageFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    productViewModel.TitlePictureImageFile.CopyTo(fileStream);
+                }
+
+                #endregion
             }
 
-            // New Image
-            string TitlePictureImageFileName = Guid.NewGuid().ToString() + Path.GetExtension(productViewModel.TitlePictureImageFile.FileName);
+            #endregion
 
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\upload", TitlePictureImageFileName);
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                productViewModel.TitlePictureImageFile.CopyTo(fileStream);
-            }
+            #region Create Object to Update
 
             Product Product = new Product()
             {
@@ -94,10 +111,13 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
                 TitleNameTh = productViewModel.TitleNameTh,
                 //DescriptionEN = productViewModel.DescriptionEN,
                 DescriptionTh = productViewModel.DescriptionTh,
-                TitlePictureFileName = TitlePictureImageFileName,
-                IsActive = true,
-                CreatedDate = DateTime.Now,
+                TitlePictureFileName = productViewModel.TitlePictureImageFile == null ? productViewModel.TitlePictureFileName : TitlePictureImageFileName,
+                //IsActive = true,
+                CreatedDate = productViewModel.CreatedDate,
+                UpdatedDate = DateTime.Now
             };
+
+            #endregion
 
             _unitOfWork.Products.Update(Product);
         }

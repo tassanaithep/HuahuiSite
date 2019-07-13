@@ -16,6 +16,8 @@ namespace HuahuiSite.Web.Areas.Backend.Models
         public string DescriptionTh { get; set; }
         public string TitlePictureFileName { get; set; }
         public bool IsActive { get; set; }
+        public DateTime CreatedDate { get; set; }
+
         public IFormFile TitlePictureImageFile { get; set; }
 
         public IEnumerable<Product> ProductList { get; set; }
