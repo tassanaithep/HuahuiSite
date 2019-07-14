@@ -1,4 +1,4 @@
-﻿@model HuahuiSite.Web.Areas.Backend.Models.ProductViewModel
+﻿@model HuahuiSite.Web.Areas.Backend.Models.UserViewModel
 
 <div class="col-md-12">
     <div class="card">
@@ -13,10 +13,8 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>TitleName</th>
-                            <th>Description</th>
-                            <th>Picture</th>
-                            <th>CreateDatetime</th>
+                            <th>Name</th>
+                            <th>Username</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -25,46 +23,24 @@
 
                         @{ int No = 1; }
 
-                        @foreach (var item in Model.ProductList)
+                        @foreach (var item in Model.UserList)
                         {
 
                             string modalId = "modal-row-table-" + No;
 
                             <tr>
                                 <td>@No</td>
-                                <td>@item.TitleNameTh</td>
-
-                                @if (@item.DescriptionTh.Length > 50)
-                                {
-                                    <td>@item.DescriptionTh.Substring(0, 50) .....</td>
-                                }
-                                else
-                                {
-                                    <td>@item.DescriptionTh</td>
-                                }
-
-                                <td>
-
-                                @if (@item.TitlePictureFileName != null)
-	                            {
-                                    <img src="~/images/upload/@item.TitlePictureFileName" alt="Title Picture" width="80" />
-                                }
-
-                                </td>
-
-                                <td>@item.CreatedDate</td>
+                                <td>@item.Name</td>
+                                <td>@item.Username</td>
                                 <td>
                                     <a href="#" data-toggle="modal" data-target="#@modalId"> <i class="fas fa-pencil-alt text-inverse m-r-10"></i> </a>
                                     <div class="modal fade" id="@modalId" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content">
-                                                <form class="form-row-table" asp-controller="Product" asp-action="Update" data-ajax="true" data-ajax-method="post" data-ajax-success="OnUpdateSuccess" enctype="multipart/form-data">
-
-                                                    <!-- Hidden Value -->
+                                                <form class="form-row-table" asp-controller="User" asp-action="Update" data-ajax="true" data-ajax-method="post" data-ajax-success="OnUpdateSuccess" enctype="multipart/form-data">
+                                                    
+                                                    <!-- Hidden Value-->
                                                     <input type="hidden" name="Id" value="@item.Id" />
-                                                    <input type="hidden" name="TitlePictureFileName" value="@item.TitlePictureFileName" />
-                                                    <input type="hidden" name="CreatedDate" value="@item.CreatedDate" />
-                                                    <input type="hidden" name="IsRemoveImage" />
                                                     <!-- End Hidden Value-->
 
                                                     <div class="modal-header">
@@ -75,27 +51,23 @@
                                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                                             <div class="modal-body">
                                                                 <div class="form-group">
-                                                                    <label class="control-label">Titile Name</label>
-                                                                    <input type="text" class="form-control" name="TitleNameTh" value="@item.TitleNameTh">
+                                                                    <label class="control-label">Name</label>
+                                                                    <input type="text" class="form-control" name="Name" value="@item.Name">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="control-label">Content Description</label>
-                                                                    <div class="form-group">
-                                                                        <textarea class="textarea_editor form-control" rows="15" placeholder="Enter text ..." name="DescriptionTh">@item.DescriptionTh</textarea>
-                                                                    </div>
+                                                                    <label class="control-label">Username</label>
+                                                                    <input type="text" class="form-control" name="Username" value="@item.Username">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Password</label>
+                                                                    <input type="password" class="form-control" name="Password" value="@item.Password">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12 col-lg-12">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Picture Upload</label>
-                                                            <input type="file" class="dropify" name="TitlePictureImageFile" />
-                                                        </div>
-                                                    </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-success" onclick="return ValidateUpdateSubmit(this)"><i class="fa fa-check"></i>Success</button>
+                                                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i>Success</button>
                                                     </div>
                                                 </form>
                                             </div>

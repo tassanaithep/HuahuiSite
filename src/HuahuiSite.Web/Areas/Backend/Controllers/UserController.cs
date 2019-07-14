@@ -10,19 +10,19 @@ using Microsoft.AspNetCore.Mvc;
 namespace HuahuiSite.Web.Areas.Backend.Controllers
 {
     [Area("Backend")]
-    public class ProductController : Controller
+    public class UserController : Controller
     {
         #region Members
 
-        private readonly IProductService _productService;
+        private readonly IUserService _userService;
 
         #endregion
 
         #region Constructor
 
-        public ProductController(IProductService productService)
+        public UserController(IUserService userService)
         {
-            _productService = productService;
+            _userService = userService;
         }
 
         #endregion
@@ -30,7 +30,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         #region Views
 
         /// <summary>
-        /// Index of Product Page.
+        /// Index of User Page.
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
@@ -42,18 +42,18 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
             //    return RedirectToAction("Index", "Login");
             //}
 
-            ProductViewModel productViewModel = new ProductViewModel();
+            UserViewModel userViewModel = new UserViewModel();
 
             try
             {
-                _productService.GetProductList(ref productViewModel);
+                _userService.GetUserList(ref userViewModel);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
 
             }
 
-            return View(productViewModel);
+            return View(userViewModel);
         }
 
         #endregion
@@ -66,14 +66,14 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         // Author: Mod Nattasit
         // Updated: 07/07/2019
         [HttpPost]
-        public IActionResult Save(ProductViewModel productViewModel)
+        public IActionResult Save(UserViewModel userViewModel)
         {
             bool isSuccess;
             string exceptionMessage = string.Empty;
 
             try
             {
-                _productService.SaveProduct(productViewModel);
+                _userService.SaveUser(userViewModel);
                 isSuccess = true;
             }
             catch (Exception exception)
@@ -91,14 +91,14 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         // Author: Mod Nattasit
         // Updated: 07/07/2019
         [HttpPost]
-        public IActionResult Update(ProductViewModel productViewModel)
+        public IActionResult Update(UserViewModel userViewModel)
         {
             bool isSuccess;
             string exceptionMessage = string.Empty;
 
             try
             {
-                _productService.UpdateProduct(productViewModel);
+                _userService.UpdateUser(userViewModel);
                 isSuccess = true;
             }
             catch (Exception exception)
@@ -116,14 +116,14 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         // Author: Mod Nattasit
         // Updated: 07/07/2019
         [HttpPost]
-        public JsonResult Delete(ProductViewModel productViewModel)
+        public JsonResult Delete(UserViewModel userViewModel)
         {
             bool isSuccess;
             string exceptionMessage = string.Empty;
 
             try
             {
-                _productService.DeleteProduct(productViewModel);
+                _userService.DeleteUser(userViewModel);
                 isSuccess = true;
             }
             catch (Exception exception)
@@ -142,18 +142,18 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         // Updated: 07/07/2019
         public PartialViewResult UpdateTable()
         {
-            ProductViewModel productViewModel = new ProductViewModel();
+            UserViewModel userViewModel = new UserViewModel();
 
             try
             {
-                _productService.GetProductList(ref productViewModel);
+                _userService.GetUserList(ref userViewModel);
             }
             catch (Exception exception)
             {
 
             }
 
-            return PartialView("_Table", productViewModel);
+            return PartialView("_Table", userViewModel);
         }
 
         #endregion

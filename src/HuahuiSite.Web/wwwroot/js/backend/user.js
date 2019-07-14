@@ -5,7 +5,7 @@
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
 $(function () {
-    RenderImage();
+    //RenderImage();
 });
 
 // #endregion
@@ -40,8 +40,8 @@ UpdatePage = () => {
     HideModal();
     ClearForm();
     UpdateTable();
-    DropifyScriptRender();
-    RenderImage();
+    //DropifyScriptRender();
+    //RenderImage();
 
     $("body").removeAttr("style");
 };
@@ -72,7 +72,7 @@ HideModal = () => {
 */
 UpdateTable = () => {
     $.ajax({
-        url: "/Backend/Product/UpdateTable",
+        url: "/Backend/User/UpdateTable",
         async: false,
         success: function (res) {
             $("#parent-table").html(res);
@@ -94,15 +94,15 @@ Delete = (e) => {
     let $form = $(e).closest("tr").find(".form-row-table");
 
     let $id = $form.find("[name='Id']").val();
-    let $titlePictureFileName = $form.find("[name='TitlePictureFileName']").val();
+    //let $titlePictureFileName = $form.find("[name='TitlePictureFileName']").val();
 
     let jsonObject = {};
     jsonObject.Id = $id;
-    jsonObject.TitlePictureFileName = $titlePictureFileName;
+    //jsonObject.TitlePictureFileName = $titlePictureFileName;
 
     $.ajax({
         type: "POST",
-        url: "/Backend/Product/Delete",
+        url: "/Backend/User/Delete",
         data: jsonObject,
         success: function (res) {
             if (res.isSuccess) {

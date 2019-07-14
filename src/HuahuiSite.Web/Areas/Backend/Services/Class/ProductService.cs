@@ -38,9 +38,9 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void SaveProduct(ProductViewModel productViewModel)
         {
-            string titlePictureImageFileName = string.Empty;
+            #region Save Image to Directory
 
-            #region Save Image
+            string titlePictureImageFileName = string.Empty;
 
             if (productViewModel.TitlePictureImageFile != null)
             {
@@ -57,7 +57,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #region Create Object to Save
 
-            Product Product = new Product()
+            Product product = new Product()
             {
                 //TitleNameEN = productViewModel.TitleNameEN,
                 TitleNameTh = productViewModel.TitleNameTh,
@@ -70,7 +70,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #endregion
 
-            _unitOfWork.Products.Add(Product);
+            _unitOfWork.Products.Add(product);
         }
 
         #endregion
@@ -98,9 +98,9 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void UpdateProduct(ProductViewModel productViewModel)
         {
-            string titlePictureImageFileName = string.Empty;
-
             #region Update Image
+
+            string titlePictureImageFileName = string.Empty;
 
             #region Delete Old Image
 
@@ -135,7 +135,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #region Create Object to Update
 
-            Product Product = new Product()
+            Product product = new Product()
             {
                 Id = productViewModel.Id,
                 //TitleNameEN = productViewModel.TitleNameEN,
@@ -150,7 +150,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #endregion
 
-            _unitOfWork.Products.Update(Product);
+            _unitOfWork.Products.Update(product);
         }
 
         #endregion
@@ -162,16 +162,29 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
-        public void DeleteProduct(Product product)
+        public void DeleteProduct(ProductViewModel productViewModel)
         {
+            #region Create Object to Delete
+
+            Product product = new Product()
+            {
+                Id = productViewModel.Id,
+            };
+
+            #endregion
+
             _unitOfWork.Products.Remove(product);
 
-            string imagePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\upload", product.TitlePictureFileName);
+            #region Delete Image
+
+            string imagePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\upload", productViewModel.TitlePictureFileName);
 
             if (System.IO.File.Exists(imagePath))
             {
                 System.IO.File.Delete(imagePath);
             }
+
+            #endregion
         }
 
         #endregion

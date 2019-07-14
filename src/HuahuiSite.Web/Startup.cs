@@ -68,6 +68,7 @@ namespace HuahuiSite.Web
             // Initialize Service
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IUserService, UserService>();
 
             #endregion
         }
@@ -96,15 +97,15 @@ namespace HuahuiSite.Web
                 //    name: "default",
                 //    template: "{controller=Main}/{action=Home}/{id?}");
 
-                routes.MapAreaRoute(
-                    name: "Frontend",
-                    areaName: "Frontend",
-                    template: "{controller=Main}/{action=Home}/{id?}");
-
                 //routes.MapAreaRoute(
-                //    name: "Backend",
-                //    areaName: "Backend",
-                //    template: "{area:exists}/{controller=Login}/{action=Index}/{id?}");
+                //    name: "Frontend",
+                //    areaName: "Frontend",
+                //    template: "{controller=Main}/{action=Home}/{id?}");
+
+                routes.MapAreaRoute(
+                    name: "Backend",
+                    areaName: "Backend",
+                    template: "{area:exists}/{controller=Login}/{action=Index}/{id?}");
             });
         }
     }

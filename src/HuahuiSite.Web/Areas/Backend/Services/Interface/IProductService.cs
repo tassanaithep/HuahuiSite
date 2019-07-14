@@ -12,6 +12,6 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Interface
         void GetProductList(ref ProductViewModel productViewModel);
         void SaveProduct(ProductViewModel productViewModel);
         void UpdateProduct(ProductViewModel productViewModel);
-        void DeleteProduct(Product Product);
+        void DeleteProduct(ProductViewModel productViewModel);
     }
 }
