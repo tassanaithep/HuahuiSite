@@ -17,8 +17,4 @@
     <ProjectReference Include="..\HuahuiSite.Core\HuahuiSite.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Class\Repositories\" />
-  </ItemGroup>
-
 </Project>

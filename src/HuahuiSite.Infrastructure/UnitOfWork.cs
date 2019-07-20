@@ -15,10 +15,12 @@ namespace HuahuiSite.Infrastructure
         {
             _context = context;
             Products = new ProductRepository(_context);
+            Sales = new SaleRepository(_context);
             Users = new UserRepository(_context);
         }
 
         public IProductRepository Products { get; private set; }
+        public ISaleRepository Sales { get; private set; }
         public IUserRepository Users { get; private set; }
 
         public int Complete()

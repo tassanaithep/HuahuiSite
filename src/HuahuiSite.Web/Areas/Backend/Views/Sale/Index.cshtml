@@ -1,0 +1,72 @@
+﻿@model HuahuiSite.Web.Areas.Backend.Models.SaleViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <h4 class="card-title">Sale Management</h4>
+        <h6 class="card-subtitle m-b-20 text-muted">You can make sale like this</h6>
+    </div>
+
+    <div class="col-md-4 text-right">
+        <button class="btn btn-info waves-effect waves-light" type="button" data-toggle="modal" data-target="#create-modal"><span class="btn-label"><i class="fa fa-plus"></i></span>Create Product</button>
+    </div>
+
+    <div class="modal fade" id="create-modal" tabindex="-1" role="dialog" aria-labelledby="create-modal-label" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <form id="form-create" asp-controller="Sale" asp-action="Save" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSaveSuccess" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="create-modal-label">Add User</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label asp-for="Firstname" class="control-label">Firstname</label>
+                                    <input class="form-control" asp-for="Firstname" placeholder="Enter text ...">
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Lastname" class="control-label">Lastname</label>
+                                    <input class="form-control" asp-for="Lastname">
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Address" class="control-label">Address</label>
+                                    <div class="form-group">
+                                        <textarea class="textarea_editor form-control" rows="5" placeholder="Enter text ..." asp-for="Address"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="PhoneNumber" class="control-label">PhoneNumber</label>
+                                    <input class="form-control" asp-for="PhoneNumber">
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Email" class="control-label">Email</label>
+                                    <input class="form-control" asp-for="Email">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i>Success</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" id="parent-table">
+    <partial name="_Table" model="Model" />
+</div>
+
+@section Scripts {
+
+    <script src="~/js/backend/sale.js"></script>
+
+}
+
