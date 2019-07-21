@@ -501,75 +501,39 @@
         <div class="container">
             <div class="footer_top">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-5 col-md-12">
                         <div class="widgets_container contact_us">
                             <div class="footer_logo">
-                                <a href="#"><img src="assets/img/logo/logo-2.png" alt=""></a>
+                                <a asp-action="Home" asp-controller="Main"><img src="~/lib/FrontendTheme/assets/img/logo/logo.png" alt=""></a>
                             </div>
                             <div class="footer_contact">
-                                <p>
-                                    We are a team of designers and developers that
-                                    create high quality Magento, Prestashop, Opencart...
-                                </p>
-                                <p><span>Add:</span> 6688Princess Road, London, Greater London BAS 23JK, UK</p>
-
-                                <ul>
-                                    <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li class="googleplus"><a href="#"><i class="ion-social-googleplus"></i></a></li>
-                                    <li class="behance"><a href="#"><i class="fa fa-behance"></i></a></li>
-                                    <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                    <li class="youtube"><a href="#"><i class="ion-social-youtube"></i></a></li>
-                                </ul>
-
+                                <p><h4>บริษัท หัวฮุย อินเตอร์ จำกัด</h4></p>
+                                <p><i class="fa fa-map-marker"></i>  36/681 ถ.กาญจนาภิเษก ต.บางรักพัฒนา อ.บางบัวทอง จ.นนทบุรี 11110</p>
+                                <p><i class="fa fa-phone"></i><a href="tel:0806136536">  080-613-6536</a></p>
+                                <p><i class="fa fa-facebook"></i><a href="https://www.facebook.com/HUA-HUI-INTER-COLTD-536433739714780/" target="_blank">  HUA HUI INTER CO.LTD</a></p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-8 col-md-6">
+
+                    <div class="col-lg-6 col-md-12">
                         <div class="widgets_container widget_menu">
-                            @*<h3>Menu</h3>*@
-                            <div class="col-lg-12 col-md-6">
-                                <div class="widgets_container widget_menu">
-                                    <h3>Menu</h3>
-                                    <div class="col-12">
-                                        <div class="main_menu menu_one" style="text-align:left">
-                                            <nav>
-                                                <ul>
-                                                    <li>
-                                                        <a asp-action="Home" asp-controller="Main">หน้าแรก<!--<i class="fa fa-angle-down"></i>--></a>
+                            <h3>แผนที่</h3>
+                        </div>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3870.7853828607294!2d100.3876993143144!3d14.030732194549884!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e289b3c4963ae9%3A0xe7e62cae35ca2aae!2z4Lia4Lij4Li04Lip4Lix4LiX4Lir4Lix4Lin4Liu4Li44Lii4Lit4Li04LiZ4LmA4LiV4Lit4Lij4LmM4LiI4Liz4LiB4Lix4LiU!5e0!3m2!1sen!2sth!4v1563710377905!5m2!1sen!2sth" width="450" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
 
-                                                    </li>
-                                                    <li>
-                                                        <a asp-controller="Shoplist" asp-action="index">สินค้าทั้งหมด<!--<i class="fa fa-angle-down"></i>--></a>
-
-                                                    </li>
-                                                    <li><a asp-controller="Promotion" asp-action="index">โปรโมชั่น<!--<i class="fa fa-angle-down"></i>--></a></li>
-
-
-                                                    <li><a asp-controller="AboutUs" asp-action="index">เกี่ยวกับเรา</a></li>
-                                                    <li><a asp-controller="ContactUs" asp-action="index"> ติดต่อเรา</a></li>
-                                                </ul>
-                                            </nav>
-                                        </div>
-                                    </div>
-
-                                </div>
+                    <div class="col-lg-1 col-md-12">
+                        <div class="widgets_container widget_menu">
+                            <h3>Menu</h3>
+                            <div class="footer_menu">
+                                <ul>
+                                    <li><a asp-action="Home" asp-controller="Main">หน้าแรก<!--<i class="fa fa-angle-down"></i>--></a></li>
+                                    <li><a asp-controller="Shoplist" asp-action="index">สินค้าทั้งหมด<!--<i class="fa fa-angle-down"></i>--></a></li>
+                                    <li><a asp-controller="Promotion" asp-action="index">โปรโมชั่น<!--<i class="fa fa-angle-down"></i>--></a></li>
+                                    <li><a asp-controller="AboutUs" asp-action="index">เกี่ยวกับเรา</a></li>
+                                    <li><a asp-controller="ContactUs" asp-action="index"> ติดต่อเรา</a></li>
+                                </ul>
                             </div>
-                            @*<div class="footer_menu">
-                                    <ul>
-                                        <li>
-                                            <a asp-action="Home" asp-controller="Main">หน้าแรก<!--<i class="fa fa-angle-down"></i>--></a>
-                                        </li>
-                                        <li>
-                                            <a asp-controller="Shoplist" asp-action="index">สินค้าทั้งหมด<!--<i class="fa fa-angle-down"></i>--></a>
-                                        </li>
-                                        <li><a asp-controller="Promotion" asp-action="index">โปรโมชั่น<!--<i class="fa fa-angle-down"></i>--></a></li>
-
-                                        <li><a asp-controller="AboutUs" asp-action="index">เกี่ยวกับเรา</a></li>
-                                        <li><a asp-controller="ContactUs" asp-action="index"> ติดต่อเรา</a></li>
-                                        <li><a href="#">Site Map</a></li>
-                                    </ul>
-                                </div>*@
                         </div>
                     </div>
                 </div>
