@@ -1,4 +1,4 @@
-﻿@model HuahuiSite.Web.Areas.Backend.Models.SaleViewModel
+﻿@model HuahuiSite.Web.Areas.Backend.Models.CustomerViewModel
 
 <div class="col-md-12">
     <div class="card">
@@ -26,7 +26,7 @@
 
                         @{ int No = 1; }
 
-                        @foreach (var item in Model.SaleList)
+                        @foreach (var item in Model.CustomerList)
                         {
 
                             string modalId = "modal-row-table-" + No;
@@ -53,7 +53,7 @@
                                 <div class="modal fade" id="@modalId" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
                                     <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
-                                            <form class="form-row-table" asp-controller="Sale" asp-action="Update" data-ajax="true" data-ajax-method="post" data-ajax-success="OnUpdateSuccess" enctype="multipart/form-data">
+                                            <form class="form-row-table" asp-controller="Customer" asp-action="Update" data-ajax="true" data-ajax-method="post" data-ajax-success="OnUpdateSuccess" enctype="multipart/form-data">
 
                                                 <!-- Hidden Value -->
                                                 <input type="hidden" name="Id" value="@item.Id" />

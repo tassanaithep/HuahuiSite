@@ -2,6 +2,7 @@
 using HuahuiSite.Core.Interfaces;
 using HuahuiSite.Web.Areas.Backend.Models;
 using HuahuiSite.Web.Areas.Backend.Services.Interface;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -59,7 +60,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         #region Read
 
         /// <summary>
-        /// Get User List.
+        /// Get Sale List.
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
@@ -68,12 +69,22 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
             saleViewModel.SaleList = _unitOfWork.Sales.GetAll();
         }
 
+        /// <summary>
+        /// Get Sale Select List.
+        /// </summary>
+        // Author: Mod Nattasit
+        // Updated: 07/07/2019
+        public void GetSaleSelectList(ref CustomerViewModel customerViewModel)
+        {
+            customerViewModel.SaleSelectList = _unitOfWork.Sales.GetAll().Select(s => new SelectListItem { Value = s.Id.ToString(), Text = s.Firstname+"  "+s.Lastname });
+        }
+
         #endregion
 
         #region Update
 
         /// <summary>
-        /// Update User.
+        /// Update Sale.
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
@@ -101,7 +112,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         #region Delete
 
         /// <summary>
-        /// Delete User.
+        /// Delete Sale.
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
