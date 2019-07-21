@@ -3,7 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - HuahuiSite.Web</title>
+    <title>บริษัท หัวฮุย อินเตอร์ จำกัด</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/lib/FrontendTheme/assets/img/auto1icon.ico">
 
     <environment include="Development">
         <!-- Plugins CSS -->
@@ -23,6 +26,7 @@
 </head>
 <body>
     <!-- Main Wrapper Start -->
+
     <!--header area start-->
     <header class="header_area pb-sm-90">
         <!--header top start-->
@@ -56,10 +60,10 @@
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-12">
                         <div class="logo" style="border-radius: 0 30px 30px 0;">
-                            <a href="index.html"><img src="~/lib/FrontendTheme/assets/img/logo/logo.png" alt=""></a>
-
+                            <a asp-action="Home" asp-controller="Main"><img src="~/lib/FrontendTheme/assets/img/logo/logo.png" alt=""></a>
                         </div>
                     </div>
+
                     <div class="col-lg-9 col-md-12">
                         <div class="middel_right">
                             <div class="search-container">
@@ -67,12 +71,12 @@
                                     <div class="hover_category">
                                         <select class="select_option" name="select" id="categori">
                                             <option selected value="1">All Categories</option>
-                                            <option value="2">สินค้า Lamp & LED </option>
-                                            <option value="3">กล้องติดรถ</option>
-                                            <option value="4">ท่อ</option>
-                                            <option value="5">สินค้าแต่งรถทั่วไป </option>
-                                            <option value="6">กระจกรถ</option>
-                                            <option value="7">เซนเซอร์</option>
+                                            <option value="2">ดูแลรักษารถยนต์ </option>
+                                            <option value="3">โคมไฟ - หลอดไฟ - Xenon</option>
+                                            <option value="4"> อิเล็กทรอนิคส์ - ของตกแต่งอื่นๆ</option>
+                                            <option value="5">ตกแต่งทั่วไป</option>
+                                            <option value="6">เพิ่มประสิทธิภาพ</option>
+                                            <option value="7">ตกแต่งภายใน - ภายนอก</option>
                                             <!--<option value="8">Laptops</option>
                                             <option value="9">Handbags</option>
                                             <option value="10">Headphone & Speaker</option>
@@ -90,6 +94,7 @@
                                     </div>
                                 </form>
                             </div>
+
                             <div class="middel_right_info">
                                 <div class="header_account">
                                     <a href="my-account.html"><i class="ion-android-people"></i></a>
@@ -143,10 +148,10 @@
 
                                         <div class="mini_cart_footer">
                                             <div class="cart_button">
-                                                <a href="cart.html">View cart</a>
+                                                <a asp-controller="cart" asp-action="index">View cart</a>
                                             </div>
                                             <div class="cart_button">
-                                                <a href="checkout.html">Checkout</a>
+                                                <a asp-controller="login" asp-action="logout">Checkout</a>
                                             </div>
 
                                         </div>
@@ -179,86 +184,91 @@
                                         <li class="menu_item_children">
                                             <a href="shop.html">
                                                 <img src="~/lib/FrontendTheme/assets/img/icon/menu1.png" alt="">
-                                                <span> สินค้า Lamp & LED <i class="fa fa-angle-down"></i></span>
+                                                <span> ดูแลรักษารถยนต์ <i class="fa fa-angle-down"></i></span>
                                             </a>
-                                            <ul class="mega_menu">
-                                                <li class="menu_item_children">
-                                                    <a href="#">หลอดไฟส่่องสว่าง</a>
-                                                    <ul>
-                                                        <li><a href="shop.html">ไฟหรี่</a></li>
-                                                        <li><a href="shop.html">ไฟเพดาน</a></li>
+                                            <ul class="sub_menu">
+                                                <li><a href="shop.html">ชุดน้ำยาดูแลรักษารถยนต์</a></li>
 
-                                                    </ul>
-                                                </li>
-                                                <li class="menu_item_children">
-                                                    <a href="shop.html">ไฟซีนอล</a>
-                                                    <ul>
-                                                        <li><a href="shop.html">ชุดไฟซีนอล</a></li>
-                                                        <li><a href="shop.html">หลอดไฟซีนอล</a></li>
-                                                        <li><a href="shop.html">กล่องไฟซีนอล</a></li>
-                                                        <li><a href="shop.html">ไฟตัดหมอก</a></li>
-                                                        <li><a href="shop.html">ไฟหน้าXENON</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="menu_item_children">
-                                                    <a href="shop.html">หลอดไฟเบรค & ไฟเลี้ยว</a>
-                                                    <ul>
-                                                        <li><a href="shop.html">ไฟเบรคกระพริบ</a></li>
-                                                        <li><a href="shop.html">ไฟเบรคหน้า</a></li>
-                                                        <li><a href="shop.html">ไฟไซเรน</a></li>
-                                                        <li><a href="shop.html">ไฟท้าย</a></li>
-                                                        <li><a href="shop.html">ไฟถอย</a></li>
-                                                        <li><a href="shop.html">ไฟเลี้ยว</a></li>
-                                                    </ul>
-                                                </li>
                                             </ul>
 
                                         </li>
                                         <li class="menu_item_children">
                                             <a href="shop.html">
                                                 <img src="~/lib/FrontendTheme/assets/img/icon/menu2.png" alt="">
-                                                <span> กล้องติดรถ <i class="fa fa-angle-down"></i></span>
+                                                <span> โคมไฟ-หลอดไฟ-Xenon <i class="fa fa-angle-down"></i></span>
                                             </a>
                                             <ul class="sub_menu">
-                                                <li><a href="shop.html">กล้องติดรถ</a></li>
-                                                <li><a href="shop.html">กระจก</a></li>
-                                                <li><a href="shop.html">เซนเซอร์</a></li>
+                                                <li><a href="shop.html">ไฟหรี่</a></li>
+                                                <li><a href="shop.html">ไฟเพดาน</a></li>
+                                                <li><a href="shop.html">ไฟโปรเจคเตอร์</a></li>
+                                                <li><a href="shop.html"></a></li>
+                                                <li><a href="shop.html">ไฟไซเรนหน้าLED</a></li>
+                                                <li><a href="shop.html">ไฟถอย</a></li>
+                                                <li><a href="shop.html">ชุดไฟซีนอล</a></li>
+                                                <li><a href="shop.html"> หลอดไฟซีนอล</a></li>
                                             </ul>
                                         </li>
 
                                         <li class="menu_item_children">
                                             <a href="shop.html">
                                                 <img src="~/lib/FrontendTheme/assets/img/icon/menu3.png" alt="">
-                                                <span> ท่อ <i class="fa fa-angle-down"></i></span>
+                                                <span>  อิเล็กทรอนิคส์ - ของตกแต่งอื่นๆ <i class="fa fa-angle-down"></i></span>
                                             </a>
                                             <ul class="sub_menu pages">
-                                                <li><a href="shop.html">ท่อตรง</a></li>
-                                                <li><a href="shop.html">ท่องอ</a></li>
-                                                <li><a href="shop.html">สายแวคค่ำ</a></li>
-                                                <li><a href="shop.html">ท่อยาง</a></li>
+                                                <li><a href="shop.html">ชุดเซ็นทรัลล็อค</a></li>
+                                                <li><a href="shop.html">เซ็นเซอร์</a></li>
+                                                <li><a href="shop.html">กล้องบันทึก</a></li>
+
                                             </ul>
                                         </li>
                                         <li>
                                             <a href="shop.html">
                                                 <img src="~/lib/FrontendTheme/assets/img/icon/menu4.png" alt="">
-                                                <span> สินค้าแต่งรถทั่วไป </span>
+                                                <span> ตกแต่งทั่วไป <i class="fa fa-angle-down"></i></span>
                                             </a>
+                                            <ul class="sub_menu pages">
+                                                <li><a href="shop.html">ขายึดป้ายทะเบียน</a></li>
+                                                <li><a href="shop.html">ที่ยึดแบตเตอร์รี่</a></li>
+                                                <li><a href="shop.html">น็อต</a></li>
+                                                <li><a href="shop.html">วัดBootsหน้าน้ำมัน</a></li>
+                                                <li><a href="shop.html">ฝาครอบดุมล้อ</a></li>
+                                                <li><a href="shop.html">ขายึดป้ายทะเบียน</a></li>
+                                                <li><a href="shop.html">หัวเกียร์ </a></li>
+                                                <li><a href="shop.html">ท่อดักลมยืดได้</a></li>
+                                                <li><a href="shop.html">ปากแตร</a></li>
+                                                <li><a href="shop.html">กระจังหน้า</a></li>
+
+                                            </ul>
                                         </li>
                                         <li>
                                             <a href="shop.html">
                                                 <img src="~/lib/FrontendTheme/assets/img/icon/menu5.png" alt="">
-                                                <span>กระจกรถ </span>
+                                                <span>เพิ่มประสิทธิภาพ <i class="fa fa-angle-down"></i></span>
                                             </a>
                                             <ul class="sub_menu pages">
-                                                <li><a href="shop.html">กระจกติดรถยนต์1</a></li>
-                                                <li><a href="shop.html">กระจกติดรถยนต์2</a></li>
+                                                <li><a href="shop.html">ท่อตรง</a></li>
+                                                <li><a href="shop.html">ท่องอ</a></li>
+                                                <li><a href="shop.html">สายถัก</a></li>
+                                                <li><a href="shop.html"> สายแวคคั่ม</a></li>
                                             </ul>
                                         </li>
                                         <li>
                                             <a href="shop.html">
                                                 <img src="~/lib/FrontendTheme/assets/img/icon/menu6.png" alt="">
-                                                <span> เซนเซอร์</span>
+                                                <span> ตกแต่งภายใน - ภายนอก <i class="fa fa-angle-down"></i></span>
                                             </a>
+                                            <ul class="sub_menu pages">
+                                                <li><a href="shop.html">รีฟิลยางใบปัด</a></li>
+                                                <li><a href="shop.html">มือหมุนพวงมาลัย</a></li>
+                                                <li><a href="shop.html">ที่วางโทรศัพท์</a></li>
+                                                <li><a href="shop.html"> พรมชุด</a></li>
+                                                <li><a href="shop.html"> ซิลิโคนหุ้มกุญแจ</a></li>
+                                                <li><a href="shop.html"> ฟิล์มติดไฟหน้า</a></li>
+                                                <li><a href="shop.html"> ครอบดิสก์เบรค</a></li>
+                                                <li><a href="shop.html"> สติ๊กเกอร์ </a></li>
+                                                <li><a href="shop.html"> ฟิล์มปรอท</a></li>
+
+                                            </ul>
                                         </li>
                                     </ul>
                                 </nav>
@@ -271,9 +281,9 @@
             </div>
         </div>
         <!--header bottom end-->
-
     </header>
     <!--header area end-->
+
     <!--header menu area start-->
     <div class="header_main_menu">
         <div class="container">
@@ -282,9 +292,8 @@
                     <div class="main_menu menu_one">
                         <nav>
                             <ul>
-
                                 <li>
-                                    <a href="index.html">หน้าแรก<!--<i class="fa fa-angle-down"></i>--></a>
+                                    <a asp-action="Home" asp-controller="Main">หน้าแรก<!--<i class="fa fa-angle-down"></i>--></a>
                                     <!--<ul class="sub_menu">
                                         <li><a href="index.html">Home 1</a></li>
                                         <li><a href="index-2.html">Home 2</a></li>
@@ -293,7 +302,7 @@
                                     </ul>-->
                                 </li>
                                 <li>
-                                    <a href="shop.html">สินค้าทั้งหมด<!--<i class="fa fa-angle-down"></i>--></a>
+                                    <a asp-controller="Shoplist" asp-action="index">สินค้าทั้งหมด<!--<i class="fa fa-angle-down"></i>--></a>
                                     <!--<ul class="mega_menu">
                                         <li>
                                             <a href="#">Shop Layouts</a>
@@ -327,7 +336,7 @@
                                         </li>
                                     </ul>-->
                                 </li>
-                                <li><a href="shop.html">โปรโมชั่น<!--<i class="fa fa-angle-down"></i>--></a></li>
+                                <li><a asp-controller="Promotion" asp-action="index">โปรโมชั่น<!--<i class="fa fa-angle-down"></i>--></a></li>
                                 <!--<li>
                                     <a href="blog.html">blog<i class="fa fa-angle-down"></i></a>
                                     <ul class="sub_menu pages">
@@ -349,8 +358,8 @@
                                     </ul>
                                 </li>-->
 
-                                <li><a href="about.html">เกี่ยวกับเรา</a></li>
-                                <li><a href="contact.html"> ติดต่อเรา</a></li>
+                                <li><a asp-controller="AboutUs" asp-action="index">เกี่ยวกับเรา</a></li>
+                                <li><a asp-controller="ContactUs" asp-action="index"> ติดต่อเรา</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -359,6 +368,7 @@
         </div>
     </div>
     <!--header menu area end-->
+
     <!--Offcanvas menu area start-->
     <div class="Offcanvas_menu">
         <div class="container">
@@ -406,19 +416,18 @@
                         </div>
                         <div id="menu" class="text-left ">
                             <ul>
-
                                 <li>
-                                    <a href="index.html">home</a>
-                                    <ul class="sub_menu">
+                                    <a asp-action="Home" asp-controller="Main">หน้าแรก<!--<i class="fa fa-angle-down"></i>--></a>
+                                    <!--<ul class="sub_menu">
                                         <li><a href="index.html">Home 1</a></li>
                                         <li><a href="index-2.html">Home 2</a></li>
                                         <li><a href="index-3.html">Home 3</a></li>
                                         <li><a href="index-4.html">Home 4</a></li>
-                                    </ul>
+                                    </ul>-->
                                 </li>
                                 <li>
-                                    <a href="shop.html">shop</a>
-                                    <ul>
+                                    <a asp-controller="Shoplist" asp-action="index">สินค้าทั้งหมด<!--<i class="fa fa-angle-down"></i>--></a>
+                                    <!--<ul class="mega_menu">
                                         <li>
                                             <a href="#">Shop Layouts</a>
                                             <ul>
@@ -449,19 +458,20 @@
 
                                             </ul>
                                         </li>
-                                    </ul>
+                                    </ul>-->
                                 </li>
-                                <li>
-                                    <a href="blog.html">blog</a>
-                                    <ul>
+                                <li><a asp-controller="Promotion" asp-action="index">โปรโมชั่น<!--<i class="fa fa-angle-down"></i>--></a></li>
+                                <!--<li>
+                                    <a href="blog.html">blog<i class="fa fa-angle-down"></i></a>
+                                    <ul class="sub_menu pages">
                                         <li><a href="blog-details.html">blog details</a></li>
                                         <li><a href="blog-fullwidth.html">blog fullwidth</a></li>
                                         <li><a href="blog-sidebar.html">blog sidebar</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="portfolio.html">pages</a>
-                                    <ul>
+                                    <a href="portfolio.html">pages <i class="fa fa-angle-down"></i></a>
+                                    <ul class="sub_menu pages">
                                         <li><a href="about.html">About Us</a></li>
                                         <li><a href="services.html">services</a></li>
                                         <li><a href="faq.html">Frequently Questions</a></li>
@@ -470,10 +480,10 @@
                                         <li><a href="wishlist.html">Wishlist</a></li>
                                         <li><a href="404.html">Error 404</a></li>
                                     </ul>
-                                </li>
+                                </li>-->
 
-                                <li><a href="about.html">about Us</a></li>
-                                <li><a href="contact.html"> Contact Us</a></li>
+                                <li><a asp-controller="AboutUs" asp-action="index">เกี่ยวกับเรา</a></li>
+                                <li><a asp-controller="ContactUs" asp-action="index"> ติดต่อเรา</a></li>
                             </ul>
                         </div>
                     </div>
@@ -515,67 +525,56 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-6">
+                    <div class="col-lg-8 col-md-6">
                         <div class="widgets_container widget_menu">
-                            <h3>Information</h3>
-                            <div class="footer_menu">
-                                <ul>
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="blog.html">Delivery Information</a></li>
-                                    <li><a href="contact.html">Privacy Policy</a></li>
-                                    <li><a href="services.html">Terms & Conditions</a></li>
-                                    <li><a href="#">Returns</a></li>
-                                    <li><a href="portfolio.html">Gift Certificates</a></li>
-                                </ul>
+                            @*<h3>Menu</h3>*@
+                            <div class="col-lg-12 col-md-6">
+                                <div class="widgets_container widget_menu">
+                                    <h3>Menu</h3>
+                                    <div class="col-12">
+                                        <div class="main_menu menu_one" style="text-align:left">
+                                            <nav>
+                                                <ul>
+                                                    <li>
+                                                        <a asp-action="Home" asp-controller="Main">หน้าแรก<!--<i class="fa fa-angle-down"></i>--></a>
+
+                                                    </li>
+                                                    <li>
+                                                        <a asp-controller="Shoplist" asp-action="index">สินค้าทั้งหมด<!--<i class="fa fa-angle-down"></i>--></a>
+
+                                                    </li>
+                                                    <li><a asp-controller="Promotion" asp-action="index">โปรโมชั่น<!--<i class="fa fa-angle-down"></i>--></a></li>
+
+
+                                                    <li><a asp-controller="AboutUs" asp-action="index">เกี่ยวกับเรา</a></li>
+                                                    <li><a asp-controller="ContactUs" asp-action="index"> ติดต่อเรา</a></li>
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4">
-                        <div class="widgets_container widget_menu">
-                            <h3>My Account</h3>
-                            <div class="footer_menu">
-                                <ul>
-                                    <li><a href="my-account.html">My Account</a></li>
-                                    <li><a href="#">Order History</a></li>
-                                    <li><a href="wishlist.html">Wish List</a></li>
-                                    <li><a href="#">Newsletter</a></li>
-                                    <li><a href="#">Affiliate</a></li>
-                                    <li><a href="faq.html">Specials</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4">
-                        <div class="widgets_container widget_menu">
-                            <h3>Extras</h3>
-                            <div class="footer_menu">
-                                <ul>
-                                    <li><a href="#">Returns</a></li>
-                                    <li><a href="#">Gift Certificates</a></li>
-                                    <li><a href="#">Affiliate</a></li>
-                                    <li><a href="#">Specials</a></li>
-                                    <li><a href="my-account.html">My Account</a></li>
-                                    <li><a href="#">Order History</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4">
-                        <div class="widgets_container widget_menu">
-                            <h3>Customer Service</h3>
-                            <div class="footer_menu">
-                                <ul>
-                                    <li><a href="contact.html">Contact Us</a></li>
-                                    <li><a href="#">Returns</a></li>
-                                    <li><a href="#">Site Map</a></li>
-                                    <li><a href="#">Affiliate</a></li>
-                                    <li><a href="#">Newsletter</a></li>
-                                </ul>
-                            </div>
+                            @*<div class="footer_menu">
+                                    <ul>
+                                        <li>
+                                            <a asp-action="Home" asp-controller="Main">หน้าแรก<!--<i class="fa fa-angle-down"></i>--></a>
+                                        </li>
+                                        <li>
+                                            <a asp-controller="Shoplist" asp-action="index">สินค้าทั้งหมด<!--<i class="fa fa-angle-down"></i>--></a>
+                                        </li>
+                                        <li><a asp-controller="Promotion" asp-action="index">โปรโมชั่น<!--<i class="fa fa-angle-down"></i>--></a></li>
+
+                                        <li><a asp-controller="AboutUs" asp-action="index">เกี่ยวกับเรา</a></li>
+                                        <li><a asp-controller="ContactUs" asp-action="index"> ติดต่อเรา</a></li>
+                                        <li><a href="#">Site Map</a></li>
+                                    </ul>
+                                </div>*@
                         </div>
                     </div>
                 </div>
             </div>
+
             @*<div class="newletter_area">
                     <div class="row">
                         <div class="col-lg-5 col-md-5">
@@ -596,15 +595,16 @@
                             </div>
                         </div>
                     </div>
-                </div>*@
+            </div>*@
+
             <div class="footer_bottom">
                 <div class="row">
-                    <div class="col-lg-6 col-md-12">
+                    <div class="col-lg-12 col-md-12">
                         <div class="copyright_area">
                             <p>Copyright &copy; 2019 <a href="#">HYPERSOFT SOLUTION COMPANY</a>  All Right Reserved.</p>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-12">
+                    @*<div class="col-lg-6 col-md-12">
                         <div class="footer_paypal">
                             <ul>
                                 <li><a href="#"><img src="assets/img/icon/paypal.jpg" alt=""></a></li>
@@ -615,12 +615,13 @@
                                 <li><a href="#"><img src="assets/img/icon/paypal5.jpg" alt=""></a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div>*@
                 </div>
             </div>
         </div>
     </footer>
     <!--footer area end-->
+
     <!-- modal area start-->
     <div class="modal fade" id="modal_box" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -732,8 +733,8 @@
             </div>
         </div>
     </div>
-
     <!-- modal area end-->
+
     <!--news letter popup start-->
     @*<div class="newletter-popup">
             <div id="boxes" class="newletter-container">
@@ -769,7 +770,6 @@
             </div>
             <!-- /.box -->
         </div>*@
-
     <!--news letter popup start-->
 
     <environment include="Development">
