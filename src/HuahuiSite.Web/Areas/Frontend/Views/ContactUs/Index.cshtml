@@ -1,8 +1,19 @@
 ﻿
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Areas/Frontend/Shared/_Layout.cshtml";
 }
+
+<div class="about_section pt-30">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12">
+                <div class="about_thumb">
+                    <img src="~/lib/FrontendTheme/assets/img/map.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="contact_area">
     <div class="container">
@@ -10,41 +21,37 @@
             <div class="col-lg-6 col-md-12">
                 <div class="contact_message content">
                     <h3>ติดต่อเรา</h3>
-                    <p><h2>บริษัทหัวฮุย อินเตอร์ จำกัด</h2></p>
-                       <ul>
-                           <li><i class="fa fa-fax"></i>  ที่อยู่ : เลขที่ 36/681 ถนนกาณจนาภิเษก ตำบลบางรักพัฒนา อำเภอบางบัวทอง จังหวัดนนทบุรี 1110</li>
-                           <li><i class="fa fa-envelope-o"></i> 080-613-6536</li>
-                           <li><i class="fa fa-edit"></i> หากต้อการสั่งซื้อกรุณาติดต่อ: </li>
-
-                           <li><i class="fa fa-facebook"></i> 
-                               <a href="https://www.facebook.com/HUA-HUI-INTER-COLTD-536433739714780/" target="_blank">
-                                   https://www.facebook.com/HUA-HUI-INTER
-                               </a></li>
-                           <li><i class="fab fa-line"></i>huahuiOficial</li>
-                       </ul>
+                    <p><h4>บริษัท หัวฮุย อินเตอร์ จำกัด</h4></p>
+                    <ul>
+                        <li><i class="fa fa-map-marker"></i>เลขที่ 36/681 ถ.กาญจนาภิเษก ต.บางรักพัฒนา อ.บางบัวทอง จ.นนทบุรี 11110</li>
+                        <li><i class="fa fa-phone"></i><a href="tel:0806136536">080-613-6536</a></li>
+                        @*<li><i class="fa fa-edit"></i> หากต้อการสั่งซื้อกรุณาติดต่อ: </li>*@
+                        <li><i class="fa fa-facebook"></i><a href="https://www.facebook.com/HUA-HUI-INTER-COLTD-536433739714780/" target="_blank">HUA HUI INTER CO.LTD</a></li>
+                        @*<li><i class="fab fa-line"></i>huahuiOficial</li>*@
+                    </ul>
                 </div>
             </div>
             <div class="col-lg-6 col-md-12">
                 <div class="contact_message form">
-                    <h3>Tell us your project</h3>
+                    <h3>ส่งข้อความ</h3>
                     <form id="contact-form" method="POST" action="assets/mail.php">
                         <p>
-                            <label> Your Name (required)</label>
-                            <input name="name" placeholder="Name *" type="text">
+                            <label>ชื่อ</label>
+                            <input name="name" type="text">
                         </p>
                         <p>
-                            <label>  Your Email (required)</label>
-                            <input name="email" placeholder="Email *" type="email">
+                            <label>อีเมล</label>
+                            <input name="email" type="email">
                         </p>
                         <p>
-                            <label>  Subject</label>
-                            <input name="subject" placeholder="Subject *" type="text">
+                            <label>เรื่อง</label>
+                            <input name="subject" type="text">
                         </p>
                         <div class="contact_textarea">
-                            <label>  Your Message</label>
-                            <textarea placeholder="Message *" name="message" class="form-control2"></textarea>
+                            <label>ข้อความ</label>
+                            <textarea name="message" class="form-control2"></textarea>
                         </div>
-                        <button type="submit"> Send</button>
+                        <button type="submit">ส่งข้อความ</button>
                         <p class="form-messege"></p>
                     </form>
 

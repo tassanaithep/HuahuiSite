@@ -10,6 +10,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Interface
     public interface ISaleService
     {
         void GetSaleList(ref SaleViewModel saleViewModel);
+        void GetSaleSelectList(ref CustomerViewModel customerViewModel);
         void SaveSale(SaleViewModel saleViewModel);
         void UpdateSale(SaleViewModel saleViewModel);
         void DeleteSale(SaleViewModel saleViewModel);
