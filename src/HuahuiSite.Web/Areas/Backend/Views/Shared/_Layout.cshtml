@@ -67,9 +67,9 @@
                     <b>
                         <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                         <!-- Dark Logo icon -->
-                        <img src="~/images/backend/logo-icon.png" alt="homepage" class="dark-logo" />
+                        <img src="~/images/backend/logo-icon2.png" alt="homepage" class="dark-logo" />
                         <!-- Light Logo icon -->
-                        <img src="~/images/backend/logo-light-icon.png" alt="homepage" class="light-logo" />
+                        <img src="~/images/backend/logo-light-icon2.png" alt="homepage" class="light-logo" />
                     </b>
                     <!--End Logo icon -->
                     <!-- Logo text -->
@@ -234,8 +234,13 @@
                 <ul id="sidebarnav">
                     <li class="nav-small-cap">Menu Management</li>
                     <li>
-                        <a class="has-arrow waves-effect waves-dark" aria-expanded="false">
-                            <i class="mdi mdi-truck-delivery"></i><span class="hide-menu">Product</span>
+                        <a class="waves-effect waves-dark" asp-controller="Home" asp-action="Index" aria-expanded="false">
+                            <i class="mdi mdi-home"></i><span class="hide-menu">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="has-arrow  waves-effect waves-dark" aria-expanded="false">
+                            <i class="mdi mdi-car-wash"></i><span class="hide-menu">Product</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">
                             <li><a asp-controller="Product" asp-action="Index">Group Product</a></li>
@@ -245,17 +250,17 @@
                     </li>
                     <li>
                         <a class="waves-effect waves-dark" asp-controller="Sale" asp-action="Index" aria-expanded="false">
-                            <i class="mdi mdi-truck-delivery"></i><span class="hide-menu">Sale</span>
+                            <i class="mdi mdi-voice"></i><span class="hide-menu">Sale</span>
                         </a>
                     </li>
                     <li>
                         <a class="waves-effect waves-dark" asp-controller="Customer" asp-action="Index" aria-expanded="false">
-                            <i class="mdi mdi-truck-delivery"></i><span class="hide-menu">Customer</span>
+                            <i class="mdi mdi-account-star"></i><span class="hide-menu">Customer</span>
                         </a>
                     </li>
                     <li>
                         <a class="waves-effect waves-dark" asp-controller="User" asp-action="Index" aria-expanded="false">
-                            <i class="mdi mdi-account-settings-variant"></i><span class="hide-menu">User System</span>
+                            <i class="mdi mdi-settings"></i><span class="hide-menu">User System</span>
                         </a>
                     </li>
                     <li class="nav-devider"></li>
