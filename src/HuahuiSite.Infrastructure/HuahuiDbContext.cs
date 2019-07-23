@@ -18,7 +18,10 @@ namespace HuahuiSite.Infrastructure
 
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<ProductCategorie> ProductCategorie { get; set; }
+        public virtual DbSet<ProductGroup> ProductGroup { get; set; }
         public virtual DbSet<Sale> Sale { get; set; }
+        public virtual DbSet<UnitOfProduct> UnitOfProduct { get; set; }
         public virtual DbSet<User> User { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -55,24 +58,61 @@ namespace HuahuiSite.Infrastructure
 
             modelBuilder.Entity<Product>(entity =>
             {
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-
-                entity.Property(e => e.DescriptionEn).HasColumnName("DescriptionEN");
-
-                entity.Property(e => e.DescriptionTh)
+                entity.Property(e => e.Code)
                     .IsRequired()
-                    .HasColumnName("DescriptionTH");
+                    .HasMaxLength(30);
 
-                entity.Property(e => e.TitleNameEn)
-                    .HasColumnName("TitleNameEN")
-                    .HasMaxLength(50);
+                entity.Property(e => e.CreatedDateTime).HasColumnType("datetime");
 
-                entity.Property(e => e.TitleNameTh)
+                entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasColumnName("TitleNameTH")
-                    .HasMaxLength(50);
+                    .HasMaxLength(150);
 
-                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+                entity.Property(e => e.PictureFileName).HasMaxLength(200);
+
+                entity.Property(e => e.ProductCategorieCode)
+                    .IsRequired()
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.ProductGroupCode)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.UpdatedDateTime).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<ProductCategorie>(entity =>
+            {
+                entity.Property(e => e.Code)
+                    .IsRequired()
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.CreatedDateTime).HasColumnType("datetime");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.UpdatedDateTime).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<ProductGroup>(entity =>
+            {
+                entity.Property(e => e.Code)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.CreatedDateTime).HasColumnType("datetime");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.ProductCategorieCode)
+                    .IsRequired()
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.UpdatedDateTime).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<Sale>(entity =>
@@ -94,6 +134,17 @@ namespace HuahuiSite.Infrastructure
                 entity.Property(e => e.PhoneNumber)
                     .IsRequired()
                     .HasMaxLength(10);
+            });
+
+            modelBuilder.Entity<UnitOfProduct>(entity =>
+            {
+                entity.Property(e => e.CreateDateTime).HasColumnType("datetime");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.UpdatedDateTime).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<User>(entity =>

@@ -32,27 +32,20 @@
 
                             <tr>
                                 <td>@No</td>
-                                <td>@item.TitleNameTh</td>
+                                <td>@item.Name</td>
 
-                                @if (@item.DescriptionTh.Length > 50)
-                                {
-                                    <td>@item.DescriptionTh.Substring(0, 50) .....</td>
-                                }
-                                else
-                                {
-                                    <td>@item.DescriptionTh</td>
-                                }
+                                
 
                                 <td>
 
-                                @if (@item.TitlePictureFileName != null)
+                                @if (@item.PictureFileName != null)
 	                            {
-                                    <img src="~/images/upload/@item.TitlePictureFileName" alt="Title Picture" width="80" />
+                                    <img src="~/images/upload/@item.PictureFileName" alt="Title Picture" width="80" />
                                 }
 
                                 </td>
 
-                                <td>@item.CreatedDate</td>
+                                <td>@item.CreatedDateTime</td>
                                 <td>
                                     <a href="#" data-toggle="modal" data-target="#@modalId"> <i class="fas fa-pencil-alt text-inverse m-r-10"></i> </a>
                                     <div class="modal fade" id="@modalId" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
@@ -62,8 +55,8 @@
 
                                                     <!-- Hidden Value -->
                                                     <input type="hidden" name="Id" value="@item.Id" />
-                                                    <input type="hidden" name="TitlePictureFileName" value="@item.TitlePictureFileName" />
-                                                    <input type="hidden" name="CreatedDate" value="@item.CreatedDate" />
+                                                    <input type="hidden" name="PictureFileName" value="@item.PictureFileName" />
+                                                    <input type="hidden" name="CreatedDateTime" value="@item.CreatedDateTime" />
                                                     <input type="hidden" name="IsRemoveImage" />
                                                     <!-- End Hidden Value -->
 
@@ -75,14 +68,8 @@
                                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                                             <div class="modal-body">
                                                                 <div class="form-group">
-                                                                    <label class="control-label">Titile Name</label>
-                                                                    <input type="text" class="form-control" name="TitleNameTh" value="@item.TitleNameTh">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label class="control-label">Description</label>
-                                                                    <div class="form-group">
-                                                                        <textarea class="textarea_editor form-control" rows="5" placeholder="Enter text ..." name="DescriptionTh">@item.DescriptionTh</textarea>
-                                                                    </div>
+                                                                    <label class="control-label">Name</label>
+                                                                    <input type="text" class="form-control" name="Name" value="@item.Name">
                                                                 </div>
                                                             </div>
                                                         </div>

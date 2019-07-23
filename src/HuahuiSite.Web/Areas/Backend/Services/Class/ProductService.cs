@@ -59,13 +59,16 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             Product product = new Product()
             {
-                //TitleNameEN = productViewModel.TitleNameEN,
-                TitleNameTh = productViewModel.TitleNameTh,
-                //DescriptionEN = productViewModel.DescriptionEN,
-                DescriptionTh = productViewModel.DescriptionTh,
-                TitlePictureFileName = productViewModel.TitlePictureImageFile != null ? titlePictureImageFileName : null,
-                IsActive = true,
-                CreatedDate = DateTime.Now,
+                Code = productViewModel.Code,
+                Name = productViewModel.Name,
+                UnitId = productViewModel.UnitId,
+                ProductCategorieCode = productViewModel.ProductCategorieCode,
+                ProductGroupCode = productViewModel.ProductGroupCode,
+                IsLicense = productViewModel.IsLicense,
+                IsPromotion = productViewModel.IsPromotion,
+                IsActive = productViewModel.IsActive,
+                PictureFileName = productViewModel.PictureFileName,
+                CreatedDateTime = DateTime.Now
             };
 
             #endregion
@@ -104,15 +107,15 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #region Delete Old Image
 
-            if ((productViewModel.TitlePictureImageFile != null || productViewModel.IsRemoveImage) && productViewModel.TitlePictureFileName != null)
-            {
-                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\upload", productViewModel.TitlePictureFileName);
+            //if ((productViewModel.TitlePictureImageFile != null || productViewModel.IsRemoveImage) && productViewModel.TitlePictureFileName != null)
+            //{
+            //    string imagePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\upload", productViewModel.TitlePictureFileName);
 
-                if (System.IO.File.Exists(imagePath))
-                {
-                    System.IO.File.Delete(imagePath);
-                }
-            }
+            //    if (System.IO.File.Exists(imagePath))
+            //    {
+            //        System.IO.File.Delete(imagePath);
+            //    }
+            //}
 
             #endregion
 
@@ -138,14 +141,17 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
             Product product = new Product()
             {
                 Id = productViewModel.Id,
-                //TitleNameEN = productViewModel.TitleNameEN,
-                TitleNameTh = productViewModel.TitleNameTh,
-                //DescriptionEN = productViewModel.DescriptionEN,
-                DescriptionTh = productViewModel.DescriptionTh,
-                TitlePictureFileName = productViewModel.TitlePictureImageFile == null && !productViewModel.IsRemoveImage ? productViewModel.TitlePictureFileName : productViewModel.TitlePictureImageFile == null && productViewModel.IsRemoveImage ? null : titlePictureImageFileName,
-                //IsActive = true,
-                CreatedDate = productViewModel.CreatedDate,
-                UpdatedDate = DateTime.Now
+                Code = productViewModel.Code,
+                Name = productViewModel.Name,
+                UnitId = productViewModel.UnitId,
+                ProductCategorieCode = productViewModel.ProductCategorieCode,
+                ProductGroupCode = productViewModel.ProductGroupCode,
+                IsLicense = productViewModel.IsLicense,
+                IsPromotion = productViewModel.IsPromotion,
+                IsActive = productViewModel.IsActive,
+                PictureFileName = productViewModel.PictureFileName,
+                CreatedDateTime = productViewModel.CreatedDateTime,
+                UpdatedDateTime = DateTime.Now
             };
 
             #endregion
@@ -177,12 +183,12 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #region Delete Image
 
-            string imagePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\upload", productViewModel.TitlePictureFileName);
+            //string imagePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\upload", productViewModel.TitlePictureFileName);
 
-            if (System.IO.File.Exists(imagePath))
-            {
-                System.IO.File.Delete(imagePath);
-            }
+            //if (System.IO.File.Exists(imagePath))
+            //{
+            //    System.IO.File.Delete(imagePath);
+            //}
 
             #endregion
         }
