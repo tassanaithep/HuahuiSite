@@ -6,38 +6,38 @@
 
 <div class="row">
     <div class="col-md-8">
-        <h4 class="card-title">User Management</h4>
-        <h6 class="card-subtitle m-b-20 text-muted">You can make user like this</h6>
+        <h4 class="card-title">Admin Management</h4>
+        <h6 class="card-subtitle m-b-20 text-danger">Admin Only [สำหรับผุ้ดูแลระบบเท่านั้น]</h6>
     </div>
 
     <div class="col-md-4 text-right">
-        <button class="btn btn-info waves-effect waves-light" type="button" data-toggle="modal" data-target="#create-modal"><span class="btn-label"><i class="fa fa-plus"></i></span>Create User</button>
+        <button class="btn btn-info waves-effect waves-light" type="button" data-toggle="modal" data-target="#create-modal"><span class="btn-label"><i class="fa fa-plus"></i></span>Create Admin</button>
     </div>
 
     <div class="modal fade" id="create-modal" tabindex="-1" role="dialog" aria-labelledby="create-modal-label" style="display: none;" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <form id="form-create" asp-controller="User" asp-action="Save" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSaveSuccess" enctype="multipart/form-data">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="create-modal-label">Add User</h4>
+                    <div class="modal-header" style="background-color:darkred;">
+                        <h4 class="modal-title text-white" id="create-modal-label">Create Admin</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label asp-for="Name" class="control-label">Name</label>
-                                    <input class="form-control" asp-for="Name" placeholder="Enter text ...">
+                                    <label asp-for="Name" class="control-label">Name - Surname*</label>
+                                    <input class="form-control" asp-for="Name" required="">
                                 </div>
 
                                 <div class="form-group">
-                                    <label asp-for="Username" class="control-label">Username</label>
-                                    <input class="form-control" asp-for="Username">
+                                    <label asp-for="Username" class="control-label">Username*</label>
+                                    <input class="form-control" asp-for="Username" required="">
                                 </div>
 
                                 <div class="form-group">
-                                    <label asp-for="Password" class="control-label">Password</label>
-                                    <input class="form-control" asp-for="Password">
+                                    <label asp-for="Password" class="control-label">Password*</label>
+                                    <input class="form-control" asp-for="Password" required="">
                                 </div>
                                
                             </div>
