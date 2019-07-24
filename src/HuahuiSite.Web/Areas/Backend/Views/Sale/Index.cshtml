@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-md-8">
         <h4 class="card-title">Sale Management</h4>
-        
+        <h6 class="card-subtitle m-b-20 text-muted">You can make customer like this&nbsp;</h6>
     </div>
 
     <div class="col-md-4 text-right">
@@ -18,9 +18,9 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <form id="form-create" asp-controller="Sale" asp-action="Save" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSaveSuccess" enctype="multipart/form-data" >
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="create-modal-label">Create Sale</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <div class="modal-header" style="background-color:#000;">
+                        <h4 class="modal-title text-white" id="create-modal-label">Create Sale</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="text-white">×</span></button>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -29,57 +29,54 @@
 
                                     <div class="form-group row">
 
-                                        <label asp-for="Firstname" class="col-sm-3 text-right control-label col-form-label">Firstname</label>
+                                        <label asp-for="Firstname" class="col-sm-2 text-right control-label col-form-label">Firstname*</label>
 
-                                        <div class="col-sm-9">
-                                            <input class="form-control" asp-for="Firstname" placeholder="Enter text ...">
+                                        <div class="col-sm-4">
+                                            <input class="form-control" asp-for="Firstname" required="">
+                                        </div>
+                                        <label asp-for="Lastname" class="col-sm-2 text-right control-label col-form-label">Lastname*</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control" asp-for="Lastname" required="">
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label asp-for="Lastname" class="col-sm-3 text-right control-label col-form-label">Lastname*</label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" asp-for="Lastname">
-                                        </div>
-                                    </div>
+                                    
                                     <div class="form-group row">
 
-                                        <label asp-for="Address" class="col-sm-3 text-right control-label col-form-label">Address</label>
+                                        <label asp-for="Address" class="col-sm-2 text-right control-label col-form-label">Address*</label>
                                         <div class="col-sm-9">
-                                            <textarea class="textarea_editor form-control" rows="5" asp-for="Address"></textarea>
+                                            <textarea class="textarea_editor form-control" rows="4" asp-for="Address" required=""></textarea>
                                         </div>
 
 
                                     </div>
                                     <div class="form-group row">
 
-                                        <label asp-for="PhoneNumber" class="col-sm-3 text-right control-label col-form-label">PhoneNumber</label>
+                                        <label asp-for="PhoneNumber" class="col-sm-2 text-right control-label col-form-label">PhoneNumber</label>
 
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-4">
                                             <input class="form-control" asp-for="PhoneNumber">
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label asp-for="Email" class="col-sm-3 text-right control-label col-form-label">Email</label>
-                                        <div class="col-sm-9">
+                                        <label asp-for="Email" class="col-sm-2 text-right control-label col-form-label">Email</label>
+                                        <div class="col-sm-4">
                                             <input class="form-control" asp-for="Email">
                                         </div>
                                     </div>
+                                 
                                     <hr />
 
-                                    <span class="text-danger">  <b>กำหนด Username Login</b></span>
-
+                                    <h4><label class="col-sm-12  control-label col-form-label text-info"> กำหนด Username Login</label></h4>
                                     <div class="form-group row">
 
-                                        <label asp-for="Username" class="col-sm-3 text-right control-label col-form-label">Username</label>
+                                        <label asp-for="Username" class="col-sm-2 text-right control-label col-form-label">Username*</label>
 
-                                        <div class="col-sm-9">
-                                            <input class="form-control" asp-for="Username" placeholder="">
+                                        <div class="col-sm-4">
+                                            <input class="form-control" asp-for="Username"  required="">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label asp-for="Password" class="col-sm-3 text-right control-label col-form-label">Password</label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" asp-for="Password" type="password">
+                                        <label asp-for="Password" class="col-sm-2 text-right control-label col-form-label">Password*</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control" asp-for="Password" type="password"  required="">
                                         </div>
                                     </div>
                                 </div>

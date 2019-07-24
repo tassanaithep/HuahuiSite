@@ -31,79 +31,110 @@
 
                             string modalId = "modal-row-table-" + No;
 
-                        <tr>
-                            <td>@No</td>
-                            <td>@item.Firstname</td>
-                            <td>@item.Lastname</td>
+                            <tr>
+                                <td>@No</td>
+                                <td>@item.Firstname</td>
+                                <td>@item.Lastname</td>
 
-                            @if (@item.Address.Length > 50)
-                            {
-                                <td>@item.Address.Substring(0, 50) .....</td>
-                            }
-                            else
-                            {
-                                <td>@item.Address</td>
-                            }
+                                @if (@item.Address.Length > 50)
+                                {
+                                    <td>@item.Address.Substring(0, 50) .....</td>
+                                }
+                                else
+                                {
+                                    <td>@item.Address</td>
+                                }
 
-                            <td>@item.PhoneNumber</td>
-                            <td>@item.Email</td>
+                                <td>@item.PhoneNumber</td>
+                                <td>@item.Email</td>
 
-                            <td>
-                                <a href="#" data-toggle="modal" data-target="#@modalId"> <i class="fas fa-pencil-alt text-inverse m-r-10"></i> </a>
-                                <div class="modal fade" id="@modalId" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg" role="document">
-                                        <div class="modal-content">
-                                            <form class="form-row-table" asp-controller="Customer" asp-action="Update" data-ajax="true" data-ajax-method="post" data-ajax-success="OnUpdateSuccess" enctype="multipart/form-data">
+                                <td>
+                                    <a href="#" data-toggle="modal" data-target="#@modalId"> <i class="fas fa-pencil-alt text-inverse m-r-10"></i> </a>
+                                    <div class="modal fade" id="@modalId" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <form class="form-row-table" asp-controller="Customer" asp-action="Update" data-ajax="true" data-ajax-method="post" data-ajax-success="OnUpdateSuccess" enctype="multipart/form-data">
 
-                                                <!-- Hidden Value -->
-                                                <input type="hidden" name="Id" value="@item.Id" />
-                                                <!-- End Hidden Value -->
+                                                    <!-- Hidden Value -->
+                                                    <input type="hidden" name="Id" value="@item.Id" />
+                                                    <!-- End Hidden Value -->
 
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title">Edit Sale</h4>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                        <div class="modal-body">
-                                                            <div class="form-group">
-                                                                <label class="control-label">Firstname</label>
-                                                                <input type="text" class="form-control" name="Firstname" value="@item.Firstname">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="control-label">Lastname</label>
-                                                                <input type="text" class="form-control" name="Lastname" value="@item.Lastname">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="control-label">Address</label>
-                                                                <div class="form-group">
-                                                                    <textarea class="textarea_editor form-control" rows="5" placeholder="Enter text ..." name="Address">@item.Address</textarea>
+                                                    <div class="modal-header" style="background-color:#ff6a00;">
+                                                        <h4 class="modal-title text-white" >Edit Customer</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="text-white">×</span></button>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                            <div class="modal-body">
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-2 text-right control-label col-form-label">Firstname*</label>
+                                                                    <div class="col-sm-4">
+                                                                        <input type="text" class="form-control" name="Firstname" value="@item.Firstname" required="">
+                                                                    </div>
+                                                                    <label class="col-sm-2 text-right control-label col-form-label">Lastname*</label>
+                                                                    <div class="col-sm-4">
+                                                                        <input type="text" class="form-control" name="Lastname" value="@item.Lastname" required="">
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="control-label">PhoneNumber</label>
-                                                                <input type="text" class="form-control" name="PhoneNumber" value="@item.PhoneNumber">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="control-label">Email</label>
-                                                                <input type="text" class="form-control" name="Email" value="@item.Email">
+                                                                
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-2 text-right control-label col-form-label">Address*</label>
+                                                                    <div class="col-sm-10">
+                                                                        <textarea class="textarea_editor form-control" rows="5" placeholder="Enter text ..." name="Address" required="">@item.Address</textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-2 text-right control-label col-form-label">PhoneNumber</label>
+                                                                    <div class="col-sm-4">
+                                                                        <input type="text" class="form-control" name="PhoneNumber" value="@item.PhoneNumber">
+                                                                    </div>
+                                                                    <label class="col-sm-2 text-right control-label col-form-label">Email</label>
+                                                                    <div class="col-sm-4">
+                                                                        <input type="email" class="form-control" name="Email" value="@item.Email">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label asp-for="SaleId" class="col-sm-2 text-right control-label col-form-label">Sale*</label>
+                                                                    <div class="col-sm-10">
+                                                                        <select class="form-control" asp-for="SaleId" asp-items="@Model.SaleSelectList">
+                                                                            <option value="">--- Please Select Item ---</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <hr />
+
+
+                                                                <h4><label class="col-sm-12  control-label col-form-label text-info"> กำหนด Username Login</label></h4>
+                                                                <div class="form-group row">
+
+                                                                    <label asp-for="Username" class="col-sm-2 text-right control-label col-form-label">Username*</label>
+
+                                                                    <div class="col-sm-4">
+                                                                        <input class="form-control" asp-for="Username" required="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label asp-for="Password" class="col-sm-2 text-right control-label col-form-label">Password*</label>
+                                                                    <div class="col-sm-4">
+                                                                        <input class="form-control" asp-for="Password" type="password" required="">
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Success</button>
-                                                </div>
-                                            </form>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Success</button>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td>
-                                <a href="#" onclick="Delete(this)"><i class="fas fa-trash-alt text-inverse m-r-10"></i></a>
-                            </td>
-                        </tr>
+                                </td>
+                                <td>
+                                    <a href="#" onclick="Delete(this)"><i class="fas fa-trash-alt text-inverse m-r-10"></i></a>
+                                </td>
+                            </tr>
 
                             No++;
 
