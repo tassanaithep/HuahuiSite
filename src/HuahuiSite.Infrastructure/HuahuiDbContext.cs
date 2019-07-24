@@ -138,7 +138,7 @@ namespace HuahuiSite.Infrastructure
 
             modelBuilder.Entity<UnitOfProduct>(entity =>
             {
-                entity.Property(e => e.CreateDateTime).HasColumnType("datetime");
+                entity.Property(e => e.CreatedDateTime).HasColumnType("datetime");
 
                 entity.Property(e => e.Name)
                     .IsRequired()

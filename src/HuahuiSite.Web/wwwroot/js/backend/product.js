@@ -6,6 +6,7 @@
 */
 $(function () {
     RenderImage();
+    BindData();
 });
 
 // #endregion
@@ -18,13 +19,45 @@ $(function () {
 */
 RenderImage = () => {
     $(".form-row-table").each(function (index, element) {
-        let $titlePictureFileName = $(element).find("[name='TitlePictureFileName']").val();
+        let $pictureFileName = $(element).find("[name='PictureFileName']").val();
 
-        if ($titlePictureFileName !== "") {
+        if ($pictureFileName !== "") {
             $(element).find(".dropify-wrapper").addClass("has-preview");
             $(element).find(".dropify-preview").css("display", "block");
-            $(element).find(".dropify-render").append("<img src='/images/upload/" + $titlePictureFileName + "' />");
+            $(element).find(".dropify-render").append("<img src='/images/upload/" + $pictureFileName + "' />");
         }
+    });
+};
+
+/**
+  * @desc Bind Data
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+BindData = () => {
+    $(".form-row-table").each(function (index, element) {
+        // #region Get Element
+
+        let $unitIdSelect = $(element).find("[name='UnitId']");
+        let $productCategorieCodeSelect = $(element).find("[name='ProductCategorieCode']");
+        let $productGroupCodeSelect = $(element).find("[name='ProductGroupCode']");
+
+        // #endregion
+
+        // #region Get Value
+
+        let $unitId = $(element).find("[name='hid-unitId']").val();
+        let $productCategorieCode = $(element).find("[name='hid-productCategorieCode']").val();
+        let $productGroupCode = $(element).find("[name='hid-productGroupCode']").val();
+
+        // #endregion
+
+        // #region Binding Value
+
+        $unitIdSelect.val($unitId);
+        $productCategorieCodeSelect.val($productCategorieCode);
+        $productGroupCodeSelect.val($productGroupCode);
+
+        // #endregion
     });
 };
 
@@ -42,6 +75,7 @@ UpdatePage = () => {
     UpdateTable();
     DropifyScriptRender();
     RenderImage();
+    BindData();
 
     $("body").removeAttr("style");
 };
@@ -53,7 +87,7 @@ UpdatePage = () => {
 ClearForm = () => {
     $("#form-create")[0].reset();
     $("#form-create").find(".dropify-wrapper").remove();
-    $("#parent-form-group-title-picture").append("<input class='dropify' type='file' id='TitlePictureImageFile' name='TitlePictureImageFile'>");
+    $("#parent-form-group-picture").append("<input class='dropify' type='file' id='PictureImageFile' name='PictureImageFile'>");
 };
 
 /**
@@ -94,11 +128,11 @@ Delete = (e) => {
     let $form = $(e).closest("tr").find(".form-row-table");
 
     let $id = $form.find("[name='Id']").val();
-    let $titlePictureFileName = $form.find("[name='TitlePictureFileName']").val();
+    let $pictureFileName = $form.find("[name='PictureFileName']").val();
 
     let jsonObject = {};
     jsonObject.Id = $id;
-    jsonObject.TitlePictureFileName = $titlePictureFileName;
+    jsonObject.PictureFileName = $pictureFileName;
 
     $.ajax({
         type: "POST",

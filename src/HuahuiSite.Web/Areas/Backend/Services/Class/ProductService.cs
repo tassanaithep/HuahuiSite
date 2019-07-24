@@ -2,6 +2,7 @@
 using HuahuiSite.Core.Interfaces;
 using HuahuiSite.Web.Areas.Backend.Models;
 using HuahuiSite.Web.Areas.Backend.Services.Interface;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -40,16 +41,16 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         {
             #region Save Image to Directory
 
-            string titlePictureImageFileName = string.Empty;
+            string pictureImageFileName = string.Empty;
 
-            if (productViewModel.TitlePictureImageFile != null)
+            if (productViewModel.PictureFile != null)
             {
-                titlePictureImageFileName = Guid.NewGuid().ToString() + Path.GetExtension(productViewModel.TitlePictureImageFile.FileName);
+                pictureImageFileName = Guid.NewGuid().ToString() + Path.GetExtension(productViewModel.PictureFile.FileName);
 
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\upload", titlePictureImageFileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\upload", pictureImageFileName);
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    productViewModel.TitlePictureImageFile.CopyTo(fileStream);
+                    productViewModel.PictureFile.CopyTo(fileStream);
                 }
             }
 
@@ -66,8 +67,8 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
                 ProductGroupCode = productViewModel.ProductGroupCode,
                 IsLicense = productViewModel.IsLicense,
                 IsPromotion = productViewModel.IsPromotion,
-                IsActive = productViewModel.IsActive,
-                PictureFileName = productViewModel.PictureFileName,
+                IsActive =true,
+                PictureFileName = productViewModel.PictureFile != null ? pictureImageFileName : null,
                 CreatedDateTime = DateTime.Now
             };
 
@@ -87,7 +88,19 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void GetProductList(ref ProductViewModel productViewModel)
         {
+            #region Get List
+
             productViewModel.ProductList = _unitOfWork.Products.GetAll();
+
+            #endregion
+
+            #region Get Select List
+
+            productViewModel.UnitOfProductSelectList = _unitOfWork.UnitOfProducts.GetAll().Select(s => new SelectListItem { Value = s.Id.ToString(), Text = s.Name });
+            productViewModel.ProductCategorieSelectList = _unitOfWork.ProductCategories.GetAll().Select(s => new SelectListItem { Value = s.Code, Text = s.Name });
+            productViewModel.ProductGroupSelectList = _unitOfWork.ProductGroups.GetAll().Select(s => new SelectListItem { Value = s.Code, Text = s.Name });
+
+            #endregion
         }
 
         #endregion
@@ -103,19 +116,19 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         {
             #region Update Image
 
-            string titlePictureImageFileName = string.Empty;
+            string pictureFileName = string.Empty;
 
             #region Delete Old Image
 
-            //if ((productViewModel.TitlePictureImageFile != null || productViewModel.IsRemoveImage) && productViewModel.TitlePictureFileName != null)
-            //{
-            //    string imagePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\upload", productViewModel.TitlePictureFileName);
+            if ((productViewModel.PictureFile != null || productViewModel.IsRemoveImage) && productViewModel.PictureFileName != null)
+            {
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\upload", productViewModel.PictureFileName);
 
-            //    if (System.IO.File.Exists(imagePath))
-            //    {
-            //        System.IO.File.Delete(imagePath);
-            //    }
-            //}
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+            }
 
             #endregion
 
@@ -123,12 +136,12 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             if (!productViewModel.IsRemoveImage)
             {
-                titlePictureImageFileName = Guid.NewGuid().ToString() + Path.GetExtension(productViewModel.TitlePictureImageFile.FileName);
+                pictureFileName = Guid.NewGuid().ToString() + Path.GetExtension(productViewModel.PictureFile.FileName);
 
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\upload", titlePictureImageFileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\upload", pictureFileName);
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    productViewModel.TitlePictureImageFile.CopyTo(fileStream);
+                    productViewModel.PictureFile.CopyTo(fileStream);
                 }
             }
 
@@ -149,7 +162,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
                 IsLicense = productViewModel.IsLicense,
                 IsPromotion = productViewModel.IsPromotion,
                 IsActive = productViewModel.IsActive,
-                PictureFileName = productViewModel.PictureFileName,
+                PictureFileName = productViewModel.PictureFile == null && !productViewModel.IsRemoveImage ? productViewModel.PictureFileName : productViewModel.PictureFile == null && productViewModel.IsRemoveImage ? null : pictureFileName,
                 CreatedDateTime = productViewModel.CreatedDateTime,
                 UpdatedDateTime = DateTime.Now
             };

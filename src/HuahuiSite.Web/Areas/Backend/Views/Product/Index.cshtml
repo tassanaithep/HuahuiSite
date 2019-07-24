@@ -33,26 +33,20 @@
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="UnitId" class="control-label">Unit</label>
-                                    <select class="form-control" asp-for="UnitId">
+                                    <select class="form-control" asp-for="UnitId" asp-items="@Model.UnitOfProductSelectList">
                                         <option value="">--- Please Select Item ---</option>
-                                        <option value="1">Bath</option>
-                                        <option value="2">Dolla</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="ProductCategorieCode" class="control-label">Categorie</label>
-                                    <select class="form-control" asp-for="ProductCategorieCode">
+                                    <select class="form-control" asp-for="ProductCategorieCode" asp-items="@Model.ProductCategorieSelectList">
                                         <option value="">--- Please Select Item ---</option>
-                                        <option value="1">Categorie 1</option>
-                                        <option value="2">Categorie 2</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="ProductGroupCode" class="control-label">Group</label>
-                                    <select class="form-control" asp-for="ProductGroupCode">
+                                    <select class="form-control" asp-for="ProductGroupCode" asp-items="@Model.ProductGroupSelectList">
                                         <option value="">--- Please Select Item ---</option>
-                                        <option value="1">ProductGroupCode 1</option>
-                                        <option value="2">ProductGroupCode 2</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -63,19 +57,13 @@
                                     <input type="checkbox" asp-for="IsPromotion" class="check">
                                     <label asp-for="IsPromotion" class="control-label">Promotion</label>
                                 </div>
-                                @*<div class="form-group">
-            <label asp-for="DescriptionTh" class="control-label">Description</label>
-            <div class="form-group">
-                <textarea class="textarea_editor form-control" rows="5" placeholder="Enter text ..." asp-for="DescriptionTh"></textarea>
-            </div>
-        </div>*@
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-12">
-                        <div class="form-group" id="parent-form-group-title-picture">
-                            <label asp-for="TitlePictureImageFile" class="control-label">Picture Upload</label>
-                            <input class="dropify" asp-for="TitlePictureImageFile" />
+                        <div class="form-group" id="parent-form-group-picture">
+                            <label asp-for="PictureFile" class="control-label">Picture Upload</label>
+                            <input class="dropify" asp-for="PictureFile" />
                         </div>
                     </div>
                     <div class="modal-footer">

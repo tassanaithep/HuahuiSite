@@ -9,7 +9,10 @@ namespace HuahuiSite.Core.Interfaces
     {
         ICustomerRepository Customers { get; }
         IProductRepository Products { get; }
+        IProductCategorieRepository ProductCategories { get; }
+        IProductGroupRepository ProductGroups { get; }
         ISaleRepository Sales { get; }
+        IUnitOfProductRepository UnitOfProducts { get; }
         IUserRepository Users { get; }
         int Complete();
     }

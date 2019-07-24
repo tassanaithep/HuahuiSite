@@ -8,7 +8,7 @@ namespace HuahuiSite.Core.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public bool IsActive { get; set; }
-        public DateTime CreateDateTime { get; set; }
+        public DateTime CreatedDateTime { get; set; }
         public DateTime? UpdatedDateTime { get; set; }
     }
 }

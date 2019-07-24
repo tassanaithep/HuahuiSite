@@ -1,5 +1,6 @@
 ﻿using HuahuiSite.Core.Entities;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +22,12 @@ namespace HuahuiSite.Web.Areas.Backend.Models
         public string PictureFileName { get; set; }
         public DateTime CreatedDateTime { get; set; }
 
-        public IFormFile TitlePictureImageFile { get; set; }
+        public IFormFile PictureFile { get; set; }
         public bool IsRemoveImage { get; set; }
+
+        public IEnumerable<SelectListItem> UnitOfProductSelectList { get; set; }
+        public IEnumerable<SelectListItem> ProductCategorieSelectList { get; set; }
+        public IEnumerable<SelectListItem> ProductGroupSelectList { get; set; }
 
         public IEnumerable<Product> ProductList { get; set; }
     }

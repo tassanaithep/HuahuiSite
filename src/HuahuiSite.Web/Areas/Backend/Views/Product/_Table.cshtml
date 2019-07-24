@@ -13,8 +13,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>TitleName</th>
-                            <th>Description</th>
+                            <th>Name</th>
                             <th>Picture</th>
                             <th>CreateDatetime</th>
                             <th>Edit</th>
@@ -55,6 +54,9 @@
 
                                                     <!-- Hidden Value -->
                                                     <input type="hidden" name="Id" value="@item.Id" />
+                                                    <input type="hidden" name="hid-unitId" value="@item.UnitId" />
+                                                    <input type="hidden" name="hid-productCategorieCode" value="@item.ProductCategorieCode" />
+                                                    <input type="hidden" name="hid-productGroupCode" value="@item.ProductGroupCode" />
                                                     <input type="hidden" name="PictureFileName" value="@item.PictureFileName" />
                                                     <input type="hidden" name="CreatedDateTime" value="@item.CreatedDateTime" />
                                                     <input type="hidden" name="IsRemoveImage" />
@@ -68,8 +70,56 @@
                                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                                             <div class="modal-body">
                                                                 <div class="form-group">
+                                                                    <label class="control-label">Code</label>
+                                                                    <input type="text" class="form-control" name="Code" value="@item.Code">
+                                                                </div>
+                                                                <div class="form-group">
                                                                     <label class="control-label">Name</label>
                                                                     <input type="text" class="form-control" name="Name" value="@item.Name">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Unit</label>
+                                                                    <select class="form-control" name="UnitId" asp-items="@Model.UnitOfProductSelectList">
+                                                                        <option value="">--- Please Select Item ---</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Categorie</label>
+                                                                    <select class="form-control" name="ProductCategorieCode" asp-items="@Model.ProductCategorieSelectList">
+                                                                        <option value="">--- Please Select Item ---</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Group</label>
+                                                                    <select class="form-control" name="ProductGroupCode" asp-items="@Model.ProductGroupSelectList">
+                                                                        <option value="">--- Please Select Item ---</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+
+                                                                    @if (item.IsLicense)
+                                                                    {
+                                                                        <input type="checkbox" name="IsLicense" class="check" checked>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <input type="checkbox" name="IsLicense" class="check">
+                                                                    }
+
+                                                                    <label class="control-label">License</label>
+                                                                </div>
+                                                                <div class="form-group">
+
+                                                                    @if (item.IsPromotion)
+                                                                    {
+                                                                        <input type="checkbox" name="IsPromotion" class="check" checked>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <input type="checkbox" name="IsPromotion" class="check">
+                                                                    }
+
+                                                                    <label class="control-label">Promotion</label>
                                                                 </div>
                                                             </div>
                                                         </div>
