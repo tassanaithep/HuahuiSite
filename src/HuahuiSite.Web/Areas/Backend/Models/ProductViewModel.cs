@@ -10,13 +10,16 @@ namespace HuahuiSite.Web.Areas.Backend.Models
     public class ProductViewModel
     {
         public int Id { get; set; }
-        public string TitleNameEn { get; set; }
-        public string TitleNameTh { get; set; }
-        public string DescriptionEn { get; set; }
-        public string DescriptionTh { get; set; }
-        public string TitlePictureFileName { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public int UnitId { get; set; }
+        public string ProductCategorieCode { get; set; }
+        public string ProductGroupCode { get; set; }
+        public bool IsLicense { get; set; }
+        public bool IsPromotion { get; set; }
         public bool IsActive { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public string PictureFileName { get; set; }
+        public DateTime CreatedDateTime { get; set; }
 
         public IFormFile TitlePictureImageFile { get; set; }
         public bool IsRemoveImage { get; set; }

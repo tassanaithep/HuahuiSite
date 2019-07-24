@@ -24,15 +24,51 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label asp-for="TitleNameTh" class="control-label">Titile Name</label>
-                                    <input class="form-control" asp-for="TitleNameTh" placeholder="Enter text ...">
+                                    <label asp-for="Code" class="control-label">Code</label>
+                                    <input class="form-control" asp-for="Code" placeholder="Enter text ...">
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="DescriptionTh" class="control-label">Description</label>
-                                    <div class="form-group">
-                                        <textarea class="textarea_editor form-control" rows="5" placeholder="Enter text ..." asp-for="DescriptionTh"></textarea>
-                                    </div>
+                                    <label asp-for="Name" class="control-label">Name</label>
+                                    <input class="form-control" asp-for="Name" placeholder="Enter text ...">
                                 </div>
+                                <div class="form-group">
+                                    <label asp-for="UnitId" class="control-label">Unit</label>
+                                    <select class="form-control" asp-for="UnitId">
+                                        <option value="">--- Please Select Item ---</option>
+                                        <option value="1">Bath</option>
+                                        <option value="2">Dolla</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="ProductCategorieCode" class="control-label">Categorie</label>
+                                    <select class="form-control" asp-for="ProductCategorieCode">
+                                        <option value="">--- Please Select Item ---</option>
+                                        <option value="1">Categorie 1</option>
+                                        <option value="2">Categorie 2</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="ProductGroupCode" class="control-label">Group</label>
+                                    <select class="form-control" asp-for="ProductGroupCode">
+                                        <option value="">--- Please Select Item ---</option>
+                                        <option value="1">ProductGroupCode 1</option>
+                                        <option value="2">ProductGroupCode 2</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="checkbox" asp-for="IsLicense" class="check">
+                                    <label asp-for="IsLicense" class="control-label">License</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="checkbox" asp-for="IsPromotion" class="check">
+                                    <label asp-for="IsPromotion" class="control-label">Promotion</label>
+                                </div>
+                                @*<div class="form-group">
+            <label asp-for="DescriptionTh" class="control-label">Description</label>
+            <div class="form-group">
+                <textarea class="textarea_editor form-control" rows="5" placeholder="Enter text ..." asp-for="DescriptionTh"></textarea>
+            </div>
+        </div>*@
                             </div>
                         </div>
                     </div>
