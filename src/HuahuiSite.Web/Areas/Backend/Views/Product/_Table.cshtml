@@ -26,28 +26,21 @@
 
                         @foreach (var item in Model.ProductList)
                         {
-
-                            string modalId = "modal-row-table-" + No;
-
                             <tr>
                                 <td>@No</td>
                                 <td>@item.Name</td>
-
-                                
-
                                 <td>
 
                                 @if (@item.PictureFileName != null)
 	                            {
-                                    <img src="~/images/upload/@item.PictureFileName" alt="Title Picture" width="80" />
+                                    <img src="~/images/upload/@item.PictureFileName" alt="Picture" width="80" />
                                 }
 
                                 </td>
-
                                 <td>@item.CreatedDateTime</td>
                                 <td>
-                                    <a href="#" data-toggle="modal" data-target="#@modalId"> <i class="fas fa-pencil-alt text-inverse m-r-10"></i> </a>
-                                    <div class="modal fade" id="@modalId" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+                                    <a href="#" data-toggle="modal" data-target="#modal-row-table-@No"> <i class="fas fa-pencil-alt text-inverse m-r-10"></i> </a>
+                                    <div class="modal fade" id="modal-row-table-@No" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content">
                                                 <form class="form-row-table" asp-controller="Product" asp-action="Update" data-ajax="true" data-ajax-method="post" data-ajax-success="OnUpdateSuccess" enctype="multipart/form-data">
@@ -57,6 +50,8 @@
                                                     <input type="hidden" name="hid-unitId" value="@item.UnitId" />
                                                     <input type="hidden" name="hid-productCategorieCode" value="@item.ProductCategorieCode" />
                                                     <input type="hidden" name="hid-productGroupCode" value="@item.ProductGroupCode" />
+                                                    @if (@item.IsLicense) { <input type="hidden" name="IsLicense" value="true" /> } else { <input type="hidden" name="IsLicense" value="false" /> }
+                                                    @if (@item.IsPromotion) { <input type="hidden" name="IsPromotion" value="true" /> } else { <input type="hidden" name="IsPromotion" value="false" /> }
                                                     <input type="hidden" name="PictureFileName" value="@item.PictureFileName" />
                                                     <input type="hidden" name="CreatedDateTime" value="@item.CreatedDateTime" />
                                                     <input type="hidden" name="IsRemoveImage" />
@@ -71,11 +66,11 @@
                                                             <div class="modal-body">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Code</label>
-                                                                    <input type="text" class="form-control" name="Code" value="@item.Code">
+                                                                    <input type="text" class="form-control" name="Code" value="@item.Code" />
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="control-label">Name</label>
-                                                                    <input type="text" class="form-control" name="Name" value="@item.Name">
+                                                                    <input type="text" class="form-control" name="Name" value="@item.Name" />
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="control-label">Unit</label>
@@ -99,27 +94,27 @@
 
                                                                     @if (item.IsLicense)
                                                                     {
-                                                                        <input type="checkbox" name="IsLicense" class="check" checked>
+                                                                        <input type="checkbox" id="IsLicense-@No" class="check" onclick="SwitchCheck(this)" checked />
                                                                     }
                                                                     else
                                                                     {
-                                                                        <input type="checkbox" name="IsLicense" class="check">
+                                                                        <input type="checkbox" id="IsLicense-@No" class="check" onclick="SwitchCheck(this)" />
                                                                     }
 
-                                                                    <label class="control-label">License</label>
+                                                                    <label for="IsLicense-@No" class="control-label">License</label>
                                                                 </div>
                                                                 <div class="form-group">
 
                                                                     @if (item.IsPromotion)
                                                                     {
-                                                                        <input type="checkbox" name="IsPromotion" class="check" checked>
+                                                                        <input type="checkbox" id="IsPromotion-@No" class="check" onclick="SwitchCheck(this)" checked />
                                                                     }
                                                                     else
                                                                     {
-                                                                        <input type="checkbox" name="IsPromotion" class="check">
+                                                                        <input type="checkbox" id="IsPromotion-@No" class="check" onclick="SwitchCheck(this)" />
                                                                     }
 
-                                                                    <label class="control-label">Promotion</label>
+                                                                    <label for="IsPromotion-@No" class="control-label">Promotion</label>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -127,7 +122,7 @@
                                                     <div class="col-md-12 col-lg-12">
                                                         <div class="form-group">
                                                             <label class="control-label">Picture Upload</label>
-                                                            <input type="file" class="dropify" name="TitlePictureImageFile" />
+                                                            <input type="file" class="dropify" name="PictureFile" />
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">

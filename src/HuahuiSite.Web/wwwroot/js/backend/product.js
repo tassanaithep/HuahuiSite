@@ -63,6 +63,32 @@ BindData = () => {
 
 // #endregion
 
+// #region Functions
+
+// #region On Click
+
+/**
+  * @desc On Checkbox Click
+  * @param {Object} e - Element of Checkbox
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+SwitchCheck = (e) => {
+    let $elementName = $(e).prop("id").substr(0, $(e).prop("id").indexOf('-'));
+
+    let $elementOfValue = $(e).closest(".form-row-table").find("[name='" + $elementName + "']");
+
+    if ($elementOfValue.val() === "true") {
+        $elementOfValue.val("false");
+    }
+    else if ($elementOfValue.val() === "false") {
+        $elementOfValue.val("true");
+    }
+};
+
+// #endregion
+
+// #endregion
+
 // #region Affect
 
 /**

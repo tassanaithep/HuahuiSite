@@ -25,16 +25,13 @@
 
                         @foreach (var item in Model.UserList)
                         {
-
-                            string modalId = "modal-row-table-" + No;
-
                             <tr>
                                 <td>@No</td>
                                 <td>@item.Name</td>
                                 <td>@item.Username</td>
                                 <td>
-                                    <a href="#" data-toggle="modal" data-target="#@modalId"> <i class="fas fa-pencil-alt text-inverse m-r-10"></i> </a>
-                                    <div class="modal fade" id="@modalId" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+                                    <a href="#" data-toggle="modal" data-target="#modal-row-table-@No"> <i class="fas fa-pencil-alt text-inverse m-r-10"></i> </a>
+                                    <div class="modal fade" id="modal-row-table-@No" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content">
                                                 <form class="form-row-table" asp-controller="User" asp-action="Update" data-ajax="true" data-ajax-method="post" data-ajax-success="OnUpdateSuccess" enctype="multipart/form-data">
@@ -52,15 +49,15 @@
                                                             <div class="modal-body">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Name</label>
-                                                                    <input type="text" class="form-control" name="Name" value="@item.Name">
+                                                                    <input type="text" class="form-control" name="Name" value="@item.Name" />
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="control-label">Username</label>
-                                                                    <input type="text" class="form-control" name="Username" value="@item.Username">
+                                                                    <input type="text" class="form-control" name="Username" value="@item.Username" />
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="control-label">Password</label>
-                                                                    <input type="password" class="form-control" name="Password" value="@item.Password">
+                                                                    <input type="password" class="form-control" name="Password" value="@item.Password" />
                                                                 </div>
                                                             </div>
                                                         </div>
