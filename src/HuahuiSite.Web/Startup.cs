@@ -69,6 +69,8 @@ namespace HuahuiSite.Web
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductCategorieService, ProductCategorieService>();
+            services.AddScoped<IProductGroupService, ProductGroupService>();
             services.AddScoped<ISaleService, SaleService>();
             services.AddScoped<IUserService, UserService>();
 

@@ -29,7 +29,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         #region Views
 
         /// <summary>
-        /// Index of Login Page.
+        /// Index of Page.
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019

@@ -1,0 +1,118 @@
+﻿@model HuahuiSite.Web.Areas.Backend.Models.ProductGroupViewModel
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-actions">
+                <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+            </div>
+        </div>
+        <div class="card-body collapse show">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Unit Price</th>
+                            <th>Min Quantity</th>
+                            <th>Max Quantity</th>
+                            <th>Categorie Code</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{ int No = 1; }
+
+                        @foreach (var item in Model.ProductGroupList)
+                        {
+                        <tr>
+                            <td>@No</td>
+                            <td>@item.Code</td>
+                            <td>@item.Name</td>
+                            <td>@item.UnitPrice</td>
+                            <td>@item.MinQuantity</td>
+                            <td>@item.MaxQuantity</td>
+                            <td>@item.ProductCategorieCode</td>
+                            <td>
+                                <a href="#" data-toggle="modal" data-target="#modal-row-table-@No"> <i class="fas fa-pencil-alt text-inverse m-r-10"></i> </a>
+                                <div class="modal fade" id="modal-row-table-@No" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <form class="form-row-table" asp-controller="ProductGroup" asp-action="Update" data-ajax="true" data-ajax-method="post" data-ajax-success="OnUpdateSuccess" enctype="multipart/form-data">
+
+                                                <!-- Hidden Value -->
+                                                <input type="hidden" name="Id" value="@item.Id" />
+                                                <input type="hidden" name="hid-productCategorieCode" value="@item.ProductCategorieCode" />
+                                                <input type="hidden" name="CreatedDateTime" value="@item.CreatedDateTime" />
+                                                <!-- End Hidden Value -->
+
+                                                <div class="modal-header" style="background-color:#ff6a00;">
+                                                    <h4 class="modal-title text-white">Edit ProductCategorie</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="text-white">×</span></button>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                        <div class="modal-body">
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 text-right control-label col-form-label">Code*</label>
+                                                                <div class="col-sm-4">
+                                                                    <input type="text" class="form-control" name="Code" value="@item.Code" required="" />
+                                                                </div>
+                                                                <label class="col-sm-2 text-right control-label col-form-label">Name*</label>
+                                                                <div class="col-sm-4">
+                                                                    <input type="text" class="form-control" name="Name" value="@item.Name" required="" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 text-right control-label col-form-label">Unit Price*</label>
+                                                                <div class="col-sm-4">
+                                                                    <input type="number" class="form-control" name="UnitPrice" value="@item.UnitPrice" required="">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 text-right control-label col-form-label">Min Quantity*</label>
+                                                                <div class="col-sm-4">
+                                                                    <input type="number" class="form-control" name="MinQuantity" value="@item.MinQuantity" required="">
+                                                                </div>
+                                                                <label class="col-sm-2 text-right control-label col-form-label">Max Quantity*</label>
+                                                                <div class="col-sm-4">
+                                                                    <input type="number" class="form-control" name="MaxQuantity" value="@item.MaxQuantity" required="">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="control-label">Product Categorie</label>
+                                                                <select class="form-control" name="ProductCategorieCode" asp-items="@Model.ProductCategorieSelectList">
+                                                                    <option value="">--- Please Select Item ---</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Success</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="#" onclick="Delete(this)"><i class="fas fa-trash-alt text-inverse m-r-10"></i></a>
+                            </td>
+                        </tr>
+
+                            No++;
+
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

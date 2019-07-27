@@ -1,0 +1,61 @@
+﻿@model HuahuiSite.Web.Areas.Backend.Models.ProductCategorieViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <h4 class="card-title">Product Categorie Management</h4>
+        <h6 class="card-subtitle m-b-20 text-muted">You can make product categorie like this</h6>
+    </div>
+
+    <div class="col-md-4 text-right">
+        <button class="btn btn-info waves-effect waves-light" type="button" data-toggle="modal" data-target="#create-modal"><span class="btn-label"><i class="fa fa-plus"></i></span>Create Categorie</button>
+    </div>
+
+    <div class="modal fade" id="create-modal" tabindex="-1" role="dialog" aria-labelledby="create-modal-label" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <form id="form-create" asp-controller="ProductCategorie" asp-action="Save" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSaveSuccess" enctype="multipart/form-data">
+                    <div class="modal-header" style="background-color:#000;">
+                        <h4 class="modal-title text-white" id="create-modal-label">Create Product Categorie</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="text-white">×</span></button>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <label asp-for="Code" class="col-sm-2 text-right control-label col-form-label">Code*</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" asp-for="Code" required="">
+
+                                    </div>
+                                    <label asp-for="Name" class="col-sm-2 text-right control-label col-form-label">Name*</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" asp-for="Name" required="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Success</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" id="parent-table">
+    <partial name="_Table" model="Model" />
+</div>
+
+@section Scripts {
+
+    <script src="~/js/backend/product_categorie.js"></script>
+
+}
+
