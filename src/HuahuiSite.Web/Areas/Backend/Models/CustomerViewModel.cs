@@ -17,7 +17,6 @@ namespace HuahuiSite.Web.Areas.Backend.Models
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public int SaleId { get; set; }
-        public int SaleName { get; set; }
 
         public string Username { get; set; }
         public string Password { get; set; }
