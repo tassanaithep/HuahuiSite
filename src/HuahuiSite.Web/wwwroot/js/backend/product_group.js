@@ -37,7 +37,7 @@ BindData = () => {
     $(".form-row-table").each(function (index, element) {
         // #region Get Element
 
-        let $productCategorieCodeSelect = $(element).find("[name='ProductCategorieCode']");
+        let $productCategorieSelect = $(element).find("[name='ProductCategorieCode']");
 
         // #endregion
 
@@ -49,7 +49,7 @@ BindData = () => {
 
         // #region Binding Value
 
-        $productCategorieCodeSelect.val($productCategorieCode);
+        $productCategorieSelect.val($productCategorieCode);
 
         // #endregion
     });

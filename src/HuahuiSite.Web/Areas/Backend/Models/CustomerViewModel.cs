@@ -17,18 +17,13 @@ namespace HuahuiSite.Web.Areas.Backend.Models
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public int SaleId { get; set; }
+        public int SaleName { get; set; }
 
-
-
-        // Mon สร้าง 24/7/62
         public string Username { get; set; }
         public string Password { get; set; }
 
-        // Mon สร้าง 24/7/62
         public IEnumerable<SelectListItem> SaleSelectList { get; set; }
 
         public IEnumerable<Customer> CustomerList { get; set; }
-
-        
     }
 }

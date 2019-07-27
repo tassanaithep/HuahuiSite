@@ -37,9 +37,9 @@ BindData = () => {
     $(".form-row-table").each(function (index, element) {
         // #region Get Element
 
-        let $unitIdSelect = $(element).find("[name='UnitId']");
-        let $productCategorieCodeSelect = $(element).find("[name='ProductCategorieCode']");
-        let $productGroupCodeSelect = $(element).find("[name='ProductGroupCode']");
+        let $unitSelect = $(element).find("[name='UnitId']");
+        let $productCategorieSelect = $(element).find("[name='ProductCategorieCode']");
+        let $productGroupSelect = $(element).find("[name='ProductGroupCode']");
 
         // #endregion
 
@@ -53,9 +53,9 @@ BindData = () => {
 
         // #region Binding Value
 
-        $unitIdSelect.val($unitId);
-        $productCategorieCodeSelect.val($productCategorieCode);
-        $productGroupCodeSelect.val($productGroupCode);
+        $unitSelect.val($unitId);
+        $productCategorieSelect.val($productCategorieCode);
+        $productGroupSelect.val($productGroupCode);
 
         // #endregion
     });

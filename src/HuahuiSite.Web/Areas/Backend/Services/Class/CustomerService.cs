@@ -32,7 +32,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         #region Create
 
         /// <summary>
-        /// Save User.
+        /// Save Customer.
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
@@ -60,7 +60,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         #region Read
 
         /// <summary>
-        /// Get User List.
+        /// Get Customer List.
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
@@ -74,7 +74,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         #region Update
 
         /// <summary>
-        /// Update User.
+        /// Update Customer.
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
@@ -102,7 +102,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         #region Delete
 
         /// <summary>
-        /// Delete User.
+        /// Delete Customer.
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019

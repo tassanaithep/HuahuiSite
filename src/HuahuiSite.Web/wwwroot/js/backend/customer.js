@@ -6,6 +6,7 @@
 */
 $(function () {
     //RenderImage();
+    BindData();
 });
 
 // #endregion
@@ -25,6 +26,32 @@ RenderImage = () => {
             $(element).find(".dropify-preview").css("display", "block");
             $(element).find(".dropify-render").append(`<img src="/images/upload/${ $titlePictureFileName }" />`);
         }
+    });
+};
+
+/**
+  * @desc Bind Data
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+BindData = () => {
+    $(".form-row-table").each(function (index, element) {
+        // #region Get Element
+
+        let $saleSelect = $(element).find("[name='SaleId']");
+
+        // #endregion
+
+        // #region Get Value
+
+        let $saleId = $(element).find("[name='hid-sale-id']").val();
+
+        // #endregion
+
+        // #region Binding Value
+
+        $saleSelect.val($saleId);
+
+        // #endregion
     });
 };
 
