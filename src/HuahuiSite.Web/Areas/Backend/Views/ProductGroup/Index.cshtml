@@ -26,38 +26,40 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="modal-body">
                                 <div class="form-group row">
-                                    <label asp-for="Code" class="col-sm-2 text-right control-label col-form-label">Code*</label>
+                                    <label asp-for="Code" class="col-sm-2 text-right control-label col-form-label">Code*:</label>
                                     <div class="col-sm-4">
                                         <input class="form-control" asp-for="Code" required="" />
                                     </div>
-                                    <label asp-for="Name" class="col-sm-2 text-right control-label col-form-label">Name*</label>
+                                    <label asp-for="Name" class="col-sm-2 text-right control-label col-form-label">Name*:</label>
                                     <div class="col-sm-4">
                                         <input class="form-control" asp-for="Name" required="" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label asp-for="UnitPrice" class="col-sm-2 text-right control-label col-form-label">Unit Price*</label>
+                                    <label asp-for="UnitPrice" class="col-sm-2 text-right control-label col-form-label">Unit Price*:</label>
                                     <div class="col-sm-4">
                                         <input class="form-control" asp-for="UnitPrice" required="" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label asp-for="MinQuantity" class="col-sm-2 text-right control-label col-form-label">Min Quantity*</label>
+                                    <label asp-for="MinQuantity" class="col-sm-2 text-right control-label col-form-label">Min Quantity*:</label>
                                     <div class="col-sm-4">
                                         <input class="form-control" asp-for="MinQuantity" required="" />
                                     </div>
-                                    <label asp-for="MaxQuantity" class="col-sm-2 text-right control-label col-form-label">Max Quantity*</label>
+                                    <label asp-for="MaxQuantity" class="col-sm-2 text-right control-label col-form-label">Max Quantity*:</label>
                                     <div class="col-sm-4">
                                         <input class="form-control" asp-for="MaxQuantity" required="" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label asp-for="ProductCategorieCode" class="control-label">Product Categorie</label>
-                                    <select class="form-control" asp-for="ProductCategorieCode" asp-items="@Model.ProductCategorieSelectList">
-                                        <option value="">--- Please Select Item ---</option>
-                                    </select>
+                                    <label asp-for="ProductCategorieCode" class="col-sm-2 text-right control-label col-form-label">Product Categorie*:</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" asp-for="ProductCategorieCode" asp-items="@Model.ProductCategorieSelectList">
+                                            <option value="">--- Please Select Item ---</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
+                                </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -77,6 +79,14 @@
 @section Scripts {
 
     <script src="~/js/backend/product_group.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table_productGroup').DataTable();
+        });
+    </script>
+
+
+
 
 }
 

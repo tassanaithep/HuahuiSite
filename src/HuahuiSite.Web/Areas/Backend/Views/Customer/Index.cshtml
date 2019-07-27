@@ -4,6 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
+
 <div class="row">
     <div class="col-md-8">
         <h4 class="card-title">Customer Management</h4>
@@ -64,7 +65,7 @@
                                 </div>
                                 <hr />
 
-                               
+
                                 <h4><label class="col-sm-12  control-label col-form-label text-info"> กำหนด Username Login</label></h4>
                                 <div class="form-group row">
 
@@ -93,6 +94,8 @@
     </div>
 </div>
 
+
+
 <div class="row" id="parent-table">
     <partial name="_Table" model="Model" />
 </div>
@@ -100,6 +103,14 @@
 @section Scripts {
 
     <script src="~/js/backend/customer.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#table_customer').DataTable();
+        });
+    </script>
+
+
 
 }
 
