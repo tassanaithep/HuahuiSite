@@ -134,7 +134,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #region Save New Image
 
-            if (!productViewModel.IsRemoveImage)
+            if (productViewModel.PictureFile != null && !productViewModel.IsRemoveImage)
             {
                 pictureFileName = Guid.NewGuid().ToString() + Path.GetExtension(productViewModel.PictureFile.FileName);
 
