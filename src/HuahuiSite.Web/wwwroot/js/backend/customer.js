@@ -53,6 +53,26 @@ BindData = () => {
 
         // #endregion
     });
+
+    $(".form-row-table").each(function (index, element) {
+        // #region Get Element
+
+        let $tdOfSaleName = $(element).closest("tr").find(".td-sale-name");
+
+        // #endregion
+
+        // #region Get Value
+
+        let $saleName = $(element).find("[name='SaleId'] :selected").text();
+
+        // #endregion
+
+        // #region Binding Value
+
+        $tdOfSaleName.text($saleName);
+
+        // #endregion
+    });
 };
 
 // #endregion
