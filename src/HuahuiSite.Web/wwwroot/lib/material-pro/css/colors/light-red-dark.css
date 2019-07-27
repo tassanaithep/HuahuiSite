@@ -145,16 +145,18 @@ a.link:hover, a.link:focus {
 }
 
 .sidebar-nav {
-  background: #272c33;
+    background: #272c33;
+    color: #ffffff;
 }
 
 .sidebar-nav ul li a {
   color: #ffffff;
 }
 
-.sidebar-nav ul li a.active, .sidebar-nav ul li a:hover {
-  color: #26c6da;
-}
+    .sidebar-nav ul li a.active, .sidebar-nav ul li a:hover {
+        color: #26c6da;
+        background-color: #ff8b67;
+    }
 
 .sidebar-nav ul li a.active {
   color: #ffffff;
