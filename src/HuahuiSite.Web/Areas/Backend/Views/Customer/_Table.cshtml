@@ -23,11 +23,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item2 in Model.SaleSelectList)
-
-                        {
-                            @item2.Text
-                        }
 
                             @{ int No = 1; }
 
@@ -110,13 +105,13 @@
                                                                     <div class="form-group row">
                                                                         <label asp-for="Username" class="col-sm-2 text-right control-label col-form-label">Username*</label>
                                                                         <div class="col-sm-4">
-                                                                            <input class="form-control" asp-for="Username" required="" />
+                                                                            <input class="form-control" asp-for="Username" />
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
                                                                         <label asp-for="Password" class="col-sm-2 text-right control-label col-form-label">Password*</label>
                                                                         <div class="col-sm-4">
-                                                                            <input class="form-control" asp-for="Password" type="password" required="" />
+                                                                            <input class="form-control" asp-for="Password" type="password" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
