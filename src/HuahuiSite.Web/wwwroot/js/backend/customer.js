@@ -23,7 +23,7 @@ RenderImage = () => {
         if ($titlePictureFileName !== "") {
             $(element).find(".dropify-wrapper").addClass("has-preview");
             $(element).find(".dropify-preview").css("display", "block");
-            $(element).find(".dropify-render").append("<img src='/images/upload/" + $titlePictureFileName + "' />");
+            $(element).find(".dropify-render").append(`<img src="/images/upload/${ $titlePictureFileName }" />`);
         }
     });
 };
@@ -53,7 +53,7 @@ UpdatePage = () => {
 ClearForm = () => {
     $("#form-create")[0].reset();
     $("#form-create").find(".dropify-wrapper").remove();
-    $("#parent-form-group-title-picture").append("<input class='dropify' type='file' id='TitlePictureImageFile' name='TitlePictureImageFile'>");
+    $("#parent-form-group-title-picture").append(`<input class="dropify" type="file" id="TitlePictureImageFile" name="TitlePictureImageFile" />`);
 };
 
 /**
