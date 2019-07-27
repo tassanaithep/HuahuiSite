@@ -16,55 +16,71 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <form id="form-create" asp-controller="Product" asp-action="Save" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSaveSuccess" enctype="multipart/form-data">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="create-modal-label">Add Product</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <div class="modal-header" style="background-color:#000;">
+                        <h4 class="modal-title text-white" id="create-modal-label">Add Product</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="text-white">×</span></button>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="modal-body">
-                                <div class="form-group">
-                                    <label asp-for="Code" class="control-label">Code</label>
-                                    <input class="form-control" asp-for="Code" placeholder="Enter text ...">
+                                <div class="form-group row">
+                                    <label asp-for="Code" class="col-sm-2 text-right control-label col-form-label">Code*:</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" asp-for="Code" required="">
+                                    </div>
+                                    
                                 </div>
-                                <div class="form-group">
-                                    <label asp-for="Name" class="control-label">Name</label>
-                                    <input class="form-control" asp-for="Name" placeholder="Enter text ...">
+                                <div class="form-group row">
+                                    <label asp-for="Name" class="col-sm-2 text-right control-label col-form-label">Name*:</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" asp-for="Name"  required="">
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label asp-for="UnitId" class="control-label">Unit</label>
-                                    <select class="form-control" asp-for="UnitId" asp-items="@Model.UnitOfProductSelectList">
-                                        <option value="">--- Please Select Item ---</option>
-                                    </select>
+                                <div class="form-group row">
+                                    <label asp-for="UnitId" class="col-sm-2 text-right control-label col-form-label">Unit*:</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" asp-for="UnitId" asp-items="@Model.UnitOfProductSelectList">
+                                            <option value="">--- Please Select Item ---</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label asp-for="ProductCategorieCode" class="control-label">Categorie</label>
-                                    <select class="form-control" asp-for="ProductCategorieCode" asp-items="@Model.ProductCategorieSelectList">
-                                        <option value="">--- Please Select Item ---</option>
-                                    </select>
+                                <div class="form-group row">
+                                    <label asp-for="ProductCategorieCode" class="col-sm-2 text-right control-label col-form-label">Categorie*:</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" asp-for="ProductCategorieCode" asp-items="@Model.ProductCategorieSelectList">
+                                            <option value="">--- Please Select Item ---</option>
+                                        </select>
+                                    </div>
+                                    <label asp-for="ProductGroupCode" class="col-sm-2 text-right control-label col-form-label">Product Group:*</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" asp-for="ProductGroupCode" asp-items="@Model.ProductGroupSelectList">
+                                            <option value="">--- Please Select Item ---</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label asp-for="ProductGroupCode" class="control-label">Group</label>
-                                    <select class="form-control" asp-for="ProductGroupCode" asp-items="@Model.ProductGroupSelectList">
-                                        <option value="">--- Please Select Item ---</option>
-                                    </select>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 text-right control-label col-form-label">Option:</label>
+
+                                    <div class="col-sm-3">
+                                        <input type="checkbox" asp-for="IsLicense" class="check">
+                                        <label asp-for="IsLicense" class="col-sm-2 text-right control-label col-form-label">License</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="checkbox" asp-for="IsPromotion" class="check">
+                                        <label asp-for="IsPromotion" class="col-sm-2 text-right control-label col-form-label">Promotion</label>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <input type="checkbox" asp-for="IsLicense" class="check">
-                                    <label asp-for="IsLicense" class="control-label">License</label>
+                                <div class="form-group row" id="parent-form-group-picture">
+                                    <label asp-for="PictureFile" class="col-sm-2 text-right control-label col-form-label">Picture Upload</label>
+                                    <div class="col-sm-10">
+                                        <input class="dropify" asp-for="PictureFile" />
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <input type="checkbox" asp-for="IsPromotion" class="check">
-                                    <label asp-for="IsPromotion" class="control-label">Promotion</label>
+
                                 </div>
-                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 col-lg-12">
-                        <div class="form-group" id="parent-form-group-picture">
-                            <label asp-for="PictureFile" class="control-label">Picture Upload</label>
-                            <input class="dropify" asp-for="PictureFile" />
-                        </div>
+                      
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

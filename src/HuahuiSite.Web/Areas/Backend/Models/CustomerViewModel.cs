@@ -18,6 +18,8 @@ namespace HuahuiSite.Web.Areas.Backend.Models
         public string Email { get; set; }
         public int SaleId { get; set; }
 
+
+
         // Mon สร้าง 24/7/62
         public string Username { get; set; }
         public string Password { get; set; }
