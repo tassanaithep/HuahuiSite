@@ -16,6 +16,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
         private readonly ICustomerService _customerService;
         private readonly ISaleService _saleService;
+        private readonly IUserService _userService;
 
         #endregion
 
@@ -23,11 +24,13 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
         public CustomerController(
             ICustomerService customerService,
-            ISaleService saleService
+            ISaleService saleService,
+            IUserService userService
             )
         {
             _customerService = customerService;
             _saleService = saleService;
+            _userService = userService;
         }
 
         #endregion
@@ -80,6 +83,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
             try
             {
                 _customerService.SaveCustomer(customerViewModel);
+                _userService.SaveUser(null, null, customerViewModel);
                 isSuccess = true;
             }
             catch (Exception exception)

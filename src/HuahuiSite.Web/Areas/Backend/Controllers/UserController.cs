@@ -73,7 +73,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
             try
             {
-                _userService.SaveUser(userViewModel);
+                _userService.SaveUser(userViewModel, null, null);
                 isSuccess = true;
             }
             catch (Exception exception)
