@@ -33,11 +33,11 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         #region Create
 
         /// <summary>
-        /// Save User.
+        /// Save Sale.
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
-        public void SaveSale(SaleViewModel saleViewModel)
+        public int SaveSale(SaleViewModel saleViewModel)
         {
             #region Create Object to Save
 
@@ -53,6 +53,8 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
             #endregion
 
             _unitOfWork.Sales.Add(sale);
+
+            return sale.Id;
         }
 
         #endregion

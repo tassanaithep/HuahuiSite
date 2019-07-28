@@ -15,8 +15,8 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         #region Members
 
         private readonly ICustomerService _customerService;
-        private readonly ISaleService _saleService;
         private readonly IUserService _userService;
+        private readonly ISaleService _saleService;
 
         #endregion
 
@@ -24,13 +24,13 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
         public CustomerController(
             ICustomerService customerService,
-            ISaleService saleService,
-            IUserService userService
+            IUserService userService,
+            ISaleService saleService
             )
         {
             _customerService = customerService;
-            _saleService = saleService;
             _userService = userService;
+            _saleService = saleService;
         }
 
         #endregion
@@ -82,8 +82,8 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
             try
             {
-                _customerService.SaveCustomer(customerViewModel);
-                _userService.SaveUser(null, null, customerViewModel);
+                int customerId = _customerService.SaveCustomer(customerViewModel);
+                _userService.SaveUser(null, null, customerViewModel, customerId);
                 isSuccess = true;
             }
             catch (Exception exception)
@@ -109,6 +109,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
             try
             {
                 _customerService.UpdateCustomer(customerViewModel);
+                //_userService.UpdateUser(null, null, customerViewModel);
                 isSuccess = true;
             }
             catch (Exception exception)

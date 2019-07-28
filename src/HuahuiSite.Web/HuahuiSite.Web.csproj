@@ -5,16 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+    <PackageReference Include="System.Web.Helpers.Crypto" Version="3.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Areas\Backend\Data\" />
     <Folder Include="Areas\Frontend\Data\" />
     <Folder Include="wwwroot\images\backend\background\" />
-    <Folder Include="wwwroot\lib\themeforest-venezo-ecommerce-bootstrap-4-template\" />
   </ItemGroup>
 
   <ItemGroup>

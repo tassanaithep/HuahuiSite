@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using HuahuiSite.Core.Interfaces;
+using HuahuiSite.Core.Models;
 using HuahuiSite.Infrastructure;
+using HuahuiSite.Web.Areas.Backend.Models;
 using HuahuiSite.Web.Areas.Backend.Services.Class;
 using HuahuiSite.Web.Areas.Backend.Services.Interface;
 using Microsoft.AspNetCore.Builder;
@@ -65,14 +68,34 @@ namespace HuahuiSite.Web
 
             #region Initialize Services
 
-            // Initialize Service
-            services.AddScoped<ILoginService, LoginService>();
-            services.AddScoped<ICustomerService, CustomerService>();
-            services.AddScoped<IProductService, ProductService>();
-            services.AddScoped<IProductCategorieService, ProductCategorieService>();
-            services.AddScoped<IProductGroupService, ProductGroupService>();
-            services.AddScoped<ISaleService, SaleService>();
-            services.AddScoped<IUserService, UserService>();
+            #region Backend
+
+            services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.ILoginService, HuahuiSite.Web.Areas.Backend.Services.Class.LoginService>();
+            services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.ICustomerService, HuahuiSite.Web.Areas.Backend.Services.Class.CustomerService>();
+            services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.IProductService, HuahuiSite.Web.Areas.Backend.Services.Class.ProductService>();
+            services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.IProductCategorieService, HuahuiSite.Web.Areas.Backend.Services.Class.ProductCategorieService>();
+            services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.IProductGroupService, HuahuiSite.Web.Areas.Backend.Services.Class.ProductGroupService>();
+            services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.ISaleService, HuahuiSite.Web.Areas.Backend.Services.Class.SaleService>();
+            services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.IUserService, HuahuiSite.Web.Areas.Backend.Services.Class.UserService>();
+
+            #endregion
+
+            #region Frontend
+
+            services.AddScoped<HuahuiSite.Web.Areas.Frontend.Services.Interface.ILoginService, HuahuiSite.Web.Areas.Frontend.Services.Class.LoginService>();
+            services.AddScoped<HuahuiSite.Web.Areas.Frontend.Services.Interface.ICartService, HuahuiSite.Web.Areas.Frontend.Services.Class.CartService>();
+
+            #endregion
+
+            #endregion
+
+            #region Initialize Auto Mapper
+
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<SaleModel, SaleViewModel>();
+                cfg.CreateMap<CustomerModel, CustomerViewModel>();
+            });
 
             #endregion
         }
@@ -101,15 +124,15 @@ namespace HuahuiSite.Web
                 //    name: "default",
                 //    template: "{controller=Main}/{action=Home}/{id?}");
 
-                //routes.MapAreaRoute(
-                //    name: "Frontend",
-                //    areaName: "Frontend",
-                //    template: "{controller=Main}/{action=Home}/{id?}");
-
                 routes.MapAreaRoute(
-                    name: "Backend",
-                    areaName: "Backend",
-                    template: "{area:exists}/{controller=Login}/{action=Index}/{id?}");
+                    name: "Frontend",
+                    areaName: "Frontend",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+
+                //routes.MapAreaRoute(
+                //    name: "Backend",
+                //    areaName: "Backend",
+                //    template: "{area:exists}/{controller=Login}/{action=Index}/{id?}");
             });
         }
     }

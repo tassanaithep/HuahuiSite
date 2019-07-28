@@ -1,5 +1,7 @@
-﻿using HuahuiSite.Core.Entities;
+﻿using AutoMapper;
+using HuahuiSite.Core.Entities;
 using HuahuiSite.Core.Interfaces;
+using HuahuiSite.Core.Models;
 using HuahuiSite.Web.Areas.Backend.Models;
 using HuahuiSite.Web.Areas.Backend.Services.Interface;
 using System;
@@ -36,11 +38,11 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
-        public void SaveCustomer(CustomerViewModel customerViewModel)
+        public int SaveCustomer(CustomerViewModel customerViewModel)
         {
             #region Create Object to Save
 
-            Customer Customer = new Customer()
+            Customer customer = new Customer()
             {
                 Firstname = customerViewModel.Firstname,
                 Lastname = customerViewModel.Lastname,
@@ -52,7 +54,9 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #endregion
 
-            _unitOfWork.Customers.Add(Customer);
+            _unitOfWork.Customers.Add(customer);
+
+            return customer.Id;
         }
 
         #endregion
@@ -66,7 +70,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void GetCustomerList(ref CustomerViewModel customerViewModel)
         {
-            customerViewModel.CustomerList = _unitOfWork.Customers.GetAll();
+            customerViewModel.CustomerList = Mapper.Map<IEnumerable<CustomerModel>, IEnumerable<CustomerViewModel>>(_unitOfWork.Customers.GetCustomerList());
         }
 
         #endregion
@@ -82,7 +86,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         {
             #region Create Object to Update
 
-            Customer Customer = new Customer()
+            Customer customer = new Customer()
             {
                 Id = customerViewModel.Id,
                 Firstname = customerViewModel.Firstname,
@@ -95,7 +99,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #endregion
 
-            _unitOfWork.Customers.Update(Customer);
+            _unitOfWork.Customers.Update(customer);
         }
 
         #endregion
@@ -111,14 +115,14 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         {
             #region Create Object to Delete
 
-            Customer Customer = new Customer()
+            Customer customer = new Customer()
             {
                 Id = customerViewModel.Id,
             };
 
             #endregion
 
-            _unitOfWork.Customers.Remove(Customer);
+            _unitOfWork.Customers.Remove(customer);
         }
 
         #endregion

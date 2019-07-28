@@ -14,6 +14,8 @@ namespace HuahuiSite.Infrastructure
         public UnitOfWork(HuahuiDbContext context)
         {
             _context = context;
+            Carts = new CartRepository(_context);
+            CartItemLists = new CartItemListRepository(_context);
             Customers = new CustomerRepository(_context);
             Products = new ProductRepository(_context);
             ProductCategories = new ProductCategorieRepository(_context);
@@ -23,6 +25,8 @@ namespace HuahuiSite.Infrastructure
             Users = new UserRepository(_context);
         }
 
+        public ICartRepository Carts { get; private set; }
+        public ICartItemListRepository CartItemLists { get; private set; }
         public ICustomerRepository Customers { get; private set; }
         public IProductRepository Products { get; private set; }
         public IProductCategorieRepository ProductCategories { get; private set; }

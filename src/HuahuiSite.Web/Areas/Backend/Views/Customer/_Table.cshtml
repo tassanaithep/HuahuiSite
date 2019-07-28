@@ -57,6 +57,7 @@
                                                     <!-- Hidden Value -->
                                                     <input type="hidden" name="Id" value="@item.Id" />
                                                     <input type="hidden" name="hid-sale-id" value="@item.SaleId" />
+                                                    <input type="hidden" name="Password" value="@item.Password" />
                                                     <!-- End Hidden Value -->
 
                                                     <div class="modal-header" style="background-color:#ff6a00;">
@@ -105,15 +106,15 @@
 
                                                                 <h4><label class="col-sm-12  control-label col-form-label text-info"> กำหนด Username Login</label></h4>
                                                                 <div class="form-group row">
-                                                                    <label asp-for="Username" class="col-sm-2 text-right control-label col-form-label">Username*</label>
+                                                                    <label class="col-sm-2 text-right control-label col-form-label">Username*</label>
                                                                     <div class="col-sm-4">
-                                                                        <input class="form-control" asp-for="Username" />
+                                                                        <input class="form-control" name="Username" value="@item.Username" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <label asp-for="Password" class="col-sm-2 text-right control-label col-form-label">Password*</label>
+                                                                    <label class="col-sm-2 text-right control-label col-form-label">Password*</label>
                                                                     <div class="col-sm-4">
-                                                                        <input class="form-control" asp-for="Password" type="password" />
+                                                                        <input type="password" class="form-control" name="NewPassword" value="**********" />
                                                                     </div>
                                                                 </div>
                                                             </div>

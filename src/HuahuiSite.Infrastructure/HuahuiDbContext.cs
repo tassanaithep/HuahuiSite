@@ -16,6 +16,8 @@ namespace HuahuiSite.Infrastructure
         {
         }
 
+        public virtual DbSet<Cart> Cart { get; set; }
+        public virtual DbSet<CartItemList> CartItemList { get; set; }
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<ProductCategorie> ProductCategorie { get; set; }
@@ -35,6 +37,28 @@ namespace HuahuiSite.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Cart>(entity =>
+            {
+                entity.Property(e => e.CreatedDateTime).HasColumnType("datetime");
+
+                entity.Property(e => e.Status)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.UpdatedDateTime).HasColumnType("datetime");
+
+                entity.Property(e => e.UserRole)
+                    .IsRequired()
+                    .HasMaxLength(30);
+            });
+
+            modelBuilder.Entity<CartItemList>(entity =>
+            {
+                entity.Property(e => e.CreatedDateTime).HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedDateTime).HasColumnType("datetime");
+            });
+
             modelBuilder.Entity<Customer>(entity =>
             {
                 entity.Property(e => e.Address)
@@ -155,15 +179,15 @@ namespace HuahuiSite.Infrastructure
 
                 entity.Property(e => e.Password)
                     .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.Username)
-                    .IsRequired()
-                    .HasMaxLength(20);
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.RoleName)
                     .IsRequired()
                     .HasMaxLength(30);
+
+                entity.Property(e => e.Username)
+                    .IsRequired()
+                    .HasMaxLength(20);
             });
         }
     }

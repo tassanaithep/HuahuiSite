@@ -11,7 +11,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Interface
     {
         void GetSaleList(ref SaleViewModel saleViewModel);
         void GetSaleSelectList(ref CustomerViewModel customerViewModel);
-        void SaveSale(SaleViewModel saleViewModel);
+        int SaveSale(SaleViewModel saleViewModel);
         void UpdateSale(SaleViewModel saleViewModel);
         void DeleteSale(SaleViewModel saleViewModel);
     }

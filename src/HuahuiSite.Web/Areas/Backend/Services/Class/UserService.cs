@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 
 namespace HuahuiSite.Web.Areas.Backend.Services.Class
 {
@@ -36,7 +37,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
-        public void SaveUser(UserViewModel userViewModel = null, SaleViewModel saleViewModel = null,  CustomerViewModel customerViewModel = null)
+        public void SaveUser(UserViewModel userViewModel = null, SaleViewModel saleViewModel = null,  CustomerViewModel customerViewModel = null, int? roleId = null)
         {
             #region Create Object to Save
 
@@ -46,22 +47,24 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
             {
                 user.Name = userViewModel.Name;
                 user.Username = userViewModel.Username;
-                user.Password = userViewModel.Password;
+                user.Password = Crypto.Hash(userViewModel.Password);
                 user.RoleName = "Admin";
             }
             else if (saleViewModel != null)
             {
                 user.Name = saleViewModel.Firstname + " " + saleViewModel.Lastname;
                 user.Username = saleViewModel.Username;
-                user.Password = saleViewModel.Password;
+                user.Password = Crypto.Hash(saleViewModel.Password);
                 user.RoleName = "Sale";
+                user.RoleId = roleId;
             }
             else if (customerViewModel != null)
             {
                 user.Name = customerViewModel.Firstname + " " + customerViewModel.Lastname;
                 user.Username = customerViewModel.Username;
-                user.Password = customerViewModel.Password;
+                user.Password = Crypto.Hash(customerViewModel.Password);
                 user.RoleName = "Customer";
+                user.RoleId = roleId;
             }
 
             #endregion
@@ -92,17 +95,34 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
-        public void UpdateUser(UserViewModel userViewModel)
+        public void UpdateUser(UserViewModel userViewModel = null, SaleViewModel saleViewModel = null, CustomerViewModel customerViewModel = null)
         {
+            var decryptPassword = Crypto.HashPassword(customerViewModel.Password);
             #region Create Object to Update
 
-            User user = new User()
+            User user = new User();
+
+            if (userViewModel != null)
             {
-                Id = userViewModel.Id,
-                Name = userViewModel.Name,
-                Username = userViewModel.Username,
-                Password = userViewModel.Password
-            };
+                user.Id = userViewModel.Id;
+                user.Name = userViewModel.Name;
+                user.Username = userViewModel.Username;
+                user.Password = userViewModel.Password;
+            }
+            else if (saleViewModel != null)
+            {
+                user.Id = saleViewModel.UserId;
+                user.Name = saleViewModel.Firstname + " " + saleViewModel.Lastname;
+                user.Username = saleViewModel.Username;
+                user.Password = saleViewModel.Password;
+            }
+            else if (customerViewModel != null)
+            {
+                user.Id = customerViewModel.Id;
+                user.Name = customerViewModel.Firstname + " " + customerViewModel.Lastname;
+                user.Username = customerViewModel.Username;
+                user.Password = customerViewModel.Password;
+            }
 
             #endregion
 

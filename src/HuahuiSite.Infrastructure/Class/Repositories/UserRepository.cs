@@ -19,7 +19,7 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
             get { return Context as HuahuiDbContext; }
         }
 
-        public User GetUser(string username, string password)
+        public User GetUserOfLogin(string username, string password)
         {
             return HuahuiDbContext.User.First(w => w.Username.Equals(username) && w.Password.Equals(password));
         }

@@ -16,6 +16,8 @@ namespace HuahuiSite.Web.Areas.Backend.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
+        public string NewPassword { get; set; }
+
         public IEnumerable<User> UserList { get; set; }
     }
 }

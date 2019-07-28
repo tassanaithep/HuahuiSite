@@ -78,8 +78,8 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
             try
             {
-                _saleService.SaveSale(saleViewModel);
-                _userService.SaveUser(null, saleViewModel, null);
+                int saleId = _saleService.SaveSale(saleViewModel);
+                _userService.SaveUser(null, saleViewModel, null, saleId);
                 isSuccess = true;
             }
             catch (Exception exception)
