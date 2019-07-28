@@ -59,6 +59,32 @@ BindData = () => {
 
         // #endregion
     });
+
+
+
+    $(".form-row-table").each(function (index, element) {
+        // #region Get Element
+
+        let $tdOfCategoriesName = $(element).closest("tr").find(".td-categories-name");
+        let $tdOfProductGroupName = $(element).closest("tr").find(".td-productgroup-name");
+
+        // #endregion
+
+        // #region Get Value
+
+        let $categoriesName = $(element).find("[name='ProductCategorieCode'] :selected").text();
+        let $productgroupName = $(element).find("[name='ProductGroupCode'] :selected").text();
+
+
+        // #endregion
+
+        // #region Binding Value
+
+        $tdOfCategoriesName.text($categoriesName);
+        $tdOfProductGroupName.text($productgroupName);
+
+        // #endregion
+    });
 };
 
 // #endregion

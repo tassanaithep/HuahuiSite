@@ -16,9 +16,11 @@
                             <th>Code</th>
                             <th>Name</th>
                             <th>Categories</th>
+                            <th>Categories Name</th>
                             <th>Product Group</th>
+                            <th>Product GroupName</th>
                             <th>Picture</th>
-                            <th>CreateDatetime</th>
+                            @*<th>CreateDatetime</th>*@
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -34,7 +36,9 @@
                             <td>@item.Code</td>
                             <td>@item.Name</td>
                             <td>@item.ProductCategorieCode</td>
+                            <td class="td-categories-name"></td>
                             <td>@item.ProductGroupCode</td>
+                            <td class="td-productgroup-name"></td>
 
                             <td>
 
@@ -44,7 +48,7 @@
                                 }
 
                             </td>
-                            <td>@item.CreatedDateTime</td>
+                            @*<td>@item.CreatedDateTime</td>*@
                             <td>
                                 <a href="#" data-toggle="modal" data-target="#modal-row-table-@No"> <i class="fas fa-pencil-alt text-inverse m-r-10"></i> </a>
                                 <div class="modal fade" id="modal-row-table-@No" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
@@ -71,7 +75,7 @@
                                                 <!-- End Hidden Value -->
 
                                                 <div class="modal-header" style="background-color:#ff6a00;">
-                                                    <h4 class="modal-title text-white"  >Edit Product</h4>
+                                                    <h4 class="modal-title text-white">Edit Product</h4>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="text-white">×</span></button>
                                                 </div>
                                                 <div class="row">
@@ -111,7 +115,7 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                           
+
                                                             <div class="form-group row">
                                                                 <label class="col-sm-2 text-right control-label col-form-label">Option:</label>
                                                                 <div class="col-sm-3">
@@ -125,7 +129,7 @@
                                                                     }
 
                                                                     <label for="IsLicense-@No" class="text-right control-label col-form-label">License</label>
-                                                                </div>  
+                                                                </div>
                                                                 <div class="col-sm-3">
                                                                     @if (item.IsPromotion)
                                                                     {
@@ -140,7 +144,7 @@
 
                                                                 </div>
                                                             </div>
-                                                               
+
                                                             <div class="form-group row">
                                                                 <label class="col-sm-2 text-right control-label col-form-label">Picture Upload</label>
                                                                 <div class="col-sm-10">
@@ -149,10 +153,10 @@
                                                                 </div>
                                                             </div>
 
-                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                     <button type="submit" class="btn btn-success" onclick="return ValidateUpdateSubmit(this)"><i class="fa fa-check"></i> Success</button>
