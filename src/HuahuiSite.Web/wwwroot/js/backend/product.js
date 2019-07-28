@@ -61,8 +61,6 @@ BindData = () => {
         // #endregion
     });
 
-
-
     $(".form-row-table").each(function (index, element) {
         // #region Get Element
 
@@ -75,7 +73,6 @@ BindData = () => {
 
         let $categoriesName = $(element).find("[name='ProductCategorieCode'] :selected").text();
         let $productgroupName = $(element).find("[name='ProductGroupCode'] :selected").text();
-
 
         // #endregion
 
@@ -140,7 +137,7 @@ UpdatePage = () => {
 ClearForm = () => {
     $("#form-create")[0].reset();
     $("#form-create").find(".dropify-wrapper").remove();
-    $("#parent-form-group-picture").append(`<input class="dropify" type="file" id="PictureImageFile" name="PictureImageFile" />`);
+    $("#parent-form-group-picture").append(`<input class="dropify" type="file" id="PictureFile" name="PictureFile" />`);
 };
 
 /**
