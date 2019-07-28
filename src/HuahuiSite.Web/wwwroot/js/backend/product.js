@@ -35,6 +35,8 @@ RenderImage = () => {
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
 BindData = () => {
+    // #region Select
+
     $(".form-row-table").each(function (index, element) {
         // #region Get Element
 
@@ -61,6 +63,10 @@ BindData = () => {
         // #endregion
     });
 
+    // #endregion
+
+    // #region Column of Table
+
     $(".form-row-table").each(function (index, element) {
         // #region Get Element
 
@@ -83,6 +89,8 @@ BindData = () => {
 
         // #endregion
     });
+
+    // #endregion
 };
 
 // #endregion

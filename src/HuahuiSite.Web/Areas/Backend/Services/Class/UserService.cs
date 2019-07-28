@@ -36,16 +36,33 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
-        public void SaveUser(UserViewModel userViewModel)
+        public void SaveUser(UserViewModel userViewModel = null, SaleViewModel saleViewModel = null,  CustomerViewModel customerViewModel = null)
         {
             #region Create Object to Save
 
-            User user = new User()
+            User user = new User();
+
+            if (userViewModel != null)
             {
-                Name = userViewModel.Name,
-                Username = userViewModel.Username,
-                Password = userViewModel.Password
-            };
+                user.Name = userViewModel.Name;
+                user.Username = userViewModel.Username;
+                user.Password = userViewModel.Password;
+                user.RoleName = "Admin";
+            }
+            else if (saleViewModel != null)
+            {
+                user.Name = saleViewModel.Firstname + " " + saleViewModel.Lastname;
+                user.Username = saleViewModel.Username;
+                user.Password = saleViewModel.Password;
+                user.RoleName = "Sale";
+            }
+            else if (customerViewModel != null)
+            {
+                user.Name = customerViewModel.Firstname + " " + customerViewModel.Lastname;
+                user.Username = customerViewModel.Username;
+                user.Password = customerViewModel.Password;
+                user.RoleName = "Customer";
+            }
 
             #endregion
 

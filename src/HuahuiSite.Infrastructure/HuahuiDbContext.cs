@@ -160,6 +160,10 @@ namespace HuahuiSite.Infrastructure
                 entity.Property(e => e.Username)
                     .IsRequired()
                     .HasMaxLength(20);
+
+                entity.Property(e => e.RoleName)
+                    .IsRequired()
+                    .HasMaxLength(30);
             });
         }
     }

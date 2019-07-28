@@ -10,7 +10,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Interface
     public interface IUserService
     {
         void GetUserList(ref UserViewModel userViewModel);
-        void SaveUser(UserViewModel userViewModel);
+        void SaveUser(UserViewModel userViewModel = null, SaleViewModel saleViewModel = null,  CustomerViewModel customerViewModel = null);
         void UpdateUser(UserViewModel userViewModel);
         void DeleteUser(UserViewModel userViewModel);
     }

@@ -15,14 +15,19 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         #region Members
 
         private readonly ISaleService _saleService;
+        private readonly IUserService _userService;
 
         #endregion
 
         #region Constructor
 
-        public SaleController(ISaleService saleService)
+        public SaleController(
+            ISaleService saleService,
+            IUserService userService
+            )
         {
             _saleService = saleService;
+            _userService = userService;
         }
 
         #endregion
@@ -74,6 +79,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
             try
             {
                 _saleService.SaveSale(saleViewModel);
+                _userService.SaveUser(null, saleViewModel, null);
                 isSuccess = true;
             }
             catch (Exception exception)
