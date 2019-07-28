@@ -6,6 +6,7 @@
 */
 $(function () {
     //RenderImage();
+    $("#table-data").DataTable();
 });
 
 // #endregion
@@ -42,7 +43,7 @@ UpdatePage = () => {
     UpdateTable();
     //DropifyScriptRender();
     //RenderImage();
-
+    $("#table-data").DataTable();
     $("body").removeAttr("style");
 };
 

@@ -153,6 +153,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
             try
             {
                 _customerService.GetCustomerList(ref customerViewModel);
+                _saleService.GetSaleSelectList(ref customerViewModel);
             }
             catch (Exception exception)
             {

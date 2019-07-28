@@ -7,6 +7,7 @@
 $(function () {
     //RenderImage();
     BindData();
+    $("#table-data").DataTable();
 });
 
 // #endregion
@@ -97,7 +98,8 @@ UpdatePage = () => {
     UpdateTable();
     //DropifyScriptRender();
     //RenderImage();
-
+    BindData();
+    $("#table-data").DataTable();
     $("body").removeAttr("style");
 };
 
