@@ -101,7 +101,8 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
                 Id = userViewModel.Id,
                 Name = userViewModel.Name,
                 Username = userViewModel.Username,
-                Password = userViewModel.Password
+                Password = userViewModel.Password,
+                RoleName = userViewModel.RoleName
             };
 
             #endregion
