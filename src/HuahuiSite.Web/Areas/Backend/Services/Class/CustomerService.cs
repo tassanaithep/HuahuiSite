@@ -89,7 +89,8 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
                 Lastname = customerViewModel.Lastname,
                 Address = customerViewModel.Address,
                 PhoneNumber = customerViewModel.PhoneNumber,
-                Email = customerViewModel.Email
+                Email = customerViewModel.Email,
+                SaleId = customerViewModel.SaleId
             };
 
             #endregion
