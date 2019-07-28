@@ -25,7 +25,7 @@ RenderImage = () => {
         if ($pictureFileName !== "") {
             $(element).find(".dropify-wrapper").addClass("has-preview");
             $(element).find(".dropify-preview").css("display", "block");
-            $(element).find(".dropify-render").append(`<img src="/images/upload/${ $pictureFileName }" />`);
+            $(element).find(".dropify-render").append(`<img src="/images/upload/${$pictureFileName}" />`);
         }
     });
 };
@@ -183,29 +183,52 @@ UpdateTable = () => {
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
 Delete = (e) => {
-    let $form = $(e).closest("tr").find(".form-row-table");
 
-    let $id = $form.find("[name='Id']").val();
-    let $pictureFileName = $form.find("[name='PictureFileName']").val();
+    swal({
+        title: 'Are you sure?',
+        text: "คุณต้องการลบข้อมูล ใช่หรือไม่?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.value) {
+            let $form = $(e).closest("tr").find(".form-row-table");
 
-    let jsonObject = {};
-    jsonObject.Id = $id;
-    jsonObject.PictureFileName = $pictureFileName;
+            let $id = $form.find("[name='Id']").val();
+            let $pictureFileName = $form.find("[name='PictureFileName']").val();
 
-    $.ajax({
-        type: "POST",
-        url: "/Backend/Product/Delete",
-        data: jsonObject,
-        success: function (res) {
-            if (res.isSuccess) {
-                UpdatePage();
-                swal("Delete Success", "", "success");
-            } else {
-                swal("Delete Failed", "", "error");
-            }
-        },
-        error: function () { }
-    });
+            let jsonObject = {};
+            jsonObject.Id = $id;
+            jsonObject.PictureFileName = $pictureFileName;
+
+            $.ajax({
+                type: "POST",
+                url: "/Backend/Product/Delete",
+                data: jsonObject,
+                success: function (res) {
+                    if (res.isSuccess) {
+                        UpdatePage();
+                        swal("Delete Success", "", "success");
+                    } else {
+                        swal("Delete Failed", "", "error");
+                    }
+                },
+                error: function () { }
+            });
+            Swal(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+            )
+        }
+    })
+
+
+
+
+
 };
 
 // #endregion

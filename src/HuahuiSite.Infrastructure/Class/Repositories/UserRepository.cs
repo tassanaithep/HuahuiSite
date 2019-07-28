@@ -21,7 +21,7 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
 
         public User GetUserOfLogin(string username, string password)
         {
-            return HuahuiDbContext.User.First(w => w.Username.Equals(username) && w.Password.Equals(password));
+            return HuahuiDbContext.User.First(w => w.Username.Equals(username) && w.Password.Equals(password) && w.RoleName.Equals("Admin"));
         }
     }
 }
