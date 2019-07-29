@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HuahuiSite.Core.Entities;
 using HuahuiSite.Web.Areas.Frontend.Models;
 using HuahuiSite.Web.Areas.Frontend.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -42,7 +43,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
 
             }
 
-            return View();
+            return View(cartViewModel);
         }
 
         #endregion
@@ -56,6 +57,27 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
             try
             {
                 _cartService.SaveCart(cartViewModel);
+
+                RedirectToAction("Index");
+            }
+            catch (Exception exception)
+            {
+
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult UpdateCart([FromBody]IEnumerable<CartItemList> cartItemList)
+        {
+            CartViewModel cartViewModel = new CartViewModel();
+
+            cartViewModel.CartItemList = cartItemList;
+
+            try
+            {
+                _cartService.UpdateCart(cartViewModel);
 
                 RedirectToAction("Index");
             }
