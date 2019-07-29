@@ -10,5 +10,6 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Interface
     {
         void SaveCart(CartViewModel cartViewModel);
         void GetCartItemList(ref CartViewModel cartViewModel);
+        void UpdateCart(CartViewModel cartViewModel);
     }
 }

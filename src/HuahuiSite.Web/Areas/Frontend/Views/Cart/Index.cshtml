@@ -1,4 +1,5 @@
-﻿
+﻿@model HuahuiSite.Web.Areas.Frontend.Models.CartViewModel
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -30,52 +31,40 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th class="product_remove">Delete</th>
-                                        <th class="product_thumb">Image</th>
-                                        <th class="product_name">Product</th>
-                                        <th class="product-price">Price</th>
-                                        <th class="product_quantity">Quantity</th>
-                                        <th class="product_total">Total</th>
+                                        <th>Delete</th>
+                                        <th>Image</th>
+                                        <th>Product</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                        <td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>
-                                        <td class="product_name"><a href="#">Handbag fringilla</a></td>
-                                        <td class="product-price">£65.00</td>
-                                        <td class="product_quantity"><label>Quantity</label> <input min="0" max="100" value="1" type="number"></td>
-                                        <td class="product_total">£130.00</td>
 
+                                    @foreach (var item in Model.CartItemListViewList)
+                                    {
+                                        <tr>
 
-                                    </tr>
+                                            <!-- Hidden Value -->
 
-                                    <tr>
-                                        <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                        <td class="product_thumb"><a href="#"><img src="assets/img/s-product/product2.jpg" alt=""></a></td>
-                                        <td class="product_name"><a href="#">Handbags justo</a></td>
-                                        <td class="product-price">£90.00</td>
-                                        <td class="product_quantity"><label>Quantity</label> <input min="0" max="100" value="1" type="number"></td>
-                                        <td class="product_total">£180.00</td>
+                                            <input type="hidden" name="hid-cart-item-id" value="@item.Id" />
 
+                                            <!-- End Hidden Value -->
 
-                                    </tr>
-                                    <tr>
-                                        <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                        <td class="product_thumb"><a href="#"><img src="assets/img/s-product/product5.jpg" alt=""></a></td>
-                                        <td class="product_name"><a href="#">Handbag elit</a></td>
-                                        <td class="product-price">£80.00</td>
-                                        <td class="product_quantity"><label>Quantity</label> <input min="0" max="100" value="1" type="number"></td>
-                                        <td class="product_total">£160.00</td>
-
-
-                                    </tr>
+                                            <td class="product_remove"><a onclick="RemoveCartItem(this)"><i class="fa fa-trash-o"></i></a></td>
+                                            <td class="product_thumb"><a href="#"><img src="~/images/upload/@item.PictureFileName" alt=""></a></td>
+                                            <td class="product_name"><a href="#">@item.ProductName</a></td>
+                                            <td class="product-price">@item.UnitPrice</td>
+                                            <td class="product_quantity"><label>Quantity</label> <input type="number" name="ProductQuantity" min="0" max="100" value="1" onchange="CalculateTotalPrice(this)" /></td>
+                                            <td class="product_total"></td>
+                                        </tr>
+                                    }
 
                                 </tbody>
                             </table>
                         </div>
                         <div class="cart_submit">
-                            <button type="submit">update cart</button>
+                            <button type="button" onclick="UpdateCart()">update cart</button>
                         </div>
                     </div>
                 </div>
@@ -124,3 +113,15 @@
     </div>
 </div>
 <!--shopping cart area end -->
+
+@section Scripts {
+
+    <script>
+
+        var _cartItemList = @Html.Raw(Json.Serialize(@Model.CartItemList));
+
+    </script>
+
+    <script src="~/js/frontend/cart.js"></script>
+
+}

@@ -20,7 +20,7 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
             get { return Context as HuahuiDbContext; }
         }
 
-        public IEnumerable<CartItemListModel> GetCartListItemByUser(int userId)
+        public IEnumerable<CartItemListModel> GetCartItemListByUser(int userId)
         {
             return (from cartListItem in HuahuiDbContext.CartItemList
                     join productJoin in HuahuiDbContext.Product on cartListItem.ProductId equals productJoin.Id into CartListItemJoinProduct
@@ -38,6 +38,11 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         UnitPrice = productGroup.UnitPrice,
                         PictureFileName = product.PictureFileName
                     });
+        }
+
+        public IEnumerable<CartItemList> GetCartItemListByCard(int cardId)
+        {
+            return HuahuiDbContext.CartItemList.Where(w => w.CardId.Equals(cardId)).ToList();
         }
     }
 }

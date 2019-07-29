@@ -9,6 +9,7 @@ using HuahuiSite.Infrastructure;
 using HuahuiSite.Web.Areas.Backend.Models;
 using HuahuiSite.Web.Areas.Backend.Services.Class;
 using HuahuiSite.Web.Areas.Backend.Services.Interface;
+using HuahuiSite.Web.Areas.Frontend.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -95,6 +96,7 @@ namespace HuahuiSite.Web
             {
                 cfg.CreateMap<SaleModel, SaleViewModel>();
                 cfg.CreateMap<CustomerModel, CustomerViewModel>();
+                cfg.CreateMap<CartItemListModel, CartItemListViewModel>();
             });
 
             #endregion

@@ -1,5 +1,7 @@
-﻿using HuahuiSite.Core.Entities;
+﻿using AutoMapper;
+using HuahuiSite.Core.Entities;
 using HuahuiSite.Core.Interfaces;
+using HuahuiSite.Core.Models;
 using HuahuiSite.Web.Areas.Frontend.Models;
 using HuahuiSite.Web.Areas.Frontend.Services.Interface;
 using System;
@@ -70,6 +72,8 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             {
                 CardId = cartOfUser == null ? cart.Id : cartOfUser.Id,
                 ProductId = 3002,
+                Quantity = 1,
+                TotalPrice = 500,
                 IsActive = true,
                 CreatedDateTime = DateTime.Now
             };
@@ -92,54 +96,37 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         // Updated: 07/07/2019
         public void GetCartItemList(ref CartViewModel cartViewModel)
         {
-            var test = _unitOfWork.CartItemLists.GetCartListItemByUser(2013);
-            var test2 = test;
+            cartViewModel.CartItemListViewList = Mapper.Map<IEnumerable<CartItemListModel>, IEnumerable<CartItemListViewModel>>(_unitOfWork.CartItemLists.GetCartItemListByUser(2013));
+            cartViewModel.CartItemList = _unitOfWork.CartItemLists.GetCartItemListByCard(cartViewModel.CartItemListViewList.First().CardId);
         }
 
         #endregion
 
-        //#region Update
+        #region Update
 
         ///// <summary>
         ///// Update Cart.
         ///// </summary>
         //// Author: Mod Nattasit
         //// Updated: 07/07/2019
-        //public void UpdateUser(UserViewModel userViewModel = null, SaleViewModel saleViewModel = null, CustomerViewModel customerViewModel = null)
-        //{
-        //    var decryptPassword = Crypto.HashPassword(customerViewModel.Password);
-        //    #region Create Object to Update
+        public void UpdateCart(CartViewModel cartViewModel)
+        {
+            #region Delete Old Cart Item List
 
-        //    Cart user = new Cart();
+            var cartItemListToRemove = _unitOfWork.CartItemLists.GetCartItemListByCard(cartViewModel.CartItemList.First().CardId);
+            _unitOfWork.CartItemLists.RemoveRange(cartItemListToRemove);
 
-        //    if (userViewModel != null)
-        //    {
-        //        user.Id = userViewModel.Id;
-        //        user.Name = userViewModel.Name;
-        //        user.Username = userViewModel.Username;
-        //        user.Password = userViewModel.Password;
-        //    }
-        //    else if (saleViewModel != null)
-        //    {
-        //        user.Id = saleViewModel.UserId;
-        //        user.Name = saleViewModel.Firstname + " " + saleViewModel.Lastname;
-        //        user.Username = saleViewModel.Username;
-        //        user.Password = saleViewModel.Password;
-        //    }
-        //    else if (customerViewModel != null)
-        //    {
-        //        user.Id = customerViewModel.Id;
-        //        user.Name = customerViewModel.Firstname + " " + customerViewModel.Lastname;
-        //        user.Username = customerViewModel.Username;
-        //        user.Password = customerViewModel.Password;
-        //    }
+            #endregion
 
-        //    #endregion
 
-        //    _unitOfWork.Users.Update(user);
-        //}
+            #region Update Cart Item List
 
-        //#endregion
+            _unitOfWork.CartItemLists.AddRange(cartViewModel.CartItemList);
+
+            #endregion
+        }
+
+        #endregion
 
         //#region Delete
 
