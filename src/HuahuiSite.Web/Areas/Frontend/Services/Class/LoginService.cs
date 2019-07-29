@@ -40,7 +40,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         {
             var user = _unitOfWork.Users.GetUserOfLogin(loginViewModel.Username, loginViewModel.Password);
 
-            if (user.RoleName.Equals("Sale") || user.RoleName.Equals("Customer"))
+            if (user.RoleName.Equals("Sale") || user.RoleName.Equals("Customer") || user.RoleName.Equals("Admin"))
             {
                 Extensions.SessionExtensions.SetObject(_httpContextAccessor.HttpContext.Session, "UserData", loginViewModel);
             }

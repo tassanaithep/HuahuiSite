@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using HuahuiSite.Web.Areas.Frontend.Models;
 using HuahuiSite.Web.Areas.Frontend.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace HuahuiSite.Web.Areas.Frontend.Controllers
 {
@@ -57,6 +58,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
             try
             {
                 _loginService.CheckLogin(loginViewModel);
+                HttpContext.Session.SetString("username", loginViewModel.Username);
                 isSuccess = true;
             }
             catch (Exception ex)
