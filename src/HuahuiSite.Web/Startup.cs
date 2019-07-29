@@ -84,7 +84,7 @@ namespace HuahuiSite.Web
             #region Frontend
 
             services.AddScoped<HuahuiSite.Web.Areas.Frontend.Services.Interface.ILoginService, HuahuiSite.Web.Areas.Frontend.Services.Class.LoginService>();
-            services.AddScoped<HuahuiSite.Web.Areas.Frontend.Services.Interface.ICartService, HuahuiSite.Web.Areas.Frontend.Services.Class.CartService>();
+            services.AddScoped<HuahuiSite.Web.Areas.Frontend.Services.Interface.IHomeService, HuahuiSite.Web.Areas.Frontend.Services.Class.HomeService>();
 
             #endregion
 
@@ -97,6 +97,7 @@ namespace HuahuiSite.Web
                 cfg.CreateMap<SaleModel, SaleViewModel>();
                 cfg.CreateMap<CustomerModel, CustomerViewModel>();
                 cfg.CreateMap<CartItemListModel, CartItemListViewModel>();
+                cfg.CreateMap<ProductModel, Areas.Frontend.Models.ProductViewModel>();
             });
 
             #endregion

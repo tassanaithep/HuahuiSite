@@ -1,7 +1,4 @@
-﻿@{
-    //Layout = "~/Areas/Frontend/Shared/_Layout.cshtml";
-}
-
+﻿@model HuahuiSite.Web.Areas.Frontend.Models.HomeViewModel
 
 <!--slider area start-->
 <section class="slider_area slider_nav owl-carousel">
@@ -128,282 +125,57 @@
                     </div>
                 </div>
                 <div class="product_carousel product_column4 owl-carousel">
-                    <div class="col-lg-3">
-                        <div class="single_product">
-                            <div class="product_thumb">
-                                <a class="primary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product1.jpg" alt=""></a>
-                                @*  <a class="secondary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product1.jpg" alt=""></a>*@
-                                <div class="quick_button">
-                                    <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
-                                </div>
-                                <div class="label_product">
-                                    <span class="label_sale">-57%</span>
-                                </div>
-                            </div>
-                            <div class="product_content">
-                                <div class="content_inner">
-                                    <div class="product_name">
-                                        <h3><a href="product-details.html">Nonstick Dishwasher PFOA</a></h3>
-                                    </div>
-                                    <div class="product_ratings">
-                                        <ul>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="price_box">
-                                        <span class="old_price">$420.00</span>
-                                        <span class="current_price">$180.00</span>
-                                    </div>
-                                    <div class="action_links">
-                                        <ul>
-                                            <li class="add_to_cart"><a asp-area="Frontend" asp-controller="Cart" asp-action="AddToCart" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                            <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                                            <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
 
-                                @*<div class="product_timing">
-                                        <h3>Ends in</h3>
-                                        <div data-countdown="2020/12/15"></div>
-                                    </div>*@
+                    @foreach (var item in Model.ProductList)
+                    {
+                        <div class="col-lg-3">
+                            <div class="single_product">
+                                <div class="product_thumb">
+                                    <a class="primary_img" href="product-details.html"><img src="~/images/upload/@item.PictureFileName" alt=""></a>
+                                    @*  <a class="secondary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product1.jpg" alt=""></a>*@
+                                    <div class="quick_button">
+                                        <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
+                                    </div>
+                                    <div class="label_product">
+                                        <span class="label_sale">-57%</span>
+                                    </div>
+                                </div>
+                                <div class="product_content">
+                                    <div class="content_inner">
+                                        <div class="product_name">
+                                            <h3><a href="product-details.html">@item.Name</a></h3>
+                                        </div>
+                                        <div class="product_ratings">
+                                            <ul>
+                                                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                                                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                                                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                                                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                                                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="price_box">
+                                            <span class="old_price">$420.00</span>
+                                            <span class="current_price">@item.UnitPrice</span>
+                                        </div>
+                                        <div class="action_links">
+                                            <ul>
+                                                <li class="add_to_cart"><a asp-area="Frontend" asp-controller="Cart" asp-action="AddToCart" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
+                                                <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a></li>
+                                                <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    @*<div class="product_timing">
+                            <h3>Ends in</h3>
+                            <div data-countdown="2020/12/15"></div>
+                        </div>*@
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="single_product">
-                            <div class="product_thumb">
-                                <a class="primary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product3.jpg" alt=""></a>
-                                @*   <a class="secondary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product4.jpg" alt=""></a>*@
-                                <div class="quick_button">
-                                    <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
-                                </div>
-                                <div class="label_product">
-                                    <span class="label_sale">-47%</span>
-                                </div>
-                            </div>
-                            <div class="product_content">
-                                <div class="content_inner">
-                                    <div class="product_name">
-                                        <h3><a href="product-details.html">Mug Today is a good day</a></h3>
-                                    </div>
-                                    <div class="product_ratings">
-                                        <ul>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="price_box">
-                                        <span class="old_price">$420.00</span>
-                                        <span class="current_price">$160.00</span>
-                                    </div>
-                                    <div class="action_links">
-                                        <ul>
-                                            <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                            <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                                            <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                    }
 
-                                @*<div class="product_timing">
-                                        <h3>Ends in</h3>
-                                        <div data-countdown="2020/12/15"></div>
-                                    </div>*@
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="single_product">
-                            <div class="product_thumb">
-                                <a class="primary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product5.jpg" alt=""></a>
-                                @* <a class="secondary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product6.jpg" alt=""></a>*@
-                                <div class="quick_button">
-                                    <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
-                                </div>
-                                <div class="label_product">
-                                    <span class="label_sale">-57%</span>
-                                </div>
-                            </div>
-                            <div class="product_content">
-                                <div class="content_inner">
-                                    <div class="product_name">
-                                        <h3><a href="product-details.html">Accusantium dolorem1</a></h3>
-                                    </div>
-                                    <div class="product_ratings">
-                                        <ul>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="price_box">
-                                        <span class="old_price">$420.00</span>
-                                        <span class="current_price">$180.00</span>
-                                    </div>
-                                    <div class="action_links">
-                                        <ul>
-                                            <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                            <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                                            <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                @*<div class="product_timing">
-                                        <h3>Ends in</h3>
-                                        <div data-countdown="2020/12/15"></div>
-                                    </div>*@
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="single_product">
-                            <div class="product_thumb">
-                                <a class="primary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product7.jpg" alt=""></a>
-                                @* <a class="secondary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product8.jpg" alt=""></a>*@
-                                <div class="quick_button">
-                                    <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
-                                </div>
-                                <div class="label_product">
-                                    <span class="label_sale">-50%</span>
-                                </div>
-                            </div>
-                            <div class="product_content">
-                                <div class="content_inner">
-                                    <div class="product_name">
-                                        <h3><a href="product-details.html">Classic 17-Piece Tool	</a></h3>
-                                    </div>
-                                    <div class="product_ratings">
-                                        <ul>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="price_box">
-                                        <span class="old_price">$420.00</span>
-                                        <span class="current_price">$120.00</span>
-                                    </div>
-                                    <div class="action_links">
-                                        <ul>
-                                            <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                            <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                                            <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                @*<div class="product_timing">
-                                        <h3>Ends in</h3>
-                                        <div data-countdown="2020/12/15"></div>
-                                    </div>*@
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="single_product">
-                            <div class="product_thumb">
-                                <a class="primary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product9.jpg" alt=""></a>
-                                @*   <a class="secondary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product8.jpg" alt=""></a>*@
-                                <div class="quick_button">
-                                    <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
-                                </div>
-                                <div class="label_product">
-                                    <span class="label_sale">-52%</span>
-                                </div>
-                            </div>
-                            <div class="product_content">
-                                <div class="content_inner">
-                                    <div class="product_name">
-                                        <h3><a href="product-details.html">Aicok Stand Mixet</a></h3>
-                                    </div>
-                                    <div class="product_ratings">
-                                        <ul>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="price_box">
-                                        <span class="old_price">$420.00</span>
-                                        <span class="current_price">$180.00</span>
-                                    </div>
-                                    <div class="action_links">
-                                        <ul>
-                                            <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                            <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                                            <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                @*<div class="product_timing">
-                                        <h3>Ends in</h3>
-                                        <div data-countdown="2020/12/15"></div>
-                                    </div>*@
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="single_product">
-                            <div class="product_thumb">
-                                <a class="primary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product10.jpg" alt=""></a>
-                                @*   <a class="secondary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product11.jpg" alt=""></a>*@
-                                <div class="quick_button">
-                                    <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
-                                </div>
-                                <div class="label_product">
-                                    <span class="label_sale">-57%</span>
-                                </div>
-                            </div>
-                            <div class="product_content">
-                                <div class="content_inner">
-                                    <div class="product_name">
-                                        <h3><a href="product-details.html">Nonstick Dishwasher PFOA</a></h3>
-                                    </div>
-                                    <div class="product_ratings">
-                                        <ul>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="price_box">
-                                        <span class="old_price">$420.00</span>
-                                        <span class="current_price">$180.00</span>
-                                    </div>
-                                    <div class="action_links">
-                                        <ul>
-                                            <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                            <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                                            <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                @*<div class="product_timing">
-                                        <h3>Ends in</h3>
-                                        <div data-countdown="2020/12/15"></div>
-                                    </div>*@
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
