@@ -38,9 +38,19 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void CheckLogin(LoginViewModel loginViewModel)
         {
-            _unitOfWork.Users.GetUserOfLogin(loginViewModel.Username, loginViewModel.Password);
+            //_unitOfWork.Users.GetUserOfLogin(loginViewModel.Username, loginViewModel.Password);
+            var user = _unitOfWork.Users.GetUserOfLogin(loginViewModel.Username, loginViewModel.Password);
 
-            Extensions.SessionExtensions.SetObject(_httpContextAccessor.HttpContext.Session, "UserData", loginViewModel);
+            if (user.RoleName.Equals("Admin"))
+            {
+                Extensions.SessionExtensions.SetObject(_httpContextAccessor.HttpContext.Session, "UserData", loginViewModel);
+            }
+            else
+            {
+                throw new Exception("Login Failed");
+            }
+
+           // Extensions.SessionExtensions.SetObject(_httpContextAccessor.HttpContext.Session, "UserData", loginViewModel);
         }
 
         /// <summary>
