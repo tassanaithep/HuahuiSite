@@ -74,7 +74,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-12">
                         <div class="logo" style="border-radius: 0 30px 30px 0;">
-                            <a asp-action="Home" asp-controller="Main"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/logo/logo.png" alt=""></a>
+                            <a asp-action="" asp-controller="Home"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/logo/logo.png" alt=""></a>
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-12">
@@ -101,52 +101,17 @@
 
                             <div class="middel_right_info">
                                 <div class="header_account">
-                                    <a href="my-account.html"><i class="ion-android-people"></i></a>
+                                    @*<a href="my-account.html"><i class="ion-android-people"></i></a>*@
                                 </div>
                                 <div class="header_wishlist">
-                                    <a href="wishlist.html"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                                    @*<a href="wishlist.html"><i class="fa fa-heart-o" aria-hidden="true"></i></a>*@
                                 </div>
                                 <div class="mini_cart_wrapper">
                                     <a href="#"><i class="ion-bag"></i>$138.00</a>
                                     <span class="cart_quantity">2</span>
                                     <!--mini cart-->
                                     <div class="mini_cart">
-                                        <div class="cart_item">
-                                            <div class="cart_img">
-                                                <a href="#"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/s-product/product.jpg" alt=""></a>
-                                            </div>
-                                            <div class="cart_info">
-                                                <a href="#">Aenean eu tristique</a>
-                                                <span class="quantity">Qty: 1</span>
-                                                <span class="price_cart">$60.00</span>
-                                            </div>
-                                            <div class="cart_remove">
-                                                <a href="#"><i class="ion-android-close"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="cart_item">
-                                            <div class="cart_img">
-                                                <a href="#"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/s-product/product2.jpg" alt=""></a>
-                                            </div>
-                                            <div class="cart_info">
-                                                <a href="#">Lid Cover Cookware</a>
-                                                <span class="quantity">Qty: 1</span>
-                                                <span class="price_cart">$69.00</span>
-                                            </div>
-                                            <div class="cart_remove">
-                                                <a href="#"><i class="ion-android-close"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="mini_cart_table">
-                                            <div class="cart_total">
-                                                <span>Sub total:</span>
-                                                <span class="price">$138.00</span>
-                                            </div>
-                                            <div class="cart_total mt-10">
-                                                <span>total:</span>
-                                                <span class="price">$138.00</span>
-                                            </div>
-                                        </div>
+                                       
                                         <div class="mini_cart_footer">
                                             <div class="cart_button">
                                                 <a asp-controller="cart" asp-action="index">View cart</a>
@@ -284,7 +249,7 @@
                     <div class="main_menu menu_one">
                         <nav>
                             <ul>
-                                <li><a asp-action="Home" asp-controller="Main">หน้าแรก</a></li>
+                                <li><a asp-action="" asp-controller="Home">หน้าแรก</a></li>
                                 <li><a asp-controller="Shoplist" asp-action="index">สินค้าทั้งหมด</a></li>
                                 <li><a asp-controller="Promotion" asp-action="index">โปรโมชั่น</a></li>
                                 <li><a asp-controller="AboutUs" asp-action="index">เกี่ยวกับเรา</a></li>
@@ -335,7 +300,7 @@
 
                         <div id="menu" class="text-left">
                             <ul>
-                                <li><a asp-action="Home" asp-controller="Main">หน้าแรก</a></li>
+                                <li><a asp-action="" asp-controller="Home">หน้าแรก</a></li>
                                 <li><a asp-controller="Shoplist" asp-action="index">สินค้าทั้งหมด</a></li>
                                 <li><a asp-controller="Promotion" asp-action="index">โปรโมชั่น</a></li>
                                 <li><a asp-controller="AboutUs" asp-action="index">เกี่ยวกับเรา</a></li>
@@ -360,7 +325,7 @@
                     <div class="col-lg-5 col-md-12">
                         <div class="widgets_container contact_us">
                             <div class="footer_logo">
-                                <a asp-action="Home" asp-controller="Main"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/logo/logo.png" alt=""></a>
+                                <a asp-action="" asp-controller="Home"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/logo/logo.png" alt=""></a>
                             </div>
                             <div class="footer_contact">
                                 <p><h4>บริษัท หัวฮุย อินเตอร์ จำกัด</h4></p>
@@ -383,7 +348,7 @@
                             <h3>เมนู</h3>
                             <div class="footer_menu">
                                 <ul>
-                                    <li><a asp-action="Home" asp-controller="Main">หน้าแรก</a></li>
+                                    <li><a asp-action="" asp-controller="Home">หน้าแรก</a></li>
                                     <li><a asp-controller="Shoplist" asp-action="index">สินค้าทั้งหมด</a></li>
                                     <li><a asp-controller="Promotion" asp-action="index">โปรโมชั่น</a></li>
                                     <li><a asp-controller="AboutUs" asp-action="index">เกี่ยวกับเรา</a></li>
