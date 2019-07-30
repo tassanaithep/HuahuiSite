@@ -13,5 +13,8 @@ namespace HuahuiSite.Web.Areas.Frontend.Models
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        public string RoleName { get; set; }
+        public int RoleId { get; set; }
     }
 }

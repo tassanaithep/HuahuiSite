@@ -4,6 +4,7 @@ using HuahuiSite.Core.Interfaces;
 using HuahuiSite.Core.Models;
 using HuahuiSite.Web.Areas.Frontend.Models;
 using HuahuiSite.Web.Areas.Frontend.Services.Interface;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,14 +18,19 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
     {
         #region Members
 
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUnitOfWork _unitOfWork;
 
         #endregion
 
         #region Constructor
 
-        public CartService(IUnitOfWork unitOfWork)
+        public CartService(
+            IHttpContextAccessor httpContextAccessor,
+            IUnitOfWork unitOfWork
+            )
         {
+            _httpContextAccessor = httpContextAccessor;
             _unitOfWork = unitOfWork;
         }
 
@@ -41,9 +47,11 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         // Updated: 07/07/2019
         public void SaveCart(CartViewModel cartViewModel)
         {
+            var loginViewModel = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserData");
+
             #region Save Cart
 
-            var cartOfUser = _unitOfWork.Carts.GetCartActiveByUser(2013);
+            var cartOfUser = _unitOfWork.Carts.GetCartActiveByUser(loginViewModel.RoleId);
 
             Cart cart = new Cart();
 
@@ -51,8 +59,8 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             {
                 #region Create Object to Save
 
-                cart.UserRole = "Customer";
-                cart.UserId = 2013;
+                cart.UserRole = loginViewModel.RoleName;
+                cart.UserId = loginViewModel.RoleId;
                 cart.Status = "Confirm";
                 cart.IsActive = true;
                 cart.CreatedDateTime = DateTime.Now;
@@ -64,25 +72,59 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
             #endregion
 
-            #region Save Cart Item List
+            CartItemList cartItemOfProduct = new CartItemList();
 
-            #region Create Object to Save
-
-            CartItemList cartItemList = new CartItemList()
+            if (cartOfUser != null)
             {
-                CardId = cartOfUser == null ? cart.Id : cartOfUser.Id,
-                ProductId = 3002,
-                Quantity = 1,
-                TotalPrice = 500,
-                IsActive = true,
-                CreatedDateTime = DateTime.Now
-            };
+                cartItemOfProduct = _unitOfWork.CartItemLists.GetCartItemListByCardAndProduct(cartOfUser.Id, cartViewModel.ProductId);
+            }
 
-            #endregion
+            if (cartItemOfProduct == null)
+            {
+                #region Save Cart Item List
 
-            _unitOfWork.CartItemLists.Add(cartItemList);
+                #region Create Object to Save
 
-            #endregion
+                CartItemList cartItemList = new CartItemList()
+                {
+                    CardId = cartOfUser == null ? cart.Id : cartOfUser.Id,
+                    ProductId = cartViewModel.ProductId,
+                    Quantity = 1,
+                    TotalPrice = cartViewModel.ProductUnitPrice,
+                    IsActive = true,
+                    CreatedDateTime = DateTime.Now
+                };
+
+                #endregion
+
+                _unitOfWork.CartItemLists.Add(cartItemList);
+
+                #endregion
+            }
+            //else
+            //{
+            //    #region Update Cart Item List
+
+            //    #region Create Object to Update
+
+            //    CartItemList cartItemList = new CartItemList()
+            //    {
+            //        Id = cartItemOfProduct.Id,
+            //        CardId = cartOfUser.Id,
+            //        ProductId = cartViewModel.ProductId,
+            //        Quantity = cartItemOfProduct.Quantity,
+            //        TotalPrice = cartViewModel.ProductUnitPrice,
+            //        IsActive = cartItemOfProduct.IsActive,
+            //        CreatedDateTime = cartItemOfProduct.CreatedDateTime,
+            //        UpdatedDateTime = DateTime.Now
+            //    };
+
+            //    #endregion
+
+            //    _unitOfWork.CartItemLists.Update(cartItemList);
+
+            //    #endregion
+            //}
         }
 
         #endregion

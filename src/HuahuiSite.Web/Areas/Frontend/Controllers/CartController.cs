@@ -50,22 +50,24 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
 
         #region Actions
 
-        public IActionResult AddToCart()
+        [HttpPost]
+        public IActionResult AddToCart(CartViewModel cartViewModel)
         {
-            CartViewModel cartViewModel = new CartViewModel();
+            bool isSuccess;
+            string exceptionMessage = string.Empty;
 
             try
             {
                 _cartService.SaveCart(cartViewModel);
-
-                RedirectToAction("Index");
+                isSuccess = true;
             }
             catch (Exception exception)
             {
-
+                exceptionMessage = exception.Message;
+                isSuccess = false;
             }
 
-            return View();
+            return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
         }
 
         [HttpPost]

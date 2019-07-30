@@ -128,52 +128,65 @@
 
                     @foreach (var item in Model.ProductList)
                     {
-                        <div class="col-lg-3">
-                            <div class="single_product">
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="product-details.html"><img src="~/images/upload/@item.PictureFileName" alt=""></a>
-                                    @*  <a class="secondary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product1.jpg" alt=""></a>*@
-                                    <div class="quick_button">
-                                        <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
-                                    </div>
-                                    <div class="label_product">
-                                        <span class="label_sale">-57%</span>
-                                    </div>
-                                </div>
-                                <div class="product_content">
-                                    <div class="content_inner">
-                                        <div class="product_name">
-                                            <h3><a href="product-details.html">@item.Name</a></h3>
-                                        </div>
-                                        <div class="product_ratings">
-                                            <ul>
-                                                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="price_box">
-                                            <span class="old_price">$420.00</span>
-                                            <span class="current_price">@item.UnitPrice</span>
-                                        </div>
-                                        <div class="action_links">
-                                            <ul>
-                                                <li class="add_to_cart"><a asp-area="Frontend" asp-controller="Cart" asp-action="AddToCart" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                                <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                                                <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                        <form class="form-product-item" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
 
-                                    @*<div class="product_timing">
-                            <h3>Ends in</h3>
-                            <div data-countdown="2020/12/15"></div>
-                        </div>*@
+                            <!-- Hidden Value -->
+
+                            <input type="hidden" name="ProductId" value="@item.Id" />
+                            <input type="hidden" name="ProductUnitPrice" value="@item.UnitPrice" />
+
+                            <!-- End Hidden Value -->
+
+                            <div class="col-lg-3">
+                                <div class="single_product">
+                                    <div class="product_thumb">
+                                        <a class="primary_img" href="product-details.html"><img src="~/images/upload/@item.PictureFileName" alt=""></a>
+                                        @*  <a class="secondary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product1.jpg" alt=""></a>*@
+                                        <div class="quick_button">
+                                            <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
+                                        </div>
+                                        <div class="label_product">
+                                            <span class="label_sale">-57%</span>
+                                        </div>
+                                    </div>
+                                    <div class="product_content">
+                                        <div class="content_inner">
+                                            <div class="product_name">
+                                                <h3><a href="product-details.html">@item.Name</a></h3>
+                                            </div>
+                                            <div class="product_ratings">
+                                                <ul>
+                                                    <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                                                    <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                                                    <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                                                    <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                                                    <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="price_box">
+                                                <span class="old_price">$420.00</span>
+                                                <span class="current_price">@item.UnitPrice</span>
+                                            </div>
+                                            <div class="action_links">
+                                                <ul>
+                                                    <li class="add_to_cart"><a onclick="AddToCartSubmit(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
+                                                    <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a></li>
+                                                    <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        @*<div class="product_timing">
+                                            <h3>Ends in</h3>
+                                            <div data-countdown="2020/12/15"></div>
+                                        </div>*@
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+
+                            <input type="submit" class="btn-submit" style="display: none;" />
+
+                        </form>
                     }
 
                 </div>
@@ -4350,3 +4363,24 @@
     </div>
 </div>
 <!--brand area end-->
+
+@section Scripts {
+
+    <script>
+
+        AddToCartSubmit = (e) => {
+            $(e).closest("form").find(".btn-submit").click();
+        };
+
+        OnAddToCartSuccess = (res) => {
+            if (res.isSuccess) {
+                window.location = "/Cart/Index";
+            }
+            else {
+                swal("Login Failed", "", "error");
+            }
+        };
+
+    </script>
+
+}

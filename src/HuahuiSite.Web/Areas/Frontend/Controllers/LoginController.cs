@@ -58,7 +58,6 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
             try
             {
                 _loginService.CheckLogin(loginViewModel);
-                HttpContext.Session.SetString("username", loginViewModel.Username);
                 isSuccess = true;
             }
             catch (Exception ex)

@@ -44,5 +44,10 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
         {
             return HuahuiDbContext.CartItemList.Where(w => w.CardId.Equals(cardId)).ToList();
         }
+
+        public CartItemList GetCartItemListByCardAndProduct(int cardId, int productId)
+        {
+            return HuahuiDbContext.CartItemList.FirstOrDefault(w => w.CardId.Equals(cardId) && w.ProductId.Equals(productId));
+        }
     }
 }

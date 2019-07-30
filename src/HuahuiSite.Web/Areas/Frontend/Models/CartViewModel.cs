@@ -15,6 +15,13 @@ namespace HuahuiSite.Web.Areas.Frontend.Models
         public bool IsActive { get; set; }
         public DateTime CreatedDateTime { get; set; }
 
+        #region Product
+
+        public int ProductId { get; set; }
+        public int  ProductUnitPrice { get; set; }
+
+        #endregion
+
         public IEnumerable<CartItemList> CartItemList { get; set; }
         public IEnumerable<CartItemListViewModel> CartItemListViewList { get; set; }
     }
