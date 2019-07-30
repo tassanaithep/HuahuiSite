@@ -22,19 +22,21 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
 
         public IEnumerable<CustomerModel> GetCustomerList()
         {
-            return HuahuiDbContext.Customer.Join(HuahuiDbContext.User, customer => customer.Id, user => user.RoleId, (customer, user) => new CustomerModel
-            {
-                Id = customer.Id,
-                Firstname = customer.Firstname,
-                Lastname = customer.Lastname,
-                Address = customer.Address,
-                PhoneNumber = customer.PhoneNumber,
-                Email = customer.Email,
-                SaleId = customer.SaleId,
-                UserId = user.Id,
-                Username = user.Username,
-                Password = user.Password
-            });
+            return (from customer in HuahuiDbContext.Customer
+                    join user in HuahuiDbContext.User on customer.Id equals user.RoleId
+                    select new CustomerModel
+                    {
+                        Id = customer.Id,
+                        Firstname = customer.Firstname,
+                        Lastname = customer.Lastname,
+                        Address = customer.Address,
+                        PhoneNumber = customer.PhoneNumber,
+                        Email = customer.Email,
+                        SaleId = customer.SaleId,
+                        UserId = user.Id,
+                        Username = user.Username,
+                        Password = user.Password
+                    });
         }
     }
 }
