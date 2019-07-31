@@ -1,4 +1,5 @@
 ﻿using HuahuiSite.Core.Entities;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,9 @@ namespace HuahuiSite.Web.Areas.Frontend.Models
     public class HomeViewModel
     {
         public IEnumerable<ProductViewModel> ProductList { get; set; }
+
+        public IEnumerable<ProductCategorie> ProductCategorieList { get; set; }
+        public IEnumerable<ProductGroup> ProductGroupList { get; set; }
     }
+
 }
