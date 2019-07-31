@@ -47,53 +47,53 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         //// Updated: 07/07/2019
         //public void SaveCart(CartViewModel cartViewModel)
         //{
-        //    #region Save Cart
+        ////    #region Save Cart
 
         //    var cartOfUser = _unitOfWork.Carts.GetCartActiveByUser(2013);
 
-        //    Cart cart = new Cart();
+        ////    Cart cart = new Cart();
 
-        //    if (cartOfUser == null)
-        //    {
-        //        #region Create Object to Save
+        ////    if (cartOfUser == null)
+        ////    {
+        ////        #region Create Object to Save
 
-        //        cart.UserRole = "Customer";
-        //        cart.UserId = 2013;
-        //        cart.Status = "Confirm";
-        //        cart.IsActive = true;
-        //        cart.CreatedDateTime = DateTime.Now;
+        ////        cart.UserRole = "Customer";
+        ////        cart.UserId = 2013;
+        ////        cart.Status = "Confirm";
+        ////        cart.IsActive = true;
+        ////        cart.CreatedDateTime = DateTime.Now;
 
-        //        #endregion
+        ////        #endregion
 
-        //        _unitOfWork.Carts.Add(cart);
-        //    }
+        ////        _unitOfWork.Carts.Add(cart);
+        ////    }
 
-        //    #endregion
+        ////    #endregion
 
-        //    #region Save Cart Item List
+        ////    #region Save Cart Item List
 
-        //    #region Create Object to Save
+        ////    #region Create Object to Save
 
-        //    CartItemList cartItemList = new CartItemList()
-        //    {
-        //        CardId = cartOfUser == null ? cart.Id : cartOfUser.Id,
-        //        ProductId = 3002,
-        //        Quantity = 1,
-        //        TotalPrice = 500,
-        //        IsActive = true,
-        //        CreatedDateTime = DateTime.Now
-        //    };
+        //CartItemList cartItemList = new CartItemList()
+        //{
+        //    CardId = cartOfUser == null ? cart.Id : cartOfUser.Id,
+        //    ProductId = 3002,
+        //    Quantity = 1,
+        //    TotalPrice = 500,
+        //    IsActive = true,
+        //    CreatedDateTime = DateTime.Now
+        //};
 
-        //    #endregion
+        ////    #endregion
 
-        //    _unitOfWork.CartItemLists.Add(cartItemList);
+        ////    _unitOfWork.CartItemLists.Add(cartItemList);
 
-        //    #endregion
+        ////    #endregion
         //}
 
-        //#endregion
+        ////#endregion
 
-        #region Read
+        //#region Read
 
         /// <summary>
         /// Get Product List.
@@ -106,7 +106,13 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
             homeViewModel.IsLogin = loginViewModel != null ? true : false;
             homeViewModel.ProductList = Mapper.Map<IEnumerable<ProductModel>, IEnumerable<ProductViewModel>>(_unitOfWork.Products.GetProductList());
-        }
+
+            homeViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();
+            homeViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
+          
+
+
+    }
 
         #endregion
 
@@ -159,6 +165,6 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
         //#endregion
 
-        #endregion
+        //#endregion
     }
 }

@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Http;
+@model HuahuiSite.Web.Areas.Frontend.Models.HomeViewModel
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,10 +41,10 @@
                             {
                                 <span class="text-white strong">
                                     Welcome: @Context.Session.GetString("username")
-                                   
+
                                 </span>
                             }
-                           
+
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
@@ -52,13 +53,13 @@
 
                                 @if (Context.Session.GetString("username") != null)
                                 {
-                               
-                                <a asp-area="Frontend" asp-controller="Login" asp-action="Index"><i class="ion-log-out"></i> ออกจากระบบ </a>
+
+                                    <a asp-area="Frontend" asp-controller="Login" asp-action="Index"><i class="ion-log-out"></i> ออกจากระบบ </a>
                                 }
                                 else
                                 {
-                            <li><a asp-area="Frontend" asp-controller="Login" asp-action="Index"><i class="ion-log-in"></i> เข้าสู่ระบบ </a></li>
-                        }
+                                    <li><a asp-area="Frontend" asp-controller="Login" asp-action="Index"><i class="ion-log-in"></i> เข้าสู่ระบบ </a></li>
+                                }
 
 
                             </ul>
@@ -84,12 +85,17 @@
                                     <div class="hover_category">
                                         <select class="select_option" name="select" id="categori">
                                             <option selected value="1">ทุกหมวดหมู่</option>
-                                            <option value="2">ดูแลรักษารถยนต์</option>
-                                            <option value="3">โคมไฟ-หลอดไฟ-Xenon</option>
-                                            <option value="4">อิเล็กทรอนิคส์-ของตกแต่งอื่นๆ</option>
-                                            <option value="5">ตกแต่งทั่วไป</option>
-                                            <option value="6">เพิ่มประสิทธิภาพ</option>
-                                            <option value="7">ตกแต่งภายใน-ภายนอก</option>
+                                            @foreach (var item in Model.ProductCategorieList)
+                                            {
+                                                <option value="@item.Id">@item.Name</option>
+                                            }
+
+
+                                            @*<option value="3">โคมไฟ-หลอดไฟ-Xenon</option>
+                                                <option value="4">อิเล็กทรอนิคส์-ของตกแต่งอื่นๆ</option>
+                                                <option value="5">ตกแต่งทั่วไป</option>
+                                                <option value="6">เพิ่มประสิทธิภาพ</option>
+                                                <option value="7">ตกแต่งภายใน-ภายนอก</option>*@
                                         </select>
                                     </div>
                                     <div class="search_box">
@@ -111,7 +117,7 @@
                                     <span class="cart_quantity">2</span>
                                     <!--mini cart-->
                                     <div class="mini_cart">
-                                       
+
                                         <div class="mini_cart_footer">
                                             <div class="cart_button">
                                                 <a asp-controller="cart" asp-action="index">View cart</a>
@@ -142,17 +148,27 @@
                                 </div>
                                 <nav class="categories_menu_toggle">
                                     <ul>
-                                        <li class="menu_item_children">
-                                            <a href="shop.html">
-                                                <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu1.png" alt="">
-                                                <span>ดูแลรักษารถยนต์ <i class="fa fa-angle-down"></i></span>
-                                            </a>
-                                            <ul class="sub_menu">
-                                                <li><a href="shop.html">ชุดน้ำยาดูแลรักษารถยนต์</a></li>
-                                            </ul>
-                                        </li>
+                                        @foreach (var item in Model.ProductCategorieList)
+                                        {
+                                            <li class="menu_item_children">
+                                                <a href="shop.html">
+                                                    @*<img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu1.png" alt="">*@
+                                                    <span>@item.Name <i class="fa fa-angle-down"></i></span>
+                                                </a>
+                                                <ul class="sub_menu">
+                                                    @{ var re = Model.ProductGroupList.Select(m => new { m.Name, m.ProductCategorieCode }).Distinct();
+                                                    }
+                                                    @foreach (var itemgrp in re.Where(m => m.ProductCategorieCode == item.Code))
+                                                    {
+                                                        <li><a href="shop.html">@itemgrp.Name</a></li>
+                                                    }
 
-                                        <li class="menu_item_children">
+                                                </ul>
+                                            </li>
+                                        }
+
+
+                                        @*<li class="menu_item_children">
                                             <a href="shop.html">
                                                 <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu2.png" alt="">
                                                 <span>โคมไฟ-หลอดไฟ-Xenon <i class="fa fa-angle-down"></i></span>
@@ -228,7 +244,7 @@
                                                 <li><a href="shop.html">สติ๊กเกอร์</a></li>
                                                 <li><a href="shop.html">ฟิล์มปรอท</a></li>
                                             </ul>
-                                        </li>
+                                        </li>*@
                                     </ul>
                                 </nav>
                             </div>
@@ -424,9 +440,9 @@
                                                 <a href="#"><img src="assets/img/product/product1.jpg" alt=""></a>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
-                                    
+
                                 </div>
                             </div>
                             <div class="col-lg-7 col-md-7 col-sm-12">
@@ -439,11 +455,11 @@
                                         <span class="old_price">$78.99</span>
                                     </div>
                                     <div class="modal_description mb-15">
-                                      
+
                                     </div>
                                     <div class="variants_selects">
-                                        
-                                        
+
+
                                         <div class="modal_add_to_cart">
                                             <form action="#">
                                                 <input min="0" max="100" step="2" value="1" type="number">
@@ -451,7 +467,7 @@
                                             </form>
                                         </div>
                                     </div>
-                                   
+
                                 </div>
                             </div>
                         </div>
