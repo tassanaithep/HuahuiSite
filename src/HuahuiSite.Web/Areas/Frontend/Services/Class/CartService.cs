@@ -72,7 +72,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
             #endregion
 
-            CartItemList cartItemOfProduct = new CartItemList();
+            CartItemList cartItemOfProduct = null;
 
             if (cartOfUser != null)
             {
@@ -162,6 +162,8 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
 
             #region Update Cart Item List
+
+            cartViewModel.CartItemList.ToList().ForEach(i => i.Id = 0);
 
             _unitOfWork.CartItemLists.AddRange(cartViewModel.CartItemList);
 

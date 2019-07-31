@@ -8,6 +8,8 @@ namespace HuahuiSite.Web.Areas.Frontend.Models
 {
     public class HomeViewModel
     {
+        public bool IsLogin { get; set; }
+
         public IEnumerable<ProductViewModel> ProductList { get; set; }
     }
 }

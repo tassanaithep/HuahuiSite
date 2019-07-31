@@ -4,6 +4,7 @@ using HuahuiSite.Core.Interfaces;
 using HuahuiSite.Core.Models;
 using HuahuiSite.Web.Areas.Frontend.Models;
 using HuahuiSite.Web.Areas.Frontend.Services.Interface;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,14 +18,19 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
     {
         #region Members
 
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUnitOfWork _unitOfWork;
 
         #endregion
 
         #region Constructor
 
-        public HomeService(IUnitOfWork unitOfWork)
+        public HomeService(
+            IHttpContextAccessor httpContextAccessor, 
+            IUnitOfWork unitOfWork
+            )
         {
+            _httpContextAccessor = httpContextAccessor;
             _unitOfWork = unitOfWork;
         }
 
@@ -96,6 +102,9 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         // Updated: 07/07/2019
         public void GetProductList(ref HomeViewModel homeViewModel)
         {
+            var loginViewModel = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserData");
+
+            homeViewModel.IsLogin = loginViewModel != null ? true : false;
             homeViewModel.ProductList = Mapper.Map<IEnumerable<ProductModel>, IEnumerable<ProductViewModel>>(_unitOfWork.Products.GetProductList());
         }
 
