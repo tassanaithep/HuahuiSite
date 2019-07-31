@@ -13,6 +13,20 @@ $(function () {
 // #region Functions
 
 RemoveCartItem = (e) => {
+    let $cartItemId = $(e).closest("tr").find("[name='hid-cart-item-id']").val();
+
+    // #region Remove Cart Item from Cart Item List
+
+    for (var i = 0; i < _cartItemList.length; i++) {
+        if (_cartItemList[i].id === parseInt($cartItemId)) {
+            delete _cartItemList[i];
+            _cartItemList.splice(i, i);
+            break;
+        }
+    }
+
+    // #endregion
+
     $(e).closest("tr").remove();
 };
 
