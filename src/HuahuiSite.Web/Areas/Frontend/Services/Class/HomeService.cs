@@ -107,8 +107,8 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             homeViewModel.IsLogin = loginViewModel != null ? true : false;
             homeViewModel.ProductList = Mapper.Map<IEnumerable<ProductModel>, IEnumerable<ProductViewModel>>(_unitOfWork.Products.GetProductList());
 
-            homeViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();
-            homeViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
+          //  homeViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();
+          //  homeViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
           
 
 

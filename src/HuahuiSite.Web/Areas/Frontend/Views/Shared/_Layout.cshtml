@@ -85,17 +85,17 @@
                                     <div class="hover_category">
                                         <select class="select_option" name="select" id="categori">
                                             <option selected value="1">ทุกหมวดหมู่</option>
-                                            @foreach (var item in Model.ProductCategorieList)
+                                            @*@foreach (var item in Model.ProductCategorieList)
                                             {
                                                 <option value="@item.Id">@item.Name</option>
-                                            }
+                                            }*@
 
 
-                                            @*<option value="3">โคมไฟ-หลอดไฟ-Xenon</option>
+                                            <option value="3">โคมไฟ-หลอดไฟ-Xenon</option>
                                                 <option value="4">อิเล็กทรอนิคส์-ของตกแต่งอื่นๆ</option>
                                                 <option value="5">ตกแต่งทั่วไป</option>
                                                 <option value="6">เพิ่มประสิทธิภาพ</option>
-                                                <option value="7">ตกแต่งภายใน-ภายนอก</option>*@
+                                                <option value="7">ตกแต่งภายใน-ภายนอก</option>
                                         </select>
                                     </div>
                                     <div class="search_box">
@@ -148,11 +148,11 @@
                                 </div>
                                 <nav class="categories_menu_toggle">
                                     <ul>
-                                        @foreach (var item in Model.ProductCategorieList)
+                                        @*@foreach (var item in Model.ProductCategorieList)
                                         {
                                             <li class="menu_item_children">
                                                 <a href="shop.html">
-                                                    @*<img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu1.png" alt="">*@
+                                                   
                                                     <span>@item.Name <i class="fa fa-angle-down"></i></span>
                                                 </a>
                                                 <ul class="sub_menu">
@@ -165,10 +165,10 @@
 
                                                 </ul>
                                             </li>
-                                        }
+                                        }*@
 
 
-                                        @*<li class="menu_item_children">
+                                        <li class="menu_item_children">
                                             <a href="shop.html">
                                                 <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu2.png" alt="">
                                                 <span>โคมไฟ-หลอดไฟ-Xenon <i class="fa fa-angle-down"></i></span>
@@ -244,7 +244,7 @@
                                                 <li><a href="shop.html">สติ๊กเกอร์</a></li>
                                                 <li><a href="shop.html">ฟิล์มปรอท</a></li>
                                             </ul>
-                                        </li>*@
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
