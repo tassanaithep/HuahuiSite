@@ -22,18 +22,19 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
 
         public IEnumerable<CartItemListModel> GetCartItemListByUser(int userId)
         {
-            return (from cartListItem in HuahuiDbContext.CartItemList
-                    join productJoin in HuahuiDbContext.Product on cartListItem.ProductId equals productJoin.Id into CartListItemJoinProduct
-                    from product in CartListItemJoinProduct.DefaultIfEmpty()
+            return (from cartItemList in HuahuiDbContext.CartItemList
+                    join productJoin in HuahuiDbContext.Product on cartItemList.ProductId equals productJoin.Id into CartItemListJoinProduct
+                    from product in CartItemListJoinProduct.DefaultIfEmpty()
                     join productGroupJoin in HuahuiDbContext.ProductGroup on product.ProductGroupCode equals productGroupJoin.Code into ProductJoinProductGroup
                     from productGroup in ProductJoinProductGroup.DefaultIfEmpty()
                     select new CartItemListModel
                     {
-                        Id = cartListItem.Id,
-                        CardId = cartListItem.CardId,
-                        ProductId = cartListItem.ProductId,
-                        IsActive = cartListItem.IsActive,
-                        CreatedDateTime = cartListItem.CreatedDateTime,
+                        Id = cartItemList.Id,
+                        CardId = cartItemList.CardId,
+                        ProductId = cartItemList.ProductId,
+                        Quantity = cartItemList.Quantity,
+                        IsActive = cartItemList.IsActive,
+                        CreatedDateTime = cartItemList.CreatedDateTime,
                         ProductName = product.Name,
                         UnitPrice = productGroup.UnitPrice,
                         PictureFileName = product.PictureFileName

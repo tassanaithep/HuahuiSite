@@ -107,12 +107,17 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             homeViewModel.IsLogin = loginViewModel != null ? true : false;
             homeViewModel.ProductList = Mapper.Map<IEnumerable<ProductModel>, IEnumerable<ProductViewModel>>(_unitOfWork.Products.GetProductList());
 
-          //  homeViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();
-          //  homeViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
+            if (loginViewModel != null)
+            {
+                homeViewModel.CartItemListViewList = Mapper.Map<IEnumerable<CartItemListModel>, IEnumerable<CartItemListViewModel>>(_unitOfWork.CartItemLists.GetCartItemListByUser(loginViewModel.RoleId));
+            }
+
+            //homeViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();
+            //homeViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
           
 
 
-    }
+        }
 
         #endregion
 
