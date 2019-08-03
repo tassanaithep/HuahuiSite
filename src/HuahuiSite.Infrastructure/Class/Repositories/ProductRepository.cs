@@ -37,8 +37,9 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         PictureFileName = product.PictureFileName,
                         CreatedDateTime = product.CreatedDateTime,
                         UpdatedDateTime = product.UpdatedDateTime,
-                        UnitPrice = productGroup.UnitPrice
-                    });
+                        UnitPrice = productGroup.UnitPrice,
+                        PromotionPrice = productGroup.PromotionPrice
+                    }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
         }
     }
 }

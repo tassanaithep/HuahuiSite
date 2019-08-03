@@ -8,5 +8,6 @@ namespace HuahuiSite.Core.Models
     public class ProductModel : Product
     {
         public int UnitPrice { get; set; }
+        public int? PromotionPrice { get; set; }
     }
 }
