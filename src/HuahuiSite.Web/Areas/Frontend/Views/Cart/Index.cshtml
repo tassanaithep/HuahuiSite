@@ -55,7 +55,7 @@
                                             <td class="product_thumb"><a href="#"><img src="~/images/upload/@item.PictureFileName" alt=""></a></td>
                                             <td class="product_name"><a href="#">@item.ProductName</a></td>
                                             <td class="product-price">@item.UnitPrice</td>
-                                            <td class="product_quantity"><label>Quantity</label> <input type="number" name="ProductQuantity" min="0" max="100" value="1" onchange="CalculateTotalPrice(this)" /></td>
+                                            <td class="product_quantity"><label>Quantity</label> <input type="number" name="ProductQuantity" min="0" max="100" value="@item.Quantity" onchange="CalculateTotalPrice(this)" /></td>
                                             <td class="product_total"></td>
                                         </tr>
                                     }

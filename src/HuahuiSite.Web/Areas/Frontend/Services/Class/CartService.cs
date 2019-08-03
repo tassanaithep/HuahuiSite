@@ -138,7 +138,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         // Updated: 07/07/2019
         public void GetCartItemList(ref CartViewModel cartViewModel)
         {
-            cartViewModel.CartItemListViewList = Mapper.Map<IEnumerable<CartItemListModel>, IEnumerable<CartItemListViewModel>>(_unitOfWork.CartItemLists.GetCartItemListByUser(2013));
+            cartViewModel.CartItemListViewList = Mapper.Map<IEnumerable<CartItemListModel>, IEnumerable<CartItemListViewModel>>(_unitOfWork.CartItemLists.GetCartItemListByUser(cartViewModel.UserId));
             cartViewModel.CartItemList = _unitOfWork.CartItemLists.GetCartItemListByCard(cartViewModel.CartItemListViewList.First().CardId);
         }
 

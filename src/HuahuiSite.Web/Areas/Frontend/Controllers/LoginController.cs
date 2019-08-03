@@ -59,9 +59,12 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
             {
                 _loginService.CheckLogin(loginViewModel);
                 isSuccess = true;
+                ViewBag.erromessage = "";
+                HttpContext.Session.SetString("username", loginViewModel.Username);
             }
             catch (Exception ex)
             {
+                ViewBag.erromessage = "ไม่พบรหัสผู้ใช้งาน กรุณาติดต่อผู้เกี่ยวข้อง";
                 exceptionMessage = ex.Message;
                 isSuccess = false;
             }

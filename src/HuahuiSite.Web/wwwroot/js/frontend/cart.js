@@ -12,6 +12,11 @@ $(function () {
 
 // #region Functions
 
+/**
+  * @desc Remove Cart Item from Cart
+  * @param {Object} e - Element of Remove Button
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
 RemoveCartItem = (e) => {
     let $cartItemId = $(e).closest("tr").find("[name='hid-cart-item-id']").val();
 

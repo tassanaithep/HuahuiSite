@@ -10,27 +10,31 @@
             <!--login area start-->
             <div class="col-lg-6 col-md-6">
                 <div class="account_form">
-                    <h2>login</h2>
+                    <h2>LOGIN </h2>
                     <form asp-area="Frontend" asp-controller="Login" asp-action="CheckLogin" data-ajax="true" data-ajax-method="post" data-ajax-success="OnCheckLoginSuccess">
                         <p>
-                            <label>Username <span>*</span></label>
+                            <label><b><span>Username *</span></b></label>
                             <input asp-for="Username" class="form-control" />
                         </p>
                         <p>
-                            <label>Passwords <span>*</span></label>
+                            <label><b><span>Password *</span></b></label>
                             <input asp-for="Password" class="form-control" />
                         </p>
                         <div class="login_submit">
+                            <label id="loginfailtext" class="text-danger"></label>
                             @*<a href="#">Lost your password?</a>*@
-                            <label for="remember">
-                                <input id="remember" type="checkbox">
-                                Remember me
-                            </label>
-                            <button type="submit">login</button>
+                            @*<label for="remember">
+            <input id="remember" type="checkbox">
+            Remember me
+        </label>*@
+                            <button type="submit" style="width:30%">login</button>
 
                         </div>
-
                     </form>
+                        <center>
+                            <span class="text-danger text-center">หากต้องการสมัคร </span><a href="#"><span class="text-blue">คลิ๊กที่นี่</span></a><span class="text-danger text-center"> เพื่อติดต่อเรา</span>
+                        </center>
+               
                 </div>
             </div>
             <!--login area start-->
@@ -42,12 +46,16 @@
 </div>
 
 <script>
-
+   
         OnCheckLoginSuccess = (res) => {
             if (res.isSuccess) {
+                
                 window.location = "/Home/Index";
             }
             else {
+
+                $("#loginfailtext").html("!!ไม่พบผู้ใช้งาน กรุณาติดต่อผู้เกี่ยวข้อง!! ");
+               
                 swal("Login Failed", "", "error");
             }
         };
