@@ -38,13 +38,14 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-md-12">
                         <div class="welcome_text">
-                            @*<p> HUAHUI INTER COMPANY</p>*@
-                            @if (Context.Session.GetString("username") != null)
-                            {
-                            <span class="text-white strong">
-                                Welcome: @Context.Session.GetString("username")
 
-                            </span>
+                            @*<p> HUAHUI INTER COMPANY</p>*@
+
+                            @if (Model.IsLogin)
+                            {
+                                <span class="text-white strong">
+                                    Welcome: @Context.Session.GetString("username")
+                                </span>
                             }
 
                         </div>
@@ -53,16 +54,14 @@
                         <div class="top_right text-right">
                             <ul>
 
-                                @if (Context.Session.GetString("username") != null)
+                                @if (Model.IsLogin)
                                 {
-
-                                <a asp-area="Frontend" asp-controller="Login" asp-action="Index"><i class="ion-log-out"></i> ออกจากระบบ </a>
+                                    <a asp-area="Frontend" asp-controller="Login" asp-action="Index"><i class="ion-log-out"></i> ออกจากระบบ </a>
                                 }
                                 else
                                 {
-                                <li><a asp-area="Frontend" asp-controller="Login" asp-action="Index"><i class="ion-log-in"></i> เข้าสู่ระบบ </a></li>
+                                    <li><a asp-area="Frontend" asp-controller="Login" asp-action="Index"><i class="ion-log-in"></i> เข้าสู่ระบบ </a></li>
                                 }
-
 
                             </ul>
                         </div>
