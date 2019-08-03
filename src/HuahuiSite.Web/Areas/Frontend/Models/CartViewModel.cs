@@ -22,6 +22,8 @@ namespace HuahuiSite.Web.Areas.Frontend.Models
 
         #endregion
 
+        public int QuantityOfItem { get; set; }
+
         public IEnumerable<CartItemList> CartItemList { get; set; }
         public IEnumerable<CartItemListViewModel> CartItemListViewList { get; set; }
     }

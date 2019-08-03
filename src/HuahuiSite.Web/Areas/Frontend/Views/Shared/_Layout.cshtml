@@ -1,5 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Http;
 
+@model HuahuiSite.Web.Areas.Frontend.Models.MainViewModel
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,12 +87,6 @@
                                     <div class="hover_category">
                                         <select class="select_option" name="select" id="categori">
                                             <option selected value="1">ทุกหมวดหมู่</option>
-                                            @*@foreach (var item in Model.ProductCategorieList)
-                                            {
-                                                <option value="@item.Id">@item.Name</option>
-                                            }*@
-
-
                                             <option value="3">โคมไฟ-หลอดไฟ-Xenon</option>
                                                 <option value="4">อิเล็กทรอนิคส์-ของตกแต่งอื่นๆ</option>
                                                 <option value="5">ตกแต่งทั่วไป</option>
@@ -148,103 +144,28 @@
                                 </div>
                                 <nav class="categories_menu_toggle">
                                     <ul>
-                                        @*@foreach (var item in Model.ProductCategorieList)
+
+                                        @foreach (var itemOfProductCategorie in Model.ProductCategorieList)
                                         {
                                             <li class="menu_item_children">
                                                 <a href="shop.html">
-                                                   
-                                                    <span>@item.Name <i class="fa fa-angle-down"></i></span>
+                                                    <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu2.png" alt="">
+                                                    <span>@itemOfProductCategorie.Name <i class="fa fa-angle-down"></i></span>
                                                 </a>
                                                 <ul class="sub_menu">
-                                                    @{ var re = Model.ProductGroupList.Select(m => new { m.Name, m.ProductCategorieCode }).Distinct();
-                                                    }
-                                                    @foreach (var itemgrp in re.Where(m => m.ProductCategorieCode == item.Code))
+
+                                                    @if (Model.ProductGroupList.Where(w => w.ProductCategorieCode.Equals(itemOfProductCategorie.Code)).Count() > 0)
                                                     {
-                                                        <li><a href="shop.html">@itemgrp.Name</a></li>
+                                                        @foreach (var itemOfProductGroup in Model.ProductGroupList.Where(w => w.ProductCategorieCode.Equals(itemOfProductCategorie.Code)))
+                                                        {
+                                                            <li><a href="shop.html">@itemOfProductGroup.Name</a></li>
+                                                        }
                                                     }
 
                                                 </ul>
                                             </li>
-                                        }*@
+                                        }
 
-
-                                        <li class="menu_item_children">
-                                            <a href="shop.html">
-                                                <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu2.png" alt="">
-                                                <span>โคมไฟ-หลอดไฟ-Xenon <i class="fa fa-angle-down"></i></span>
-                                            </a>
-                                            <ul class="sub_menu">
-                                                <li><a href="shop.html">ไฟหรี่</a></li>
-                                                <li><a href="shop.html">ไฟเพดาน</a></li>
-                                                <li><a href="shop.html">ไฟโปรเจคเตอร์</a></li>
-                                                <li><a href="shop.html">ไฟไซเรนหน้าLED</a></li>
-                                                <li><a href="shop.html">ไฟถอย</a></li>
-                                                <li><a href="shop.html">ชุดไฟซีนอล</a></li>
-                                                <li><a href="shop.html">หลอดไฟซีนอล</a></li>
-                                            </ul>
-                                        </li>
-
-                                        <li class="menu_item_children">
-                                            <a href="shop.html">
-                                                <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu3.png" alt="">
-                                                <span>อิเล็กทรอนิคส์-ของตกแต่งอื่นๆ <i class="fa fa-angle-down"></i></span>
-                                            </a>
-                                            <ul class="sub_menu pages">
-                                                <li><a href="shop.html">ชุดเซ็นทรัลล็อค</a></li>
-                                                <li><a href="shop.html">เซ็นเซอร์</a></li>
-                                                <li><a href="shop.html">กล้องบันทึก</a></li>
-                                            </ul>
-                                        </li>
-
-                                        <li class="menu_item_children">
-                                            <a href="shop.html">
-                                                <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu4.png" alt="">
-                                                <span>ตกแต่งทั่วไป <i class="fa fa-angle-down"></i></span>
-                                            </a>
-                                            <ul class="sub_menu pages">
-                                                <li><a href="shop.html">ขายึดป้ายทะเบียน</a></li>
-                                                <li><a href="shop.html">ที่ยึดแบตเตอร์รี่</a></li>
-                                                <li><a href="shop.html">น็อต</a></li>
-                                                <li><a href="shop.html">วัด Boots หน้าน้ำมัน</a></li>
-                                                <li><a href="shop.html">ฝาครอบดุมล้อ</a></li>
-                                                <li><a href="shop.html">ขายึดป้ายทะเบียน</a></li>
-                                                <li><a href="shop.html">หัวเกียร์ </a></li>
-                                                <li><a href="shop.html">ท่อดักลมยืดได้</a></li>
-                                                <li><a href="shop.html">ปากแตร</a></li>
-                                                <li><a href="shop.html">กระจังหน้า</a></li>
-                                            </ul>
-                                        </li>
-
-                                        <li class="menu_item_children">
-                                            <a href="shop.html">
-                                                <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu5.png" alt="">
-                                                <span>เพิ่มประสิทธิภาพ <i class="fa fa-angle-down"></i></span>
-                                            </a>
-                                            <ul class="sub_menu pages">
-                                                <li><a href="shop.html">ท่อตรง</a></li>
-                                                <li><a href="shop.html">ท่องอ</a></li>
-                                                <li><a href="shop.html">สายถัก</a></li>
-                                                <li><a href="shop.html">สายแวคคั่ม</a></li>
-                                            </ul>
-                                        </li>
-
-                                        <li class="menu_item_children">
-                                            <a href="shop.html">
-                                                <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu6.png" alt="">
-                                                <span>ตกแต่งภายใน-ภายนอก <i class="fa fa-angle-down"></i></span>
-                                            </a>
-                                            <ul class="sub_menu pages">
-                                                <li><a href="shop.html">รีฟิลยางใบปัด</a></li>
-                                                <li><a href="shop.html">มือหมุนพวงมาลัย</a></li>
-                                                <li><a href="shop.html">ที่วางโทรศัพท์</a></li>
-                                                <li><a href="shop.html">พรมชุด</a></li>
-                                                <li><a href="shop.html">ซิลิโคนหุ้มกุญแจ</a></li>
-                                                <li><a href="shop.html">ฟิล์มติดไฟหน้า</a></li>
-                                                <li><a href="shop.html">ครอบดิสก์เบรค</a></li>
-                                                <li><a href="shop.html">สติ๊กเกอร์</a></li>
-                                                <li><a href="shop.html">ฟิล์มปรอท</a></li>
-                                            </ul>
-                                        </li>
                                     </ul>
                                 </nav>
                             </div>

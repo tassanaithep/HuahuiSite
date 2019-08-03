@@ -8,6 +8,6 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Interface
 {
     public interface IHomeService
     {
-        void GetProductList(ref HomeViewModel homeViewModel);
+        void GetProductList(ref MainViewModel mainViewModel);
     }
 }
