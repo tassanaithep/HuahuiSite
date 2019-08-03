@@ -5,8 +5,8 @@
             <div class="col-12">
                 <div class="breadcrumb_content">
                     <ul>
-                        <li><a href="index.html">home</a></li>
-                        <li>Camera & Video </li>
+                        <li><a asp-controller="Home" asp-action="Index">home</a></li>
+                      
                         <li>shop list</li>
                     </ul>
                 </div>
@@ -35,32 +35,16 @@
                             <h2><b>Filter by categories</b></h2>
                             @*<h2>Product categories</h2>*@
                             <ul>
+                                @foreach (var categorie in Model.ProductCategoriesList)
+                                {
                                 <li>
                                     @*<input type="checkbox">*@
-                                    <a href="#">Categories1 (6)</a>
-                                    @*<span class="checkmark"></span>*@
+                                    <a asp-controller="ShopList" asp-action="Index" asp-route-param="@categorie.Code"> @categorie.Name</a>
+                                    @* <a href="#">Categories1 (6)</a>
+        <span class="checkmark"></span>*@
                                 </li>
-                                <li>
-                                    @*<input type="checkbox">*@
-                                    <a href="#">Categories2(10)</a>
-                                    @*<span class="checkmark"></span>*@
-                                </li>
-                                <li>
-                                    @*<input type="checkbox">*@
-                                    <a href="#">Categories3 (4)</a>
-                                    @*<span class="checkmark"></span>*@
-                                </li>
-                                <li>
-                                    @*<input type="checkbox">*@
-                                    <a href="#">Categories4(10)</a>
-                                    @*<span class="checkmark"></span>*@
-                                </li>
-                                <li>
-                                    @*<input type="checkbox">*@
-                                    <a href="#">Categories5(8)</a>
-                                    @*<span class="checkmark"></span>*@
-                                </li>
-
+                                }
+                                
                             </ul>
                         </div>
 

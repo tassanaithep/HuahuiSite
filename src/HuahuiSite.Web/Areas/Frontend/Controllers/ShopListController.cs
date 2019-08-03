@@ -23,12 +23,28 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
             _shopListService = shopListService;
         }
         #endregion
-        public IActionResult Index()
+        public IActionResult Index(string param)
         {
+
             ShopListViewModel shopListViewModel = new ShopListViewModel();
+           
+
+
             try
             {
-                _shopListService.GetShopList(ref shopListViewModel);
+               _shopListService.GetShopList(ref shopListViewModel);
+                if(param != null)
+                {
+                    shopListViewModel.ProductList = shopListViewModel.ProductList.Where(x => x.ProductCategorieCode == param).ToList();
+
+                }
+                //else
+                //{
+                //    _shopListService.GetShopList(ref shopListViewModel);
+
+                //}
+
+
             }
             catch (Exception exception)
             {

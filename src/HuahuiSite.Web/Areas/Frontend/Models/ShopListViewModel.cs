@@ -11,7 +11,8 @@ namespace HuahuiSite.Web.Areas.Frontend.Models
         public bool IsLogin { get; set; }
 
         public IEnumerable<ProductViewModel> ProductList { get; set; }
-
+        public IEnumerable<ProductCategorie> ProductCategoriesList { get; set; }
      
+        
     }
 }
