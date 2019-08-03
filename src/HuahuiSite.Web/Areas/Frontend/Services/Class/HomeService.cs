@@ -100,23 +100,22 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
-        public void GetProductList(ref HomeViewModel homeViewModel)
+        public void GetProductList(ref MainViewModel mainViewModel)
         {
             var loginViewModel = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserData");
 
-            homeViewModel.IsLogin = loginViewModel != null ? true : false;
-            homeViewModel.ProductList = Mapper.Map<IEnumerable<ProductModel>, IEnumerable<ProductViewModel>>(_unitOfWork.Products.GetProductList());
+            mainViewModel.IsLogin = loginViewModel != null ? true : false;
+
+            mainViewModel.HomeViewModel = new HomeViewModel();
+            mainViewModel.HomeViewModel.ProductList = Mapper.Map<IEnumerable<ProductModel>, IEnumerable<ProductViewModel>>(_unitOfWork.Products.GetProductList());
 
             if (loginViewModel != null)
             {
-                homeViewModel.CartItemListViewList = Mapper.Map<IEnumerable<CartItemListModel>, IEnumerable<CartItemListViewModel>>(_unitOfWork.CartItemLists.GetCartItemListByUser(loginViewModel.RoleId));
+                mainViewModel.HomeViewModel.CartItemListViewList = Mapper.Map<IEnumerable<CartItemListModel>, IEnumerable<CartItemListViewModel>>(_unitOfWork.CartItemLists.GetCartItemListByUser(loginViewModel.RoleId));
             }
 
-            //homeViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();
-            //homeViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
-          
-
-
+            mainViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();
+            mainViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
         }
 
         #endregion

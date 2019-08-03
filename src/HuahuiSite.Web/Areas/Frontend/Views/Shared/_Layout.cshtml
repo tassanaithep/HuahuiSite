@@ -1,5 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Http;
 
+@model HuahuiSite.Web.Areas.Frontend.Models.MainViewModel
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,12 +38,13 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-md-12">
                         <div class="welcome_text">
+
                             @*<p> HUAHUI INTER COMPANY</p>*@
-                            @if (Context.Session.GetString("username") != null)
+
+                            @if (Model.IsLogin)
                             {
                                 <span class="text-white strong">
                                     Welcome: @Context.Session.GetString("username")
-
                                 </span>
                             }
 
@@ -51,16 +54,14 @@
                         <div class="top_right text-right">
                             <ul>
 
-                                @if (Context.Session.GetString("username") != null)
+                                @if (Model.IsLogin)
                                 {
-
                                     <a asp-area="Frontend" asp-controller="Login" asp-action="Index"><i class="ion-log-out"></i> ออกจากระบบ </a>
                                 }
                                 else
                                 {
                                     <li><a asp-area="Frontend" asp-controller="Login" asp-action="Index"><i class="ion-log-in"></i> เข้าสู่ระบบ </a></li>
                                 }
-
 
                             </ul>
                         </div>
@@ -85,17 +86,11 @@
                                     <div class="hover_category">
                                         <select class="select_option" name="select" id="categori">
                                             <option selected value="1">ทุกหมวดหมู่</option>
-                                            @*@foreach (var item in Model.ProductCategorieList)
-                                            {
-                                                <option value="@item.Id">@item.Name</option>
-                                            }*@
-
-
                                             <option value="3">โคมไฟ-หลอดไฟ-Xenon</option>
-                                                <option value="4">อิเล็กทรอนิคส์-ของตกแต่งอื่นๆ</option>
-                                                <option value="5">ตกแต่งทั่วไป</option>
-                                                <option value="6">เพิ่มประสิทธิภาพ</option>
-                                                <option value="7">ตกแต่งภายใน-ภายนอก</option>
+                                            <option value="4">อิเล็กทรอนิคส์-ของตกแต่งอื่นๆ</option>
+                                            <option value="5">ตกแต่งทั่วไป</option>
+                                            <option value="6">เพิ่มประสิทธิภาพ</option>
+                                            <option value="7">ตกแต่งภายใน-ภายนอก</option>
                                         </select>
                                     </div>
                                     <div class="search_box">
@@ -148,103 +143,28 @@
                                 </div>
                                 <nav class="categories_menu_toggle">
                                     <ul>
-                                        @*@foreach (var item in Model.ProductCategorieList)
+
+                                        @foreach (var itemOfProductCategorie in Model.ProductCategorieList)
                                         {
-                                            <li class="menu_item_children">
-                                                <a href="shop.html">
-                                                   
-                                                    <span>@item.Name <i class="fa fa-angle-down"></i></span>
-                                                </a>
-                                                <ul class="sub_menu">
-                                                    @{ var re = Model.ProductGroupList.Select(m => new { m.Name, m.ProductCategorieCode }).Distinct();
-                                                    }
-                                                    @foreach (var itemgrp in re.Where(m => m.ProductCategorieCode == item.Code))
-                                                    {
-                                                        <li><a href="shop.html">@itemgrp.Name</a></li>
-                                                    }
-
-                                                </ul>
-                                            </li>
-                                        }*@
-
-
                                         <li class="menu_item_children">
                                             <a href="shop.html">
                                                 <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu2.png" alt="">
-                                                <span>โคมไฟ-หลอดไฟ-Xenon <i class="fa fa-angle-down"></i></span>
+                                                <span>@itemOfProductCategorie.Name <i class="fa fa-angle-down"></i></span>
                                             </a>
                                             <ul class="sub_menu">
-                                                <li><a href="shop.html">ไฟหรี่</a></li>
-                                                <li><a href="shop.html">ไฟเพดาน</a></li>
-                                                <li><a href="shop.html">ไฟโปรเจคเตอร์</a></li>
-                                                <li><a href="shop.html">ไฟไซเรนหน้าLED</a></li>
-                                                <li><a href="shop.html">ไฟถอย</a></li>
-                                                <li><a href="shop.html">ชุดไฟซีนอล</a></li>
-                                                <li><a href="shop.html">หลอดไฟซีนอล</a></li>
-                                            </ul>
-                                        </li>
 
-                                        <li class="menu_item_children">
-                                            <a href="shop.html">
-                                                <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu3.png" alt="">
-                                                <span>อิเล็กทรอนิคส์-ของตกแต่งอื่นๆ <i class="fa fa-angle-down"></i></span>
-                                            </a>
-                                            <ul class="sub_menu pages">
-                                                <li><a href="shop.html">ชุดเซ็นทรัลล็อค</a></li>
-                                                <li><a href="shop.html">เซ็นเซอร์</a></li>
-                                                <li><a href="shop.html">กล้องบันทึก</a></li>
-                                            </ul>
-                                        </li>
+                                                @if (Model.ProductGroupList.Where(w => w.ProductCategorieCode.Equals(itemOfProductCategorie.Code)).Count() > 0)
+                                                {
+                                                @foreach (var itemOfProductGroup in Model.ProductGroupList.Where(w => w.ProductCategorieCode.Equals(itemOfProductCategorie.Code)))
+                                                {
+                                                <li><a href="shop.html">@itemOfProductGroup.Name</a></li>
+                                                }
+                                                }
 
-                                        <li class="menu_item_children">
-                                            <a href="shop.html">
-                                                <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu4.png" alt="">
-                                                <span>ตกแต่งทั่วไป <i class="fa fa-angle-down"></i></span>
-                                            </a>
-                                            <ul class="sub_menu pages">
-                                                <li><a href="shop.html">ขายึดป้ายทะเบียน</a></li>
-                                                <li><a href="shop.html">ที่ยึดแบตเตอร์รี่</a></li>
-                                                <li><a href="shop.html">น็อต</a></li>
-                                                <li><a href="shop.html">วัด Boots หน้าน้ำมัน</a></li>
-                                                <li><a href="shop.html">ฝาครอบดุมล้อ</a></li>
-                                                <li><a href="shop.html">ขายึดป้ายทะเบียน</a></li>
-                                                <li><a href="shop.html">หัวเกียร์ </a></li>
-                                                <li><a href="shop.html">ท่อดักลมยืดได้</a></li>
-                                                <li><a href="shop.html">ปากแตร</a></li>
-                                                <li><a href="shop.html">กระจังหน้า</a></li>
                                             </ul>
                                         </li>
+                                        }
 
-                                        <li class="menu_item_children">
-                                            <a href="shop.html">
-                                                <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu5.png" alt="">
-                                                <span>เพิ่มประสิทธิภาพ <i class="fa fa-angle-down"></i></span>
-                                            </a>
-                                            <ul class="sub_menu pages">
-                                                <li><a href="shop.html">ท่อตรง</a></li>
-                                                <li><a href="shop.html">ท่องอ</a></li>
-                                                <li><a href="shop.html">สายถัก</a></li>
-                                                <li><a href="shop.html">สายแวคคั่ม</a></li>
-                                            </ul>
-                                        </li>
-
-                                        <li class="menu_item_children">
-                                            <a href="shop.html">
-                                                <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu6.png" alt="">
-                                                <span>ตกแต่งภายใน-ภายนอก <i class="fa fa-angle-down"></i></span>
-                                            </a>
-                                            <ul class="sub_menu pages">
-                                                <li><a href="shop.html">รีฟิลยางใบปัด</a></li>
-                                                <li><a href="shop.html">มือหมุนพวงมาลัย</a></li>
-                                                <li><a href="shop.html">ที่วางโทรศัพท์</a></li>
-                                                <li><a href="shop.html">พรมชุด</a></li>
-                                                <li><a href="shop.html">ซิลิโคนหุ้มกุญแจ</a></li>
-                                                <li><a href="shop.html">ฟิล์มติดไฟหน้า</a></li>
-                                                <li><a href="shop.html">ครอบดิสก์เบรค</a></li>
-                                                <li><a href="shop.html">สติ๊กเกอร์</a></li>
-                                                <li><a href="shop.html">ฟิล์มปรอท</a></li>
-                                            </ul>
-                                        </li>
                                     </ul>
                                 </nav>
                             </div>
@@ -330,7 +250,6 @@
 
     </div>
     <!--Offcanvas menu area end-->
-
     @RenderBody()
 
     <!--footer area start-->
@@ -377,26 +296,26 @@
             </div>
 
             @*<div class="newletter_area">
-                        <div class="row">
-                            <div class="col-lg-5 col-md-5">
-                                <div class="newletter_title">
-                                    <img src="assets/img/about/icon-newletter.png" alt="">
-                                    <div class="newletter_content">
-                                        <h2>Join Our Newsletter Now</h2>
-                                        <p>Be the First to Know. Sign up to newsletter today</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-7 col-md-7">
-                                <div class="newletter_subscribe">
-                                    <form action="#">
-                                        <input placeholder="Enter you email address here..." type="text">
-                                        <button type="submit">Subscribe</button>
-                                    </form>
-                                </div>
+                <div class="row">
+                    <div class="col-lg-5 col-md-5">
+                        <div class="newletter_title">
+                            <img src="assets/img/about/icon-newletter.png" alt="">
+                            <div class="newletter_content">
+                                <h2>Join Our Newsletter Now</h2>
+                                <p>Be the First to Know. Sign up to newsletter today</p>
                             </div>
                         </div>
-                </div>*@
+                    </div>
+                    <div class="col-lg-7 col-md-7">
+                        <div class="newletter_subscribe">
+                            <form action="#">
+                                <input placeholder="Enter you email address here..." type="text">
+                                <button type="submit">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
 
             <div class="footer_bottom">
                 <div class="row">
@@ -406,58 +325,57 @@
                         </div>
                     </div>
                     @*<div class="col-lg-6 col-md-12">
-                            <div class="footer_paypal">
-                                <ul>
-                                    <li><a href="#"><img src="assets/img/icon/paypal.jpg" alt=""></a></li>
-                                    <li><a href="#"><img src="assets/img/icon/paypal1.jpg" alt=""></a></li>
-                                    <li><a href="#"><img src="assets/img/icon/paypal2.jpg" alt=""></a></li>
-                                    <li><a href="#"><img src="assets/img/icon/paypal3.jpg" alt=""></a></li>
-                                    <li><a href="#"><img src="assets/img/icon/paypal4.jpg" alt=""></a></li>
-                                    <li><a href="#"><img src="assets/img/icon/paypal5.jpg" alt=""></a></li>
-                                </ul>
-                            </div>
-                        </div>*@
+                        <div class="footer_paypal">
+                            <ul>
+                                <li><a href="#"><img src="assets/img/icon/paypal.jpg" alt=""></a></li>
+                                <li><a href="#"><img src="assets/img/icon/paypal1.jpg" alt=""></a></li>
+                                <li><a href="#"><img src="assets/img/icon/paypal2.jpg" alt=""></a></li>
+                                <li><a href="#"><img src="assets/img/icon/paypal3.jpg" alt=""></a></li>
+                                <li><a href="#"><img src="assets/img/icon/paypal4.jpg" alt=""></a></li>
+                                <li><a href="#"><img src="assets/img/icon/paypal5.jpg" alt=""></a></li>
+                            </ul>
+                        </div>
+                    </div>*@
                 </div>
             </div>
         </div>
     </footer>
     <!--footer area end-->
-
     <!--news letter popup start-->
     @*<div class="newletter-popup">
-            <div id="boxes" class="newletter-container">
-                <div id="dialog" class="window">
-                    <div id="popup2">
-                        <span class="b-close"><span>close</span></span>
-                    </div>
-                    <div class="box">
-                        <div class="newletter-title">
-                            <h2>Newsletter</h2>
-                        </div>
-                        <div class="box-content newleter-content">
-                            <label class="newletter-label">Enter your email address to subscribe our notification of our new post &amp; features by email.</label>
-                            <div id="frm_subscribe">
-                                <form name="subscribe" id="subscribe_popup">
-                                    <!-- <span class="required">*</span><span>Enter you email address here...</span>-->
-                                    <input type="text" value="" name="subscribe_pemail" id="subscribe_pemail" placeholder="Enter you email address here...">
-                                    <input type="hidden" value="" name="subscribe_pname" id="subscribe_pname">
-                                    <div id="notification"></div>
-                                    <a class="theme-btn-outlined" onclick="email_subscribepopup()"><span>Subscribe</span></a>
-                                </form>
-                                <div class="subscribe-bottom">
-                                    <input type="checkbox" id="newsletter_popup_dont_show_again">
-                                    <label for="newsletter_popup_dont_show_again">Don't show this popup again</label>
-                                </div>
-                            </div>
-                            <!-- /#frm_subscribe -->
-                        </div>
-                        <!-- /.box-content -->
-                    </div>
+        <div id="boxes" class="newletter-container">
+            <div id="dialog" class="window">
+                <div id="popup2">
+                    <span class="b-close"><span>close</span></span>
                 </div>
-
+                <div class="box">
+                    <div class="newletter-title">
+                        <h2>Newsletter</h2>
+                    </div>
+                    <div class="box-content newleter-content">
+                        <label class="newletter-label">Enter your email address to subscribe our notification of our new post &amp; features by email.</label>
+                        <div id="frm_subscribe">
+                            <form name="subscribe" id="subscribe_popup">
+                                <!-- <span class="required">*</span><span>Enter you email address here...</span>-->
+                                <input type="text" value="" name="subscribe_pemail" id="subscribe_pemail" placeholder="Enter you email address here...">
+                                <input type="hidden" value="" name="subscribe_pname" id="subscribe_pname">
+                                <div id="notification"></div>
+                                <a class="theme-btn-outlined" onclick="email_subscribepopup()"><span>Subscribe</span></a>
+                            </form>
+                            <div class="subscribe-bottom">
+                                <input type="checkbox" id="newsletter_popup_dont_show_again">
+                                <label for="newsletter_popup_dont_show_again">Don't show this popup again</label>
+                            </div>
+                        </div>
+                        <!-- /#frm_subscribe -->
+                    </div>
+                    <!-- /.box-content -->
+                </div>
             </div>
-            <!-- /.box -->
-        </div>*@
+
+        </div>
+        <!-- /.box -->
+    </div>*@
     <!--news letter popup start-->
 
     <environment include="Development">

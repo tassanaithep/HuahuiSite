@@ -18,6 +18,8 @@ $(function () {
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
 OpenProductModal = (e) => {
+    // #region Get Value from Form
+
     let $form = $(e).closest(".form-product-item");
 
     let $formId = $form.find("[name='hid-form-product-id']").val();
@@ -26,14 +28,32 @@ OpenProductModal = (e) => {
     let $unitPrice = $form.find("[name='ProductUnitPrice']").val();
     let $pictureFileName = $form.find("[name='ProductPictureFileName']").val();
 
-    let qty = null;
+    let $quantityOfItem = $form.find("input[name=QuantityOfItem]");
 
-    for (var i = 0; i < _cartItemList.length; i++) {
-        if (_cartItemList[i].productId === parseInt($productId)) {
-            qty = _cartItemList[i].quantity;
-            break;
+    // #endregion
+
+    // #region Get Quantity of Product
+
+    let quantity = null;
+
+    if (_cartItemList !== null) {
+        for (var i = 0; i < _cartItemList.length; i++) {
+            if (_cartItemList[i].productId === parseInt($productId)) {
+                quantity = _cartItemList[i].quantity;
+                break;
+            }
         }
     }
+
+    if (quantity === null) {
+        $quantityOfItem.val(1);
+    } else {
+        $quantityOfItem.val(quantity);
+    }
+
+    // #endregion
+
+    // #region Add Modal Element
 
     $("body").append(`
         <div class="modal fade" id="modal-product" tabindex="-1" role="dialog" aria-hidden="true">
@@ -70,7 +90,7 @@ OpenProductModal = (e) => {
                                         <div class="variants_selects">
                                             <div class="modal_add_to_cart">
                                                 <form action="#">
-                                                    <input min="0" max="100" step="2" value="${ (qty !== null ? qty : 1) }" type="number">
+                                                    <input min="0" max="100" step="2" value="${ (quantity !== null ? quantity : 1) }" type="number">
                                                     <button type="button" onclick="ProductModalSubmit('${ $formId }')">add to cart</button>
                                                 </form>
                                             </div>
@@ -83,7 +103,9 @@ OpenProductModal = (e) => {
                 </div>
             </div>
         </div>
-`);
+    `);
+
+    // #endregion
 
     $("#modal-product").modal("show");
 };
@@ -96,7 +118,7 @@ ClearProductModal = () => {
 };
 
 ProductModalSubmit = (formId) => {
-    $("#" + formId).find(".btn-submit").click();
+    $("#" + formId).find("[name='btn-submit']").click();
 };
 
 // #endregion

@@ -89,7 +89,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                 {
                     CardId = cartOfUser == null ? cart.Id : cartOfUser.Id,
                     ProductId = cartViewModel.ProductId,
-                    Quantity = 1,
+                    Quantity = Convert.ToInt16(cartViewModel.QuantityOfItem),
                     TotalPrice = cartViewModel.ProductUnitPrice,
                     IsActive = true,
                     CreatedDateTime = DateTime.Now

@@ -29,18 +29,18 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
 
         public IActionResult Index()
         {
-            HomeViewModel homeViewModel = new HomeViewModel();
+            MainViewModel mainViewModel = new MainViewModel();
 
             try
             {
-                _homeService.GetProductList(ref homeViewModel);
+                _homeService.GetProductList(ref mainViewModel);
             }
             catch (Exception exception)
             {
 
             }
 
-            return View(homeViewModel);
+            return View(mainViewModel);
         }
     }
 }
