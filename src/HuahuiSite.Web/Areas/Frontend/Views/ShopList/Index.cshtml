@@ -1,4 +1,4 @@
-﻿@model HuahuiSite.Web.Areas.Frontend.Models.ShopListViewModel
+﻿@model HuahuiSite.Web.Areas.Frontend.Models.MainViewModel
 <div class="breadcrumbs_area">
     <div class="container">
         <div class="row">
@@ -35,7 +35,7 @@
                             <h2><b>Filter by categories</b></h2>
                             @*<h2>Product categories</h2>*@
                             <ul>
-                                @foreach (var categorie in Model.ProductCategoriesList)
+                                @foreach (var categorie in Model.ShopListViewModel.ProductCategoriesList)
                                 {
                                 <li>
                                     @*<input type="checkbox">*@
@@ -176,7 +176,7 @@
                 <div class="row shop_wrapper grid_list">
                     <div class="col-12 ">
                         @* // foreach shopList*@
-                        @foreach (var item in Model.ProductList)
+                        @foreach (var item in Model.ShopListViewModel.ProductList)
                         {
                             
                             <div class="single_product">

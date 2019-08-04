@@ -25,17 +25,16 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
         #endregion
         public IActionResult Index(string param)
         {
-
-            ShopListViewModel shopListViewModel = new ShopListViewModel();
-           
+            MainViewModel mainViewModel = new MainViewModel();
+         //   ShopListViewModel shopListViewModel = new ShopListViewModel();
 
 
             try
             {
-               _shopListService.GetShopList(ref shopListViewModel);
+               _shopListService.GetShopList(ref mainViewModel);
                 if(param != null)
                 {
-                    shopListViewModel.ProductList = shopListViewModel.ProductList.Where(x => x.ProductCategorieCode == param).ToList();
+                    mainViewModel.ShopListViewModel.ProductList = mainViewModel.ShopListViewModel.ProductList.Where(x => x.ProductCategorieCode == param).ToList();
 
                 }
                 //else
@@ -51,7 +50,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
 
                 throw;
             }
-            return View(shopListViewModel);
+            return View(mainViewModel);
         }
     }
 }

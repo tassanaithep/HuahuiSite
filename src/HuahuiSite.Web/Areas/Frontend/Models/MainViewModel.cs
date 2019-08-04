@@ -15,5 +15,6 @@ namespace HuahuiSite.Web.Areas.Frontend.Models
         public LoginViewModel LoginViewModel { get; set; }
         public HomeViewModel HomeViewModel { get; set; }
         public CartViewModel CartViewModel { get; set; }
+        public ShopListViewModel ShopListViewModel { get; set; }
     }
 }
