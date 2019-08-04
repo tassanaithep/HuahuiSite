@@ -6,7 +6,7 @@
                 <div class="breadcrumb_content">
                     <ul>
                         <li><a asp-controller="Home" asp-action="Index">home</a></li>
-                      
+
                         <li>shop list</li>
                     </ul>
                 </div>
@@ -23,112 +23,118 @@
                 <aside class="sidebar_widget">
                     <div class="widget_inner">
                         @* <div class="widget_list widget_filter">
-        <h2>Filter by price</h2>
-         <form action="#">
-             <div id="slider-range"></div>
-             <button type="submit">Filter</button>
-             <input type="text" name="text" id="amount" />
+                            <h2>Filter by price</h2>
+                             <form action="#">
+                                 <div id="slider-range"></div>
+                                 <button type="submit">Filter</button>
+                                 <input type="text" name="text" id="amount" />
 
-         </form>
-                    </div>*@
+                             </form>
+                                        </div>*@
                         <div class="widget_list widget_categories">
                             <h2><b>Filter by categories</b></h2>
                             @*<h2>Product categories</h2>*@
                             <ul>
                                 @foreach (var categorie in Model.ShopListViewModel.ProductCategoriesList)
                                 {
-                                <li>
-                                    @*<input type="checkbox">*@
-                                    <a asp-controller="ShopList" asp-action="Index" asp-route-param="@categorie.Code"> @categorie.Name</a>
-                                    @* <a href="#">Categories1 (6)</a>
-        <span class="checkmark"></span>*@
-                                </li>
+                                    <li>
+                                        @*<input type="checkbox">*@
+                                        <a asp-controller="ShopList" asp-action="Index" asp-route-param="@categorie.Code"> @categorie.Name</a>
+                                        @* <a href="#">Categories1 (6)</a>
+                                            <span class="checkmark"></span>*@
+                                    </li>
                                 }
-                                
+
                             </ul>
                         </div>
 
-                        @*<div class="widget_list widget_categories">
-            <h2>Manufacturer</h2>
-            <ul>
-                <li>
-                    <input type="checkbox">
-                    <a href="#">Calvin Klein (6)</a>
-                    <span class="checkmark"></span>
-                </li>
-                <li>
-                    <input type="checkbox">
-                    <a href="#">Chanel(10)</a>
-                    <span class="checkmark"></span>
-                </li>
-                <li>
-                    <input type="checkbox">
-                    <a href="#">Christian Dior (4)</a>
-                    <span class="checkmark"></span>
-                </li>
-                <li>
-                    <input type="checkbox">
-                    <a href="#">hermes(10)</a>
-                    <span class="checkmark"></span>
-                </li>
-                <li>
-                    <input type="checkbox">
-                    <a href="#">louis vuitton(8)</a>
-                    <span class="checkmark"></span>
-                </li>
-                <li>
-                    <input type="checkbox">
-                    <a href="#">Tommy Hilfiger(7)</a>
-                    <span class="checkmark"></span>
-                </li>
-                <li>
-                    <input type="checkbox">
-                    <a href="#">Versace(6)</a>
-                    <span class="checkmark"></span>
-                </li>
-            </ul>
-        </div>
-        <div class="widget_list widget_categories">
-            <h2>Select By Color</h2>
-            <ul>
-                <li>
-                    <input type="checkbox">
-                    <a href="#">Black (6)</a>
-                    <span class="checkmark"></span>
-                </li>
-                <li>
-                    <input type="checkbox">
-                    <a href="#"> Blue (8)</a>
-                    <span class="checkmark"></span>
-                </li>
-                <li>
-                    <input type="checkbox">
-                    <a href="#">Brown (10)</a>
-                    <span class="checkmark"></span>
-                </li>
-                <li>
-                    <input type="checkbox">
-                    <a href="#"> Green (6)</a>
-                    <span class="checkmark"></span>
-                </li>
-                <li>
-                    <input type="checkbox">
-                    <a href="#">Pink (4)</a>
-                    <span class="checkmark"></span>
-                </li>
-                <li>
-                    <input type="checkbox">
-                    <a href="#">White (2)</a>
-                    <span class="checkmark"></span>
+                        <div class="widget_list widget_categories">
+                            <h2>Product Group</h2>
+                            <ul>
 
-                </li>
-                <li>
-                    <input type="checkbox">
-                    <a href="#">Yellow (3)</a>
-                    <span class="checkmark"></span>
-                </li>
-            </ul>
-        </div>*@
+                                @foreach (var productGroupitem in Model.ProductGroupList.Where(w => w.ProductCategorieCode.Equals(Model.ShopListViewModel.Param)).Select(i => new { i.Code, i.Name,i.ProductCategorieCode }).Distinct())
+
+                                {
+                                <li>
+                                    @*<input type="checkbox">*@
+                                    @*<a href="">@productGroupitem</a>*@
+                                    <a asp-controller="ShopList" asp-action="Index" asp-route-param="@productGroupitem.ProductCategorieCode"  asp-route-param2="@productGroupitem.Code"> @productGroupitem.Name</a>
+                                    @*<span class="checkmark"></span>*@
+                                </li>
+                                }
+                                @*<li>
+                                        <input type="checkbox">
+                                        <a href="#">Chanel(10)</a>
+                                        <span class="checkmark"></span>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox">
+                                        <a href="#">Christian Dior (4)</a>
+                                        <span class="checkmark"></span>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox">
+                                        <a href="#">hermes(10)</a>
+                                        <span class="checkmark"></span>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox">
+                                        <a href="#">louis vuitton(8)</a>
+                                        <span class="checkmark"></span>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox">
+                                        <a href="#">Tommy Hilfiger(7)</a>
+                                        <span class="checkmark"></span>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox">
+                                        <a href="#">Versace(6)</a>
+                                        <span class="checkmark"></span>
+                                    </li>*@
+                            </ul>
+                        </div>
+                        @*  <div class="widget_list widget_categories">
+                                <h2>Select By Color</h2>
+                                <ul>
+                                    <li>
+                                        <input type="checkbox">
+                                        <a href="#">Black (6)</a>
+                                        <span class="checkmark"></span>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox">
+                                        <a href="#"> Blue (8)</a>
+                                        <span class="checkmark"></span>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox">
+                                        <a href="#">Brown (10)</a>
+                                        <span class="checkmark"></span>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox">
+                                        <a href="#"> Green (6)</a>
+                                        <span class="checkmark"></span>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox">
+                                        <a href="#">Pink (4)</a>
+                                        <span class="checkmark"></span>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox">
+                                        <a href="#">White (2)</a>
+                                        <span class="checkmark"></span>
+
+                                    </li>
+                                    <li>
+                                        <input type="checkbox">
+                                        <a href="#">Yellow (3)</a>
+                                        <span class="checkmark"></span>
+                                    </li>
+                                </ul>
+                            </div>*@
                     </div>
                     <div class="single_banner">
                         <a href="#"><img src="assets/img/bg/banner19.jpg" alt=""></a>
@@ -175,93 +181,110 @@
 
                 <div class="row shop_wrapper grid_list">
                     <div class="col-12 ">
-                        @* // foreach shopList*@
-                        @foreach (var item in Model.ShopListViewModel.ProductList)
-                        {
-                            
-                            <div class="single_product">
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="product-details.html"><img src="~/images/upload/@item.PictureFileName" alt="" width="200px"></a>
-                                     <div class="quick_button">
-                                        <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
-                                    </div>
-                                    <div class="label_product">
-                                        <span class="label_new">New</span>
-                                    </div>
-                                </div>
-                        <div class="row">
-                            
-                        </div>
-                                <div class="product_content grid_content">
-                                    <div class="content_inner">
-                                        <div class="product_name">
-                                            <h3><a href="product-details.html"> @item.Name</a></h3>
-                                        </div>
-                                        @*<div class="product_ratings">
-                                            <ul>
-                                                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            </ul>
-                                        </div>*@
-                                        <div class="price_box">
-                                            <span class="old_price">420.00</span>
-                                            <span class="current_price">@item.UnitPrice</span>
-                                        </div>
-                                        <div class="action_links">
-                                            <ul>
-                                                <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                                @*<li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                                                <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i></a></li>*@
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                        <table id="dataproduct" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.ShopListViewModel.ProductList)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="single_product">
+                                                <div class="product_thumb">
+                                                    <a class="primary_img" href="product-details.html"><img src="~/images/upload/@item.PictureFileName" alt="" width="200px"></a>
+                                                    <div class="quick_button">
+                                                        <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
+                                                    </div>
+                                                    <div class="label_product">
+                                                        <span class="label_new">New</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+
+                                                </div>
+                                                <div class="product_content grid_content">
+                                                    <div class="content_inner">
+                                                        <div class="product_name">
+                                                            <h3><a href="product-details.html"> @item.Name</a></h3>
+                                                        </div>
+                                                        @*<div class="product_ratings">
+                    <ul>
+                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                    </ul>
+                </div>*@
+                                                        <div class="price_box">
+                                                            <span class="old_price">420.00</span>
+                                                            <span class="current_price">@item.UnitPrice</span>
+                                                        </div>
+                                                        <div class="action_links">
+                                                            <ul>
+                                                                <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
+                                                                @*<li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a></li>
+                        <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i></a></li>*@
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
 
-                                <div class="product_content list_content">
-                                    <div>
-                                        <div class="product_name">
-                                            <h3>Categories :  @item.ProductCategorieCode</h3>
-                                        </div>
-                                        <div class="product_name">
-                                            <h3><a href="product-details.html"> @item.Name</a></h3>
-                                        </div>
-                                        @*<div class="product_ratings">
-            <ul>
-                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-            </ul>
-        </div>*@
-                                        <div class="price_box">
-                                            <span class="old_price">$420.00</span>
-                                            <span class="current_price">@item.UnitPrice</span>
-                                        </div>
-                                        <div class="add_to_links">
-                                            <ul>
-                                                <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                                @*<li class="wishlist"><a href="#" title="Add to Wishlist"><i class="fa fa-heart-o"></i> Add to Wishlist</a></li>
-                <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i> Add to Compare</a></li>*@
-                                            </ul>
-                                        </div>
-                                        @*<div class="product_desc">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad, iure incidunt. Ab consequatur temporibus non eveniet inventore doloremque necessitatibus sed, ducimus quisquam, ad asperiores  </p>
-        </div>*@
-                                    </div>
+                                                <div class="product_content list_content">
+                                                    <div>
+                                                        <div class="product_name">
+                                                            <h3>Categories :  @item.ProductCategorieCode</h3>
+                                                        </div>
+                                                        <div class="product_name">
+                                                            <h3><a href="product-details.html"> @item.Name</a></h3>
+                                                        </div>
+                                                        @*<div class="product_ratings">
+                    <ul>
+                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                    </ul>
+                </div>*@
+                                                        <div class="price_box">
+                                                            <span class="old_price">$420.00</span>
+                                                            <span class="current_price">@item.UnitPrice</span>
+                                                        </div>
+                                                        <div class="add_to_links">
+                                                            <ul>
+                                                                <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
+                                                                @*<li class="wishlist"><a href="#" title="Add to Wishlist"><i class="fa fa-heart-o"></i> Add to Wishlist</a></li>
+                        <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i> Add to Compare</a></li>*@
+                                                            </ul>
+                                                        </div>
+                                                        @*<div class="product_desc">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad, iure incidunt. Ab consequatur temporibus non eveniet inventore doloremque necessitatibus sed, ducimus quisquam, ad asperiores  </p>
+                </div>*@
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                }
                                    
-                                </div>
-
-                            </div>}
+                                </tbody>
+                        </table>
+                                @* // foreach shopList*@
+                             
                     </div>
-                 
+
                 </div>
 
-                <div class="shop_toolbar t_bottom">
+                @*<div class="shop_toolbar t_bottom">
                     <div class="pagination">
                         <ul>
                             <li class="current">1</li>
@@ -271,11 +294,21 @@
                             <li><a href="#">>></a></li>
                         </ul>
                     </div>
-                </div>
+                </div>*@
                 <!--shop toolbar end-->
                 <!--shop wrapper end-->
             </div>
         </div>
     </div>
 </div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#dataproduct').DataTable({"ordering": false});
+        });
+    </script>
+ 
+
+}
+
 

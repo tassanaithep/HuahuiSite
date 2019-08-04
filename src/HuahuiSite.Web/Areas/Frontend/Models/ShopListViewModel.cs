@@ -12,8 +12,10 @@ namespace HuahuiSite.Web.Areas.Frontend.Models
 
         public IEnumerable<ProductViewModel> ProductList { get; set; }
         public IEnumerable<ProductCategorie> ProductCategoriesList { get; set; }
+        // public IEnumerable<ProductGroup> ProductGroupList { get; set; }
+        public string Param { get; set; }
 
-     
-        
+
+
     }
 }
