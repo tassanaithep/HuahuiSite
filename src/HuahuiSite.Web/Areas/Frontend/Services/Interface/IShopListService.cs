@@ -8,6 +8,6 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Interface
 {
     public interface IShopListService
     {
-        void GetShopList(ref ShopListViewModel shopListViewModel);
+        void GetShopList(ref MainViewModel shopListViewModel);
     }
 }
