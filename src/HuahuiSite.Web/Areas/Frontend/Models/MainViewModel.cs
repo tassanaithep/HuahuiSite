@@ -9,8 +9,6 @@ namespace HuahuiSite.Web.Areas.Frontend.Models
 {
     public class MainViewModel
     {
-        public bool IsLogin { get; set; }
-
         public IEnumerable<ProductCategorie> ProductCategorieList { get; set; }
         public IEnumerable<ProductGroup> ProductGroupList { get; set; }
 

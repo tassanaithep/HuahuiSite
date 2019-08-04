@@ -43,10 +43,10 @@
 
                             @*<p> HUAHUI INTER COMPANY</p>*@
 
-                            @if (Model.IsLogin)
+                            @if (Model.LoginViewModel.IsLogin)
                             {
                                 <span class="text-white strong">
-                                    Welcome: @Context.Session.GetString("username")
+                                    Welcome: @Model.LoginViewModel.RoleName
                                 </span>
                             }
 
@@ -56,7 +56,7 @@
                         <div class="top_right text-right">
                             <ul>
 
-                                @if (Model.IsLogin)
+                                @if (Model.LoginViewModel.IsLogin)
                                 {
                                     <a asp-area="Frontend" asp-controller="Login" asp-action="Index"><i class="ion-log-out"></i> ออกจากระบบ </a>
                                 }
@@ -148,7 +148,7 @@
 
                                         @foreach (var itemOfProductCategorie in Model.ProductCategorieList)
                                         {
-                                            
+
                                             <li class="menu_item_children">
                                                 <a href="shop.html">
                                                     <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu2.png" alt="">
@@ -169,8 +169,8 @@
 
                                                     </ul>
 
-                                                    }
-                                                
+                                                }
+
                                             </li>
 
                                         }

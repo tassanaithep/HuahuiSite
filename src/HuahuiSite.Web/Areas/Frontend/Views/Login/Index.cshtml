@@ -1,4 +1,4 @@
-﻿@model HuahuiSite.Web.Areas.Frontend.Models.LoginViewModel
+﻿@model HuahuiSite.Web.Areas.Frontend.Models.MainViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -14,11 +14,11 @@
                     <form asp-area="Frontend" asp-controller="Login" asp-action="CheckLogin" data-ajax="true" data-ajax-method="post" data-ajax-success="OnCheckLoginSuccess">
                         <p>
                             <label><b><span>Username *</span></b></label>
-                            <input asp-for="Username" class="form-control" />
+                            <input asp-for="LoginViewModel.Username" class="form-control" />
                         </p>
                         <p>
                             <label><b><span>Password *</span></b></label>
-                            <input asp-for="Password" class="form-control" />
+                            <input asp-for="LoginViewModel.Password" class="form-control" />
                         </p>
                         <div class="login_submit">
                             <label id="loginfailtext" class="text-danger"></label>
