@@ -18,7 +18,8 @@
 
         <!-- Main Style CSS -->
         <link rel="stylesheet" href="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/css/style.css">
-    </environment>
+        <link href="~/lib/material-pro/assets/plugins/datatables/media/css/dataTables.bootstrap4.min.css" rel="stylesheet" />    
+</environment>
 
     <environment include="Staging, Production">
         <!-- Plugins CSS -->
@@ -26,6 +27,7 @@
 
         <!-- Main Style CSS -->
         <link rel="stylesheet" href="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/css/style.css">
+        <link href="~/lib/material-pro/assets/plugins/datatables/media/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
     </environment>
 </head>
 <body>
@@ -398,6 +400,7 @@
 
         <!-- Main JS -->
         <script src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/js/main.js"></script>
+        <script src="~/lib/material-pro/assets/plugins/datatables/datatables.min.js"></script>
     </environment>
 
     <environment include="Staging, Production">
@@ -412,6 +415,7 @@
 
         <!-- Main JS -->
         <script src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/js/main.js"></script>
+        <script src="~/lib/material-pro/assets/plugins/datatables/datatables.min.js"></script>
     </environment>
 
     @RenderSection("Scripts", required: false)

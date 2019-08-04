@@ -127,7 +127,7 @@
 
                     @{ int No = 0; }
 
-                    @foreach (var item in Model.HomeViewModel.ProductList)
+                    @foreach (var item in Model.HomeViewModel.ProductList.Where(x=>x.IsPromotion==true).Take(10))
                     {
                         <form class="form-product-item" id="form-product-@No" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
 
@@ -245,7 +245,7 @@
                     </div>
                     <div class="product_carousel product_column4 owl-carousel">
 
-                        @foreach (var itemOfProduct in Model.HomeViewModel.ProductList.Where(w => w.ProductCategorieCode.Equals(itemOfProductCategorie.Code)))
+                        @foreach (var itemOfProduct in Model.HomeViewModel.ProductList.Where(w => w.ProductCategorieCode.Equals(itemOfProductCategorie.Code)).Take(10))
                         {
                             <form class="form-product-item" id="form-product-@NoOfCategorie" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
 
