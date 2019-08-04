@@ -28,11 +28,12 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             _unitOfWork = unitOfWork;
         }
         #endregion
+
         public void GetShopList(ref MainViewModel mainViewModel)
         {
             var loginViewModel = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserData");
 
-            mainViewModel.IsLogin = loginViewModel != null ? true : false;
+            mainViewModel.LoginViewModel.IsLogin = loginViewModel != null ? true : false;
             mainViewModel.ShopListViewModel = new ShopListViewModel();
             mainViewModel.ShopListViewModel.ProductList = Mapper.Map<IEnumerable<ProductModel>, IEnumerable<ProductViewModel>>(_unitOfWork.Products.GetProductList());
           //  mainViewModel.HomeViewModel.ProductList = Mapper.Map<IEnumerable<ProductModel>, IEnumerable<ProductViewModel>>(_unitOfWork.Products.GetProductList());

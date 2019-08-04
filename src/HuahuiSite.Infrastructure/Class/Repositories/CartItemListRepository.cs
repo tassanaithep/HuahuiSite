@@ -38,7 +38,7 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         ProductName = product.Name,
                         UnitPrice = productGroup.UnitPrice,
                         PictureFileName = product.PictureFileName
-                    });
+                    }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
         }
 
         public IEnumerable<CartItemList> GetCartItemListByCard(int cardId)
@@ -46,9 +46,19 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
             return HuahuiDbContext.CartItemList.Where(w => w.CardId.Equals(cardId)).ToList();
         }
 
-        public CartItemList GetCartItemListByCardAndProduct(int cardId, int productId)
+        public CartItemListModel GetCartItemListByCardAndProduct(int cardId, int productId)
         {
-            return HuahuiDbContext.CartItemList.FirstOrDefault(w => w.CardId.Equals(cardId) && w.ProductId.Equals(productId));
+            return HuahuiDbContext.CartItemList.Where(w => w.CardId.Equals(cardId) && w.ProductId.Equals(productId)).Select(s => new CartItemListModel
+            {
+                Id = s.Id,
+                CardId = s.CardId,
+                ProductId = s.ProductId,
+                Quantity = s.Quantity,
+                TotalPrice = s.TotalPrice,
+                IsActive = s.IsActive,
+                CreatedDateTime = s.CreatedDateTime,
+                UpdatedDateTime = s.UpdatedDateTime
+            }).FirstOrDefault();
         }
     }
 }

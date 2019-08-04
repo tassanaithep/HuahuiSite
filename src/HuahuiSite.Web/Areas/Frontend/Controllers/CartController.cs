@@ -32,18 +32,18 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
 
         public IActionResult Index()
         {
-            CartViewModel cartViewModel = new CartViewModel();
+            MainViewModel mainViewModel = new MainViewModel();
 
             try
             {
-                _cartService.GetCartItemList(ref cartViewModel);
+                _cartService.GetCartItemList(ref mainViewModel);
             }
             catch (Exception exception)
             {
 
             }
 
-            return View(cartViewModel);
+            return View(mainViewModel);
         }
 
         #endregion
@@ -69,6 +69,26 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
 
             return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
         }
+
+        //[HttpPost]
+        //public IActionResult UpdateQuantity(CartViewModel cartViewModel)
+        //{
+        //    bool isSuccess;
+        //    string exceptionMessage = string.Empty;
+
+        //    try
+        //    {
+        //        _cartService.UpdateQuantity(cartViewModel);
+        //        isSuccess = true;
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        exceptionMessage = exception.Message;
+        //        isSuccess = false;
+        //    }
+
+        //    return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
+        //}
 
         [HttpPost]
         public IActionResult UpdateCart([FromBody]IEnumerable<CartItemList> cartItemList)

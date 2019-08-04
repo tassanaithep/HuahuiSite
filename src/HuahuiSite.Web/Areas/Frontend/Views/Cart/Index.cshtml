@@ -1,4 +1,4 @@
-﻿@model HuahuiSite.Web.Areas.Frontend.Models.CartViewModel
+﻿@model HuahuiSite.Web.Areas.Frontend.Models.MainViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -41,7 +41,7 @@
                                 </thead>
                                 <tbody>
 
-                                    @foreach (var item in Model.CartItemListViewList)
+                                    @foreach (var item in Model.CartViewModel.CartItemListViewList)
                                     {
                                         <tr>
 
@@ -81,7 +81,7 @@
 
     <script>
 
-        var _cartItemList = @Html.Raw(Json.Serialize(@Model.CartItemList));
+        var _cartItemList = @Html.Raw(Json.Serialize(@Model.CartViewModel.CartItemList));
 
     </script>
 

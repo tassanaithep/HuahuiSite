@@ -90,7 +90,7 @@ OpenProductModal = (e) => {
                                         <div class="variants_selects">
                                             <div class="modal_add_to_cart">
                                                 <form action="#">
-                                                    <input min="0" max="100" step="2" value="${ (quantity !== null ? quantity : 1) }" type="number">
+                                                    <input type="number" min="0" step="1" onclick="ChangeQuantityOfProduct(this.value, '${ $formId }')" value="${ (quantity !== null ? quantity : 1) }" />
                                                     <button type="button" onclick="ProductModalSubmit('${ $formId }')">add to cart</button>
                                                 </form>
                                             </div>
@@ -117,7 +117,19 @@ ClearProductModal = () => {
     $("body").removeProp("style");
 };
 
+ChangeQuantityOfProduct = (quantity, formId) => {
+    $("#" + formId).find("[name='QuantityOfItem']").val(quantity);
+};
+
 ProductModalSubmit = (formId) => {
+    let $form = $("#" + formId);
+
+    //let quantityOfItem = $form.find("[name='QuantityOfItem']").val();
+
+    //if (quantityOfItem !== "") {
+    //    $form.prop("action", "/Cart/UpdateQuantity");
+    //}
+
     $("#" + formId).find("[name='btn-submit']").click();
 };
 

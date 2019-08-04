@@ -47,11 +47,11 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         // Updated: 07/07/2019
         public void SaveCart(CartViewModel cartViewModel)
         {
-            var loginViewModel = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserData");
+            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
 
             #region Save Cart
 
-            var cartOfUser = _unitOfWork.Carts.GetCartActiveByUser(loginViewModel.RoleId);
+            var cartOfUser = _unitOfWork.Carts.GetCartActiveByUser(loginViewModelSession.RoleId);
 
             Cart cart = new Cart();
 
@@ -59,8 +59,8 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             {
                 #region Create Object to Save
 
-                cart.UserRole = loginViewModel.RoleName;
-                cart.UserId = loginViewModel.RoleId;
+                cart.UserRole = loginViewModelSession.RoleName;
+                cart.UserId = loginViewModelSession.RoleId;
                 cart.Status = "Confirm";
                 cart.IsActive = true;
                 cart.CreatedDateTime = DateTime.Now;
@@ -72,7 +72,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
             #endregion
 
-            CartItemList cartItemOfProduct = null;
+            CartItemListModel cartItemOfProduct = null;
 
             if (cartOfUser != null)
             {
@@ -89,7 +89,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                 {
                     CardId = cartOfUser == null ? cart.Id : cartOfUser.Id,
                     ProductId = cartViewModel.ProductId,
-                    Quantity = Convert.ToInt16(cartViewModel.QuantityOfItem),
+                    Quantity = cartViewModel.QuantityOfItem,
                     TotalPrice = cartViewModel.ProductUnitPrice,
                     IsActive = true,
                     CreatedDateTime = DateTime.Now
@@ -101,30 +101,30 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
                 #endregion
             }
-            //else
-            //{
-            //    #region Update Cart Item List
+            else
+            {
+                #region Update Cart Item List
 
-            //    #region Create Object to Update
+                #region Create Object to Update
 
-            //    CartItemList cartItemList = new CartItemList()
-            //    {
-            //        Id = cartItemOfProduct.Id,
-            //        CardId = cartOfUser.Id,
-            //        ProductId = cartViewModel.ProductId,
-            //        Quantity = cartItemOfProduct.Quantity,
-            //        TotalPrice = cartViewModel.ProductUnitPrice,
-            //        IsActive = cartItemOfProduct.IsActive,
-            //        CreatedDateTime = cartItemOfProduct.CreatedDateTime,
-            //        UpdatedDateTime = DateTime.Now
-            //    };
+                CartItemList cartItemList = new CartItemList()
+                {
+                    Id = cartItemOfProduct.Id,
+                    CardId = cartOfUser.Id,
+                    ProductId = cartViewModel.ProductId,
+                    Quantity = cartViewModel.QuantityOfItem,
+                    TotalPrice = cartViewModel.ProductUnitPrice,
+                    IsActive = cartItemOfProduct.IsActive,
+                    CreatedDateTime = cartItemOfProduct.CreatedDateTime,
+                    UpdatedDateTime = DateTime.Now
+                };
 
-            //    #endregion
+                #endregion
 
-            //    _unitOfWork.CartItemLists.Update(cartItemList);
+                _unitOfWork.CartItemLists.Update(cartItemList);
 
-            //    #endregion
-            //}
+                #endregion
+            }
         }
 
         #endregion
@@ -136,15 +136,50 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
-        public void GetCartItemList(ref CartViewModel cartViewModel)
+        public void GetCartItemList(ref MainViewModel mainViewModel)
         {
-            cartViewModel.CartItemListViewList = Mapper.Map<IEnumerable<CartItemListModel>, IEnumerable<CartItemListViewModel>>(_unitOfWork.CartItemLists.GetCartItemListByUser(cartViewModel.UserId));
-            cartViewModel.CartItemList = _unitOfWork.CartItemLists.GetCartItemListByCard(cartViewModel.CartItemListViewList.First().CardId);
+            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
+
+            mainViewModel.LoginViewModel = new LoginViewModel();
+            mainViewModel.LoginViewModel.IsLogin = loginViewModelSession != null ? true : false;
+
+            mainViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();
+            mainViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
+
+            mainViewModel.CartViewModel = new CartViewModel();
+            mainViewModel.CartViewModel.CartItemListViewList = Mapper.Map<IEnumerable<CartItemListModel>, IEnumerable<CartItemListViewModel>>(_unitOfWork.CartItemLists.GetCartItemListByUser(loginViewModelSession.RoleId));
+            mainViewModel.CartViewModel.CartItemList = _unitOfWork.CartItemLists.GetCartItemListByCard(mainViewModel.CartViewModel.CartItemListViewList.First().CardId);
         }
 
         #endregion
 
         #region Update
+
+        ///// <summary>
+        ///// Update Quantity.
+        ///// </summary>
+        //// Author: Mod Nattasit
+        //// Updated: 07/07/2019
+        //public void UpdateQuantity(CartViewModel cartViewModel)
+        //{
+        //    #region Create Object to Update
+
+        //    CartItemList cartItemList = new CartItemList()
+        //    {
+        //        Id = cartViewModel.Id,
+        //        CardId = cartViewModel.Id,
+        //        ProductId = cartViewModel.ProductId,
+        //        Quantity = cartViewModel.QuantityOfItem,
+        //        TotalPrice = cartViewModel.ProductUnitPrice,
+        //        IsActive = cartViewModel.IsActive,
+        //        CreatedDateTime = cartViewModel.CreatedDateTime,
+        //        UpdatedDateTime = DateTime.Now
+        //    };
+
+        //    #endregion
+
+        //    _unitOfWork.CartItemLists.Update(cartItemList);
+        //}
 
         ///// <summary>
         ///// Update Cart.
@@ -159,7 +194,6 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             _unitOfWork.CartItemLists.RemoveRange(cartItemListToRemove);
 
             #endregion
-
 
             #region Update Cart Item List
 

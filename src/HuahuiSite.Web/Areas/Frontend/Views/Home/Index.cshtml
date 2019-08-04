@@ -131,7 +131,7 @@
                     {
                         <form class="form-product-item" id="form-product-@No" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
 
-                            <!-- Hidden Value -->
+                            <!-- Hidden Value Start -->
 
                             <input type="hidden" name="hid-form-product-id" value="form-product-@No" />
                             <input type="hidden" name="ProductId" value="@item.Id" />
@@ -139,9 +139,9 @@
                             <input type="hidden" name="ProductUnitPrice" value="@item.UnitPrice" />
                             <input type="hidden" name="ProductPictureFileName" value="@item.PictureFileName" />
 
-                            <input type="hidden" id="QuantityOfItem" name="QuantityOfItem" />
+                            <input type="hidden" name="QuantityOfItem" />
 
-                            <!-- End Hidden Value -->
+                            <!-- Hidden Value End -->
 
                             <div class="col-lg-3">
                                 <div class="single_product">
@@ -205,6 +205,8 @@
                                 <input type="submit" name="btn-submit" style="display: none;" />
                             </div>
                         </form>
+
+                        No++;
                     }
 
                 </div>
@@ -249,7 +251,7 @@
                         {
                             <form class="form-product-item" id="form-product-@NoOfCategorie" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
 
-                                <!-- Hidden Value -->
+                                <!-- Hidden Value Start -->
 
                                 <input type="hidden" name="hid-form-product-id" value="form-product-@NoOfCategorie" />
                                 <input type="hidden" name="ProductId" value="@itemOfProduct.Id" />
@@ -259,7 +261,7 @@
 
                                 <input type="hidden" name="QuantityOfItem" />
 
-                                <!-- End Hidden Value -->
+                                <!-- Hidden Value End -->
 
                                 <div class="col-lg-3">
                                     <div class="single_product">
@@ -315,7 +317,7 @@
                                                 @*<div class="product_timing">
                                                         <h3>Ends in</h3>
                                                         <div data-countdown="2020/12/15"></div>
-                                                    </div>*@
+                                                </div>*@
                                             </div>
                                         </div>
                                     </div>
@@ -328,6 +330,9 @@
                     </div>
                 </div>
             </div>
+
+            NoOfCategorie++;
+
         }
         <!-- Product By Categories End -->
         <!--blog testimonial area-->

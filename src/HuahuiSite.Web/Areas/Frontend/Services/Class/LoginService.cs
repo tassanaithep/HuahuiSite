@@ -55,6 +55,19 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         }
 
         /// <summary>
+        /// Initial Login.
+        /// </summary>
+        // Author: Mod Nattasit
+        // Updated: 07/07/2019
+        public void InitialLoginStatus(ref LoginViewModel loginViewModel)
+        {
+            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
+
+            loginViewModel = new LoginViewModel();
+            loginViewModel.IsLogin = loginViewModelSession != null ? true : false;
+        }
+
+        /// <summary>
         /// Check Login Status.
         /// </summary>
         // Author: Mod Nattasit

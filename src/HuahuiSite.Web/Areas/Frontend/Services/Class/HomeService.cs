@@ -102,17 +102,17 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         // Updated: 07/07/2019
         public void GetProductList(ref MainViewModel mainViewModel)
         {
-            var loginViewModel = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
+            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
 
             mainViewModel.LoginViewModel = new LoginViewModel();
-            mainViewModel.LoginViewModel.IsLogin = loginViewModel != null ? true : false;
+            mainViewModel.LoginViewModel.IsLogin = loginViewModelSession != null ? true : false;
 
             mainViewModel.HomeViewModel = new HomeViewModel();
             mainViewModel.HomeViewModel.ProductList = Mapper.Map<IEnumerable<ProductModel>, IEnumerable<ProductViewModel>>(_unitOfWork.Products.GetProductList());
 
-            if (loginViewModel != null)
+            if (mainViewModel.LoginViewModel != null)
             {
-                mainViewModel.HomeViewModel.CartItemListViewList = Mapper.Map<IEnumerable<CartItemListModel>, IEnumerable<CartItemListViewModel>>(_unitOfWork.CartItemLists.GetCartItemListByUser(loginViewModel.RoleId));
+                mainViewModel.HomeViewModel.CartItemListViewList = Mapper.Map<IEnumerable<CartItemListModel>, IEnumerable<CartItemListViewModel>>(_unitOfWork.CartItemLists.GetCartItemListByUser(mainViewModel.LoginViewModel.RoleId));
             }
 
             mainViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();

@@ -9,7 +9,8 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Interface
     public interface ICartService
     {
         void SaveCart(CartViewModel cartViewModel);
-        void GetCartItemList(ref CartViewModel cartViewModel);
+        void GetCartItemList(ref MainViewModel mainViewModel);
         void UpdateCart(CartViewModel cartViewModel);
+        //void UpdateQuantity(CartViewModel cartViewModel);
     }
 }
