@@ -8,6 +8,8 @@ namespace HuahuiSite.Web.Areas.Frontend.Models
 {
     public class LoginViewModel
     {
+        public bool IsLogin { get; set; }
+
         [Required]
         public string Username { get; set; }
         [Required]

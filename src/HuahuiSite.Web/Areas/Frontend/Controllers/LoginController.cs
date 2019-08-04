@@ -6,6 +6,7 @@ using HuahuiSite.Web.Areas.Frontend.Models;
 using HuahuiSite.Web.Areas.Frontend.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using HuahuiSite.Core.Entities;
 
 namespace HuahuiSite.Web.Areas.Frontend.Controllers
 {
@@ -37,12 +38,17 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
         // Updated: 07/07/2019
         public IActionResult Index(string logout)
         {
+            MainViewModel mainViewModel = new MainViewModel();
+            mainViewModel.ProductCategorieList = new List<ProductCategorie>();
+            mainViewModel.ProductGroupList = new List<ProductGroup>();
+            mainViewModel.LoginViewModel = new LoginViewModel();
+
             if (logout == "true")
             {
                 _loginService.Logout();
             }
 
-            return View();
+            return View(mainViewModel);
         }
 
         #endregion
@@ -50,21 +56,18 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
         #region Actions
 
         [HttpPost]
-        public JsonResult CheckLogin(LoginViewModel loginViewModel)
+        public JsonResult CheckLogin(MainViewModel mainViewModel)
         {
             bool isSuccess;
             string exceptionMessage = string.Empty;
 
             try
             {
-                _loginService.CheckLogin(loginViewModel);
+                _loginService.CheckLogin(mainViewModel.LoginViewModel);
                 isSuccess = true;
-                ViewBag.erromessage = "";
-                HttpContext.Session.SetString("username", loginViewModel.Username);
             }
             catch (Exception ex)
             {
-                ViewBag.erromessage = "ไม่พบรหัสผู้ใช้งาน กรุณาติดต่อผู้เกี่ยวข้อง";
                 exceptionMessage = ex.Message;
                 isSuccess = false;
             }

@@ -139,7 +139,7 @@
                             <input type="hidden" name="ProductUnitPrice" value="@item.UnitPrice" />
                             <input type="hidden" name="ProductPictureFileName" value="@item.PictureFileName" />
 
-                            <input type="hidden" name="QuantityOfItem" />
+                            <input type="hidden" id="QuantityOfItem" name="QuantityOfItem" />
 
                             <!-- End Hidden Value -->
 
@@ -184,7 +184,7 @@
 
                                                     <!-- If Login will Show Add to Cart Button -->
 
-                                                    @if (Model.IsLogin)
+                                                    @if (Model.LoginViewModel.IsLogin)
                                                     {
                                                         <li class="add_to_cart"><a onclick="AddToCartSubmit(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
                                                     }
@@ -302,7 +302,7 @@
 
                                                         <!-- If Login will Show Add to Cart Button -->
 
-                                                        @if (Model.IsLogin)
+                                                        @if (Model.LoginViewModel.IsLogin)
                                                         {
                                                             <li class="add_to_cart"><a onclick="AddToCartSubmit(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
                                                         }

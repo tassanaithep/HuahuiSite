@@ -28,7 +28,7 @@ OpenProductModal = (e) => {
     let $unitPrice = $form.find("[name='ProductUnitPrice']").val();
     let $pictureFileName = $form.find("[name='ProductPictureFileName']").val();
 
-    let $quantityOfItem = $form.find("input[name=QuantityOfItem]");
+    let $quantityOfItem = $form.find("[name='QuantityOfItem']");
 
     // #endregion
 

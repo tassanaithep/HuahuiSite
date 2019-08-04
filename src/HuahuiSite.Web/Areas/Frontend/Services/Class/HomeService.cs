@@ -102,9 +102,10 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         // Updated: 07/07/2019
         public void GetProductList(ref MainViewModel mainViewModel)
         {
-            var loginViewModel = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserData");
+            var loginViewModel = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
 
-            mainViewModel.IsLogin = loginViewModel != null ? true : false;
+            mainViewModel.LoginViewModel = new LoginViewModel();
+            mainViewModel.LoginViewModel.IsLogin = loginViewModel != null ? true : false;
 
             mainViewModel.HomeViewModel = new HomeViewModel();
             mainViewModel.HomeViewModel.ProductList = Mapper.Map<IEnumerable<ProductModel>, IEnumerable<ProductViewModel>>(_unitOfWork.Products.GetProductList());

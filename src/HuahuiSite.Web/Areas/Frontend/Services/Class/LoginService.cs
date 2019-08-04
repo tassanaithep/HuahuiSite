@@ -44,9 +44,9 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             {
                 loginViewModel.RoleName = user.RoleName;
                 loginViewModel.RoleId = user.RoleId.Value;
+                loginViewModel.IsLogin = true;
 
-                Extensions.SessionExtensions.SetObject(_httpContextAccessor.HttpContext.Session, "UserData", loginViewModel);
-                
+                Extensions.SessionExtensions.SetObject(_httpContextAccessor.HttpContext.Session, "UserDataSession", loginViewModel);
             }
             else
             {
@@ -61,7 +61,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         // Updated: 07/07/2019
         public bool CheckLoginStatus()
         {
-            var loginViewModel = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserData");
+            var loginViewModel = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
 
             if (loginViewModel != null)
             {
@@ -80,7 +80,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         // Updated: 07/07/2019
         public void Logout()
         {
-            _httpContextAccessor.HttpContext.Session.Remove("UserData");
+            _httpContextAccessor.HttpContext.Session.Remove("UserDataSession");
         }
     }
 }
