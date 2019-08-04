@@ -146,23 +146,31 @@
 
                                         @foreach (var itemOfProductCategorie in Model.ProductCategorieList)
                                         {
-                                        <li class="menu_item_children">
-                                            <a href="shop.html">
-                                                <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu2.png" alt="">
-                                                <span>@itemOfProductCategorie.Name <i class="fa fa-angle-down"></i></span>
-                                            </a>
-                                            <ul class="sub_menu">
+                                            
+                                            <li class="menu_item_children">
+                                                <a href="shop.html">
+                                                    <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu2.png" alt="">
+                                                    <span>@itemOfProductCategorie.Name <i class="fa fa-angle-down"></i></span>
+                                                </a>
 
                                                 @if (Model.ProductGroupList.Where(w => w.ProductCategorieCode.Equals(itemOfProductCategorie.Code)).Count() > 0)
                                                 {
-                                                @foreach (var itemOfProductGroup in Model.ProductGroupList.Where(w => w.ProductCategorieCode.Equals(itemOfProductCategorie.Code)))
-                                                {
-                                                <li><a href="shop.html">@itemOfProductGroup.Name</a></li>
-                                                }
-                                                }
 
-                                            </ul>
-                                        </li>
+                                                    <ul class="sub_menu">
+
+                                                        @foreach (var itemOfProductGroup in Model.ProductGroupList.Where(w => w.ProductCategorieCode.Equals(itemOfProductCategorie.Code)).Select(s => s.Name).Distinct())
+                                                        {
+
+                                                            <li><a href="shop.html">@itemOfProductGroup</a></li>
+
+                                                        }
+
+                                                    </ul>
+
+                                                    }
+                                                
+                                            </li>
+
                                         }
 
                                     </ul>
