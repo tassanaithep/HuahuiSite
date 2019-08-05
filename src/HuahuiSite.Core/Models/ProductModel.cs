@@ -7,7 +7,7 @@ namespace HuahuiSite.Core.Models
 {
     public class ProductModel : Product
     {
-        public int UnitPrice { get; set; }
-        public int? PromotionPrice { get; set; }
+        public decimal UnitPrice { get; set; }
+        public decimal? PromotionPrice { get; set; }
     }
 }

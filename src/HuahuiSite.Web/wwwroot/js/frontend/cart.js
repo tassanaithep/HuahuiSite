@@ -5,7 +5,7 @@
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
 $(function () {
-
+    
 });
 
 // #endregion
@@ -77,7 +77,7 @@ UpdateCartItemList = (trOfProduct, productQuantity, totalPrice) => {
 // #endregion
 
 // #region Render
-  
+
 // #endregion
 
 // #region Affect
@@ -98,12 +98,11 @@ UpdateCart = () => {
         dataType: 'json',
         data: JSON.stringify(_cartItemList),
         success: function (res) {
-            //if (res.isSuccess) {
-            //    UpdatePage();
-            //    swal("Update Success", "", "success");
-            //} else {
-            //    swal("Update Failed", "", "error");
-            //}
+            if (res.isSuccess) {
+                window.location = "/Cart/Index";
+            } else {
+                alert("Error");
+            }
         },
         error: function () { }
     });

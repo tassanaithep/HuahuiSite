@@ -23,7 +23,7 @@
 <!--shopping cart area start -->
 <div class="shopping_cart_area pt-30">
     <div class="container">
-        <form action="#">
+        <form id="form-cart-item">
             <div class="row">
                 <div class="col-12">
                     <div class="table_desc">
@@ -43,7 +43,7 @@
 
                                     @foreach (var item in Model.CartViewModel.CartItemListViewList)
                                     {
-                                        <tr>
+                                        <tr class="tr-cart-item">
 
                                             <!-- Hidden Value -->
 
@@ -56,7 +56,7 @@
                                             <td class="product_name"><a href="#">@item.ProductName</a></td>
                                             <td class="product-price">@item.UnitPrice</td>
                                             <td class="product_quantity"><label>Quantity</label> <input type="number" name="ProductQuantity" min="0" max="100" value="@item.Quantity" onchange="CalculateTotalPrice(this)" /></td>
-                                            <td class="product_total"></td>
+                                            <td class="product_total">@item.TotalPrice</td>
                                         </tr>
                                     }
 
