@@ -55,6 +55,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
                     //  mainViewModel.ProductGroupList =
                     mainViewModel.ShopListViewModel.ProductList = mainViewModel.ShopListViewModel.ProductList.Where(x => x.ProductCategorieCode == param && x.ProductGroupCode==param2).ToList();
                     mainViewModel.ProductGroupList = mainViewModel.ProductGroupList.Where(x => x.ProductCategorieCode == param).ToList();
+                    mainViewModel.ShopListViewModel.Param = param;
                     //  mainViewModel.ProductGroupList.ToList().Clear();
 
                     // _shopListService.GetShopList(ref shopListViewModel);

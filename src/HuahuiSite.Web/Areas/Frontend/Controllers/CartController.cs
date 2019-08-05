@@ -51,7 +51,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
         #region Actions
 
         [HttpPost]
-        public IActionResult AddToCart(CartViewModel cartViewModel)
+        public JsonResult AddToCart(CartViewModel cartViewModel)
         {
             bool isSuccess;
             string exceptionMessage = string.Empty;
@@ -70,45 +70,27 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
             return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
         }
 
-        //[HttpPost]
-        //public IActionResult UpdateQuantity(CartViewModel cartViewModel)
-        //{
-        //    bool isSuccess;
-        //    string exceptionMessage = string.Empty;
-
-        //    try
-        //    {
-        //        _cartService.UpdateQuantity(cartViewModel);
-        //        isSuccess = true;
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        exceptionMessage = exception.Message;
-        //        isSuccess = false;
-        //    }
-
-        //    return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
-        //}
-
         [HttpPost]
-        public IActionResult UpdateCart([FromBody]IEnumerable<CartItemList> cartItemList)
+        public JsonResult UpdateCart([FromBody]IEnumerable<CartItemList> cartItemList)
         {
             CartViewModel cartViewModel = new CartViewModel();
-
             cartViewModel.CartItemList = cartItemList;
+
+            bool isSuccess;
+            string exceptionMessage = string.Empty;
 
             try
             {
                 _cartService.UpdateCart(cartViewModel);
-
-                RedirectToAction("Index");
+                isSuccess = true;
             }
             catch (Exception exception)
             {
-
+                exceptionMessage = exception.Message;
+                isSuccess = false;
             }
 
-            return View();
+            return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
         }
 
         #endregion

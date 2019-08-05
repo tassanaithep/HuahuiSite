@@ -10,5 +10,6 @@ namespace HuahuiSite.Web.Areas.Frontend.Models
     {
         public int UnitPrice { get; set; }
         public int? PromotionPrice { get; set; }
+
     }
 }

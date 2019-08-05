@@ -8,7 +8,7 @@ namespace HuahuiSite.Core.Models
     public class CartItemListModel : CartItemList
     {
         public string ProductName { get; set; }
-        public int UnitPrice { get; set; }
+        public decimal UnitPrice { get; set; }
         public string PictureFileName { get; set; }
     }
 }
