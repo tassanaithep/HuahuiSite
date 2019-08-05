@@ -87,12 +87,16 @@
                                 <form action="#">
                                     <div class="hover_category">
                                         <select class="select_option" name="select" id="categori">
-                                            <option selected value="1">ทุกหมวดหมู่</option>
-                                            <option value="3">โคมไฟ-หลอดไฟ-Xenon</option>
-                                            <option value="4">อิเล็กทรอนิคส์-ของตกแต่งอื่นๆ</option>
-                                            <option value="5">ตกแต่งทั่วไป</option>
+                                            @foreach (var itemOfProductCategorie in Model.ProductCategorieList.Select(i => new { i.Code, i.Name }))
+                                            {
+                                            <option value="@itemOfProductCategorie.Code">@itemOfProductCategorie.Name</option>
+
+                                            }
+
+                                            @*<option value="5">ตกแต่งทั่วไป</option>
                                             <option value="6">เพิ่มประสิทธิภาพ</option>
-                                            <option value="7">ตกแต่งภายใน-ภายนอก</option>
+                                            <option value="7">ตกแต่งภายใน-ภายนอก</option>*@
+
                                         </select>
                                     </div>
                                     <div class="search_box">
@@ -155,7 +159,7 @@
                                                     <span>@itemOfProductCategorie.Name <i class="fa fa-angle-down"></i></span>
                                                 </a>
 
-                                                @if (Model.ProductGroupList.Where(w => w.ProductCategorieCode.Equals(itemOfProductCategorie.Code)).Count() > 0)
+                                                @*@if (Model.ProductGroupList.Where(w => w.ProductCategorieCode.Equals(itemOfProductCategorie.Code)).Count() > 0)
                                                 {
 
                                                     <ul class="sub_menu">
@@ -169,7 +173,7 @@
 
                                                     </ul>
 
-                                                }
+                                                }*@
 
                                             </li>
 
