@@ -156,32 +156,6 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         #region Update
 
         ///// <summary>
-        ///// Update Quantity.
-        ///// </summary>
-        //// Author: Mod Nattasit
-        //// Updated: 07/07/2019
-        //public void UpdateQuantity(CartViewModel cartViewModel)
-        //{
-        //    #region Create Object to Update
-
-        //    CartItemList cartItemList = new CartItemList()
-        //    {
-        //        Id = cartViewModel.Id,
-        //        CardId = cartViewModel.Id,
-        //        ProductId = cartViewModel.ProductId,
-        //        Quantity = cartViewModel.QuantityOfItem,
-        //        TotalPrice = cartViewModel.ProductUnitPrice,
-        //        IsActive = cartViewModel.IsActive,
-        //        CreatedDateTime = cartViewModel.CreatedDateTime,
-        //        UpdatedDateTime = DateTime.Now
-        //    };
-
-        //    #endregion
-
-        //    _unitOfWork.CartItemLists.Update(cartItemList);
-        //}
-
-        ///// <summary>
         ///// Update Cart.
         ///// </summary>
         //// Author: Mod Nattasit
