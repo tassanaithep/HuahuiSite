@@ -52,15 +52,15 @@
                             <h2>Product Group</h2>
                             <ul>
 
-                                @foreach (var productGroupitem in Model.ProductGroupList.Where(w => w.ProductCategorieCode.Equals(Model.ShopListViewModel.Param)).Select(i => new { i.Code, i.Name,i.ProductCategorieCode }).Distinct())
+                                @foreach (var productGroupitem in Model.ProductGroupList.Where(w => w.ProductCategorieCode.Equals(Model.ShopListViewModel.Param)).Select(i => new { i.Code, i.Name, i.ProductCategorieCode }).Distinct())
 
                                 {
-                                <li>
-                                    @*<input type="checkbox">*@
-                                    @*<a href="">@productGroupitem</a>*@
-                                    <a asp-controller="ShopList" asp-action="Index" asp-route-param="@productGroupitem.ProductCategorieCode"  asp-route-param2="@productGroupitem.Code"> @productGroupitem.Name</a>
-                                    @*<span class="checkmark"></span>*@
-                                </li>
+                                    <li>
+                                        @*<input type="checkbox">*@
+                                        @*<a href="">@productGroupitem</a>*@
+                                        <a asp-controller="ShopList" asp-action="Index" asp-route-param="@productGroupitem.ProductCategorieCode" asp-route-param2="@productGroupitem.Code"> @productGroupitem.Name</a>
+                                        @*<span class="checkmark"></span>*@
+                                    </li>
                                 }
                                 @*<li>
                                         <input type="checkbox">
@@ -185,130 +185,118 @@
                             <thead>
                                 <tr>
                                     <th>Product</th>
-                                    
+
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model.ShopListViewModel.ProductList)
-                                {
-                                    <tr>
-                                        <td>
-                                            <div class="single_product">
-                                                <div class="product_thumb">
-                                                    <a class="primary_img" href="product-details.html"><img src="~/images/upload/@item.PictureFileName" alt="" width="200px"></a>
-                                                    <div class="quick_button">
-                                                        <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
-                                                    </div>
-                                                    <div class="label_product">
-                                                        <span class="label_new">New</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
+                            <td>
+                                <div class="row">
 
+                                    @foreach (var item in Model.ShopListViewModel.ProductList)
+                                    {
+
+                                    <div class="col-md-6">
+                                        <div class="single_product">
+                                            <div class="product_thumb">
+                                                <a class="primary_img" href="product-details.html"><img src="~/images/upload/@item.PictureFileName" alt="" width="200px"></a>
+                                                <div class="quick_button">
+                                                    <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
                                                 </div>
-                                                <div class="product_content grid_content">
-                                                    <div class="content_inner">
-                                                        <div class="product_name">
-                                                            <h3><a href="product-details.html"> @item.Name</a></h3>
-                                                        </div>
-                                                        @*<div class="product_ratings">
-                    <ul>
-                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                    </ul>
-                </div>*@
-                                                        <div class="price_box">
-                                                            <span class="old_price">420.00</span>
-                                                            <span class="current_price">@item.UnitPrice</span>
-                                                        </div>
-                                                        <div class="action_links">
-                                                            <ul>
-                                                                <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                                                @*<li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                        <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i></a></li>*@
-                                                            </ul>
-                                                        </div>
+                                                <div class="label_product">
+                                                    <span class="label_new">New</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+
+                                            </div>
+                                            <div class="product_content grid_content">
+                                                <div class="content_inner">
+                                                    <div class="product_name">
+                                                        <h3><a href="product-details.html"> @item.Name</a></h3>
+                                                    </div>
+
+                                                    <div class="price_box">
+                                                        <span class="old_price">420.00</span>
+                                                        <span class="current_price">@item.UnitPrice</span>
+                                                    </div>
+                                                    <div class="action_links">
+                                                        <ul>
+                                                            <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
+
+                                                        </ul>
                                                     </div>
                                                 </div>
+                                            </div>
 
 
-                                                <div class="product_content list_content">
-                                                    <div>
-                                                        <div class="product_name">
-                                                            <h3>Categories :  @item.ProductCategorieCode</h3>
-                                                        </div>
-                                                        <div class="product_name">
-                                                            <h3><a href="product-details.html"> @item.Name</a></h3>
-                                                        </div>
-                                                        @*<div class="product_ratings">
-                    <ul>
-                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                    </ul>
-                </div>*@
-                                                        <div class="price_box">
-                                                            <span class="old_price">$420.00</span>
-                                                            <span class="current_price">@item.UnitPrice</span>
-                                                        </div>
-                                                        <div class="add_to_links">
-                                                            <ul>
-                                                                <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                                                @*<li class="wishlist"><a href="#" title="Add to Wishlist"><i class="fa fa-heart-o"></i> Add to Wishlist</a></li>
-                        <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i> Add to Compare</a></li>*@
-                                                            </ul>
-                                                        </div>
-                                                        @*<div class="product_desc">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad, iure incidunt. Ab consequatur temporibus non eveniet inventore doloremque necessitatibus sed, ducimus quisquam, ad asperiores  </p>
-                </div>*@
+                                            <div class="product_content list_content">
+                                                <div>
+                                                    <div class="product_name">
+                                                        <h3>Categories :  @item.ProductCategorieCode</h3>
+                                                    </div>
+                                                    <div class="product_name">
+                                                        <h3><a href="product-details.html"> @item.Name</a></h3>
+                                                    </div>
+
+                                                    <div class="price_box">
+                                                        <span class="old_price">$420.00</span>
+                                                        <span class="current_price">@item.UnitPrice</span>
+                                                    </div>
+                                                    <div class="add_to_links">
+                                                        <ul>
+                                                            <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
+
+                                                        </ul>
                                                     </div>
 
                                                 </div>
 
                                             </div>
-                                        </td>
 
-                                    </tr>
-                                }
-                                   
+                                        </div>
+
+                                    </div>
+
+
+                                    }
+                                      
+                                </div>
+</td>
+                               
+
                                 </tbody>
-                        </table>
-                                @* // foreach shopList*@
-                             
+                            </table>
+                            @* // foreach shopList*@
+
+                        </div>
+
                     </div>
 
+                    @*<div class="shop_toolbar t_bottom">
+                            <div class="pagination">
+                                <ul>
+                                    <li class="current">1</li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li class="next"><a href="#">next</a></li>
+                                    <li><a href="#">>></a></li>
+                                </ul>
+                            </div>
+                        </div>*@
+                    <!--shop toolbar end-->
+                    <!--shop wrapper end-->
                 </div>
-
-                @*<div class="shop_toolbar t_bottom">
-                    <div class="pagination">
-                        <ul>
-                            <li class="current">1</li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li class="next"><a href="#">next</a></li>
-                            <li><a href="#">>></a></li>
-                        </ul>
-                    </div>
-                </div>*@
-                <!--shop toolbar end-->
-                <!--shop wrapper end-->
             </div>
         </div>
     </div>
-</div>
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            $('#dataproduct').DataTable({"ordering": false});
-        });
-    </script>
- 
+    @section Scripts {
+        <script>
+            $(document).ready(function () {
+                $('#dataproduct').DataTable({ "ordering": false });
+            });
+        </script>
 
-}
+
+    }
 
 
