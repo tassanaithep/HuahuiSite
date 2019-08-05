@@ -49,9 +49,10 @@
                         </div>
 
                         <div class="widget_list widget_categories" style="width: auto; height: 700px; overflow-y: scroll;">
-                            <h2>Product Group</h2>
-                            <ul>
+                            <h2>Categories:@Model.ShopListViewModel.Param  </h2>
 
+                            <ul>
+                               
                                 @foreach (var productGroupitem in Model.ProductGroupList.Where(w => w.ProductCategorieCode.Equals(Model.ShopListViewModel.Param)).Select(i => new { i.Code, i.Name, i.ProductCategorieCode }).Distinct())
 
                                 {
@@ -63,35 +64,35 @@
                                     </li>
                                 }
                                 @*<li>
-                                        <input type="checkbox">
-                                        <a href="#">Chanel(10)</a>
-                                        <span class="checkmark"></span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox">
-                                        <a href="#">Christian Dior (4)</a>
-                                        <span class="checkmark"></span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox">
-                                        <a href="#">hermes(10)</a>
-                                        <span class="checkmark"></span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox">
-                                        <a href="#">louis vuitton(8)</a>
-                                        <span class="checkmark"></span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox">
-                                        <a href="#">Tommy Hilfiger(7)</a>
-                                        <span class="checkmark"></span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox">
-                                        <a href="#">Versace(6)</a>
-                                        <span class="checkmark"></span>
-                                    </li>*@
+            <input type="checkbox">
+            <a href="#">Chanel(10)</a>
+            <span class="checkmark"></span>
+        </li>
+        <li>
+            <input type="checkbox">
+            <a href="#">Christian Dior (4)</a>
+            <span class="checkmark"></span>
+        </li>
+        <li>
+            <input type="checkbox">
+            <a href="#">hermes(10)</a>
+            <span class="checkmark"></span>
+        </li>
+        <li>
+            <input type="checkbox">
+            <a href="#">louis vuitton(8)</a>
+            <span class="checkmark"></span>
+        </li>
+        <li>
+            <input type="checkbox">
+            <a href="#">Tommy Hilfiger(7)</a>
+            <span class="checkmark"></span>
+        </li>
+        <li>
+            <input type="checkbox">
+            <a href="#">Versace(6)</a>
+            <span class="checkmark"></span>
+        </li>*@
                             </ul>
                         </div>
                         @*  <div class="widget_list widget_categories">
