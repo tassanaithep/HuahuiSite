@@ -1,0 +1,120 @@
+﻿@model HuahuiSite.Web.Areas.Backend.Models.CartViewModel
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-actions">
+                <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+            </div>
+        </div>
+        <div class="card-body collapse show">
+            <div class="table-responsive">
+                <table class="table" id="table-data">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Customer Name</th>
+                            <th>Status</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{ int No = 1; }
+
+                        @foreach (var itemOfCart in Model.CartList)
+                        {
+                            <tr>
+                                <td>@No</td>
+                                <td>@itemOfCart.UserName</td>
+                                <td>@itemOfCart.Status</td>
+                                <td>
+                                    <a href="#" data-toggle="modal" data-target="#modal-row-table-@No"> <i class="fas fa-pencil-alt text-inverse m-r-10"></i> </a>
+                                    <div class="modal fade" id="modal-row-table-@No" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <form class="form-row-table">
+
+                                                    <!-- Hidden Value -->
+                                                    @*<input type="hidden" name="Id" value="@item.Id" />
+                                                    <input type="hidden" name="hid-sale-id" value="@item.SaleId" />
+                                                    <input type="hidden" name="Password" value="@item.Password" />*@
+                                                    <!-- End Hidden Value -->
+
+                                                    <div class="modal-header" style="background-color:#ff6a00;">
+                                                        <h4 class="modal-title text-white">Edit Cart</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="text-white">×</span></button>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                            <div class="modal-body">
+                                                                <div class="card">
+                                                                    <div class="card-header">
+                                                                        <div class="card-actions">
+                                                                            <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-body collapse show">
+                                                                        <div class="table-responsive">
+                                                                            <table class="table" id="table-data">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>Product Name</th>
+                                                                                        <th>Picture</th>
+                                                                                        <th>Quantity</th>
+                                                                                        <th>Delete</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    
+                                                                                    @foreach (var itemOfCartItem in Model.CartItemList.Where(w => w.CardId.Equals(itemOfCart.Id)))
+                                                                                    {
+
+                                                                                        <tr>
+                                                                                            <td>@itemOfCartItem.ProductName</td>
+                                                                                            <td>
+                                                                                                <img src="~/images/upload/@itemOfCartItem.PictureFileName" alt="Picture" width="80" /></td>
+                                                                                            <td>
+                                                                                                <input type="number" class="form-control" name="QuaintityOfCartItem" value="@itemOfCartItem.Quantity" />
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <a href="#" onclick="DeleteCartItem(this)"><i class="fas fa-trash-alt text-inverse m-r-10"></i></a>
+                                                                                            </td>
+                                                                                        </tr>
+
+                                                                                    }
+                                                                                    
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Success</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="#" onclick="Delete(this)"><i class="fas fa-trash-alt text-inverse m-r-10"></i></a>
+                                </td>
+                            </tr>
+
+                            No++;
+
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -6,8 +6,8 @@
 */
 $(function () {
     //RenderImage();
-    BindData();
-    $("#table-data").DataTable();
+    //BindData();
+    //$("#table-data").DataTable();
 });
 
 // #endregion
@@ -143,11 +143,11 @@ UpdateTable = () => {
 // #region Action
 
 /**
-  * @desc Delete Data
+  * @desc Delete Cart Item of Cart
   * @param {Object} e - Element of Delete Button
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
-Delete = (e) => {
+DeleteCartItem = (e) => {
     swal({
         title: 'Are you sure?',
         text: "คุณต้องการลบข้อมูล ใช่หรือไม่?",
@@ -158,29 +158,10 @@ Delete = (e) => {
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.value) {
-            let $form = $(e).closest("tr").find(".form-row-table");
+            // Remove Cart Item of Cart
+            $(e).closest("tr").remove();
 
-            let $id = $form.find("[name='Id']").val();
-            //let $titlePictureFileName = $form.find("[name='TitlePictureFileName']").val();
-
-            let jsonObject = {};
-            jsonObject.Id = $id;
-            //jsonObject.TitlePictureFileName = $titlePictureFileName;
-
-            $.ajax({
-                type: "POST",
-                url: "/Backend/Customer/Delete",
-                data: jsonObject,
-                success: function (res) {
-                    if (res.isSuccess) {
-                        UpdatePage();
-                        swal("Delete Success", "", "success");
-                    } else {
-                        swal("Delete Failed", "", "error");
-                    }
-                },
-                error: function () { }
-            });
+            // Alert Result of Delete
             Swal(
                 'Deleted!',
                 'Your file has been deleted.',
