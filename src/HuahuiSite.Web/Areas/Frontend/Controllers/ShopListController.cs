@@ -23,10 +23,15 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
             _shopListService = shopListService;
         }
         #endregion
-        public IActionResult Index(string param,string param2)
+        public IActionResult Index(string param,string param2,  string textsearch)
         {
             MainViewModel mainViewModel = new MainViewModel();
-         //   ShopListViewModel shopListViewModel = new ShopListViewModel();
+            //   ShopListViewModel shopListViewModel = new ShopListViewModel();
+            //if (textsearch==null)
+            //{
+            //    textsearch = "";
+            //}
+           
 
             try
             {
@@ -42,20 +47,32 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
 
                 if (param != null && param2==null)
                 {
-                    
+                    if(textsearch !=null)
+                    {
+                        mainViewModel.ShopListViewModel.ProductList = mainViewModel.ShopListViewModel.ProductList.Where(x => x.ProductCategorieCode == param && x.Name.Contains(textsearch)).ToList();
 
-                    mainViewModel.ShopListViewModel.ProductList = mainViewModel.ShopListViewModel.ProductList.Where(x => x.ProductCategorieCode == param).ToList();
+                    }
+                    else
+                    {
+                        mainViewModel.ShopListViewModel.ProductList = mainViewModel.ShopListViewModel.ProductList.Where(x => x.ProductCategorieCode == param ).ToList();
+
+                    }
+
+
                     mainViewModel.ProductGroupList = mainViewModel.ProductGroupList.Where(x => x.ProductCategorieCode == param).ToList();
 
                     mainViewModel.ShopListViewModel.Param = param;
                 }
                 else if(param != null && param2 != null)
                 {
+
                     //param2 = mainViewModel.ProductGroupList.Where(m=>m.ProductCategorieCode==param2).FirstOrDefault().Code;
                     //  mainViewModel.ProductGroupList =
                     mainViewModel.ShopListViewModel.ProductList = mainViewModel.ShopListViewModel.ProductList.Where(x => x.ProductCategorieCode == param && x.ProductGroupCode==param2).ToList();
                     mainViewModel.ProductGroupList = mainViewModel.ProductGroupList.Where(x => x.ProductCategorieCode == param).ToList();
                     mainViewModel.ShopListViewModel.Param = param;
+                    mainViewModel.ShopListViewModel.Param2 = param2;
+
                     //  mainViewModel.ProductGroupList.ToList().Clear();
 
                     // _shopListService.GetShopList(ref shopListViewModel);
@@ -71,5 +88,6 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
             }
             return View(mainViewModel);
         }
+
     }
 }

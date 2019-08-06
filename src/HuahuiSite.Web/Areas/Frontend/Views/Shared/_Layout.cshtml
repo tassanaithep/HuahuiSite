@@ -46,7 +46,7 @@
                             @if (Model.LoginViewModel.IsLogin)
                             {
                                 <span class="text-white strong">
-                                    Welcome: @Model.LoginViewModel.RoleName
+                                    Welcome: @Model.LoginViewModel.Username
                                 </span>
                             }
 
@@ -81,56 +81,59 @@
                             <a asp-action="" asp-controller="Home"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/logo/logo.png" alt=""></a>
                         </div>
                     </div>
-                    <div class="col-lg-9 col-md-12">
+                    <div class="col-lg-7 col-md-7 align-items-center">
                         <div class="middel_right">
                             <div class="search-container">
-                                <form action="#">
+                                <form asp-action="index" asp-controller="Shoplist" method="get">
                                     <div class="hover_category">
-                                        <select class="select_option" name="select" id="categori">
+                                        <select class="select_option" name="param" id="param">
                                             @foreach (var itemOfProductCategorie in Model.ProductCategorieList.Select(i => new { i.Code, i.Name }))
                                             {
-                                            <option value="@itemOfProductCategorie.Code">@itemOfProductCategorie.Name</option>
+                                                <option value="@itemOfProductCategorie.Code">@itemOfProductCategorie.Name</option>
 
                                             }
 
                                             @*<option value="5">ตกแต่งทั่วไป</option>
-                                            <option value="6">เพิ่มประสิทธิภาพ</option>
-                                            <option value="7">ตกแต่งภายใน-ภายนอก</option>*@
+                                <option value="6">เพิ่มประสิทธิภาพ</option>
+                                <option value="7">ตกแต่งภายใน-ภายนอก</option>*@
 
                                         </select>
                                     </div>
                                     <div class="search_box">
-                                        <input placeholder="ค้นหา" type="text">
+                                        <input placeholder="ค้นหา" type="text" name="textsearch">
                                         <button type="submit">ค้นหา</button>
                                     </div>
                                 </form>
                             </div>
 
                             <div class="middel_right_info">
-                                <div class="header_account">
-                                    @*<a href="my-account.html"><i class="ion-android-people"></i></a>*@
-                                </div>
-                                <div class="header_wishlist">
-                                    @*<a href="wishlist.html"><i class="fa fa-heart-o" aria-hidden="true"></i></a>*@
-                                </div>
-                                <div class="mini_cart_wrapper">
-                                    <a href="#"><i class="ion-bag"></i>$138.00</a>
-                                    <span class="cart_quantity">2</span>
-                                    <!--mini cart-->
-                                    <div class="mini_cart">
+                                @*<div class="header_account">
+                    <a href="my-account.html"><i class="ion-android-people"></i></a>
+                                        </div>*@
+                                @* <div class="header_wishlist">
+                                                   <a href="wishlist.html"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                    </div>*@
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2">
+                        <div class="mini_cart_wrapper">
+                            <a href="#"><i class="ion-bag"></i>@*$138.00*@</a>
+                            @*<span class="cart_quantity">2</span>*@
+                            <!--mini cart-->
+                            <div class="mini_cart">
 
-                                        <div class="mini_cart_footer">
-                                            <div class="cart_button">
-                                                <a asp-controller="cart" asp-action="index">View cart</a>
-                                            </div>
-                                            <div class="cart_button">
-                                                <a asp-controller="login" asp-action="logout">Checkout</a>
-                                            </div>
-                                        </div>
+                                <div class="mini_cart_footer">
+                                    <div class="cart_button">
+                                        <a asp-controller="cart" asp-action="index"><i class=""></i>ดูรายการสั่งซื้อ</a>
                                     </div>
-                                    <!--mini cart end-->
+                                    @*<div class="cart_button">
+                                        <a asp-controller="login" asp-action="logout">Checkout</a>
+                                    </div>*@
                                 </div>
                             </div>
+                            <!--mini cart end-->
                         </div>
                     </div>
                 </div>
@@ -154,9 +157,13 @@
                                         {
 
                                             <li class="menu_item_children">
-                                                <a href="shop.html">
-                                                    <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu2.png" alt="">
-                                                    <span>@itemOfProductCategorie.Name <i class="fa fa-angle-down"></i></span>
+                                             
+                                                    <a asp-controller="ShopList" asp-action="Index" asp-route-param="@itemOfProductCategorie.Code"> 
+                                                    @*<img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu2.png" alt="">*@
+                                                    <span>
+                                                        @itemOfProductCategorie.Name        |
+                                                        @*<i class="fa fa-angle-down"></i>*@
+                                                    </span>
                                                 </a>
 
                                                 @*@if (Model.ProductGroupList.Where(w => w.ProductCategorieCode.Equals(itemOfProductCategorie.Code)).Count() > 0)
@@ -229,23 +236,41 @@
                             @*<p> Welcom to HUAHUI INTER COMPANY Glad to see you in our store</p>*@
                         </div>
                         <div class="canvas_search_container">
-                            <form action="#">
+                            <form asp-action="index" asp-controller="Shoplist" method="get">
                                 <div class="hover_category">
-                                    <select class="select_option" name="select" id="categori1">
-                                        <option selected value="1">ทุกหมวดหมู่</option>
-                                        <option value="2">ดูแลรักษารถยนต์</option>
-                                        <option value="3">โคมไฟ-หลอดไฟ-Xenon</option>
-                                        <option value="4">อิเล็กทรอนิคส์-ของตกแต่งอื่นๆ</option>
-                                        <option value="5">ตกแต่งทั่วไป</option>
-                                        <option value="6">เพิ่มประสิทธิภาพ</option>
-                                        <option value="7">ตกแต่งภายใน-ภายนอก</option>
+                                    <select class="select_option" name="param" id="param">
+                                        @foreach (var itemOfProductCategorie in Model.ProductCategorieList.Select(i => new { i.Code, i.Name }))
+                                        {
+                                            <option value="@itemOfProductCategorie.Code">@itemOfProductCategorie.Name</option>
+
+                                        }
+
+                                      
+
                                     </select>
                                 </div>
                                 <div class="search_box">
-                                    <input placeholder="ค้นหา" type="text">
+                                    <input placeholder="ค้นหา" type="text" name="textsearch">
                                     <button type="submit">ค้นหา</button>
                                 </div>
                             </form>
+                            @*<form action="#">
+            <div class="hover_category">
+                <select class="select_option" name="select" id="categori1">
+                    <option selected value="1">ทุกหมวดหมู่</option>
+                    <option value="2">ดูแลรักษารถยนต์</option>
+                    <option value="3">โคมไฟ-หลอดไฟ-Xenon</option>
+                    <option value="4">อิเล็กทรอนิคส์-ของตกแต่งอื่นๆ</option>
+                    <option value="5">ตกแต่งทั่วไป</option>
+                    <option value="6">เพิ่มประสิทธิภาพ</option>
+                    <option value="7">ตกแต่งภายใน-ภายนอก</option>
+                </select>
+            </div>
+            <div class="search_box">
+                <input placeholder="ค้นหา" type="text">
+                <button type="submit">ค้นหา</button>
+            </div>
+        </form>*@
                         </div>
 
                         <div id="menu" class="text-left">
