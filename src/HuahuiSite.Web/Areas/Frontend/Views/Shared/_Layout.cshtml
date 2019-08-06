@@ -87,6 +87,7 @@
                                 <form asp-action="index" asp-controller="Shoplist" method="get">
                                     <div class="hover_category">
                                         <select class="select_option" name="param" id="param">
+
                                             @foreach (var itemOfProductCategorie in Model.ProductCategorieList.Select(i => new { i.Code, i.Name }))
                                             {
                                                 <option value="@itemOfProductCategorie.Code">@itemOfProductCategorie.Name</option>
