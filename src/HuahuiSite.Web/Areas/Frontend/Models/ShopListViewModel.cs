@@ -14,6 +14,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Models
         public IEnumerable<ProductCategorie> ProductCategoriesList { get; set; }
         // public IEnumerable<ProductGroup> ProductGroupList { get; set; }
         public string Param { get; set; }
+        public string Param2 { get; set; }
 
 
 
