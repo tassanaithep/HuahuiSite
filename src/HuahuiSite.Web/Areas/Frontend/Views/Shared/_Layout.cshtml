@@ -58,7 +58,7 @@
 
                                 @if (Model.LoginViewModel.IsLogin)
                                 {
-                                    <a asp-area="Frontend" asp-controller="Login" asp-action="Index"><i class="ion-log-out"></i> ออกจากระบบ </a>
+                                    <li><a asp-area="Frontend" asp-controller="Login" asp-action="Index"><i class="ion-log-out"></i> ออกจากระบบ </a></li>
                                 }
                                 else
                                 {
@@ -72,20 +72,26 @@
             </div>
         </div>
         <!--header top start-->
+
         <!--header middel start-->
         <div class="header_middle">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-3 col-md-12">
+                    <div class="col-lg-2 col-md-12">
                         <div class="logo" style="border-radius: 0 30px 30px 0;">
                             <a asp-action="" asp-controller="Home"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/logo/logo.png" alt=""></a>
                         </div>
                     </div>
+<<<<<<< HEAD
                     <div class="col-lg-7 col-md-7 align-items-center">
+=======
+                    <div class="col-lg-10 col-md-12">
+>>>>>>> 5c84669710064032bc8f6838a787e4b507b5b9e1
                         <div class="middel_right">
                             <div class="search-container">
                                 <form asp-action="index" asp-controller="Shoplist" method="get">
                                     <div class="hover_category">
+<<<<<<< HEAD
                                         <select class="select_option" name="param" id="param">
                                             @foreach (var itemOfProductCategorie in Model.ProductCategorieList.Select(i => new { i.Code, i.Name }))
                                             {
@@ -97,6 +103,14 @@
                                 <option value="6">เพิ่มประสิทธิภาพ</option>
                                 <option value="7">ตกแต่งภายใน-ภายนอก</option>*@
 
+=======
+                                        <select class="select_option" name="select" id="categori">
+                                            <option selected value="0">ทุกหมวดหมู่</option>
+                                            @foreach (var itemOfProductCategorie in Model.ProductCategorieList.Select(i => new { i.Code, i.Name }))
+                                            {
+                                                <option value="@itemOfProductCategorie.Code">@itemOfProductCategorie.Name</option>
+                                            }
+>>>>>>> 5c84669710064032bc8f6838a787e4b507b5b9e1
                                         </select>
                                     </div>
                                     <div class="search_box">
@@ -140,6 +154,7 @@
             </div>
         </div>
         <!--header middel end-->
+
         <!--header bottom satrt-->
         <div class="header_bottom sticky-header">
             <div class="container">
@@ -148,15 +163,14 @@
                         <div class="categories_menu_inner">
                             <div class="categories_menu">
                                 <div class="category_toggle">
-                                    <a href="#">หมวดหมู่<i class="fa fa-angle-down"></i></a>
+                                    <a href="#">หมวดหมู่</a>
                                 </div>
                                 <nav class="categories_menu_toggle">
                                     <ul>
-
                                         @foreach (var itemOfProductCategorie in Model.ProductCategorieList)
                                         {
-
                                             <li class="menu_item_children">
+
                                              
                                                     <a asp-controller="ShopList" asp-action="Index" asp-route-param="@itemOfProductCategorie.Code"> 
                                                     @*<img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu2.png" alt="">*@
@@ -164,40 +178,36 @@
                                                         @itemOfProductCategorie.Name        |
                                                         @*<i class="fa fa-angle-down"></i>*@
                                                     </span>
-                                                </a>
+                                                        </a>
+                                                @*<a asp-controller="Shoplist" asp-action="index">
+                                                    <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu2.png" alt="">
+                                                    <span>@itemOfProductCategorie.Name</span>
+
+                                                </a>*@
 
                                                 @*@if (Model.ProductGroupList.Where(w => w.ProductCategorieCode.Equals(itemOfProductCategorie.Code)).Count() > 0)
                                                 {
-
                                                     <ul class="sub_menu">
-
                                                         @foreach (var itemOfProductGroup in Model.ProductGroupList.Where(w => w.ProductCategorieCode.Equals(itemOfProductCategorie.Code)).Select(s => s.Name).Distinct())
                                                         {
-
                                                             <li><a href="shop.html">@itemOfProductGroup</a></li>
-
                                                         }
-
                                                     </ul>
-
                                                 }*@
-
                                             </li>
-
                                         }
-
                                     </ul>
                                 </nav>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
         <!--header bottom end-->
     </header>
     <!--header area end-->
+
     <!--header menu area start-->
     <div class="header_main_menu">
         <div class="container">
@@ -219,6 +229,7 @@
         </div>
     </div>
     <!--header menu area end-->
+
     <!--Offcanvas menu area start-->
     <div class="Offcanvas_menu">
         <div class="container">
@@ -289,6 +300,7 @@
 
     </div>
     <!--Offcanvas menu area end-->
+
     @RenderBody()
 
     <!--footer area start-->
@@ -334,28 +346,6 @@
                 </div>
             </div>
 
-            @*<div class="newletter_area">
-                <div class="row">
-                    <div class="col-lg-5 col-md-5">
-                        <div class="newletter_title">
-                            <img src="assets/img/about/icon-newletter.png" alt="">
-                            <div class="newletter_content">
-                                <h2>Join Our Newsletter Now</h2>
-                                <p>Be the First to Know. Sign up to newsletter today</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-7 col-md-7">
-                        <div class="newletter_subscribe">
-                            <form action="#">
-                                <input placeholder="Enter you email address here..." type="text">
-                                <button type="submit">Subscribe</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
-
             <div class="footer_bottom">
                 <div class="row">
                     <div class="col-12">
@@ -363,59 +353,11 @@
                             <p>Copyright &copy; 2019 <a href="https://www.hypersoft-solution.com">HYPERSOFT SOLUTION COMPANY</a>  All Right Reserved.</p>
                         </div>
                     </div>
-                    @*<div class="col-lg-6 col-md-12">
-                        <div class="footer_paypal">
-                            <ul>
-                                <li><a href="#"><img src="assets/img/icon/paypal.jpg" alt=""></a></li>
-                                <li><a href="#"><img src="assets/img/icon/paypal1.jpg" alt=""></a></li>
-                                <li><a href="#"><img src="assets/img/icon/paypal2.jpg" alt=""></a></li>
-                                <li><a href="#"><img src="assets/img/icon/paypal3.jpg" alt=""></a></li>
-                                <li><a href="#"><img src="assets/img/icon/paypal4.jpg" alt=""></a></li>
-                                <li><a href="#"><img src="assets/img/icon/paypal5.jpg" alt=""></a></li>
-                            </ul>
-                        </div>
-                    </div>*@
                 </div>
             </div>
         </div>
     </footer>
     <!--footer area end-->
-    <!--news letter popup start-->
-    @*<div class="newletter-popup">
-        <div id="boxes" class="newletter-container">
-            <div id="dialog" class="window">
-                <div id="popup2">
-                    <span class="b-close"><span>close</span></span>
-                </div>
-                <div class="box">
-                    <div class="newletter-title">
-                        <h2>Newsletter</h2>
-                    </div>
-                    <div class="box-content newleter-content">
-                        <label class="newletter-label">Enter your email address to subscribe our notification of our new post &amp; features by email.</label>
-                        <div id="frm_subscribe">
-                            <form name="subscribe" id="subscribe_popup">
-                                <!-- <span class="required">*</span><span>Enter you email address here...</span>-->
-                                <input type="text" value="" name="subscribe_pemail" id="subscribe_pemail" placeholder="Enter you email address here...">
-                                <input type="hidden" value="" name="subscribe_pname" id="subscribe_pname">
-                                <div id="notification"></div>
-                                <a class="theme-btn-outlined" onclick="email_subscribepopup()"><span>Subscribe</span></a>
-                            </form>
-                            <div class="subscribe-bottom">
-                                <input type="checkbox" id="newsletter_popup_dont_show_again">
-                                <label for="newsletter_popup_dont_show_again">Don't show this popup again</label>
-                            </div>
-                        </div>
-                        <!-- /#frm_subscribe -->
-                    </div>
-                    <!-- /.box-content -->
-                </div>
-            </div>
-
-        </div>
-        <!-- /.box -->
-    </div>*@
-    <!--news letter popup start-->
 
     <environment include="Development">
         <script src="~/lib/jquery/jquery.min.js"></script>
