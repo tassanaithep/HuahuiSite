@@ -24,15 +24,90 @@
                         <h1>สินค้าแนะนำ !!</h1>
                         <H2></H2>
                         <p>+++ สินค้าแนะนำประจำสัปดาห์ +++</p>
-                        <a class="button" href="#">ซื้อเลย</a>
+                        @*<a class="button" href="#">ซื้อเลย</a>*@
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!--slider area end-->
 
+<!--slider area end-->
+<!--header tags area-->
+@*<div class="header_tags">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <ul>
+                        <li><span>Top Tags:</span></li>
+                        <li><a href="#">Electronic Cigarettes</a></li>
+                        <li><a href="#">iPad Mini Cases</a></li>
+                        <li><a href="#">Audio Speaker</a></li>
+                        <li><a href="#">Audio Speaker</a></li>
+                        <li><a href="#">Tablets</a></li>
+                        <li><a href="#">Laptops</a></li>
+                        <li><a href="#">Mornitors</a></li>
+                        <li><a href="#">Cameras</a></li>
+                        <li><a href="#">Watchs</a></li>
+                        <li><a href="#">Audio Speaker</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>*@
+<!--header tags end-->
+<!--shipping area start-->
+@*<section class="shipping_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="single_shipping">
+                        <div class="shipping_icone">
+                            <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/about/shipping1.png" alt="">
+                        </div>
+                        <div class="shipping_content">
+                            <h2>Free Delivery</h2>
+                            <p>And free returns. See checkout for delivery dates.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="single_shipping">
+                        <div class="shipping_icone">
+                            <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/about/shipping2.png" alt="">
+                        </div>
+                        <div class="shipping_content">
+                            <h2>Safe Payment</h2>
+                            <p>And free returns. See checkout for delivery dates.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="single_shipping">
+                        <div class="shipping_icone">
+                            <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/about/shipping3.png" alt="">
+                        </div>
+                        <div class="shipping_content">
+                            <h2>Shop With Confidence</h2>
+                            <p>And free returns. See checkout for delivery dates.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="single_shipping">
+                        <div class="shipping_icone">
+                            <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/about/shipping4.png" alt="">
+                        </div>
+                        <div class="shipping_content">
+                            <h2>24/7 Help Center</h2>
+                            <p>And free returns. See checkout for delivery dates.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>*@
+<!--shipping area end-->
 <!--home product wrapper star-->
 <section class="home_product_wrapper">
     <div class="container">
@@ -50,15 +125,15 @@
                 </div>
                 <div class="product_carousel product_column4 owl-carousel">
 
-                    @{ int NoOfProductPromotion = 0; }
+                    @{ int No = 0; }
 
                     @foreach (var item in Model.HomeViewModel.ProductList.Where(x=>x.IsPromotion==true).Take(10))
                     {
-                        <form class="form-product-item" id="form-product-@NoOfProductPromotion" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
+                        <form class="form-product-item" id="form-product-@No" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
 
                             <!-- Hidden Value Start -->
 
-                            <input type="hidden" name="hid-form-product-id" value="form-product-@NoOfProductPromotion" />
+                            <input type="hidden" name="hid-form-product-id" value="form-product-@No" />
                             <input type="hidden" name="ProductId" value="@item.Id" />
                             <input type="hidden" name="ProductName" value="@item.Name" />
                             <input type="hidden" name="ProductUnitPrice" value="@item.UnitPrice" />
@@ -85,28 +160,45 @@
                                             <div class="product_name">
                                                 <h3><a href="product-details.html">@item.Name</a></h3>
                                             </div>
-                                            <div class="price_box">
-                                                <div class="row">
-                                                    <div class="col-sm-12 col-md-8 col-lg-8">
-                                                        <span class="old_price">420.00</span>
-                                                        <span class="current_price">@item.UnitPrice บาท</span>
+                                            @*<div class="product_ratings">
+            <ul>
+                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+            </ul>
+        </div>*@
+                                            @if (Model.LoginViewModel.IsLogin)
+                                            {
+                                                <div class="price_box">
+                                                    <div class="row">
+                                                        <div class="col-sm-12 col-md-8 col-lg-8">
+                                                            <span class="old_price">420.00</span>
+                                                            <span class="current_price">@item.UnitPrice บาท</span>
+                                                        </div>
+
                                                     </div>
-
                                                 </div>
-                                            </div>
 
-                                            <div class="action_links">
-                                                <ul>
+                                                <div class="action_links">
+                                                    <ul>
 
-                                                    <!-- If Login will Show Add to Cart Button -->
+                                                        <!-- If Login will Show Add to Cart Button -->
 
-                                                    @if (Model.LoginViewModel.IsLogin)
-                                                    {
-                                                        <li class="add_to_cart"><a onclick="OpenProductModal(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                                    }
 
-                                                </ul>
-                                            </div>
+                                                        <li class="add_to_cart"><a onclick="AddToCartSubmit(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
+
+
+                                                        @*<li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a></li>
+                    <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i></a></li>*@
+                                                    </ul>
+                                                </div> }
+
+                                            @*<div class="product_timing">
+            <h3>Ends in</h3>
+            <div data-countdown="2020/12/15"></div>
+        </div>*@
                                         </div>
                                     </div>
                                 </div>
@@ -115,7 +207,7 @@
                             </div>
                         </form>
 
-                        NoOfProductPromotion++;
+                        No++;
                     }
 
                 </div>
@@ -156,12 +248,9 @@
                     </div>
                     <div class="product_carousel product_column4 owl-carousel">
 
-                        @{ int NoOfProductCategorie = 0; }
-
                         @foreach (var itemOfProduct in Model.HomeViewModel.ProductList.Where(w => w.ProductCategorieCode.Equals(itemOfProductCategorie.Code)).Take(10))
                         {
-
-                            <form class="form-product-item" id="form-product-@NoOfCategorie-@NoOfProductCategorie" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
+                            <form class="form-product-item" id="form-product-@NoOfCategorie" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
 
                                 <!-- Hidden Value Start -->
 
@@ -179,6 +268,7 @@
                                     <div class="single_product">
                                         <div class="product_thumb">
                                             <a class="primary_img" href="product-details.html"><img src="~/images/upload/@itemOfProduct.PictureFileName" alt=""></a>
+                                            @*  <a class="secondary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product1.jpg" alt=""></a>*@
                                             <div class="quick_button">
                                                 <a title="quick view" onclick="OpenProductModal(this)"><i class="ion-eye"></i></a>
                                             </div>
@@ -191,36 +281,52 @@
                                                 <div class="product_name">
                                                     <h3><a href="product-details.html">@itemOfProduct.Name</a></h3>
                                                 </div>
-                                                <div class="price_box">
-                                                    <div class="row">
-                                                        <div class="col-sm-12 col-md-8 col-lg-8">
-                                                            <span class="old_price">420.00</span>
-                                                            <span class="current_price">@itemOfProduct.UnitPrice บาท</span>
+                                                @*<div class="product_ratings">
+            <ul>
+                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+            </ul>
+        </div>*@   
+                                                @if (Model.LoginViewModel.IsLogin)
+                                                {
+                                                    <div class="price_box">
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-8 col-lg-8">
+                                                                <span class="old_price">420.00</span>
+                                                                <span class="current_price">@itemOfProduct.UnitPrice บาท</span>
+                                                            </div>
+
                                                         </div>
-
                                                     </div>
-                                                </div>
-                                                <div class="action_links">
-                                                    <ul>
 
-                                                    <!-- If Login will Show Add to Cart Button -->
+                                                    <div class="action_links">
+                                                        <ul>
 
-                                                    @if (Model.LoginViewModel.IsLogin)
-                                                    {
-                                                        <li class="add_to_cart"><a onclick="OpenProductModal(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                                    }
+                                                            <!-- If Login will Show Add to Cart Button -->
 
-                                                    </ul>
-                                                </div>
+
+                                                            <li class="add_to_cart"><a onclick="AddToCartSubmit(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
+
+
+                                                            @*<li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a></li>
+                    <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i></a></li>*@
+                                                        </ul>
+                                                    </div>
+                                                }
+                                                @*<div class="product_timing">
+                <h3>Ends in</h3>
+                <div data-countdown="2020/12/15"></div>
+        </div>*@
                                             </div>
                                         </div>
                                     </div>
+
                                     <input type="submit" name="btn-submit" style="display: none;" />
                                 </div>
                             </form>
-
-                            NoOfProductCategorie++;
-
                         }
 
                     </div>
@@ -231,13 +337,13 @@
 
         }
         <!-- Product By Categories End -->
-
         <!--blog testimonial area-->
         <!--blog testimonial start-->
     </div>
-</section>
-<!--home product wrapper end-->
 
+</section>
+
+<!--home product wrapper end-->
 <!--brand area start-->
 <div class="brand_area">
     <div class="container">
@@ -316,6 +422,10 @@
     <script>
 
         var _cartItemList = @Html.Raw(Json.Serialize(@Model.HomeViewModel.CartItemListViewList));
+
+        AddToCartSubmit = (e) => {
+            $(e).closest(".form-product-item").find(".btn-submit").click();
+        };
 
         OnAddToCartSuccess = (res) => {
             if (res.isSuccess) {

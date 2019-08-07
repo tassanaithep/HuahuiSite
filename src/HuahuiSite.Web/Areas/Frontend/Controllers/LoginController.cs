@@ -36,7 +36,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
-        public IActionResult Index(string logout)
+        public IActionResult Index(string logout,string param)
         {
             MainViewModel mainViewModel = new MainViewModel();
             mainViewModel.ProductCategorieList = new List<ProductCategorie>();
@@ -44,6 +44,10 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
             mainViewModel.LoginViewModel = new LoginViewModel();
 
             if (logout == "true")
+            {
+                _loginService.Logout();
+            }
+            if(param == "logout")
             {
                 _loginService.Logout();
             }

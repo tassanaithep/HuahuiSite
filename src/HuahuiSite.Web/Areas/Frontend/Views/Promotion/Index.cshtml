@@ -1,336 +1,142 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-}
-
-<section class="slider_area slider_nav owl-carousel">
-    <div class="single_slider" data-bgimg="/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/slider/Promoslider1.jpg">
-
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-12">
-                    <div class="slider_content">
-                        <h1>PROMOTION!!</h1>
-                        <h2></h2>
-                        <p>+++ สินค้าโปรโมชั่นประจำเดือนนี้ +++ </p>
-                        <a class="button" href="#">shopping now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="single_slider" data-bgimg="/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/slider/slider2.jpg">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-12">
-                    <div class="slider_content">
-
-                        <h1>PLAYSTATION</h1>
-                        <H2>OVER 100 GAMES</H2>
-                        <p>With gamers in mind, PlayStation delivers a new world of unexpected gaming experiences through PlayStation VR. </p>
-                        <a class="button" href="#">shopping now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="home_product_wrapper">
+﻿@model HuahuiSite.Web.Areas.Frontend.Models.MainViewModel
+<div class="breadcrumbs_area" style="margin-bottom:10px;">
     <div class="container">
-        <!--countdown product area start-->
-        <div class="countdown_product default_product">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section_title">
-                        <h2> Deal Of The Day</h2>
-                        <div class="icone_img">
-                            <img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/product_icone.png" alt="">
-                        </div>
-                    </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb_content" style="padding-bottom:10px;">
+                    <ul>
+                        <li><a asp-controller="Home" asp-action="Index">home</a></li>
+
+                        <li>Promotion</li>
+                    </ul>
                 </div>
-                <div class="product_carousel product_column4 owl-carousel">
-                    <div class="col-lg-3">
-                        <div class="single_product">
-                            <div class="product_thumb">
-                                <a class="primary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product1.jpg" alt=""></a>
-                                @*  <a class="secondary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product1.jpg" alt=""></a>*@
-                                <div class="quick_button">
-                                    <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
-                                </div>
-                                <div class="label_product">
-                                    <span class="label_sale">-57%</span>
-                                </div>
-                            </div>
-                            <div class="product_content">
-                                <div class="content_inner">
-                                    <div class="product_name">
-                                        <h3><a href="product-details.html">Nonstick Dishwasher PFOA</a></h3>
-                                    </div>
-                                    <div class="product_ratings">
-                                        <ul>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="price_box">
-                                        <span class="old_price">$420.00</span>
-                                        <span class="current_price">$180.00</span>
-                                    </div>
-                                    <div class="action_links">
-                                        <ul>
-                                            <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                            <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                                            <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                                <div class="product_timing">
-                                    <h3>Ends in</h3>
-                                    <div data-countdown="2020/12/15"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="single_product">
-                            <div class="product_thumb">
-                                <a class="primary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product3.jpg" alt=""></a>
-                                @*   <a class="secondary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product4.jpg" alt=""></a>*@
-                                <div class="quick_button">
-                                    <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
-                                </div>
-                                <div class="label_product">
-                                    <span class="label_sale">-47%</span>
-                                </div>
-                            </div>
-                            <div class="product_content">
-                                <div class="content_inner">
-                                    <div class="product_name">
-                                        <h3><a href="product-details.html">Mug Today is a good day</a></h3>
-                                    </div>
-                                    <div class="product_ratings">
-                                        <ul>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="price_box">
-                                        <span class="old_price">$420.00</span>
-                                        <span class="current_price">$160.00</span>
-                                    </div>
-                                    <div class="action_links">
-                                        <ul>
-                                            <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                            <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                                            <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+        <div class="shop_area shop_reverse">
+            <div class="container">
+                <div class="row">
 
-                                <div class="product_timing">
-                                    <h3>Ends in</h3>
-                                    <div data-countdown="2020/12/15"></div>
-                                </div>
-                            </div>
+                    <div class="col-lg-9 col-md-12">
+                        <!--shop wrapper start-->
+                        <!--shop toolbar start-->
+                        <div class="shop_title">
+                            <h3>รายการสินค้าโปรโมชั่น</h3>
                         </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="single_product">
-                            <div class="product_thumb">
-                                <a class="primary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product5.jpg" alt=""></a>
-                                @* <a class="secondary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product6.jpg" alt=""></a>*@
-                                <div class="quick_button">
-                                    <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
-                                </div>
-                                <div class="label_product">
-                                    <span class="label_sale">-57%</span>
-                                </div>
-                            </div>
-                            <div class="product_content">
-                                <div class="content_inner">
-                                    <div class="product_name">
-                                        <h3><a href="product-details.html">Accusantium dolorem1</a></h3>
-                                    </div>
-                                    <div class="product_ratings">
-                                        <ul>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="price_box">
-                                        <span class="old_price">$420.00</span>
-                                        <span class="current_price">$180.00</span>
-                                    </div>
-                                    <div class="action_links">
-                                        <ul>
-                                            <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                            <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                                            <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
 
-                                <div class="product_timing">
-                                    <h3>Ends in</h3>
-                                    <div data-countdown="2020/12/15"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="single_product">
-                            <div class="product_thumb">
-                                <a class="primary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product7.jpg" alt=""></a>
-                                @* <a class="secondary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product8.jpg" alt=""></a>*@
-                                <div class="quick_button">
-                                    <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
-                                </div>
-                                <div class="label_product">
-                                    <span class="label_sale">-50%</span>
-                                </div>
-                            </div>
-                            <div class="product_content">
-                                <div class="content_inner">
-                                    <div class="product_name">
-                                        <h3><a href="product-details.html">Classic 17-Piece Tool	</a></h3>
-                                    </div>
-                                    <div class="product_ratings">
-                                        <ul>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="price_box">
-                                        <span class="old_price">$420.00</span>
-                                        <span class="current_price">$120.00</span>
-                                    </div>
-                                    <div class="action_links">
-                                        <ul>
-                                            <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                            <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                                            <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                        <div class="row shop_wrapper grid_list">
+                            <div class="col-12 ">
+                                <table id="dataproduct" class="display" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
 
-                                <div class="product_timing">
-                                    <h3>Ends in</h3>
-                                    <div data-countdown="2020/12/15"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="single_product">
-                            <div class="product_thumb">
-                                <a class="primary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product9.jpg" alt=""></a>
-                                @*   <a class="secondary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product8.jpg" alt=""></a>*@
-                                <div class="quick_button">
-                                    <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
-                                </div>
-                                <div class="label_product">
-                                    <span class="label_sale">-52%</span>
-                                </div>
-                            </div>
-                            <div class="product_content">
-                                <div class="content_inner">
-                                    <div class="product_name">
-                                        <h3><a href="product-details.html">Aicok Stand Mixet</a></h3>
-                                    </div>
-                                    <div class="product_ratings">
-                                        <ul>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="price_box">
-                                        <span class="old_price">$420.00</span>
-                                        <span class="current_price">$180.00</span>
-                                    </div>
-                                    <div class="action_links">
-                                        <ul>
-                                            <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                            <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                                            <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.PromotionViewModel.ProductList)
+                                        {
+                                            <tr>
+                                                <td>
 
-                                <div class="product_timing">
-                                    <h3>Ends in</h3>
-                                    <div data-countdown="2020/12/15"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="single_product">
-                            <div class="product_thumb">
-                                <a class="primary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product10.jpg" alt=""></a>
-                                @*   <a class="secondary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product11.jpg" alt=""></a>*@
-                                <div class="quick_button">
-                                    <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
-                                </div>
-                                <div class="label_product">
-                                    <span class="label_sale">-57%</span>
-                                </div>
-                            </div>
-                            <div class="product_content">
-                                <div class="content_inner">
-                                    <div class="product_name">
-                                        <h3><a href="product-details.html">Nonstick Dishwasher PFOA</a></h3>
-                                    </div>
-                                    <div class="product_ratings">
-                                        <ul>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="price_box">
-                                        <span class="old_price">$420.00</span>
-                                        <span class="current_price">$180.00</span>
-                                    </div>
-                                    <div class="action_links">
-                                        <ul>
-                                            <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                            <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                                            <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
 
-                                <div class="product_timing">
-                                    <h3>Ends in</h3>
-                                    <div data-countdown="2020/12/15"></div>
-                                </div>
+
+
+
+                                                    <div class="single_product">
+                                                        <div class="product_thumb">
+                                                            <a class="primary_img" href="product-details.html"><img src="~/images/upload/@item.PictureFileName" alt="" width="200px"></a>
+                                                            <div class="quick_button">
+                                                                <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
+                                                            </div>
+                                                            <div class="label_product">
+                                                                <span class="label_new">New</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+
+                                                        </div>
+                                                        <div class="product_content grid_content">
+                                                            <div class="content_inner">
+                                                                <div class="product_name">
+                                                                    <h3><a href="product-details.html"> @item.Name</a></h3>
+                                                                </div>
+
+                                                                <div class="price_box">
+                                                                    <span class="old_price">420.00</span>
+                                                                    <span class="current_price">@item.UnitPrice</span>
+                                                                </div>
+                                                                @if (Model.LoginViewModel.IsLogin)
+                                                                {
+
+                                                                    <div class="action_links">
+                                                                        <ul>
+                                                                            <li class="add_to_cart"><a onclick="AddToCartSubmit(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                }
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="product_content list_content">
+                                                            <div>
+                                                                <div class="product_name">
+                                                                    <h3>Categories :  @item.ProductCategorieCode</h3>
+                                                                </div>
+                                                                <div class="product_name">
+                                                                    <h3><a href="product-details.html"> @item.Name</a></h3>
+                                                                </div>
+
+                                                                <div class="price_box">
+                                                                    <span class="old_price">$420.00</span>
+                                                                    <span class="current_price">@item.UnitPrice</span>
+                                                                </div>
+                                                                @if (Model.LoginViewModel.IsLogin)
+                                                                {
+
+                                                                    <div class="add_to_links">
+                                                                        <ul>
+                                                                            <li class="add_to_cart"><a onclick="AddToCartSubmit(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                }
+
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                @* // foreach shopList*@
+
                             </div>
+
                         </div>
+
+
+                        <!--shop toolbar end-->
+                        <!--shop wrapper end-->
                     </div>
                 </div>
             </div>
         </div>
-     
+        @section Scripts {
+            <script>
+                $(document).ready(function () {
+                    $('#dataproduct').DataTable();
+                });
+            </script>
 
-    </div>
 
-</section>
+        }
+
 
