@@ -86,6 +86,60 @@ BindData = () => {
 
 // #endregion
 
+// #region Functions
+
+/**
+  * @desc Remove Cart Item from Cart
+  * @param {Object} e - Element of Remove Button
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+RemoveCartItem = (e) => {
+    let $cartItemId = $(e).closest("tr").find("[name='hid-cart-item-id']").val();
+
+    // #region Remove Cart Item from Cart Item List
+
+    for (var i = 0; i < _cartItemList.length; i++) {
+        if (_cartItemList[i].id === parseInt($cartItemId)) {
+            delete _cartItemList[i];
+            _cartItemList.splice(i, i);
+            break;
+        }
+    }
+
+    // #endregion
+
+    $(e).closest("tr").remove();
+};
+
+/**
+  * @desc Calculate Total Price of Unit Product
+  * @param {Object} e - Element of Quantity Input
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+CalculateTotalPrice = (e) => {
+    let $trOfCartItem = $(e).closest("tr");
+
+    let $totalPriceElement = $trOfCartItem.find("[name='TotalPrice']");
+
+    let $productUnitPrice = parseInt($trOfCartItem.find("[name='hid-cart-item-unit-price']").val());
+    let $productQuantity = parseInt($trOfCartItem.find("[name='Quantity']").val());
+
+    let $totalPrice = $productUnitPrice * $productQuantity;
+
+    $totalPriceElement.val($totalPrice);
+};
+
+/**
+  * @desc Change Quantity of Cart Item
+  * @param {Object} e - Element of Input Quantity
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+//ChangeQuantityOfCartItem = (e) => {
+//    $(e).closest(".tr-data-row").find("[name='hid-cart-item-quantity']").val($(e).val());
+//};
+
+// #endregion
+
 // #region Affect
 
 /**
@@ -94,11 +148,11 @@ BindData = () => {
 */
 UpdatePage = () => {
     HideModal();
-    ClearForm();
+    //ClearForm();
     UpdateTable();
     //DropifyScriptRender();
     //RenderImage();
-    BindData();
+    //BindData();
     $("#table-data").DataTable();
     $("body").removeAttr("style");
 };
@@ -129,7 +183,7 @@ HideModal = () => {
 */
 UpdateTable = () => {
     $.ajax({
-        url: "/Backend/Customer/UpdateTable",
+        url: "/Backend/Cart/UpdateTable",
         async: false,
         success: function (res) {
             $("#parent-table").html(res);
@@ -168,6 +222,49 @@ DeleteCartItem = (e) => {
                 'success'
             );
         }
+    });
+};
+
+/**
+  * @desc Update Cart
+  * @param {Object} e - Element of Submit Button
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+UpdateCart = (e) => {
+    let cartItemList = [];
+
+    $(e).closest(".form-row-table").find(".tr-data-row").each(function (index, element) {
+        // #region Get Value from Data Row
+
+        let $id = parseInt($(element).find("[name='hid-cart-item-id']").val());
+        let $cartId = parseInt($(element).find("[name='hid-cart-item-cart-id']").val());
+        let $productId = parseInt($(element).find("[name='hid-cart-item-product-id']").val());
+        let $quantity = parseInt($(element).find("[name='Quantity']").val());
+        let $totalPrice = parseInt($(element).find("[name='TotalPrice']").val());
+        let $isActive = $(element).find("[name='hid-cart-item-is-active']").val() === "true" ? true : false;
+        let $createdDateTime = $(element).find("[name='hid-cart-item-created-datetime']").val();
+
+        // #endregion
+
+        // Add Value to Cart Item List
+        cartItemList.push({ id: $id, cardId: $cartId, productId: $productId, quantity: $quantity, totalPrice: $totalPrice, isActive: $isActive, createdDateTime: $createdDateTime, updatedDateTime: null });
+    });
+
+    $.ajax({
+        type: "POST",
+        url: "/Backend/Cart/UpdateCart",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: JSON.stringify(cartItemList),
+        success: function (res) {
+            if (res.isSuccess) {
+                UpdatePage();
+                swal("Update Success", "", "success");
+            } else {
+                swal("Update Success", "", "error");
+            }
+        },
+        error: function () { }
     });
 };
 

@@ -35,14 +35,7 @@
                                         <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content">
                                                 <form class="form-row-table">
-
-                                                    <!-- Hidden Value -->
-                                                    @*<input type="hidden" name="Id" value="@item.Id" />
-                                                    <input type="hidden" name="hid-sale-id" value="@item.SaleId" />
-                                                    <input type="hidden" name="Password" value="@item.Password" />*@
-                                                    <!-- End Hidden Value -->
-
-                                                    <div class="modal-header" style="background-color:#ff6a00;">
+                                                    <div class="modal-header" style="background-color: #ff6a00;">
                                                         <h4 class="modal-title text-white">Edit Cart</h4>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="text-white">×</span></button>
                                                     </div>
@@ -63,20 +56,40 @@
                                                                                         <th>Product Name</th>
                                                                                         <th>Picture</th>
                                                                                         <th>Quantity</th>
+                                                                                        <th>Total Price</th>
                                                                                         <th>Delete</th>
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
                                                                                     
-                                                                                    @foreach (var itemOfCartItem in Model.CartItemList.Where(w => w.CardId.Equals(itemOfCart.Id)))
+                                                                                    @foreach (var itemOfCartItem in Model.CartItemListModelList.Where(w => w.CardId.Equals(itemOfCart.Id)))
                                                                                     {
 
-                                                                                        <tr>
+                                                                                        <tr class="tr-data-row">
+
+                                                                                            <!-- Hidden Value of Cart Item Start -->
+
+                                                                                            <input type="hidden" name="hid-cart-item-id" value="@itemOfCartItem.Id" />
+                                                                                            <input type="hidden" name="hid-cart-item-cart-id" value="@itemOfCartItem.CardId" />
+                                                                                            <input type="hidden" name="hid-cart-item-product-id" value="@itemOfCartItem.ProductId" />
+                                                                                            @*<input type="hidden" name="hid-cart-item-quantity" value="@itemOfCartItem.Quantity" />*@
+                                                                                            @*<input type="hidden" name="hid-cart-item-total-price" value="@itemOfCartItem.TotalPrice" />*@
+                                                                                            <input type="hidden" name="hid-cart-item-is-active" value="@(@itemOfCartItem.IsActive ? "true" : "false")" />
+                                                                                            <input type="hidden" name="hid-cart-item-created-datetime" value="@itemOfCartItem.CreatedDateTime" />
+
+                                                                                            <input type="hidden" name="hid-cart-item-unit-price" value="@itemOfCartItem.UnitPrice" />
+
+                                                                                            <!-- Hidden Value of Cart Item End -->
+
                                                                                             <td>@itemOfCartItem.ProductName</td>
                                                                                             <td>
-                                                                                                <img src="~/images/upload/@itemOfCartItem.PictureFileName" alt="Picture" width="80" /></td>
+                                                                                                <img src="~/images/upload/@itemOfCartItem.PictureFileName" alt="Picture" width="80" />
+                                                                                            </td>
                                                                                             <td>
-                                                                                                <input type="number" class="form-control" name="QuaintityOfCartItem" value="@itemOfCartItem.Quantity" />
+                                                                                                <input type="number" class="form-control col-sm-4" name="Quantity" value="@itemOfCartItem.Quantity" onchange="CalculateTotalPrice(this)" />
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <input type="text" class="form-control col-sm-6" name="TotalPrice" value="@itemOfCartItem.TotalPrice" />
                                                                                             </td>
                                                                                             <td>
                                                                                                 <a href="#" onclick="DeleteCartItem(this)"><i class="fas fa-trash-alt text-inverse m-r-10"></i></a>
@@ -96,7 +109,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Success</button>
+                                                        <button type="button" class="btn btn-success" onclick="UpdateCart(this)"><i class="fa fa-check"></i> Success</button>
                                                     </div>
                                                 </form>
                                             </div>

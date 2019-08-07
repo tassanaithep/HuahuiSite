@@ -10,6 +10,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Interface
     public interface ICartService
     {
         void GetCartList(ref CartViewModel cartViewModel);
+        void UpdateCart(CartViewModel cartViewModel);
         //int SaveCustomer(CustomerViewModel customerViewModel);
         //void UpdateCustomer(CustomerViewModel customerViewModel);
         //void DeleteCustomer(CustomerViewModel customerViewModel);

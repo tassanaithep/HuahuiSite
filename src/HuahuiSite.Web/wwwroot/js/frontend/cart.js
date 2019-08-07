@@ -41,18 +41,18 @@ RemoveCartItem = (e) => {
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
 CalculateTotalPrice = (e) => {
-    let $trOfProduct = $(e).closest("tr");
+    let $trOfCartItem = $(e).closest("tr");
 
-    let $totalPriceElement = $trOfProduct.find(".product_total");
+    let $totalPriceElement = $trOfCartItem.find(".product_total");
 
-    let $productUnitPrice = parseInt($trOfProduct.find(".product-price").text());
-    let $productQuantity = $trOfProduct.find("[name='ProductQuantity']").val();
+    let $productUnitPrice = parseInt($trOfCartItem.find(".product-price").text());
+    let $productQuantity = parseInt($trOfCartItem.find("[name='ProductQuantity']").val());
 
     let $totalPrice = $productUnitPrice * $productQuantity;
 
     $totalPriceElement.text($totalPrice);
 
-    UpdateCartItemList($trOfProduct, $productQuantity, $totalPrice);
+    UpdateCartItemList($trOfCartItem, $productQuantity, $totalPrice);
 };
 
 /**
@@ -94,8 +94,8 @@ UpdateCart = () => {
     $.ajax({
         type: "POST",
         url: "/Cart/UpdateCart",
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
         data: JSON.stringify(_cartItemList),
         success: function (res) {
             if (res.isSuccess) {

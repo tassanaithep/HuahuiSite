@@ -71,39 +71,37 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         public void GetCartList(ref CartViewModel cartViewModel)
         {
             cartViewModel.CartList = _unitOfWork.Carts.GetCartList();
-            cartViewModel.CartItemList = _unitOfWork.CartItemLists.GetCartItemList();
+            cartViewModel.CartItemListModelList = _unitOfWork.CartItemLists.GetCartItemList();
         }
 
         #endregion
 
-        //#region Update
+        #region Update
 
         ///// <summary>
-        ///// Update Customer.
+        ///// Update Cart.
         ///// </summary>
         //// Author: Mod Nattasit
         //// Updated: 07/07/2019
-        //public void UpdateCustomer(CustomerViewModel customerViewModel)
-        //{
-        //    #region Create Object to Update
+        public void UpdateCart(CartViewModel cartViewModel)
+        {
+            #region Delete Old Cart Item List
 
-        //    Customer customer = new Customer()
-        //    {
-        //        Id = customerViewModel.Id,
-        //        Firstname = customerViewModel.Firstname,
-        //        Lastname = customerViewModel.Lastname,
-        //        Address = customerViewModel.Address,
-        //        PhoneNumber = customerViewModel.PhoneNumber,
-        //        Email = customerViewModel.Email,
-        //        SaleId = customerViewModel.SaleId
-        //    };
+            var cartItemListToRemove = _unitOfWork.CartItemLists.GetCartItemListByCard(cartViewModel.CartItemList.First().CardId);
+            _unitOfWork.CartItemLists.RemoveRange(cartItemListToRemove);
 
-        //    #endregion
+            #endregion
 
-        //    _unitOfWork.Customers.Update(customer);
-        //}
+            #region Update Cart Item List
 
-        //#endregion
+            cartViewModel.CartItemList.ToList().ForEach(i => i.Id = 0);
+
+            _unitOfWork.CartItemLists.AddRange(cartViewModel.CartItemList);
+
+            #endregion
+        }
+
+        #endregion
 
         //#region Delete
 

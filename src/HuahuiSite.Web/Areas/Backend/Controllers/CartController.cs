@@ -60,6 +60,33 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
         #endregion
 
+        #region Actions
+
+        [HttpPost]
+        public JsonResult UpdateCart([FromBody]IEnumerable<CartItemList> cartItemList)
+        {
+            CartViewModel cartViewModel = new CartViewModel();
+            cartViewModel.CartItemList = cartItemList;
+
+            bool isSuccess;
+            string exceptionMessage = string.Empty;
+
+            try
+            {
+                _cartService.UpdateCart(cartViewModel);
+                isSuccess = true;
+            }
+            catch (Exception exception)
+            {
+                exceptionMessage = exception.Message;
+                isSuccess = false;
+            }
+
+            return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
+        }
+
+        #endregion
+
         //#region Actions
 
         ///// <summary>
@@ -139,27 +166,26 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         //    return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
         //}
 
-        ///// <summary>
-        ///// Update Table.
-        ///// </summary>
-        //// Author: Mod Nattasit
-        //// Updated: 07/07/2019
-        //public PartialViewResult UpdateTable()
-        //{
-        //    CustomerViewModel customerViewModel = new CustomerViewModel();
+        /// <summary>
+        /// Update Table.
+        /// </summary>
+        // Author: Mod Nattasit
+        // Updated: 07/07/2019
+        public PartialViewResult UpdateTable()
+        {
+            CartViewModel cartViewModel = new CartViewModel();
 
-        //    try
-        //    {
-        //        _customerService.GetCustomerList(ref customerViewModel);
-        //        _saleService.GetSaleSelectList(ref customerViewModel);
-        //    }
-        //    catch (Exception exception)
-        //    {
+            try
+            {
+                _cartService.GetCartList(ref cartViewModel);
+            }
+            catch (Exception exception)
+            {
 
-        //    }
+            }
 
-        //    return PartialView("_Table", customerViewModel);
-        //}
+            return PartialView("_Table", cartViewModel);
+        }
 
         //#endregion
     }
