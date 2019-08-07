@@ -47,8 +47,11 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
                 //{
                 //    if (textsearch != null)
                 //    {
-                       mainViewModel.PromotionViewModel.ProductList = mainViewModel.PromotionViewModel.ProductList
-                    .Where(x => x.IsPromotion == true).OrderBy(x=>x.ProductCategorieCode).ToList();
+
+                    //   mainViewModel.PromotionViewModel.ProductList = mainViewModel.PromotionViewModel.ProductList
+                    //.Where(x => x.IsPromotion == true).OrderBy(x=>x.ProductCategorieCode).ToList();
+
+                mainViewModel.PromotionViewModel.ProductList = mainViewModel.PromotionViewModel.ProductList.Where(x => x.IsPromotion == true).ToList();
 
                 //    }
                 //    else

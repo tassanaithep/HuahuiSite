@@ -7,7 +7,7 @@
                     <ul>
                         <li><a asp-controller="Home" asp-action="Index">home</a></li>
 
-                        <li>shop list</li>
+                        <li>Promotion</li>
                     </ul>
                 </div>
             </div>
@@ -15,125 +15,128 @@
     </div>
 </div>
 
-<div class="shop_area shop_reverse">
-    <div class="container">
-        <div class="row">
-            
-            <div class="col-lg-9 col-md-12">
-                <!--shop wrapper start-->
-                <!--shop toolbar start-->
-                <div class="shop_title">
-                    <h3>รายการสินค้า</h3>
-                </div>
-                
+        <div class="shop_area shop_reverse">
+            <div class="container">
+                <div class="row">
 
-                <div class="row shop_wrapper grid_list">
-                    <div class="col-12 ">
-                        <table id="dataproduct" class="display" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
+                    <div class="col-lg-9 col-md-12">
+                        <!--shop wrapper start-->
+                        <!--shop toolbar start-->
+                        <div class="shop_title">
+                            <h3>รายการสินค้าโปรโมชั่น</h3>
+                        </div>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.PromotionViewModel.ProductList)
-                                {
-                                    <tr>
-                                        <td>
+                        <div class="row shop_wrapper grid_list">
+                            <div class="col-12 ">
+                                <table id="dataproduct" class="display" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
 
-                                            <div class="single_product">
-                                                <div class="product_thumb">
-                                                    <a class="primary_img" href="product-details.html"><img src="~/images/upload/@item.PictureFileName" alt="" width="200px"></a>
-                                                    <div class="quick_button">
-                                                        <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
-                                                    </div>
-                                                    <div class="label_product">
-                                                        <span class="label_new">New</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.PromotionViewModel.ProductList)
+                                        {
+                                            <tr>
+                                                <td>
 
-                                                </div>
-                                                <div class="product_content grid_content">
-                                                    <div class="content_inner">
-                                                        <div class="product_name">
-                                                            <h3><a href="product-details.html"> @item.Name</a></h3>
-                                                        </div>
 
-                                                        <div class="price_box">
-                                                            <span class="old_price">420.00</span>
-                                                            <span class="current_price">@item.UnitPrice</span>
-                                                        </div>
-                                                        @if (Model.LoginViewModel.IsLogin)
-                                                        {
 
-                                                            <div class="action_links">
-                                                                <ul>
-                                                                    <li class="add_to_cart"><a onclick="AddToCartSubmit(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                                                </ul>
+
+
+                                                    <div class="single_product">
+                                                        <div class="product_thumb">
+                                                            <a class="primary_img" href="product-details.html"><img src="~/images/upload/@item.PictureFileName" alt="" width="200px"></a>
+                                                            <div class="quick_button">
+                                                                <a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <i class="ion-eye"></i></a>
                                                             </div>
-                                                        }
-
-                                                    </div>
-                                                </div>
-
-                                                <div class="product_content list_content">
-                                                    <div>
-                                                        <div class="product_name">
-                                                            <h3>Categories :  @item.ProductCategorieCode</h3>
-                                                        </div>
-                                                        <div class="product_name">
-                                                            <h3><a href="product-details.html"> @item.Name</a></h3>
-                                                        </div>
-
-                                                        <div class="price_box">
-                                                            <span class="old_price">$420.00</span>
-                                                            <span class="current_price">@item.UnitPrice</span>
-                                                        </div>
-                                                        @if (Model.LoginViewModel.IsLogin)
-                                                        {
-
-                                                            <div class="add_to_links">
-                                                                <ul>
-                                                                    <li class="add_to_cart"><a onclick="AddToCartSubmit(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                                                </ul>
+                                                            <div class="label_product">
+                                                                <span class="label_new">New</span>
                                                             </div>
-                                                        }
+                                                        </div>
+                                                        <div class="row">
 
+                                                        </div>
+                                                        <div class="product_content grid_content">
+                                                            <div class="content_inner">
+                                                                <div class="product_name">
+                                                                    <h3><a href="product-details.html"> @item.Name</a></h3>
+                                                                </div>
+
+                                                                <div class="price_box">
+                                                                    <span class="old_price">420.00</span>
+                                                                    <span class="current_price">@item.UnitPrice</span>
+                                                                </div>
+                                                                @if (Model.LoginViewModel.IsLogin)
+                                                                {
+
+                                                                    <div class="action_links">
+                                                                        <ul>
+                                                                            <li class="add_to_cart"><a onclick="AddToCartSubmit(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                }
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="product_content list_content">
+                                                            <div>
+                                                                <div class="product_name">
+                                                                    <h3>Categories :  @item.ProductCategorieCode</h3>
+                                                                </div>
+                                                                <div class="product_name">
+                                                                    <h3><a href="product-details.html"> @item.Name</a></h3>
+                                                                </div>
+
+                                                                <div class="price_box">
+                                                                    <span class="old_price">$420.00</span>
+                                                                    <span class="current_price">@item.UnitPrice</span>
+                                                                </div>
+                                                                @if (Model.LoginViewModel.IsLogin)
+                                                                {
+
+                                                                    <div class="add_to_links">
+                                                                        <ul>
+                                                                            <li class="add_to_cart"><a onclick="AddToCartSubmit(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                }
+
+
+                                                            </div>
+
+                                                        </div>
 
                                                     </div>
 
-                                                </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                @* // foreach shopList*@
 
-                                            </div>
+                            </div>
 
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                        @* // foreach shopList*@
+                        </div>
 
+
+                        <!--shop toolbar end-->
+                        <!--shop wrapper end-->
                     </div>
-
                 </div>
-
-
-                <!--shop toolbar end-->
-                <!--shop wrapper end-->
             </div>
         </div>
-    </div>
-</div>
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            $('#dataproduct').DataTable();
-        });
-    </script>
+        @section Scripts {
+            <script>
+                $(document).ready(function () {
+                    $('#dataproduct').DataTable();
+                });
+            </script>
 
 
-}
+        }
 
 
