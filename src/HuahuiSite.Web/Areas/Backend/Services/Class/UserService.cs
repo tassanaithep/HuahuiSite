@@ -97,7 +97,8 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void UpdateUser(UserViewModel userViewModel = null, SaleViewModel saleViewModel = null, CustomerViewModel customerViewModel = null)
         {
-            var decryptPassword = Crypto.HashPassword(customerViewModel.Password);
+            
+           var decryptPassword = Crypto.HashPassword(userViewModel.Password);
             #region Create Object to Update
 
             User user = new User();
@@ -107,21 +108,27 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
                 user.Id = userViewModel.Id;
                 user.Name = userViewModel.Name;
                 user.Username = userViewModel.Username;
-                user.Password = userViewModel.Password;
+                user.Password = Crypto.Hash(userViewModel.Password);
+                user.RoleName = "Admin";
+                //user.Password = userViewModel.Password;
             }
             else if (saleViewModel != null)
             {
                 user.Id = saleViewModel.UserId;
                 user.Name = saleViewModel.Firstname + " " + saleViewModel.Lastname;
                 user.Username = saleViewModel.Username;
-                user.Password = saleViewModel.Password;
+                user.Password = Crypto.Hash(saleViewModel.Password);
+                user.RoleName = "Sale";
+                //user.Password = saleViewModel.Password;
             }
             else if (customerViewModel != null)
             {
                 user.Id = customerViewModel.Id;
                 user.Name = customerViewModel.Firstname + " " + customerViewModel.Lastname;
                 user.Username = customerViewModel.Username;
-                user.Password = customerViewModel.Password;
+                user.Password = Crypto.Hash(customerViewModel.Password);
+                user.RoleName = "Customer";
+                //user.Password = customerViewModel.Password;
             }
 
             #endregion

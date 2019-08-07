@@ -87,6 +87,7 @@ namespace HuahuiSite.Web
             services.AddScoped<HuahuiSite.Web.Areas.Frontend.Services.Interface.IHomeService, HuahuiSite.Web.Areas.Frontend.Services.Class.HomeService>();
             services.AddScoped<HuahuiSite.Web.Areas.Frontend.Services.Interface.ICartService, HuahuiSite.Web.Areas.Frontend.Services.Class.CartService>();
             services.AddScoped<HuahuiSite.Web.Areas.Frontend.Services.Interface.IShopListService, HuahuiSite.Web.Areas.Frontend.Services.Class.ShopListService>();
+            services.AddScoped<HuahuiSite.Web.Areas.Frontend.Services.Interface.IPromotionService, HuahuiSite.Web.Areas.Frontend.Services.Class.PromotionService>();
 
             #endregion
 

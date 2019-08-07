@@ -24,7 +24,7 @@
                         <h1>สินค้าแนะนำ !!</h1>
                         <H2></H2>
                         <p>+++ สินค้าแนะนำประจำสัปดาห์ +++</p>
-                        <a class="button" href="#">ซื้อเลย</a>
+                        @*<a class="button" href="#">ซื้อเลย</a>*@
                     </div>
                 </div>
             </div>
@@ -161,43 +161,44 @@
                                                 <h3><a href="product-details.html">@item.Name</a></h3>
                                             </div>
                                             @*<div class="product_ratings">
-                                                    <ul>
-                                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                                    </ul>
-                                                </div>*@
-                                            <div class="price_box">
-                                                <div class="row">
-                                                    <div class="col-sm-12 col-md-8 col-lg-8">
-                                                        <span class="old_price">420.00</span>
-                                                        <span class="current_price">@item.UnitPrice บาท</span>
+            <ul>
+                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+            </ul>
+        </div>*@
+                                            @if (Model.LoginViewModel.IsLogin)
+                                            {
+                                                <div class="price_box">
+                                                    <div class="row">
+                                                        <div class="col-sm-12 col-md-8 col-lg-8">
+                                                            <span class="old_price">420.00</span>
+                                                            <span class="current_price">@item.UnitPrice บาท</span>
+                                                        </div>
+
                                                     </div>
-
                                                 </div>
-                                            </div>
 
-                                            <div class="action_links">
-                                                <ul>
+                                                <div class="action_links">
+                                                    <ul>
 
-                                                    <!-- If Login will Show Add to Cart Button -->
+                                                        <!-- If Login will Show Add to Cart Button -->
 
-                                                    @if (Model.LoginViewModel.IsLogin)
-                                                    {
+
                                                         <li class="add_to_cart"><a onclick="AddToCartSubmit(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                                    }
 
-                                                    @*<li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                                                        <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i></a></li>*@
-                                                </ul>
-                                            </div>
+
+                                                        @*<li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a></li>
+                    <li class="compare"><a href="#" title="compare"><i class="ion-ios-settings-strong"></i></a></li>*@
+                                                    </ul>
+                                                </div> }
 
                                             @*<div class="product_timing">
-                                                    <h3>Ends in</h3>
-                                                    <div data-countdown="2020/12/15"></div>
-                                                </div>*@
+            <h3>Ends in</h3>
+            <div data-countdown="2020/12/15"></div>
+        </div>*@
                                         </div>
                                     </div>
                                 </div>

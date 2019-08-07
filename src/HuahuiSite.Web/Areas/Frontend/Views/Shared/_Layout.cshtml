@@ -58,7 +58,7 @@
 
                                 @if (Model.LoginViewModel.IsLogin)
                                 {
-                                    <a asp-area="Frontend" asp-controller="Login" asp-action="Index"><i class="ion-log-out"></i> ออกจากระบบ </a>
+                                    <a asp-area="Frontend" asp-controller="Login" asp-action="Index" asp-route-param="logout"><i class="ion-log-out"></i> ออกจากระบบ </a>
                                 }
                                 else
                                 {
