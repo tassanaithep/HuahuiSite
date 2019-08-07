@@ -8,6 +8,7 @@ namespace HuahuiSite.Core.Interfaces.Repositories
 {
     public interface ICartItemListRepository : IRepository<CartItemList>
     {
+        IEnumerable<CartItemListModel> GetCartItemList();
         IEnumerable<CartItemListModel> GetCartItemListByUser(int userId);
         IEnumerable<CartItemList> GetCartItemListByCard(int cardId);
         CartItemListModel GetCartItemListByCardAndProduct(int cardId, int productId);

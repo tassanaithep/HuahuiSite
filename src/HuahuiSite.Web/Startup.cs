@@ -72,6 +72,7 @@ namespace HuahuiSite.Web
             #region Backend
 
             services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.ILoginService, HuahuiSite.Web.Areas.Backend.Services.Class.LoginService>();
+            services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.ICartService, HuahuiSite.Web.Areas.Backend.Services.Class.CartService>();
             services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.ICustomerService, HuahuiSite.Web.Areas.Backend.Services.Class.CustomerService>();
             services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.IProductService, HuahuiSite.Web.Areas.Backend.Services.Class.ProductService>();
             services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.IProductCategorieService, HuahuiSite.Web.Areas.Backend.Services.Class.ProductCategorieService>();
@@ -99,7 +100,7 @@ namespace HuahuiSite.Web
             {
                 cfg.CreateMap<SaleModel, SaleViewModel>();
                 cfg.CreateMap<CustomerModel, CustomerViewModel>();
-                cfg.CreateMap<CartItemListModel, CartItemListViewModel>();
+                cfg.CreateMap<CartItemListModel, Areas.Frontend.Models.CartItemListViewModel>();
                 cfg.CreateMap<ProductModel, Areas.Frontend.Models.ProductViewModel>();
 
             });

@@ -49,6 +49,8 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         {
             var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
 
+            #region If Not Already Cart
+
             #region Save Cart
 
             var cartOfUser = _unitOfWork.Carts.GetCartActiveByUser(loginViewModelSession.RoleId);
@@ -69,6 +71,8 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
                 _unitOfWork.Carts.Add(cart);
             }
+
+            #endregion
 
             #endregion
 

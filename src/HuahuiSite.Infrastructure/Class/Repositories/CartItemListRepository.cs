@@ -20,6 +20,28 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
             get { return Context as HuahuiDbContext; }
         }
 
+        public IEnumerable<CartItemListModel> GetCartItemList()
+        {
+            return (from cartItemList in HuahuiDbContext.CartItemList
+                    join productJoin in HuahuiDbContext.Product on cartItemList.ProductId equals productJoin.Id into CartItemListJoinProduct
+                    from product in CartItemListJoinProduct.DefaultIfEmpty()
+                    join productGroupJoin in HuahuiDbContext.ProductGroup on product.ProductGroupCode equals productGroupJoin.Code into ProductJoinProductGroup
+                    from productGroup in ProductJoinProductGroup.DefaultIfEmpty()
+                    select new CartItemListModel
+                    {
+                        Id = cartItemList.Id,
+                        CardId = cartItemList.CardId,
+                        ProductId = cartItemList.ProductId,
+                        Quantity = cartItemList.Quantity,
+                        TotalPrice = cartItemList.TotalPrice,
+                        IsActive = cartItemList.IsActive,
+                        CreatedDateTime = cartItemList.CreatedDateTime,
+                        ProductName = product.Name,
+                        UnitPrice = productGroup.UnitPrice,
+                        PictureFileName = product.PictureFileName
+                    }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
+        }
+
         public IEnumerable<CartItemListModel> GetCartItemListByUser(int userId)
         {
             return (from cartItemList in HuahuiDbContext.CartItemList
@@ -33,6 +55,7 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         CardId = cartItemList.CardId,
                         ProductId = cartItemList.ProductId,
                         Quantity = cartItemList.Quantity,
+                        TotalPrice = cartItemList.TotalPrice,
                         IsActive = cartItemList.IsActive,
                         CreatedDateTime = cartItemList.CreatedDateTime,
                         ProductName = product.Name,
