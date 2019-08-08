@@ -1,4 +1,5 @@
 ﻿using HuahuiSite.Core.Entities;
+using HuahuiSite.Core.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,10 @@ namespace HuahuiSite.Web.Areas.Backend.Models
         public DateTime CreatedDateTime { get; set; }
 
         public IEnumerable<Order> OrderList { get; set; }
+        public IEnumerable<OrderItemListModel> OrderItemList { get; set; }
+
+        //public IEnumerable<CartModel> CartList { get; set; }
+        //public IEnumerable<CartItemList> CartItemList { get; set; }
+        //public IEnumerable<CartItemListModel> CartItemListModelList { get; set; }
     }
 }

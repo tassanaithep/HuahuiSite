@@ -73,6 +73,7 @@ namespace HuahuiSite.Web
 
             services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.ILoginService, HuahuiSite.Web.Areas.Backend.Services.Class.LoginService>();
             services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.ICartService, HuahuiSite.Web.Areas.Backend.Services.Class.CartService>();
+            services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.IOrderService, HuahuiSite.Web.Areas.Backend.Services.Class.OrderService>();
             services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.ICustomerService, HuahuiSite.Web.Areas.Backend.Services.Class.CustomerService>();
             services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.IProductService, HuahuiSite.Web.Areas.Backend.Services.Class.ProductService>();
             services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.IProductCategorieService, HuahuiSite.Web.Areas.Backend.Services.Class.ProductCategorieService>();

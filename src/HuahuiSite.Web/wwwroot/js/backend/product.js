@@ -183,7 +183,6 @@ UpdateTable = () => {
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
 Delete = (e) => {
-
     swal({
         title: 'Are you sure?',
         text: "คุณต้องการลบข้อมูล ใช่หรือไม่?",

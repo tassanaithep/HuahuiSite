@@ -31,35 +31,9 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
         #region CRUD
 
-        //#region Create
+        #region Create
 
-        ///// <summary>
-        ///// Save Customer.
-        ///// </summary>
-        //// Author: Mod Nattasit
-        //// Updated: 07/07/2019
-        //public int SaveCustomer(CustomerViewModel customerViewModel)
-        //{
-        //    #region Create Object to Save
-
-        //    Customer customer = new Customer()
-        //    {
-        //        Firstname = customerViewModel.Firstname,
-        //        Lastname = customerViewModel.Lastname,
-        //        Address = customerViewModel.PhoneNumber,
-        //        PhoneNumber = customerViewModel.PhoneNumber,
-        //        Email = customerViewModel.Email,
-        //        SaleId = customerViewModel.SaleId
-        //    };
-
-        //    #endregion
-
-        //    _unitOfWork.Customers.Add(customer);
-
-        //    return customer.Id;
-        //}
-
-        //#endregion
+        #endregion
 
         #region Read
 
@@ -103,28 +77,75 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
         #endregion
 
-        //#region Delete
+        #region Delete
 
-        ///// <summary>
-        ///// Delete Customer.
-        ///// </summary>
-        //// Author: Mod Nattasit
-        //// Updated: 07/07/2019
-        //public void DeleteCustomer(CustomerViewModel customerViewModel)
-        //{
-        //    #region Create Object to Delete
+        /// <summary>
+        /// Delete Cart.
+        /// </summary>
+        // Author: Mod Nattasit
+        // Updated: 07/07/2019
+        public void DeleteCart(int cartId)
+        {
+            // Delete Cart
+            var cart = _unitOfWork.Carts.Get(cartId);
+            _unitOfWork.Carts.Remove(cart);
 
-        //    Customer customer = new Customer()
-        //    {
-        //        Id = customerViewModel.Id,
-        //    };
+            // Delete Cart Item
+            var cartItemList = _unitOfWork.CartItemLists.GetCartItemListByCard(cartId);
+            _unitOfWork.CartItemLists.RemoveRange(cartItemList);
+        }
 
-        //    #endregion
+        #endregion
 
-        //    _unitOfWork.Customers.Remove(customer);
-        //}
+        #endregion
 
-        //#endregion
+        #region Actions
+
+        public void ApproveCart(int cartId)
+        {
+            #region Get Cart
+
+            var cart = _unitOfWork.Carts.Get(cartId);
+            var cartItemList = _unitOfWork.CartItemLists.GetCartItemListByCard(cartId);
+
+            #endregion
+
+            #region Save Order
+
+            Order order = new Order()
+            {
+                Status = "Complete",
+                CreatedDateTime = DateTime.Now
+            };
+
+            _unitOfWork.Orders.Add(order);
+
+            #endregion
+
+            #region Save Order Item List
+
+            cartItemList.ToList().ForEach(i => {
+                OrderItemList orderItemList = new OrderItemList()
+                {
+                    OrderId = order.Id,
+                    ProductId = i.ProductId,
+                    Quantity = i.Quantity,
+                    TotalPrice = i.TotalPrice,
+                    CreatedDateTime = DateTime.Now
+                };
+
+                _unitOfWork.OrderItemLists.Add(orderItemList);
+            });
+
+            #endregion
+
+            #region Delete Cart
+
+            _unitOfWork.Carts.Remove(cart);
+            _unitOfWork.CartItemLists.RemoveRange(cartItemList);
+
+            #endregion
+        }
 
         #endregion
     }

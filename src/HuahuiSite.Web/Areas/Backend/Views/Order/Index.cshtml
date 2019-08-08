@@ -1,0 +1,16 @@
+﻿@model HuahuiSite.Web.Areas.Backend.Models.OrderViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row" id="parent-table">
+    <partial name="_Table" model="Model" />
+</div>
+
+@section Scripts {
+
+    <script src="~/js/backend/order.js"></script>
+
+}
+

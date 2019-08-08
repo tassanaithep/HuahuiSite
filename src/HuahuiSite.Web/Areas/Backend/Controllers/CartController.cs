@@ -63,7 +63,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         #region Actions
 
         [HttpPost]
-        public JsonResult UpdateCart([FromBody]IEnumerable<CartItemList> cartItemList)
+        public JsonResult Update([FromBody]IEnumerable<CartItemList> cartItemList)
         {
             CartViewModel cartViewModel = new CartViewModel();
             cartViewModel.CartItemList = cartItemList;
@@ -74,6 +74,46 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
             try
             {
                 _cartService.UpdateCart(cartViewModel);
+                isSuccess = true;
+            }
+            catch (Exception exception)
+            {
+                exceptionMessage = exception.Message;
+                isSuccess = false;
+            }
+
+            return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
+        }
+
+        [HttpGet]
+        public JsonResult Delete(int cartId)
+        {
+            bool isSuccess;
+            string exceptionMessage = string.Empty;
+
+            try
+            {
+                _cartService.DeleteCart(cartId);
+                isSuccess = true;
+            }
+            catch (Exception exception)
+            {
+                exceptionMessage = exception.Message;
+                isSuccess = false;
+            }
+
+            return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
+        }
+
+        [HttpGet]
+        public JsonResult Approve(int cartId)
+        {
+            bool isSuccess;
+            string exceptionMessage = string.Empty;
+
+            try
+            {
+                _cartService.ApproveCart(cartId);
                 isSuccess = true;
             }
             catch (Exception exception)

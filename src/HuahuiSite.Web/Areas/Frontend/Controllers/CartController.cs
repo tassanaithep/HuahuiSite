@@ -93,6 +93,26 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
             return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
         }
 
+        [HttpGet]
+        public JsonResult CheckOut(int cartId)
+        {
+            bool isSuccess;
+            string exceptionMessage = string.Empty;
+
+            try
+            {
+                _cartService.CheckOut(cartId);
+                isSuccess = true;
+            }
+            catch (Exception exception)
+            {
+                exceptionMessage = exception.Message;
+                isSuccess = false;
+            }
+
+            return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
+        }
+
         #endregion
     }
 }
