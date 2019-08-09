@@ -94,7 +94,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                     CardId = cartOfUser == null ? cart.Id : cartOfUser.Id,
                     ProductId = cartViewModel.ProductId,
                     Quantity = cartViewModel.QuantityOfItem,
-                    TotalPrice = cartViewModel.ProductUnitPrice,
+                    TotalPrice = (cartViewModel.ProductUnitPrice * cartViewModel.QuantityOfItem),
                     IsActive = true,
                     CreatedDateTime = DateTime.Now
                 };
@@ -117,7 +117,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                     CardId = cartOfUser.Id,
                     ProductId = cartViewModel.ProductId,
                     Quantity = cartViewModel.QuantityOfItem,
-                    TotalPrice = cartViewModel.ProductUnitPrice,
+                    TotalPrice = (cartViewModel.ProductUnitPrice * cartViewModel.QuantityOfItem),
                     IsActive = cartItemOfProduct.IsActive,
                     CreatedDateTime = cartItemOfProduct.CreatedDateTime,
                     UpdatedDateTime = DateTime.Now

@@ -18,21 +18,17 @@ $(function () {
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
 RemoveCartItem = (e) => {
-    let $cartItemId = $(e).closest("tr").find("[name='hid-cart-item-id']").val();
+    let $cartItemId = parseInt($(e).closest(".tr-data-row").find("[name='hid-cart-item-id']").val());
 
     // #region Remove Cart Item from Cart Item List
 
-    for (var i = 0; i < _cartItemList.length; i++) {
-        if (_cartItemList[i].id === parseInt($cartItemId)) {
-            delete _cartItemList[i];
-            _cartItemList.splice(i, i);
-            break;
-        }
-    }
+    _cartItemList = _cartItemList.filter(function (cartItemList) {
+        return cartItemList.id !== $cartItemId;
+    });
 
     // #endregion
 
-    $(e).closest("tr").remove();
+    $(e).closest(".tr-data-row").remove();
 };
 
 /**

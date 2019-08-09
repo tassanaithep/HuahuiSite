@@ -110,7 +110,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             mainViewModel.HomeViewModel = new HomeViewModel();
             mainViewModel.HomeViewModel.ProductList = Mapper.Map<IEnumerable<ProductModel>, IEnumerable<ProductViewModel>>(_unitOfWork.Products.GetProductList());
 
-            if (mainViewModel.LoginViewModel != null)
+            if (mainViewModel.LoginViewModel.IsLogin)
             {
                 mainViewModel.HomeViewModel.CartItemListViewList = Mapper.Map<IEnumerable<CartItemListModel>, IEnumerable<CartItemListViewModel>>(_unitOfWork.CartItemLists.GetCartItemListByUser(mainViewModel.LoginViewModel.RoleId));
             }

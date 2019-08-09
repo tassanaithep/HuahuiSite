@@ -18,7 +18,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Models
         #region Product
 
         public int ProductId { get; set; }
-        public int  ProductUnitPrice { get; set; }
+        public decimal  ProductUnitPrice { get; set; }
 
         #endregion
 
