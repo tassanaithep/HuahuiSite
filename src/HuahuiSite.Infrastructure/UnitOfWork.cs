@@ -17,6 +17,8 @@ namespace HuahuiSite.Infrastructure
             Carts = new CartRepository(_context);
             CartItemLists = new CartItemListRepository(_context);
             Customers = new CustomerRepository(_context);
+            Orders = new OrderRepository(_context);
+            OrderItemLists = new OrderItemListRepository(_context);
             Products = new ProductRepository(_context);
             ProductCategories = new ProductCategorieRepository(_context);
             ProductGroups = new ProductGroupRepository(_context);
@@ -28,6 +30,8 @@ namespace HuahuiSite.Infrastructure
         public ICartRepository Carts { get; private set; }
         public ICartItemListRepository CartItemLists { get; private set; }
         public ICustomerRepository Customers { get; private set; }
+        public IOrderRepository Orders { get; private set; }
+        public IOrderItemListRepository OrderItemLists { get; private set; }
         public IProductRepository Products { get; private set; }
         public IProductCategorieRepository ProductCategories { get; private set; }
         public IProductGroupRepository ProductGroups { get; private set; }

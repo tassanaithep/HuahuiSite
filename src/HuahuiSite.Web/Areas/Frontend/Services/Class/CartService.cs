@@ -182,30 +182,20 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             #endregion
         }
 
+        public void CheckOut(int cartId)
+        {
+            var cart = _unitOfWork.Carts.Get(cartId);
+
+            cart.Status = "Confirm";
+
+            _unitOfWork.Carts.Update(cart);
+        }
+
         #endregion
 
-        //#region Delete
+        #region Delete
 
-        ///// <summary>
-        ///// Delete Cart.
-        ///// </summary>
-        //// Author: Mod Nattasit
-        //// Updated: 07/07/2019
-        //public void DeleteUser(UserViewModel userViewModel)
-        //{
-        //    #region Create Object to Delete
-
-        //    Cart user = new Cart()
-        //    {
-        //        Id = userViewModel.Id,
-        //    };
-
-        //    #endregion
-
-        //    _unitOfWork.Users.Remove(user);
-        //}
-
-        //#endregion
+        #endregion
 
         #endregion
     }

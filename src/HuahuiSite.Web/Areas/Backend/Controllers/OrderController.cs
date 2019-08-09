@@ -1,165 +1,232 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using HuahuiSite.Core.Entities;
-//using HuahuiSite.Web.Areas.Backend.Models;
-//using HuahuiSite.Web.Areas.Backend.Services.Interface;
-//using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using HuahuiSite.Core.Entities;
+using HuahuiSite.Web.Areas.Backend.Models;
+using HuahuiSite.Web.Areas.Backend.Services.Interface;
+using Microsoft.AspNetCore.Mvc;
 
-//namespace HuahuiSite.Web.Areas.Backend.Controllers
-//{
-//    [Area("Backend")]
-//    public class OrderController : Controller
-//    {
-//        #region Members
+namespace HuahuiSite.Web.Areas.Backend.Controllers
+{
+    [Area("Backend")]
+    public class OrderController : Controller
+    {
+        #region Members
 
-//        private readonly IOrderService _customerService;
+        private readonly IOrderService _orderService;
 
-//        #endregion
+        #endregion
 
-//        #region Constructor
+        #region Constructor
 
-//        public OrderController(
-//            IOrderService customerService
-//            )
-//        {
-//            _customerService = customerService;
-//        }
+        public OrderController(
+            IOrderService orderService
+            )
+        {
+            _orderService = orderService;
+        }
 
-//        #endregion
+        #endregion
 
-//        #region Views
+        #region Views
 
-//        /// <summary>
-//        /// Index of Page.
-//        /// </summary>
-//        // Author: Mod Nattasit
-//        // Updated: 07/07/2019
-//        public IActionResult Index()
-//        {
-//            // Check Login Status
-//            //if (!_loginService.CheckLoginStatus())
-//            //{
-//            //    return RedirectToAction("Index", "Login");
-//            //}
+        /// <summary>
+        /// Index of Page.
+        /// </summary>
+        // Author: Mod Nattasit
+        // Updated: 07/07/2019
+        public IActionResult Index()
+        {
+            // Check Login Status
+            //if (!_loginService.CheckLoginStatus())
+            //{
+            //    return RedirectToAction("Index", "Login");
+            //}
 
-//            OrderViewModel customerViewModel = new OrderViewModel();
+            OrderViewModel orderViewModel = new OrderViewModel();
 
-//            try
-//            {
-//                _customerService.GetOrderList(ref customerViewModel);
-//            }
-//            catch (Exception exception)
-//            {
+            try
+            {
+                _orderService.GetOrderList(ref orderViewModel);
+            }
+            catch (Exception exception)
+            {
 
-//            }
+            }
 
-//            return View(customerViewModel);
-//        }
+            return View(orderViewModel);
+        }
 
-//        #endregion
+        #endregion
 
-//        //#region Actions
+        //#region Actions
 
-//        ///// <summary>
-//        ///// Save.
-//        ///// </summary>
-//        //// Author: Mod Nattasit
-//        //// Updated: 07/07/2019
-//        //[HttpPost]
-//        //public IActionResult Save(OrderViewModel customerViewModel)
-//        //{
-//        //    bool isSuccess;
-//        //    string exceptionMessage = string.Empty;
+        //[HttpPost]
+        //public JsonResult Update([FromBody]IEnumerable<CartItemList> cartItemList)
+        //{
+        //    CartViewModel cartViewModel = new CartViewModel();
+        //    cartViewModel.CartItemList = cartItemList;
 
-//        //    try
-//        //    {
-//        //        int customerId = _customerService.SaveOrder(customerViewModel);
-//        //        _userService.SaveUser(null, null, customerViewModel, customerId);
-//        //        isSuccess = true;
-//        //    }
-//        //    catch (Exception exception)
-//        //    {
-//        //        exceptionMessage = exception.Message;
-//        //        isSuccess = false;
-//        //    }
+        //    bool isSuccess;
+        //    string exceptionMessage = string.Empty;
 
-//        //    return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
-//        //}
+        //    try
+        //    {
+        //        _cartService.UpdateCart(cartViewModel);
+        //        isSuccess = true;
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        exceptionMessage = exception.Message;
+        //        isSuccess = false;
+        //    }
 
-//        ///// <summary>
-//        ///// Update.
-//        ///// </summary>
-//        //// Author: Mod Nattasit
-//        //// Updated: 07/07/2019
-//        //[HttpPost]
-//        //public IActionResult Update(OrderViewModel customerViewModel)
-//        //{
-//        //    bool isSuccess;
-//        //    string exceptionMessage = string.Empty;
+        //    return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
+        //}
 
-//        //    try
-//        //    {
-//        //        _customerService.UpdateOrder(customerViewModel);
-//        //        //_userService.UpdateUser(null, null, customerViewModel);
-//        //        isSuccess = true;
-//        //    }
-//        //    catch (Exception exception)
-//        //    {
-//        //        exceptionMessage = exception.Message;
-//        //        isSuccess = false;
-//        //    }
+        //[HttpGet]
+        //public JsonResult Delete(int cartId)
+        //{
+        //    bool isSuccess;
+        //    string exceptionMessage = string.Empty;
 
-//        //    return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
-//        //}
+        //    try
+        //    {
+        //        _cartService.DeleteCart(cartId);
+        //        isSuccess = true;
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        exceptionMessage = exception.Message;
+        //        isSuccess = false;
+        //    }
 
-//        ///// <summary>
-//        ///// Delete.
-//        ///// </summary>
-//        //// Author: Mod Nattasit
-//        //// Updated: 07/07/2019
-//        //[HttpPost]
-//        //public JsonResult Delete(OrderViewModel customerViewModel)
-//        //{
-//        //    bool isSuccess;
-//        //    string exceptionMessage = string.Empty;
+        //    return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
+        //}
 
-//        //    try
-//        //    {
-//        //        _customerService.DeleteOrder(customerViewModel);
-//        //        isSuccess = true;
-//        //    }
-//        //    catch (Exception exception)
-//        //    {
-//        //        exceptionMessage = exception.Message;
-//        //        isSuccess = false;
-//        //    }
+        //[HttpGet]
+        //public JsonResult Approve(int cartId)
+        //{
+        //    bool isSuccess;
+        //    string exceptionMessage = string.Empty;
 
-//        //    return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
-//        //}
+        //    try
+        //    {
+        //        _cartService.ApproveCart(cartId);
+        //        isSuccess = true;
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        exceptionMessage = exception.Message;
+        //        isSuccess = false;
+        //    }
 
-//        ///// <summary>
-//        ///// Update Table.
-//        ///// </summary>
-//        //// Author: Mod Nattasit
-//        //// Updated: 07/07/2019
-//        //public PartialViewResult UpdateTable()
-//        //{
-//        //    OrderViewModel customerViewModel = new OrderViewModel();
+        //    return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
+        //}
 
-//        //    try
-//        //    {
-//        //        _customerService.GetOrderList(ref customerViewModel);
-//        //    }
-//        //    catch (Exception exception)
-//        //    {
+        //#endregion
 
-//        //    }
+        //#region Actions
 
-//        //    return PartialView("_Table", customerViewModel);
-//        //}
+        ///// <summary>
+        ///// Save.
+        ///// </summary>
+        //// Author: Mod Nattasit
+        //// Updated: 07/07/2019
+        //[HttpPost]
+        //public IActionResult Save(CustomerViewModel customerViewModel)
+        //{
+        //    bool isSuccess;
+        //    string exceptionMessage = string.Empty;
 
-//        //#endregion
-//    }
-//}
+        //    try
+        //    {
+        //        int customerId = _customerService.SaveCustomer(customerViewModel);
+        //        _userService.SaveUser(null, null, customerViewModel, customerId);
+        //        isSuccess = true;
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        exceptionMessage = exception.Message;
+        //        isSuccess = false;
+        //    }
+
+        //    return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
+        //}
+
+        ///// <summary>
+        ///// Update.
+        ///// </summary>
+        //// Author: Mod Nattasit
+        //// Updated: 07/07/2019
+        //[HttpPost]
+        //public IActionResult Update(CustomerViewModel customerViewModel)
+        //{
+        //    bool isSuccess;
+        //    string exceptionMessage = string.Empty;
+
+        //    try
+        //    {
+        //        _customerService.UpdateCustomer(customerViewModel);
+        //        //_userService.UpdateUser(null, null, customerViewModel);
+        //        isSuccess = true;
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        exceptionMessage = exception.Message;
+        //        isSuccess = false;
+        //    }
+
+        //    return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
+        //}
+
+        ///// <summary>
+        ///// Delete.
+        ///// </summary>
+        //// Author: Mod Nattasit
+        //// Updated: 07/07/2019
+        //[HttpPost]
+        //public JsonResult Delete(CustomerViewModel customerViewModel)
+        //{
+        //    bool isSuccess;
+        //    string exceptionMessage = string.Empty;
+
+        //    try
+        //    {
+        //        _customerService.DeleteCustomer(customerViewModel);
+        //        isSuccess = true;
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        exceptionMessage = exception.Message;
+        //        isSuccess = false;
+        //    }
+
+        //    return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
+        //}
+
+        /// <summary>
+        /// Update Table.
+        /// </summary>
+        // Author: Mod Nattasit
+        // Updated: 07/07/2019
+        public PartialViewResult UpdateTable()
+        {
+            OrderViewModel orderViewModel = new OrderViewModel();
+
+            try
+            {
+                _orderService.GetOrderList(ref orderViewModel);
+            }
+            catch (Exception exception)
+            {
+
+            }
+
+            return PartialView("_Table", orderViewModel);
+        }
+
+        //#endregion
+    }
+}

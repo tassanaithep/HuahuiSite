@@ -10,6 +10,8 @@ namespace HuahuiSite.Core.Interfaces
         ICartRepository Carts { get; }
         ICartItemListRepository CartItemLists { get; }
         ICustomerRepository Customers { get; }
+        IOrderRepository Orders { get; }
+        IOrderItemListRepository OrderItemLists { get; }
         IProductRepository Products { get; }
         IProductCategorieRepository ProductCategories { get; }
         IProductGroupRepository ProductGroups { get; }

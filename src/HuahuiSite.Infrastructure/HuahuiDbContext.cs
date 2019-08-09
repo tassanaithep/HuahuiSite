@@ -20,6 +20,7 @@ namespace HuahuiSite.Infrastructure
         public virtual DbSet<CartItemList> CartItemList { get; set; }
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<OrderItemList> OrderItemList { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<ProductCategorie> ProductCategorie { get; set; }
         public virtual DbSet<ProductGroup> ProductGroup { get; set; }
@@ -85,7 +86,16 @@ namespace HuahuiSite.Infrastructure
             {
                 entity.Property(e => e.CreatedDateTime).HasColumnType("datetime");
 
-                entity.Property(e => e.Status).HasMaxLength(30);
+                entity.Property(e => e.Status)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.UpdatedDateTime).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<OrderItemList>(entity =>
+            {
+                entity.Property(e => e.CreatedDateTime).HasColumnType("datetime");
 
                 entity.Property(e => e.UpdatedDateTime).HasColumnType("datetime");
             });

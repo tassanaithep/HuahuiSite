@@ -24,13 +24,6 @@
 <div class="shopping_cart_area pt-30">
     <div class="container">
         <form id="form-cart-item">
-
-            <!-- Hidden Value Start -->
-
-            <input type="hidden" name="hid-cart-id" value="@Model.CartViewModel.CartItemListViewList.First().CardId" />
-
-            <!-- Hidden Value End -->
-
             <div class="row">
                 <div class="col-12">
                     <div class="table_desc">
@@ -72,13 +65,12 @@
                         </div>
                         <div class="cart_submit">
                             <button type="button" onclick="UpdateCart()">update cart</button>
-                            <button type="button" onclick="CheckOutCart()">check out cart</button>
+                            <button type="button" onclick="CheckOutCart('@Model.CartViewModel.CartItemListViewList.First().CardId')">check out cart</button>
                         </div>
                     </div>
                 </div>
             </div>
             <!--coupon code area start-->
-            
             <!--coupon code area end-->
         </form>
     </div>

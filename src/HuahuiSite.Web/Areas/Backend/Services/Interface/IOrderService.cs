@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace HuahuiSite.Web.Areas.Backend.Services.Interface
 {
-    public interface ICartService
+    public interface IOrderService
     {
-        void GetCartList(ref CartViewModel cartViewModel);
-        void UpdateCart(CartViewModel cartViewModel);
-        void DeleteCart(int cartId);
-        void ApproveCart(int cartId);
+        void GetOrderList(ref OrderViewModel orderViewModel);
     }
 }

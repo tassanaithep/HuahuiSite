@@ -197,6 +197,42 @@ UpdateTable = () => {
 // #region Action
 
 /**
+  * @desc Delete Cart
+  * @param {Object} e - Element of Delete Button
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+Delete = (e) => {
+    let $cartId = $(e).closest(".tr-data-row").find(".form-row-table").find("[name='hid-cart-id']").val();
+
+    swal({
+        title: 'Are you sure?',
+        text: "คุณต้องการลบข้อมูล ใช่หรือไม่?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                type: "GET",
+                url: "/Backend/Cart/Delete",
+                data: { cartId: $cartId },
+                success: function (res) {
+                    if (res.isSuccess) {
+                        UpdatePage();
+                        swal("Delete Success", "", "success");
+                    } else {
+                        swal("Delete Failed", "", "error");
+                    }
+                },
+                error: function () { }
+            });
+        }
+    });
+};
+
+/**
   * @desc Delete Cart Item of Cart
   * @param {Object} e - Element of Delete Button
   * @author Mod Nattasit mod.nattasit@gmail.com
@@ -216,11 +252,7 @@ DeleteCartItem = (e) => {
             $(e).closest("tr").remove();
 
             // Alert Result of Delete
-            Swal(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-            );
+            Swal('Deleted!', 'Your file has been deleted.', 'success');
         }
     });
 };
@@ -252,7 +284,7 @@ UpdateCart = (e) => {
 
     $.ajax({
         type: "POST",
-        url: "/Backend/Cart/UpdateCart",
+        url: "/Backend/Cart/Update",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: JSON.stringify(cartItemList),
@@ -265,6 +297,37 @@ UpdateCart = (e) => {
             }
         },
         error: function () { }
+    });
+};
+
+Approve = (e) => {
+    let $cartId = $(e).closest(".tr-data-row").find(".form-row-table").find("[name='hid-cart-id']").val();
+
+    swal({
+        title: 'Are you sure?',
+        text: "คุณต้องการอนุมัติการสั่งซื้อ ใช่หรือไม่?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Confirm it!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                type: "GET",
+                url: "/Backend/Cart/Approve",
+                data: { cartId: $cartId },
+                success: function (res) {
+                    if (res.isSuccess) {
+                        UpdatePage();
+                        swal("Approve Success", "", "success");
+                    } else {
+                        swal("Approve Failed", "", "error");
+                    }
+                },
+                error: function () { }
+            });
+        }
     });
 };
 

@@ -108,6 +108,27 @@ UpdateCart = () => {
     });
 };
 
+/**
+  * @desc Update Cart
+  * @param {Number} cartId - Cart Id of Cart
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+CheckOutCart = (cartId) => {
+    $.ajax({
+        type: "GET",
+        url: "/Cart/CheckOut",
+        data: { cartId: cartId },
+        success: function (res) {
+            if (res.isSuccess) {
+                window.location = "/Cart/Index";
+            } else {
+                alert("Error");
+            }
+        },
+        error: function () { }
+    });
+};
+
 // #endregion
 
 // #region Validate
