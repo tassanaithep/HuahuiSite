@@ -47,6 +47,12 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
             //homeViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();
             //homeViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
+
+            if (mainViewModel.LoginViewModel.IsLogin)
+            {
+                mainViewModel.ShopListViewModel.CartItemListViewList = Mapper.Map<IEnumerable<CartItemListModel>, IEnumerable<CartItemListViewModel>>(_unitOfWork.CartItemLists.GetCartItemListByUser(mainViewModel.LoginViewModel.RoleId));
+            }
+
             mainViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();
             mainViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
 
