@@ -10,7 +10,7 @@
                         <h1>สินค้าขายดี !!</h1>
                         <h2></h2>
                         <p>+++ สินค้าขายดีประจำเดือนนี้ +++</p>
-                        <a class="button" href="#">ซื้อเลย</a>
+                        @*<a class="button" href="#">ซื้อเลย</a>*@
                     </div>
                 </div>
             </div>
@@ -146,19 +146,23 @@
                             <div class="col-lg-3">
                                 <div class="single_product">
                                     <div class="product_thumb">
-                                        <a class="primary_img" href="product-details.html"><img src="~/images/upload/@item.PictureFileName" alt=""></a>
-                                        @*  <a class="secondary_img" href="product-details.html"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/product/product1.jpg" alt=""></a>*@
-                                        <div class="quick_button">
-                                            <a title="quick view" onclick="OpenProductModal(this)"><i class="ion-eye"></i></a>
-                                        </div>
-                                        <div class="label_product">
-                                            <span class="label_sale">-57%</span>
-                                        </div>
+                                    @*    <a class="primary_img" href="product-details.html"><img src="~/images/upload/@item.PictureFileName" alt=""></a>*@
+                                        <img src="~/images/upload/@item.PictureFileName" alt="">
+                                        @if (Model.LoginViewModel.IsLogin)
+                                        {
+                                            <div class="quick_button">
+                                                <a title="quick view" onclick="OpenProductModal(this)"><i class="ion-eye"></i></a>
+                                            </div>
+                                        }
+                                        @*<div class="label_product">
+            <span class="label_sale">-57%</span>
+        </div>*@
                                     </div>
                                     <div class="product_content">
                                         <div class="content_inner">
                                             <div class="product_name">
-                                                <h3><a href="product-details.html">@item.Name</a></h3>
+                                                @*<h3><a href="product-details.html">@item.Name</a></h3>*@
+                                                <h3>@item.Name</h3>
                                             </div>
 
                                             @if (Model.LoginViewModel.IsLogin)
@@ -236,13 +240,17 @@
                     </div>
                     <div class="product_carousel product_column4 owl-carousel">
 
+                        @{ int NoOfproduct = 0;
+                            int cat_Pro = NoOfCategorie + NoOfproduct;}
+
                         @foreach (var itemOfProduct in Model.HomeViewModel.ProductList.Where(w => w.ProductCategorieCode.Equals(itemOfProductCategorie.Code)).Take(10))
                         {
-                            <form class="form-product-item" id="form-product-@NoOfCategorie" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
+                           
+                            <form class="form-product-item" id="form-product-@NoOfCategorie-@NoOfproduct" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
 
                                 <!-- Hidden Value Start -->
 
-                                <input type="hidden" name="hid-form-product-id" value="form-product-@NoOfCategorie" />
+                                <input type="hidden" name="hid-form-product-id" value="form-product-@NoOfCategorie-@NoOfproduct" />
                                 <input type="hidden" name="ProductId" value="@itemOfProduct.Id" />
                                 <input type="hidden" name="ProductName" value="@itemOfProduct.Name" />
                                 <input type="hidden" name="ProductUnitPrice" value="@itemOfProduct.UnitPrice" />
@@ -255,20 +263,25 @@
                                 <div class="col-lg-3">
                                     <div class="single_product">
                                         <div class="product_thumb">
-                                            <a class="primary_img" href="product-details.html"><img src="~/images/upload/@itemOfProduct.PictureFileName" alt=""></a>
-                                            <div class="quick_button">
-                                                <a title="quick view" onclick="OpenProductModal(this)"><i class="ion-eye"></i></a>
-                                            </div>
-                                            <div class="label_product">
-                                                <span class="label_sale">-57%</span>
-                                            </div>
+                                            @*<a class="primary_img" href="product-details.html"><img src="~/images/upload/@itemOfProduct.PictureFileName" alt=""></a>*@
+                                            <img src="~/images/upload/@itemOfProduct.PictureFileName" alt="">
+
+                                            @if (Model.LoginViewModel.IsLogin)
+                                            {<div class="quick_button">
+                                                    <a title="quick view" onclick="OpenProductModal(this)"><i class="ion-eye"></i></a>
+                                                </div>
+                                            }
+                                            @*<div class="label_product">
+                                <span class="label_sale">-57%</span>
+                            </div>*@
                                         </div>
                                         <div class="product_content">
                                             <div class="content_inner">
                                                 <div class="product_name">
-                                                    <h3><a href="product-details.html">@itemOfProduct.Name</a></h3>
+                                                    @*<h3><a href="product-details.html">@itemOfProduct.Name</a></h3>*@
+                                                    <h3>@itemOfProduct.Name</h3>
                                                 </div>
-  
+
                                                 @if (Model.LoginViewModel.IsLogin)
                                                 {
                                                     <div class="price_box">
@@ -291,7 +304,7 @@
                                                         </ul>
                                                     </div>
                                                 }
-         
+
                                             </div>
                                         </div>
                                     </div>
@@ -299,6 +312,7 @@
                                     <input type="submit" name="btn-submit" style="display: none;" />
                                 </div>
                             </form>
+                            NoOfproduct++;
                         }
 
                     </div>
@@ -394,6 +408,7 @@
     <script>
 
         var _cartItemList = @Html.Raw(Json.Serialize(@Model.HomeViewModel.CartItemListViewList));
+       // alert(_cartItemList);
 
         AddToCartSubmit = (e) => {
             $(e).closest(".form-product-item").find(".btn-submit").click();
