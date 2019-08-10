@@ -82,7 +82,7 @@ OpenProductModal = (e) => {
                                             <h2>${ $name }</h2>
                                         </div>
                                         <div class="modal_price mb-10">
-                                            <span class="new_price">$${ $unitPrice }</span>
+                                            <span class="new_price">$${ $unitPrice}</span><span class="new_price">$${$productId }</span>
                                             <span class="old_price">$78.99</span>
                                         </div>
                                         <div class="modal_description mb-15">

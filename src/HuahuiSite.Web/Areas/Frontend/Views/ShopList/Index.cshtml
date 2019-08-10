@@ -108,85 +108,85 @@
                                 {
                                     <tr>
                                         <td>
-                                            
-                                                <form class="form-product-item" id="form-product-@NoOfProduct" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
-                                                    <input type="hidden" name="hid-form-product-id" value="form-product-@NoOfProduct" />
-                                                    <input type="hidden" name="ProductId" value="@item.Id" />
-                                                    <input type="hidden" name="ProductName" value="@item.Name" />
-                                                    <input type="hidden" name="ProductUnitPrice" value="@item.UnitPrice" />
-                                                    <input type="hidden" name="ProductPictureFileName" value="@item.PictureFileName" />
 
-                                                    <input type="hidden" name="QuantityOfItem" />
+                                            <form class="form-product-item" id="form-product-@NoOfProduct" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
+                                                <input type="hidden" name="hid-form-product-id" value="form-product-@NoOfProduct" />
+                                                <input type="hidden" name="ProductId" value="@item.Id" />
+                                                <input type="hidden" name="ProductName" value="@item.Name" />
+                                                <input type="hidden" name="ProductUnitPrice" value="@item.UnitPrice" />
+                                                <input type="hidden" name="ProductPictureFileName" value="@item.PictureFileName" />
 
-                                                    <div class="single_product">
-                                                        <div class="product_thumb" style="text-align:center;">
-                                                            <a class="primary_img" href="product-details.html"><img src="~/images/upload/@item.PictureFileName" alt="" width="200px"></a>
+                                                <input type="hidden" name="QuantityOfItem" />
 
+                                                <div class="single_product">
+                                                    <div class="product_thumb" style="text-align:center;">
+                                                        <a class="primary_img" href="product-details.html"><img src="~/images/upload/@item.PictureFileName" alt="" width="200px"></a>
+
+                                                        @if (Model.LoginViewModel.IsLogin)
+                                                        {<div class="quick_button">
+                                                                <a title="quick view" onclick="OpenProductModal(this)"><i class="ion-eye"></i></a>
+                                                            </div>
+                                                        }
+                                                        <div class="label_product">
+                                                            <span class="label_new">New</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="product_content grid_content">
+                                                        <div class="content_inner">
+                                                            <div class="product_name">
+                                                                <h3><a href="product-details.html"> @item.Name</a></h3>
+                                                            </div>
                                                             @if (Model.LoginViewModel.IsLogin)
-                                                            {<div class="quick_button">
-                                                                    <a title="quick view" onclick="OpenProductModal(this)"><i class="ion-eye"></i></a>
+                                                            {
+                                                                <div class="price_box">
+                                                                    <span class="old_price">420.00</span>
+                                                                    <span class="current_price">@item.UnitPrice</span>
+                                                                </div>
+
+
+                                                                <div class="action_links">
+                                                                    <ul>
+
+                                                                        <li class="add_to_cart"><a onclick="OpenProductModal(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
+
+                                                                    </ul>
                                                                 </div>
                                                             }
-                                                            <div class="label_product">
-                                                                <span class="label_new">New</span>
-                                                            </div>
+
                                                         </div>
+                                                    </div>
 
-                                                        <div class="product_content grid_content">
-                                                            <div class="content_inner">
-                                                                <div class="product_name">
-                                                                    <h3><a href="product-details.html"> @item.Name</a></h3>
-                                                                </div>
-                                                                @if (Model.LoginViewModel.IsLogin)
-                                                                {
-                                                                    <div class="price_box">
-                                                                        <span class="old_price">420.00</span>
-                                                                        <span class="current_price">@item.UnitPrice</span>
-                                                                    </div>
-
-
-                                                                    <div class="action_links">
-                                                                        <ul>
-
-                                                                            <li class="add_to_cart"><a onclick="OpenProductModal(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-
-                                                                        </ul>
-                                                                    </div>
-                                                                }
-
+                                                    <div class="product_content list_content">
+                                                        <div>
+                                                            <div class="product_name">
+                                                                <h3>Categories :  @item.ProductCategorieCode</h3>
                                                             </div>
-                                                        </div>
-
-                                                        <div class="product_content list_content">
-                                                            <div>
-                                                                <div class="product_name">
-                                                                    <h3>Categories :  @item.ProductCategorieCode</h3>
-                                                                </div>
-                                                                <div class="product_name">
-                                                                    <h3><a href="product-details.html"> @item.Name</a></h3>
-                                                                </div>
-                                                                @if (Model.LoginViewModel.IsLogin)
-                                                                {
-
-                                                                    <div class="price_box">
-                                                                        <span class="old_price">$420.00</span>
-                                                                        <span class="current_price">@item.UnitPrice</span>
-                                                                    </div>
-
-                                                                    <div class="add_to_links">
-                                                                        <ul>
-                                                                            <li class="add_to_cart"><a onclick="AddToCartSubmit(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                }
-
-
+                                                            <div class="product_name">
+                                                                <h3><a href="product-details.html"> @item.Name</a></h3>
                                                             </div>
+                                                            @if (Model.LoginViewModel.IsLogin)
+                                                            {
+
+                                                                <div class="price_box">
+                                                                    <span class="old_price">$420.00</span>
+                                                                    <span class="current_price">@item.UnitPrice</span>
+                                                                </div>
+
+                                                                <div class="add_to_links">
+                                                                    <ul>
+                                                                        <li class="add_to_cart"><a onclick="AddToCartSubmit(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            }
+
 
                                                         </div>
 
                                                     </div>
-                                                </form>
+
+                                                </div>
+                                            </form>
                                         </td>
                                     </tr>
                                     NoOfProduct++;
@@ -249,6 +249,7 @@
     </div>
 </div>
 @section Scripts {
+    @*<script src="~/js/frontend/shoplist.js"></script>*@
     <script src="~/js/frontend/shoplist.js"></script>
     <script>
         $(document).ready(function () {
@@ -265,6 +266,7 @@
         };
 
         OnAddToCartSuccess = (res) => {
+            alert('222');
             if (res.isSuccess) {
                 window.location = "/Cart/Index";
             }
