@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 
 namespace HuahuiSite.Web.Areas.Backend.Services.Class
 {
@@ -68,7 +69,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void GetSaleList(ref SaleViewModel saleViewModel)
         {
-            saleViewModel.SaleList = _unitOfWork.Sales.GetAll();
+            saleViewModel.SaleList = _unitOfWork.Sales.GetSaleList();
         }
 
         /// <summary>
@@ -92,6 +93,8 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void UpdateSale(SaleViewModel saleViewModel)
         {
+            #region Update Sale
+
             #region Create Object to Update
 
             Sale sale = new Sale()
@@ -107,6 +110,21 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
             #endregion
 
             _unitOfWork.Sales.Update(sale);
+
+            #endregion
+
+            #region Update Password Of User
+
+            if (saleViewModel.IsChangePassword)
+            {
+                var user = _unitOfWork.Users.GetUserByRole(saleViewModel.Id);
+
+                user.Password = Crypto.Hash(saleViewModel.NewPassword);
+
+                _unitOfWork.Users.Update(user);
+            }
+
+            #endregion
         }
 
         #endregion

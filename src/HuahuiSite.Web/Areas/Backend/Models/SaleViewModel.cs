@@ -1,4 +1,5 @@
 ﻿using HuahuiSite.Core.Entities;
+using HuahuiSite.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,6 +21,9 @@ namespace HuahuiSite.Web.Areas.Backend.Models
         public string Username { get; set; }
         public string Password { get; set; }
 
-        public IEnumerable<Sale> SaleList { get; set; }
+        public bool IsChangePassword { get; set; }
+        public string NewPassword { get; set; }
+
+        public IEnumerable<SaleModel> SaleList { get; set; }
     }
 }

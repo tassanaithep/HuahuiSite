@@ -196,7 +196,7 @@ Delete = (e) => {
 
 /**
   * @desc Validate before Update Submit
-  * @param {Object} e - Element of Submit Button
+  * @param {Object} e - Element of Form
   * @return {bool} Result of Submit
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
