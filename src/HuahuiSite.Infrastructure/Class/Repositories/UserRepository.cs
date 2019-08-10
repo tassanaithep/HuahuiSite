@@ -23,5 +23,10 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
         {
             return HuahuiDbContext.User.First(w => w.Username.Equals(username) && w.Password.Equals(password) );
         }
+
+        public User GetUserByRole(int roleId)
+        {
+            return HuahuiDbContext.User.First(w => w.RoleId.Equals(roleId));
+        }
     }
 }

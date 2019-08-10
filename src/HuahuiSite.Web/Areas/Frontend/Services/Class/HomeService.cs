@@ -105,7 +105,11 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
 
             mainViewModel.LoginViewModel = new LoginViewModel();
-            mainViewModel.LoginViewModel.IsLogin = loginViewModelSession != null ? true : false;
+
+            if (loginViewModelSession != null)
+            {
+                mainViewModel.LoginViewModel = loginViewModelSession;
+            }
 
             mainViewModel.HomeViewModel = new HomeViewModel();
             mainViewModel.HomeViewModel.ProductList = Mapper.Map<IEnumerable<ProductModel>, IEnumerable<ProductViewModel>>(_unitOfWork.Products.GetProductList());

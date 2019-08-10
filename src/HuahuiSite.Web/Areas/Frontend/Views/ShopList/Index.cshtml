@@ -1,4 +1,5 @@
 ﻿@model HuahuiSite.Web.Areas.Frontend.Models.MainViewModel
+
 <div class="breadcrumbs_area" style="margin-bottom:10px;">
     <div class="container">
         <div class="row">
@@ -24,13 +25,14 @@
 
                         <div class="widget_list widget_categories">
                             <h2><b>categories</b></h2>
-                            @*<h2>Product categories</h2>*@
                             <ul>
+
                                 @foreach (var categorie in Model.ShopListViewModel.ProductCategoriesList)
                                 {
+
                                     <li>
-                                        @*<input type="checkbox">*@
                                         <a asp-controller="ShopList" asp-action="Index" asp-route-param="@categorie.Code">
+
                                             @if (Model.ShopListViewModel.Param == categorie.Code)
                                             {
                                                 <b>@categorie.Name</b>
@@ -40,10 +42,8 @@
                                             {
                                                 @categorie.Name
                                             }
-                                        </a>
 
-                                        @* <a href="#">Categories1 (6)</a>
-                                            <span class="checkmark"></span>*@
+                                        </a>
                                     </li>
                                 }
 
@@ -52,20 +52,16 @@
 
                         <div class="widget_list widget_categories" style="width: auto; max-height:700px;min-height:100%; overflow-y: scroll;">
                             <h2>
-                                @*Categories:@Model.ShopListViewModel.Param*@
                                 กลุ่มสินค้า
                             </h2>
 
                             <ul>
 
                                 @foreach (var productGroupitem in Model.ProductGroupList.Where(w => w.ProductCategorieCode.Equals(Model.ShopListViewModel.Param)).Select(i => new { i.Code, i.Name, i.ProductCategorieCode }).Distinct())
-
                                 {
-                                    <li>
-                                        @*<input type="checkbox">*@
-                                        @*<a href="">@productGroupitem</a>*@
-                                        <a asp-controller="ShopList" asp-action="Index" asp-route-param="@productGroupitem.ProductCategorieCode" asp-route-param2="@productGroupitem.Code">
 
+                                    <li>
+                                        <a asp-controller="ShopList" asp-action="Index" asp-route-param="@productGroupitem.ProductCategorieCode" asp-route-param2="@productGroupitem.Code">
 
                                             @if (Model.ShopListViewModel.Param2 == productGroupitem.Code)
                                             {
@@ -75,10 +71,10 @@
                                             {
                                                 @productGroupitem.Name
                                             }
-                                        </a>
 
-                                        @*<span class="checkmark"></span>*@
+                                        </a>
                                     </li>
+
                                 }
 
                             </ul>
@@ -94,7 +90,9 @@
                 <div class="shop_title">
                     <h3>รายการสินค้า</h3>
                 </div>
+
                 @{ int NoOfProduct = 0; }
+
                 <div class="row shop_wrapper grid_list">
                     <div class="col-12 ">
                         <table id="dataproduct" class="display" style="width:100%">
@@ -104,160 +102,114 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 @foreach (var item in Model.ShopListViewModel.ProductList)
                                 {
                                     <tr>
                                         <td>
-                                            
-                                                <form class="form-product-item" id="form-product-@NoOfProduct" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
-                                                    <input type="hidden" name="hid-form-product-id" value="form-product-@NoOfProduct" />
-                                                    <input type="hidden" name="ProductId" value="@item.Id" />
-                                                    <input type="hidden" name="ProductName" value="@item.Name" />
-                                                    <input type="hidden" name="ProductUnitPrice" value="@item.UnitPrice" />
-                                                    <input type="hidden" name="ProductPictureFileName" value="@item.PictureFileName" />
+                                            <form class="form-product-item" id="form-product-@NoOfProduct" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
+                                                <input type="hidden" name="hid-form-product-id" value="form-product-@NoOfProduct" />
+                                                <input type="hidden" name="ProductId" value="@item.Id" />
+                                                <input type="hidden" name="ProductName" value="@item.Name" />
+                                                <input type="hidden" name="ProductUnitPrice" value="@item.UnitPrice" />
+                                                <input type="hidden" name="ProductPictureFileName" value="@item.PictureFileName" />
 
-                                                    <input type="hidden" name="QuantityOfItem" />
+                                                <input type="hidden" name="QuantityOfItem" />
 
-                                                    <div class="single_product">
-                                                        <div class="product_thumb" style="text-align:center;">
-                                                            <a class="primary_img" href="product-details.html"><img src="~/images/upload/@item.PictureFileName" alt="" width="200px"></a>
+                                                <div class="single_product">
+                                                    <div class="product_thumb" style="text-align:center;">
+                                                        <a class="primary_img" href="product-details.html"><img src="~/images/upload/@item.PictureFileName" alt="" width="200px"></a>
+
+                                                        @if (Model.LoginViewModel.IsLogin)
+                                                        {
+
+                                                            <div class="quick_button">
+                                                                <a title="quick view" onclick="OpenProductModal(this)"><i class="ion-eye"></i></a>
+                                                            </div>
+
+                                                        }
+                                                        <div class="label_product">
+                                                            <span class="label_new">New</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="product_content grid_content">
+                                                        <div class="content_inner">
+                                                            <div class="product_name">
+                                                                <h3><a href="product-details.html"> @item.Name</a></h3>
+                                                            </div>
 
                                                             @if (Model.LoginViewModel.IsLogin)
-                                                            {<div class="quick_button">
-                                                                    <a title="quick view" onclick="OpenProductModal(this)"><i class="ion-eye"></i></a>
+                                                            {
+                                                                <div class="price_box">
+                                                                    <span class="old_price">420.00</span>
+                                                                    <span class="current_price">@item.UnitPrice</span>
+                                                                </div>
+
+                                                                <div class="action_links">
+                                                                    <ul>
+                                                                        <li class="add_to_cart"><a onclick="OpenProductModal(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
+                                                                    </ul>
                                                                 </div>
                                                             }
-                                                            <div class="label_product">
-                                                                <span class="label_new">New</span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="product_content grid_content">
-                                                            <div class="content_inner">
-                                                                <div class="product_name">
-                                                                    <h3><a href="product-details.html"> @item.Name</a></h3>
-                                                                </div>
-                                                                @if (Model.LoginViewModel.IsLogin)
-                                                                {
-                                                                    <div class="price_box">
-                                                                        <span class="old_price">420.00</span>
-                                                                        <span class="current_price">@item.UnitPrice</span>
-                                                                    </div>
-
-
-                                                                    <div class="action_links">
-                                                                        <ul>
-
-                                                                            <li class="add_to_cart"><a onclick="OpenProductModal(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-
-                                                                        </ul>
-                                                                    </div>
-                                                                }
-
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="product_content list_content">
-                                                            <div>
-                                                                <div class="product_name">
-                                                                    <h3>Categories :  @item.ProductCategorieCode</h3>
-                                                                </div>
-                                                                <div class="product_name">
-                                                                    <h3><a href="product-details.html"> @item.Name</a></h3>
-                                                                </div>
-                                                                @if (Model.LoginViewModel.IsLogin)
-                                                                {
-
-                                                                    <div class="price_box">
-                                                                        <span class="old_price">$420.00</span>
-                                                                        <span class="current_price">@item.UnitPrice</span>
-                                                                    </div>
-
-                                                                    <div class="add_to_links">
-                                                                        <ul>
-                                                                            <li class="add_to_cart"><a onclick="AddToCartSubmit(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                }
-
-
-                                                            </div>
 
                                                         </div>
-
                                                     </div>
-                                                </form>
+
+                                                    <div class="product_content list_content">
+                                                        <div>
+                                                            <div class="product_name">
+                                                                <h3>Categories :  @item.ProductCategorieCode</h3>
+                                                            </div>
+                                                            <div class="product_name">
+                                                                <h3><a href="product-details.html"> @item.Name</a></h3>
+                                                            </div>
+
+                                                            @if (Model.LoginViewModel.IsLogin)
+                                                            {
+
+                                                                <div class="price_box">
+                                                                    <span class="old_price">$420.00</span>
+                                                                    <span class="current_price">@item.UnitPrice</span>
+                                                                </div>
+
+                                                                <div class="add_to_links">
+                                                                    <ul>
+                                                                        <li class="add_to_cart"><a onclick="OpenProductModal(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            }
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input type="submit" name="btn-submit" style="display: none;" />
+                                            </form>
                                         </td>
                                     </tr>
+
                                     NoOfProduct++;
+
                                 }
                             </tbody>
                         </table>
-                        @* // foreach shopList*@
-
                     </div>
-
                 </div>
-            </div>
-        </div>
-
-        <div class="row">
-
-
-            <div class="col-lg-3 col-md-12">
-
-                <!--sidebar widget start-->
-                <!--sidebar widget end-->
-            </div>
-            <div class="col-lg-9 col-md-12">
-                <!--shop wrapper start-->
-                <!--shop toolbar start-->
-                @*<div class="shop_toolbar_wrapper">
-                        <div class="shop_toolbar_btn">
-
-                            <button data-role="grid_3" type="button" class=" btn-grid-3" data-toggle="tooltip" title="3"></button>
-
-                            <button data-role="grid_4" type="button" class=" btn-grid-4" data-toggle="tooltip" title="4"></button>
-
-                            <button data-role="grid_list" type="button" class="active btn-list" data-toggle="tooltip" title="List"></button>
-                        </div>
-                        <div class=" niceselect_option">
-
-                            <form class="select_option" action="#">
-                                <select name="orderby" id="short">
-
-                                    <option selected value="1">Sort by average rating</option>
-                                    <option value="2">Sort by popularity</option>
-                                    <option value="3">Sort by newness</option>
-                                    <option value="4">Sort by price: low to high</option>
-                                    <option value="5">Sort by price: high to low</option>
-                                    <option value="6">Product Name: Z</option>
-                                </select>
-                            </form>
-
-
-                        </div>
-                        <div class="page_amount">
-                            <p>Showing 1–9 of 21 results</p>
-                        </div>
-                    </div>*@
-                <!--shop toolbar end-->
-                <!--shop toolbar end-->
-                <!--shop wrapper end-->
             </div>
         </div>
     </div>
 </div>
 @section Scripts {
+
     <script src="~/js/frontend/shoplist.js"></script>
+
     <script>
+
         $(document).ready(function () {
             $('#dataproduct').DataTable();
         });
 
-
          var _cartItemList = @Html.Raw(Json.Serialize(@Model.ShopListViewModel.CartItemListViewList));
-       // alert(_cartItemList);
 
         AddToCartSubmit = (e) => {
             alert('submit');
@@ -273,8 +225,8 @@
                 swal("Login Failed", "", "error");
             }
         };
-    </script>
 
+    </script>
 
 }
 

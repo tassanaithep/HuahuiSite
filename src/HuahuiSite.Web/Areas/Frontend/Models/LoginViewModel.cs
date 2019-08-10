@@ -18,5 +18,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Models
 
         public string RoleName { get; set; }
         public int RoleId { get; set; }
+
+        public string Name { get; set; }
     }
 }
