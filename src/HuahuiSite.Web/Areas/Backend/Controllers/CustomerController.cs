@@ -109,7 +109,6 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
             try
             {
                 _customerService.UpdateCustomer(customerViewModel);
-                //_userService.UpdateUser(null, null, customerViewModel);
                 isSuccess = true;
             }
             catch (Exception exception)
