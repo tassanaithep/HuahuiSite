@@ -95,7 +95,7 @@
 
                 <div class="row shop_wrapper grid_list">
                     <div class="col-12 ">
-                        <table id="dataproduct" class="display" style="width:100%">
+                        <table id="table-data" class="display" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Product</th>
@@ -199,17 +199,14 @@
         </div>
     </div>
 </div>
+
 @section Scripts {
 
     <script src="~/js/frontend/shoplist.js"></script>
 
     <script>
 
-        $(document).ready(function () {
-            $('#dataproduct').DataTable();
-        });
-
-         var _cartItemList = @Html.Raw(Json.Serialize(@Model.ShopListViewModel.CartItemListViewList));
+        var _cartItemList = @Html.Raw(Json.Serialize(@Model.ShopListViewModel.CartItemListViewList));
 
         AddToCartSubmit = (e) => {
             alert('submit');
@@ -217,7 +214,6 @@
         };
 
         OnAddToCartSuccess = (res) => {
-            alert('222');
             if (res.isSuccess) {
                 window.location = "/Cart/Index";
             }

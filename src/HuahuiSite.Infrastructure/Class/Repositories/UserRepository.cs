@@ -19,6 +19,11 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
             get { return Context as HuahuiDbContext; }
         }
 
+        public IEnumerable<User> GetAdminUserList()
+        {
+            return HuahuiDbContext.User.Where(w => w.RoleName.Equals("Admin")).ToList();
+        }
+
         public User GetUserOfLogin(string username, string password)
         {
             return HuahuiDbContext.User.First(w => w.Username.Equals(username) && w.Password.Equals(password) );

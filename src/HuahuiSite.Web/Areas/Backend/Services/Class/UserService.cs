@@ -83,7 +83,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void GetUserList(ref UserViewModel userViewModel)
         {
-            userViewModel.UserList = _unitOfWork.Users.GetAll();
+            userViewModel.UserList = _unitOfWork.Users.GetAdminUserList();
         }
 
         #endregion

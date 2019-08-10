@@ -38,62 +38,11 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
         #region CRUD
 
-        //#region Create
+        #region Create
 
-        ///// <summary>
-        ///// Save Cart.
-        ///// </summary>
-        //// Author: Mod Nattasit
-        //// Updated: 07/07/2019
-        //public void SaveCart(CartViewModel cartViewModel)
-        //{
-        ////    #region Save Cart
+        #endregion
 
-        //    var cartOfUser = _unitOfWork.Carts.GetCartActiveByUser(2013);
-
-        ////    Cart cart = new Cart();
-
-        ////    if (cartOfUser == null)
-        ////    {
-        ////        #region Create Object to Save
-
-        ////        cart.UserRole = "Customer";
-        ////        cart.UserId = 2013;
-        ////        cart.Status = "Confirm";
-        ////        cart.IsActive = true;
-        ////        cart.CreatedDateTime = DateTime.Now;
-
-        ////        #endregion
-
-        ////        _unitOfWork.Carts.Add(cart);
-        ////    }
-
-        ////    #endregion
-
-        ////    #region Save Cart Item List
-
-        ////    #region Create Object to Save
-
-        //CartItemList cartItemList = new CartItemList()
-        //{
-        //    CardId = cartOfUser == null ? cart.Id : cartOfUser.Id,
-        //    ProductId = 3002,
-        //    Quantity = 1,
-        //    TotalPrice = 500,
-        //    IsActive = true,
-        //    CreatedDateTime = DateTime.Now
-        //};
-
-        ////    #endregion
-
-        ////    _unitOfWork.CartItemLists.Add(cartItemList);
-
-        ////    #endregion
-        //}
-
-        ////#endregion
-
-        //#region Read
+        #region Read
 
         /// <summary>
         /// Get Product List.
@@ -125,55 +74,14 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
         #endregion
 
-        //#region Update
+        #region Update
 
-        /////// <summary>
-        /////// Update Cart.
-        /////// </summary>
-        ////// Author: Mod Nattasit
-        ////// Updated: 07/07/2019
-        //public void UpdateCart(CartViewModel cartViewModel)
-        //{
-        //    #region Delete Old Cart Item List
+        #endregion
 
-        //    var cartItemListToRemove = _unitOfWork.CartItemLists.GetCartItemListByCard(cartViewModel.CartItemList.First().CardId);
-        //    _unitOfWork.CartItemLists.RemoveRange(cartItemListToRemove);
+        #region Delete
 
-        //    #endregion
+        #endregion
 
-
-        //    #region Update Cart Item List
-
-        //    _unitOfWork.CartItemLists.AddRange(cartViewModel.CartItemList);
-
-        //    #endregion
-        //}
-
-        //#endregion
-
-        //#region Delete
-
-        ///// <summary>
-        ///// Delete Cart.
-        ///// </summary>
-        //// Author: Mod Nattasit
-        //// Updated: 07/07/2019
-        //public void DeleteUser(UserViewModel userViewModel)
-        //{
-        //    #region Create Object to Delete
-
-        //    Cart user = new Cart()
-        //    {
-        //        Id = userViewModel.Id,
-        //    };
-
-        //    #endregion
-
-        //    _unitOfWork.Users.Remove(user);
-        //}
-
-        //#endregion
-
-        //#endregion
+        #endregion
     }
 }
