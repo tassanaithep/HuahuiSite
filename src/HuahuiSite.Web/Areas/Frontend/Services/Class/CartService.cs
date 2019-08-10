@@ -63,7 +63,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
                 cart.UserRole = loginViewModelSession.RoleName;
                 cart.UserId = loginViewModelSession.RoleId;
-                cart.Status = "Confirm";
+                cart.Status = "Cart";
                 cart.IsActive = true;
                 cart.CreatedDateTime = DateTime.Now;
 

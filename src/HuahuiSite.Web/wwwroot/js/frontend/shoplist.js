@@ -122,14 +122,6 @@ ChangeQuantityOfProduct = (quantity, formId) => {
 };
 
 ProductModalSubmit = (formId) => {
-    let $form = $("#" + formId);
-    alert('ddd');
-    //let quantityOfItem = $form.find("[name='QuantityOfItem']").val();
-
-    //if (quantityOfItem !== "") {
-    //    $form.prop("action", "/Cart/UpdateQuantity");
-    //}
-
     $("#" + formId).find("[name='btn-submit']").click();
 };
 

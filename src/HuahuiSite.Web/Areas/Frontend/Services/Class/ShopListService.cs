@@ -31,22 +31,19 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
         public void GetShopList(ref MainViewModel mainViewModel)
         {
-            //var loginViewModel = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserData");
-
-            //mainViewModel.LoginViewModel.IsLogin = loginViewModel != null ? true : false;
             var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
 
             mainViewModel.LoginViewModel = new LoginViewModel();
-            mainViewModel.LoginViewModel.IsLogin = loginViewModelSession != null ? true : false;
+
+            if (loginViewModelSession != null)
+            {
+                mainViewModel.LoginViewModel = loginViewModelSession;
+            }
 
             mainViewModel.ShopListViewModel = new ShopListViewModel();
             mainViewModel.ShopListViewModel.ProductList = Mapper.Map<IEnumerable<ProductModel>, IEnumerable<ProductViewModel>>(_unitOfWork.Products.GetProductList());
-          //  mainViewModel.HomeViewModel.ProductList = Mapper.Map<IEnumerable<ProductModel>, IEnumerable<ProductViewModel>>(_unitOfWork.Products.GetProductList());
 
             mainViewModel.ShopListViewModel.ProductCategoriesList = _unitOfWork.ProductCategories.GetAll();
-
-            //homeViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();
-            //homeViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
 
             if (mainViewModel.LoginViewModel.IsLogin)
             {
@@ -57,7 +54,5 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             mainViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
 
         }
-
-        
     }
 }

@@ -248,70 +248,66 @@
                            
                             <form class="form-product-item" id="form-product-@NoOfCategorie-@NoOfproduct" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
 
-                                <!-- Hidden Value Start -->
+                            <!-- Hidden Value Start -->
 
-                                <input type="hidden" name="hid-form-product-id" value="form-product-@NoOfCategorie-@NoOfproduct" />
-                                <input type="hidden" name="ProductId" value="@itemOfProduct.Id" />
-                                <input type="hidden" name="ProductName" value="@itemOfProduct.Name" />
-                                <input type="hidden" name="ProductUnitPrice" value="@itemOfProduct.UnitPrice" />
-                                <input type="hidden" name="ProductPictureFileName" value="@itemOfProduct.PictureFileName" />
+                            <input type="hidden" name="hid-form-product-id" value="form-product-@NoOfCategorie-@NoOfproduct" />
+                            <input type="hidden" name="ProductId" value="@itemOfProduct.Id" />
+                            <input type="hidden" name="ProductName" value="@itemOfProduct.Name" />
+                            <input type="hidden" name="ProductUnitPrice" value="@itemOfProduct.UnitPrice" />
+                            <input type="hidden" name="ProductPictureFileName" value="@itemOfProduct.PictureFileName" />
 
-                                <input type="hidden" name="QuantityOfItem" />
+                            <input type="hidden" name="QuantityOfItem" />
 
-                                <!-- Hidden Value End -->
+                            <!-- Hidden Value End -->
 
-                                <div class="col-lg-3">
-                                    <div class="single_product">
-                                        <div class="product_thumb">
-                                            @*<a class="primary_img" href="product-details.html"><img src="~/images/upload/@itemOfProduct.PictureFileName" alt=""></a>*@
-                                            <img src="~/images/upload/@itemOfProduct.PictureFileName" alt="">
+                            <div class="col-lg-3">
+                                <div class="single_product">
+                                    <div class="product_thumb">
+                                        @*<a class="primary_img" href="product-details.html"><img src="~/images/upload/@itemOfProduct.PictureFileName" alt=""></a>*@
+                                        <img src="~/images/upload/@itemOfProduct.PictureFileName" alt="">
+
+                                        @if (Model.LoginViewModel.IsLogin)
+                                        {<div class="quick_button">
+                                                <a title="quick view" onclick="OpenProductModal(this)"><i class="ion-eye"></i></a>
+                                            </div>
+                                        }
+
+                                    </div>
+                                    <div class="product_content">
+                                        <div class="content_inner">
+                                            <div class="product_name">
+                                                <h3>@itemOfProduct.Name</h3>
+                                            </div>
 
                                             @if (Model.LoginViewModel.IsLogin)
-                                            {<div class="quick_button">
-                                                    <a title="quick view" onclick="OpenProductModal(this)"><i class="ion-eye"></i></a>
+                                            {
+                                                <div class="price_box">
+                                                    <div class="row">
+                                                        <div class="col-sm-12 col-md-8 col-lg-8">
+                                                            <span class="old_price">420.00</span>
+                                                            <span class="current_price">@itemOfProduct.UnitPrice บาท</span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="action_links">
+                                                    <ul>
+
+                                                        <!-- If Login will Show Add to Cart Button -->
+
+                                                        <li class="add_to_cart"><a onclick="OpenProductModal(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
+
+                                                    </ul>
                                                 </div>
                                             }
-                                            @*<div class="label_product">
-                                <span class="label_sale">-57%</span>
-                            </div>*@
-                                        </div>
-                                        <div class="product_content">
-                                            <div class="content_inner">
-                                                <div class="product_name">
-                                                    @*<h3><a href="product-details.html">@itemOfProduct.Name</a></h3>*@
-                                                    <h3>@itemOfProduct.Name</h3>
-                                                </div>
 
-                                                @if (Model.LoginViewModel.IsLogin)
-                                                {
-                                                    <div class="price_box">
-                                                        <div class="row">
-                                                            <div class="col-sm-12 col-md-8 col-lg-8">
-                                                                <span class="old_price">420.00</span>
-                                                                <span class="current_price">@itemOfProduct.UnitPrice บาท</span>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="action_links">
-                                                        <ul>
-
-                                                            <!-- If Login will Show Add to Cart Button -->
-
-                                                            <li class="add_to_cart"><a onclick="OpenProductModal(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-
-                                                        </ul>
-                                                    </div>
-                                                }
-
-                                            </div>
                                         </div>
                                     </div>
-
-                                    <input type="submit" name="btn-submit" style="display: none;" />
                                 </div>
-                            </form>
+                            </div>
+                            <input type="submit" name="btn-submit" style="display: none;" />
+                        </form>
                             NoOfproduct++;
                         }
 
@@ -408,7 +404,6 @@
     <script>
 
         var _cartItemList = @Html.Raw(Json.Serialize(@Model.HomeViewModel.CartItemListViewList));
-       // alert(_cartItemList);
 
         AddToCartSubmit = (e) => {
             $(e).closest(".form-product-item").find(".btn-submit").click();

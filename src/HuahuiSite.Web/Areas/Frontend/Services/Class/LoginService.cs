@@ -42,9 +42,12 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
             if (user.RoleName.Equals("Sale") || user.RoleName.Equals("Customer") || user.RoleName.Equals("Admin"))
             {
+                loginViewModel.IsLogin = true;
+                loginViewModel.Username = user.Username;
+                loginViewModel.Password = user.Password;
                 loginViewModel.RoleName = user.RoleName;
                 loginViewModel.RoleId = user.RoleId.Value;
-                loginViewModel.IsLogin = true;
+                loginViewModel.Name = user.Name;
 
                 Extensions.SessionExtensions.SetObject(_httpContextAccessor.HttpContext.Session, "UserDataSession", loginViewModel);
             }
