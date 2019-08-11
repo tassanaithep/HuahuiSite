@@ -14,14 +14,21 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
     {
         #region Members
 
+        private readonly ILoginService _loginService;
+
         private readonly IProductService _productService;
 
         #endregion
 
         #region Constructor
 
-        public ProductController(IProductService productService)
+        public ProductController
+        (
+            ILoginService loginService,
+            IProductService productService
+        )
         {
+            _loginService = loginService;
             _productService = productService;
         }
 
