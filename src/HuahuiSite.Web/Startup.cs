@@ -133,10 +133,10 @@ namespace HuahuiSite.Web
                 //    name: "default",
                 //    template: "{controller=Main}/{action=Home}/{id?}");
 
-                //routes.MapAreaRoute(
-                //    name: "Frontend",
-                //    areaName: "Frontend",
-                //    template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapAreaRoute(
+                    name: "Frontend",
+                    areaName: "Frontend",
+                    template: "{controller=Home}/{action=Index}/{id?}");
 
                 routes.MapAreaRoute(
                     name: "Backend",
