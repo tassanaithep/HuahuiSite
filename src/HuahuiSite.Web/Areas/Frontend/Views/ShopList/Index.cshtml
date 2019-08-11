@@ -118,7 +118,7 @@
 
                                                 <div class="single_product">
                                                     <div class="product_thumb" style="text-align:center;">
-                                                        <a class="primary_img" href="product-details.html"><img src="~/images/upload/@item.PictureFileName" alt="" width="200px"></a>
+                                                        <a class="primary_img" href="product-details.html"><img src="~/images/upload/@item.PictureFileName" alt="" width="200"></a>
 
                                                         @if (Model.LoginViewModel.IsLogin)
                                                         {
@@ -169,8 +169,17 @@
                                                             {
 
                                                                 <div class="price_box">
-                                                                    <span class="old_price">$420.00</span>
-                                                                    <span class="current_price">@item.UnitPrice</span>
+
+                                                                    @if (!item.IsPromotion)
+                                                                    {
+                                                                        <span class="current_price">@item.UnitPrice</span>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span class="old_price">@item.PromotionPrice</span>
+                                                                        <span class="current_price">@item.UnitPrice</span>
+                                                                    }
+
                                                                 </div>
 
                                                                 <div class="add_to_links">

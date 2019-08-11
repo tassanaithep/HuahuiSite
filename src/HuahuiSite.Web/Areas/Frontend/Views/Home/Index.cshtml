@@ -127,7 +127,7 @@
 
                     @{ int No = 0; }
 
-                    @foreach (var item in Model.HomeViewModel.ProductList.Where(x => x.IsPromotion == true).Take(10))
+                    @foreach (var item in Model.HomeViewModel.ProductList.Where(x => x.IsPromotion).Take(10))
                     {
                         <form class="form-product-item" id="form-product-@No" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
 
@@ -171,10 +171,9 @@
                                                 <div class="price_box">
                                                     <div class="row">
                                                         <div class="col-sm-12 col-md-8 col-lg-8">
-                                                            <span class="old_price">420.00</span>
-                                                            <span class="current_price">@item.UnitPrice บาท</span>
+                                                            <span class="old_price">@item.UnitPrice</span>
+                                                            <span class="current_price">@item.PromotionPrice บาท</span>
                                                         </div>
-
                                                     </div>
                                                 </div>
 
@@ -284,7 +283,6 @@
                                                 <div class="price_box">
                                                     <div class="row">
                                                         <div class="col-sm-12 col-md-8 col-lg-8">
-                                                            <span class="old_price">420.00</span>
                                                             <span class="current_price">@itemOfProduct.UnitPrice บาท</span>
                                                         </div>
 
