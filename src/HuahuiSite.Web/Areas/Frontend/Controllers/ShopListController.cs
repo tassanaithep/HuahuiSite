@@ -44,12 +44,20 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
                 }
                
                 // หา productgroup name 
-
+               
                 if (param != null && param2==null)
                 {
-                    if(textsearch !=null)
+                    
+                    if(param !="all" && textsearch !=null)
                     {
                         mainViewModel.ShopListViewModel.ProductList = mainViewModel.ShopListViewModel.ProductList.Where(x => x.ProductCategorieCode == param && x.Name.Contains(textsearch)).ToList();
+                       
+
+
+                    }
+                    else if (param == "all" && textsearch != null)
+                    {
+                        mainViewModel.ShopListViewModel.ProductList = mainViewModel.ShopListViewModel.ProductList.Where(x => x.Name.Contains(textsearch)).ToList();
 
                     }
                     else

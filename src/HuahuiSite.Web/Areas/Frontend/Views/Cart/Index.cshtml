@@ -80,6 +80,7 @@
                                 </tbody>
                             </table>
                         </div>
+<<<<<<< HEAD
 
                         @if (Model.CartViewModel != null && !Model.CartViewModel.Status.Equals("Confirm"))
                         {
@@ -89,6 +90,12 @@
                             </div>
                         }
 
+=======
+                        <div class="cart_submit">
+                            <button type="button" onclick="UpdateCart()">ยืนยันการแก้ไข</button>
+                            <button type="button" onclick="CheckOutCart('@Model.CartViewModel.CartItemListViewList.First().CardId')">สั่งซื้อสินค้า</button>
+                        </div>
+>>>>>>> baa5dbf1dd3fbb5f4df0a2c5544a8ad931880656
                     </div>
                 </div>
             </div>
