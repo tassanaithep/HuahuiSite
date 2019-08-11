@@ -32,6 +32,7 @@
 </head>
 <body>
     <!-- Main Wrapper Start -->
+
     <!--header area start-->
     <header class="header_area pb-sm-90">
         <!--header top start-->
@@ -49,22 +50,19 @@
                                     Welcome: @Model.LoginViewModel.Name
                                 </span>
                             }
-
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
                         <div class="top_right text-right">
                             <ul>
-
                                 @if (Model.LoginViewModel.IsLogin)
                                 {
-                                    <a asp-area="Frontend" asp-controller="Login" asp-action="Index" asp-route-param="logout"><i class="ion-log-out"></i> ออกจากระบบ </a>
+                                    <li><a asp-area="Frontend" asp-controller="Login" asp-action="Index" asp-route-param="logout"><i class="ion-log-out"></i> ออกจากระบบ </a></li>
                                 }
                                 else
                                 {
                                     <li><a asp-area="Frontend" asp-controller="Login" asp-action="Index"><i class="ion-log-in"></i> เข้าสู่ระบบ </a></li>
                                 }
-
                             </ul>
                         </div>
                     </div>
@@ -72,6 +70,7 @@
             </div>
         </div>
         <!--header top start-->
+
         <!--header middel start-->
         <div class="header_middle">
             <div class="container">
@@ -81,23 +80,17 @@
                             <a asp-action="" asp-controller="Home"><img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/logo/logo.png" alt=""></a>
                         </div>
                     </div>
-                    <div class="col-lg-7 col-md-7 align-items-center">
+                    <div class="col-lg-9 col-md-12">
                         <div class="middel_right">
                             <div class="search-container">
                                 <form asp-action="index" asp-controller="Shoplist" method="get">
-                                    <div class="hover_category">
+                                    <div class="hover_category" style="width:250px">
                                         <select class="select_option" name="param" id="param">
-
+                                            <option selected value="1">ทุกหมวดหมู่</option>
                                             @foreach (var itemOfProductCategorie in Model.ProductCategorieList.Select(i => new { i.Code, i.Name }))
                                             {
                                                 <option value="@itemOfProductCategorie.Code">@itemOfProductCategorie.Name</option>
-
                                             }
-
-                                            @*<option value="5">ตกแต่งทั่วไป</option>
-                                <option value="6">เพิ่มประสิทธิภาพ</option>
-                                <option value="7">ตกแต่งภายใน-ภายนอก</option>*@
-
                                         </select>
                                     </div>
                                     <div class="search_box">
@@ -109,38 +102,38 @@
 
                             <div class="middel_right_info">
                                 @*<div class="header_account">
-                    <a href="my-account.html"><i class="ion-android-people"></i></a>
-                                        </div>*@
+                                    <a href="my-account.html"><i class="ion-android-people"></i></a>
+                                 </div>*@
                                 @* <div class="header_wishlist">
-                                                   <a href="wishlist.html"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-                    </div>*@
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-2">
-                        <div class="mini_cart_wrapper">
-                            <a href="#"><i class="ion-bag"></i>@*$138.00*@</a>
-                            @*<span class="cart_quantity">2</span>*@
-                            <!--mini cart-->
-                            <div class="mini_cart">
-
-                                <div class="mini_cart_footer">
-                                    <div class="cart_button">
-                                        <a asp-controller="cart" asp-action="index"><i class=""></i>ดูรายการสั่งซื้อ</a>
+                                    <a href="wishlist.html"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                                </div>*@
+                                <div class="mini_cart_wrapper">
+                                    <a href="#"><i class="ion-bag"></i>@*$138.00*@</a>
+                                    @*<span class="cart_quantity">2</span>*@
+                                    <!--mini cart-->
+                                    <div class="mini_cart">
+                                        <div class="mini_cart_footer">
+                                            <div class="cart_button">
+                                                <a asp-controller="cart" asp-action="index"><i class=""></i>ดูรายการสั่งซื้อ</a>
+                                            </div>
+                                            @*<div class="cart_button">
+                                                <a asp-controller="login" asp-action="logout">Checkout</a>
+                                            </div>*@
+                                        </div>
                                     </div>
-                                    @*<div class="cart_button">
-                                        <a asp-controller="login" asp-action="logout">Checkout</a>
-                                    </div>*@
+                                    <!--mini cart end-->
                                 </div>
                             </div>
-                            <!--mini cart end-->
                         </div>
                     </div>
+                    @*<div class="col-lg-2 col-md-2">
+                        
+                    </div>*@
                 </div>
             </div>
         </div>
         <!--header middel end-->
+
         <!--header bottom satrt-->
         <div class="header_bottom sticky-header">
             <div class="container">
@@ -153,52 +146,39 @@
                                 </div>
                                 <nav class="categories_menu_toggle">
                                     <ul>
-
                                         @foreach (var itemOfProductCategorie in Model.ProductCategorieList)
                                         {
-
                                             <li class="menu_item_children">
-                                             
-                                                    <a asp-controller="ShopList" asp-action="Index" asp-route-param="@itemOfProductCategorie.Code"> 
+                                                <a asp-controller="ShopList" asp-action="Index" asp-route-param="@itemOfProductCategorie.Code"> 
                                                     @*<img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu2.png" alt="">*@
                                                     <span>
                                                         @itemOfProductCategorie.Name        |
                                                         @*<i class="fa fa-angle-down"></i>*@
                                                     </span>
                                                 </a>
-
                                                 @*@if (Model.ProductGroupList.Where(w => w.ProductCategorieCode.Equals(itemOfProductCategorie.Code)).Count() > 0)
                                                 {
-
                                                     <ul class="sub_menu">
-
                                                         @foreach (var itemOfProductGroup in Model.ProductGroupList.Where(w => w.ProductCategorieCode.Equals(itemOfProductCategorie.Code)).Select(s => s.Name).Distinct())
                                                         {
-
                                                             <li><a href="shop.html">@itemOfProductGroup</a></li>
-
                                                         }
-
                                                     </ul>
-
                                                 }*@
-
                                             </li>
-
                                         }
-
                                     </ul>
                                 </nav>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
         <!--header bottom end-->
     </header>
     <!--header area end-->
+
     <!--header menu area start-->
     <div class="header_main_menu">
         <div class="container">
@@ -211,7 +191,7 @@
                                 <li><a asp-controller="Shoplist" asp-action="index">สินค้าทั้งหมด</a></li>
                                 <li><a asp-controller="Promotion" asp-action="index">โปรโมชั่น</a></li>
                                 <li><a asp-controller="AboutUs" asp-action="index">เกี่ยวกับเรา</a></li>
-                                <li><a asp-controller="ContactUs" asp-action="index"> ติดต่อเรา</a></li>
+                                <li><a asp-controller="ContactUs" asp-action="index">ติดต่อเรา</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -220,6 +200,7 @@
         </div>
     </div>
     <!--header menu area end-->
+
     <!--Offcanvas menu area start-->
     <div class="Offcanvas_menu">
         <div class="container">
@@ -240,14 +221,11 @@
                             <form asp-action="index" asp-controller="Shoplist" method="get">
                                 <div class="hover_category">
                                     <select class="select_option" name="param" id="param">
+                                        <option selected value="1">ทุกหมวดหมู่</option>
                                         @foreach (var itemOfProductCategorie in Model.ProductCategorieList.Select(i => new { i.Code, i.Name }))
                                         {
                                             <option value="@itemOfProductCategorie.Code">@itemOfProductCategorie.Name</option>
-
                                         }
-
-                                      
-
                                     </select>
                                 </div>
                                 <div class="search_box">
@@ -255,41 +233,23 @@
                                     <button type="submit">ค้นหา</button>
                                 </div>
                             </form>
-                            @*<form action="#">
-            <div class="hover_category">
-                <select class="select_option" name="select" id="categori1">
-                    <option selected value="1">ทุกหมวดหมู่</option>
-                    <option value="2">ดูแลรักษารถยนต์</option>
-                    <option value="3">โคมไฟ-หลอดไฟ-Xenon</option>
-                    <option value="4">อิเล็กทรอนิคส์-ของตกแต่งอื่นๆ</option>
-                    <option value="5">ตกแต่งทั่วไป</option>
-                    <option value="6">เพิ่มประสิทธิภาพ</option>
-                    <option value="7">ตกแต่งภายใน-ภายนอก</option>
-                </select>
-            </div>
-            <div class="search_box">
-                <input placeholder="ค้นหา" type="text">
-                <button type="submit">ค้นหา</button>
-            </div>
-        </form>*@
                         </div>
-
                         <div id="menu" class="text-left">
                             <ul>
                                 <li><a asp-action="" asp-controller="Home">หน้าแรก</a></li>
                                 <li><a asp-controller="Shoplist" asp-action="index">สินค้าทั้งหมด</a></li>
                                 <li><a asp-controller="Promotion" asp-action="index">โปรโมชั่น</a></li>
                                 <li><a asp-controller="AboutUs" asp-action="index">เกี่ยวกับเรา</a></li>
-                                <li><a asp-controller="ContactUs" asp-action="index"> ติดต่อเรา</a></li>
+                                <li><a asp-controller="ContactUs" asp-action="index">ติดต่อเรา</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
     <!--Offcanvas menu area end-->
+
     @RenderBody()
 
     <!--footer area start-->
@@ -305,21 +265,23 @@
                             <div class="footer_contact">
                                 <p><h4>บริษัท หัวฮุย อินเตอร์ จำกัด</h4></p>
                                 <p><i class="fa fa-map-marker"></i>  36/681 ถ.กาญจนาภิเษก ต.บางรักพัฒนา อ.บางบัวทอง จ.นนทบุรี 11110</p>
-                                <p><i class="fa fa-phone"></i><a href="tel:0806136536">  080-613-6536</a></p>
+                                <p><i class="fa fa-phone"></i><a href="tel:029793208">  02-979-3208</a></p>
+                                <p><i class="fa fa-mobile"></i><a href="tel:0806136536">  080-613-6536</a></p>
                                 <p><i class="fa fa-facebook"></i><a href="https://www.facebook.com/HUA-HUI-INTER-COLTD-536433739714780/" target="_blank">  HUA HUI INTER CO.LTD</a></p>
-                                <p><i class="fa fa-lock"></i><a href="/Backend/Login/Index" target="_blank">  Management</a></p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-6 col-md-12">
+                    <div class="col-lg-5 col-md-12">
                         <div class="widgets_container widget_menu">
                             <h3>แผนที่</h3>
                         </div>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3870.7853828607294!2d100.3876993143144!3d14.030732194549884!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e289b3c4963ae9%3A0xe7e62cae35ca2aae!2z4Lia4Lij4Li04Lip4Lix4LiX4Lir4Lix4Lin4Liu4Li44Lii4Lit4Li04LiZ4LmA4LiV4Lit4Lij4LmM4LiI4Liz4LiB4Lix4LiU!5e0!3m2!1sen!2sth!4v1563710377905!5m2!1sen!2sth" width="450" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        <div class="footer_menu">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3870.7853828607294!2d100.3876993143144!3d14.030732194549884!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e289b3c4963ae9%3A0xe7e62cae35ca2aae!2z4Lia4Lij4Li04Lip4Lix4LiX4Lir4Lix4Lin4Liu4Li44Lii4Lit4Li04LiZ4LmA4LiV4Lit4Lij4LmM4LiI4Liz4LiB4Lix4LiU!5e0!3m2!1sen!2sth!4v1563710377905!5m2!1sen!2sth" width="450" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        </div>
                     </div>
 
-                    <div class="col-lg-1 col-md-12">
+                    <div class="col-lg-2 col-md-12" style="padding-left:50px">
                         <div class="widgets_container widget_menu">
                             <h3>เมนู</h3>
                             <div class="footer_menu">
@@ -328,35 +290,14 @@
                                     <li><a asp-controller="Shoplist" asp-action="index">สินค้าทั้งหมด</a></li>
                                     <li><a asp-controller="Promotion" asp-action="index">โปรโมชั่น</a></li>
                                     <li><a asp-controller="AboutUs" asp-action="index">เกี่ยวกับเรา</a></li>
-                                    <li><a asp-controller="ContactUs" asp-action="index"> ติดต่อเรา</a></li>
+                                    <li><a asp-controller="ContactUs" asp-action="index">ติดต่อเรา</a></li>
+                                    <li><a href="/Backend/Login/Index" target="_blank">การจัดการ <i class="fa fa-lock"></i></a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            @*<div class="newletter_area">
-                <div class="row">
-                    <div class="col-lg-5 col-md-5">
-                        <div class="newletter_title">
-                            <img src="assets/img/about/icon-newletter.png" alt="">
-                            <div class="newletter_content">
-                                <h2>Join Our Newsletter Now</h2>
-                                <p>Be the First to Know. Sign up to newsletter today</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-7 col-md-7">
-                        <div class="newletter_subscribe">
-                            <form action="#">
-                                <input placeholder="Enter you email address here..." type="text">
-                                <button type="submit">Subscribe</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
 
             <div class="footer_bottom">
                 <div class="row">
@@ -365,59 +306,11 @@
                             <p>Copyright &copy; 2019 <a href="https://www.hypersoft-solution.com">HYPERSOFT SOLUTION COMPANY</a>  All Right Reserved.</p>
                         </div>
                     </div>
-                    @*<div class="col-lg-6 col-md-12">
-                        <div class="footer_paypal">
-                            <ul>
-                                <li><a href="#"><img src="assets/img/icon/paypal.jpg" alt=""></a></li>
-                                <li><a href="#"><img src="assets/img/icon/paypal1.jpg" alt=""></a></li>
-                                <li><a href="#"><img src="assets/img/icon/paypal2.jpg" alt=""></a></li>
-                                <li><a href="#"><img src="assets/img/icon/paypal3.jpg" alt=""></a></li>
-                                <li><a href="#"><img src="assets/img/icon/paypal4.jpg" alt=""></a></li>
-                                <li><a href="#"><img src="assets/img/icon/paypal5.jpg" alt=""></a></li>
-                            </ul>
-                        </div>
-                    </div>*@
                 </div>
             </div>
         </div>
     </footer>
     <!--footer area end-->
-    <!--news letter popup start-->
-    @*<div class="newletter-popup">
-        <div id="boxes" class="newletter-container">
-            <div id="dialog" class="window">
-                <div id="popup2">
-                    <span class="b-close"><span>close</span></span>
-                </div>
-                <div class="box">
-                    <div class="newletter-title">
-                        <h2>Newsletter</h2>
-                    </div>
-                    <div class="box-content newleter-content">
-                        <label class="newletter-label">Enter your email address to subscribe our notification of our new post &amp; features by email.</label>
-                        <div id="frm_subscribe">
-                            <form name="subscribe" id="subscribe_popup">
-                                <!-- <span class="required">*</span><span>Enter you email address here...</span>-->
-                                <input type="text" value="" name="subscribe_pemail" id="subscribe_pemail" placeholder="Enter you email address here...">
-                                <input type="hidden" value="" name="subscribe_pname" id="subscribe_pname">
-                                <div id="notification"></div>
-                                <a class="theme-btn-outlined" onclick="email_subscribepopup()"><span>Subscribe</span></a>
-                            </form>
-                            <div class="subscribe-bottom">
-                                <input type="checkbox" id="newsletter_popup_dont_show_again">
-                                <label for="newsletter_popup_dont_show_again">Don't show this popup again</label>
-                            </div>
-                        </div>
-                        <!-- /#frm_subscribe -->
-                    </div>
-                    <!-- /.box-content -->
-                </div>
-            </div>
-
-        </div>
-        <!-- /.box -->
-    </div>*@
-    <!--news letter popup start-->
 
     <environment include="Development">
         <script src="~/lib/jquery/jquery.min.js"></script>
