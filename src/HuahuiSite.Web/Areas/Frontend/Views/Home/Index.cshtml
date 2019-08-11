@@ -208,7 +208,17 @@
                                                 <div class="price_box">
                                                     <div class="row">
                                                         <div class="col-sm-12 col-md-8 col-lg-8">
-                                                            <span class="current_price">@itemOfProduct.UnitPrice บาท</span>
+
+                                                            @if (!itemOfProduct.IsPromotion)
+                                                            {
+                                                                <span class="current_price">@itemOfProduct.UnitPrice</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="old_price">@itemOfProduct.PromotionPrice</span>
+                                                                <span class="current_price">@itemOfProduct.UnitPrice</span>
+                                                            }
+
                                                         </div>
 
                                                     </div>

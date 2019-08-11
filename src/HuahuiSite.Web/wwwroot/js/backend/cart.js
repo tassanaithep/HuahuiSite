@@ -300,7 +300,12 @@ UpdateCart = (e) => {
     });
 };
 
-Approve = (e) => {
+/**
+  * @desc Approve Cart
+  * @param {Object} e - Element of Submit Button
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+ApproveCart = (e) => {
     let $cartId = $(e).closest(".tr-data-row").find(".form-row-table").find("[name='hid-cart-id']").val();
 
     swal({
