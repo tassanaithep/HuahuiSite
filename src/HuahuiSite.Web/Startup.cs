@@ -51,7 +51,7 @@ namespace HuahuiSite.Web
             services.AddSession(options =>
             {
                 // Set a short timeout for easy testing.
-                options.IdleTimeout = TimeSpan.FromMinutes(60);
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
                 options.Cookie.HttpOnly = true;
                 // Make the session cookie essential
                 options.Cookie.IsEssential = true;
@@ -138,10 +138,10 @@ namespace HuahuiSite.Web
                     areaName: "Frontend",
                     template: "{controller=Home}/{action=Index}/{id?}");
 
-                //routes.MapAreaRoute(
-                //    name: "Backend",
-                //    areaName: "Backend",
-                //    template: "{area:exists}/{controller=Login}/{action=Index}/{id?}");
+                routes.MapAreaRoute(
+                    name: "Backend",
+                    areaName: "Backend",
+                    template: "{area:exists}/{controller=Login}/{action=Index}/{id?}");
             });
         }
     }

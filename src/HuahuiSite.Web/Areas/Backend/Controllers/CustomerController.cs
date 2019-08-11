@@ -14,6 +14,8 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
     {
         #region Members
 
+        private readonly ILoginService _loginService;
+
         private readonly ICustomerService _customerService;
         private readonly IUserService _userService;
         private readonly ISaleService _saleService;
@@ -22,12 +24,15 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
         #region Constructor
 
-        public CustomerController(
+        public CustomerController
+        (
+            ILoginService loginService,
             ICustomerService customerService,
             IUserService userService,
             ISaleService saleService
-            )
+        )
         {
+            _loginService = loginService;
             _customerService = customerService;
             _userService = userService;
             _saleService = saleService;
@@ -45,10 +50,10 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         public IActionResult Index()
         {
             // Check Login Status
-            //if (!_loginService.CheckLoginStatus())
-            //{
-            //    return RedirectToAction("Index", "Login");
-            //}
+            if (!_loginService.CheckLoginStatus())
+            {
+                return RedirectToAction("Index", "Login");
+            }
 
             CustomerViewModel customerViewModel = new CustomerViewModel();
 
@@ -109,7 +114,6 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
             try
             {
                 _customerService.UpdateCustomer(customerViewModel);
-                //_userService.UpdateUser(null, null, customerViewModel);
                 isSuccess = true;
             }
             catch (Exception exception)

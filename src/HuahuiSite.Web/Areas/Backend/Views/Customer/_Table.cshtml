@@ -52,12 +52,13 @@
                                     <div class="modal fade" id="modal-row-table-@No" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content">
-                                                <form class="form-row-table" asp-controller="Customer" asp-action="Update" data-ajax="true" data-ajax-method="post" data-ajax-success="OnUpdateSuccess" enctype="multipart/form-data">
+                                                <form class="form-row-table" asp-controller="Customer" asp-action="Update" data-ajax="true" data-ajax-method="post" onsubmit="return ValidateUpdateSubmit(this)" data-ajax-success="OnUpdateSuccess" enctype="multipart/form-data">
 
                                                     <!-- Hidden Value -->
                                                     <input type="hidden" name="Id" value="@item.Id" />
                                                     <input type="hidden" name="hid-sale-id" value="@item.SaleId" />
                                                     <input type="hidden" name="Password" value="@item.Password" />
+                                                    <input type="hidden" name="IsChangePassword" />
                                                     <!-- End Hidden Value -->
 
                                                     <div class="modal-header" style="background-color:#ff6a00;">
@@ -77,7 +78,6 @@
                                                                         <input type="text" class="form-control" name="Lastname" value="@item.Lastname" required="" />
                                                                     </div>
                                                                 </div>
-
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-2 text-right control-label col-form-label">Address*</label>
                                                                     <div class="col-sm-10">
@@ -102,9 +102,10 @@
                                                                         </select>
                                                                     </div>
                                                                 </div>
+
                                                                 <hr />
 
-                                                                @*<h4><label class="col-sm-12  control-label col-form-label text-info"> กำหนด Username Login</label></h4>
+                                                                <h4><label class="col-sm-12  control-label col-form-label text-info"> กำหนด Username Login</label></h4>
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-2 text-right control-label col-form-label">Username*</label>
                                                                     <div class="col-sm-4">
@@ -116,7 +117,7 @@
                                                                     <div class="col-sm-4">
                                                                         <input type="password" class="form-control" name="NewPassword" value="**********" />
                                                                     </div>
-                                                                </div>*@
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>

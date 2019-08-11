@@ -14,16 +14,21 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
     {
         #region Members
 
+        private readonly ILoginService _loginService;
+
         private readonly IProductCategorieService _productCategorieService;
 
         #endregion
 
         #region Constructor
 
-        public ProductCategorieController(
+        public ProductCategorieController
+        (
+            ILoginService loginService,
             IProductCategorieService productCategorieService
-            )
+        )
         {
+            _loginService = loginService;
             _productCategorieService = productCategorieService;
         }
 
@@ -39,10 +44,10 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         public IActionResult Index()
         {
             // Check Login Status
-            //if (!_loginService.CheckLoginStatus())
-            //{
-            //    return RedirectToAction("Index", "Login");
-            //}
+            if (!_loginService.CheckLoginStatus())
+            {
+                return RedirectToAction("Index", "Login");
+            }
 
             ProductCategorieViewModel productCategorieViewModel = new ProductCategorieViewModel();
 

@@ -83,7 +83,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void GetUserList(ref UserViewModel userViewModel)
         {
-            userViewModel.UserList = _unitOfWork.Users.GetAll();
+            userViewModel.UserList = _unitOfWork.Users.GetAdminUserList();
         }
 
         #endregion
@@ -97,8 +97,6 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void UpdateUser(UserViewModel userViewModel = null, SaleViewModel saleViewModel = null, CustomerViewModel customerViewModel = null)
         {
-            
-           var decryptPassword = Crypto.HashPassword(userViewModel.Password);
             #region Create Object to Update
 
             User user = new User();

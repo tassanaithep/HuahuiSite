@@ -14,6 +14,8 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
     {
         #region Members
 
+        private readonly ILoginService _loginService;
+
         private readonly ISaleService _saleService;
         private readonly IUserService _userService;
 
@@ -21,11 +23,14 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
         #region Constructor
 
-        public SaleController(
+        public SaleController
+        (
+            ILoginService loginService,
             ISaleService saleService,
             IUserService userService
-            )
+        )
         {
+            _loginService = loginService;
             _saleService = saleService;
             _userService = userService;
         }

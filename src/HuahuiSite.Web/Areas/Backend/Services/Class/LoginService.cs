@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 
 namespace HuahuiSite.Web.Areas.Backend.Services.Class
 {
@@ -38,8 +39,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void CheckLogin(LoginViewModel loginViewModel)
         {
-            //_unitOfWork.Users.GetUserOfLogin(loginViewModel.Username, loginViewModel.Password);
-            var user = _unitOfWork.Users.GetUserOfLogin(loginViewModel.Username, loginViewModel.Password);
+            var user = _unitOfWork.Users.GetUserOfLogin(loginViewModel.Username, Crypto.Hash(loginViewModel.Password));
 
             if (user.RoleName.Equals("Admin"))
             {
@@ -49,8 +49,6 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
             {
                 throw new Exception("Login Failed");
             }
-
-           // Extensions.SessionExtensions.SetObject(_httpContextAccessor.HttpContext.Session, "UserData", loginViewModel);
         }
 
         /// <summary>

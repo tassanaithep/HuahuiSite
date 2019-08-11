@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 
 namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 {
@@ -38,7 +39,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         // Updated: 07/07/2019
         public void CheckLogin(LoginViewModel loginViewModel)
         {
-            var user = _unitOfWork.Users.GetUserOfLogin(loginViewModel.Username, loginViewModel.Password);
+            var user = _unitOfWork.Users.GetUserOfLogin(loginViewModel.Username, Crypto.Hash(loginViewModel.Password));
 
             if (user.RoleName.Equals("Sale") || user.RoleName.Equals("Customer") || user.RoleName.Equals("Admin"))
             {

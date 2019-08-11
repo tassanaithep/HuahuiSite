@@ -14,14 +14,21 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
     {
         #region Members
 
+        private readonly ILoginService _loginService;
+
         private readonly IUserService _userService;
 
         #endregion
 
         #region Constructor
 
-        public UserController(IUserService userService)
+        public UserController
+        (
+            ILoginService loginService,
+            IUserService userService
+        )
         {
+            _loginService = loginService;
             _userService = userService;
         }
 
@@ -37,10 +44,10 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         public IActionResult Index()
         {
             // Check Login Status
-            //if (!_loginService.CheckLoginStatus())
-            //{
-            //    return RedirectToAction("Index", "Login");
-            //}
+            if (!_loginService.CheckLoginStatus())
+            {
+                return RedirectToAction("Index", "Login");
+            }
 
             UserViewModel userViewModel = new UserViewModel();
 

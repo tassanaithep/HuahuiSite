@@ -7,6 +7,7 @@ namespace HuahuiSite.Core.Interfaces.Repositories
 {
     public interface IUserRepository : IRepository<User>
     {
+        IEnumerable<User> GetAdminUserList();
         User GetUserOfLogin(string username, string password);
         User GetUserByRole(int roleId);
     }

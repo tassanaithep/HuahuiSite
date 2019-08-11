@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 
 namespace HuahuiSite.Web.Areas.Backend.Services.Class
 {
@@ -70,7 +71,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void GetCustomerList(ref CustomerViewModel customerViewModel)
         {
-            customerViewModel.CustomerList = Mapper.Map<IEnumerable<CustomerModel>, IEnumerable<CustomerViewModel>>(_unitOfWork.Customers.GetCustomerList());
+            customerViewModel.CustomerList = _unitOfWork.Customers.GetCustomerList();
         }
 
         #endregion
@@ -84,6 +85,8 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void UpdateCustomer(CustomerViewModel customerViewModel)
         {
+            #region Update Customer
+
             #region Create Object to Update
 
             Customer customer = new Customer()
@@ -100,6 +103,21 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
             #endregion
 
             _unitOfWork.Customers.Update(customer);
+
+            #endregion
+
+            #region Update Password Of User
+
+            if (customerViewModel.IsChangePassword)
+            {
+                var user = _unitOfWork.Users.GetUserByRole(customerViewModel.Id);
+
+                user.Password = Crypto.Hash(customerViewModel.NewPassword);
+
+                _unitOfWork.Users.Update(user);
+            }
+
+            #endregion
         }
 
         #endregion
