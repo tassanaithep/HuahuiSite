@@ -217,12 +217,11 @@
         };
 
         OnAddToCartSuccess = (res) => {
-            alert('222');
             if (res.isSuccess) {
                 window.location = "/Cart/Index";
             }
             else {
-                alert('fff');
+                
                 swal("Login Failed", "", "error");
             }
         };
