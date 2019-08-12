@@ -228,7 +228,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
             #endregion
 
-            #region Update Cart Status
+            #region Update Order Status
 
             var order = _unitOfWork.Orders.Get(cart.OrderId);
 

@@ -1,22 +1,14 @@
 ﻿@model HuahuiSite.Web.Areas.Frontend.Models.MainViewModel
 
-<<<<<<< HEAD
 <div class="breadcrumbs_area" style="margin-bottom: 10px;">
-=======
-<div class="breadcrumbs_area" style="margin-bottom:10px;">
->>>>>>> f9fdab97345b9fb1e8a1ffa06a9df11b60acf4c5
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="breadcrumb_content" style="padding-bottom:10px;">
+                <div class="breadcrumb_content" style="padding-bottom: 10px;">
                     <ul>
                         <li><a asp-controller="Home" asp-action="Index">home</a></li>
-<<<<<<< HEAD
                         <li>Promotion</li>
-=======
-
-                        <li>shop list</li>
->>>>>>> f9fdab97345b9fb1e8a1ffa06a9df11b60acf4c5
+                        <li>Shop List</li>
                     </ul>
                 </div>
             </div>
@@ -27,33 +19,22 @@
 <div class="shop_area shop_reverse">
     <div class="container">
         <div class="row">
-<<<<<<< HEAD
             <div class="col-lg-12 col-md-12">
                 <!--shop wrapper start-->
                 <!--shop toolbar start-->
-=======
-
             <div class="col-sm-12 col-lg-12 col-md-12">
->>>>>>> f9fdab97345b9fb1e8a1ffa06a9df11b60acf4c5
                 <div class="shop_title">
                     <h3>รายการสินค้าโปรโมชั่น</h3>
                 </div>
-
                 <div class="shop_area shop_reverse">
                     <div class="container img-list">
-
                         <div class="row">
 
-<<<<<<< HEAD
-=======
+                            @{ int NoOfProduct = 0; }
 
-
-                            @{ int NoOfProduct = 0; 
-                                }
-
->>>>>>> f9fdab97345b9fb1e8a1ffa06a9df11b60acf4c5
                             @foreach (var item in Model.PromotionViewModel.ProductList)
                             {
+
                                 <div class="col-lg-4 showPromotion">
                                     <form class="form-product-item" id="form-product-@NoOfProduct" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
                                         <input type="hidden" name="hid-form-product-id" value="form-product-@NoOfProduct" />
@@ -68,14 +49,10 @@
 
                                         <div class="single_product">
                                             <div class="product_thumb" style="text-align:center;">
-<<<<<<< HEAD
-
                                                 @*<a href="#" data-toggle="modal" data-target="#modal-row-table-@NoOfProduct">*@<img src="~/images/upload/@item.PictureFileName" alt="" width="200">@*</a>*@
                                                 @*<div class="modal fade" id="modal-row-table-@NoOfProduct" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
-=======
                                                 <a href="#" data-toggle="modal" data-target="#modal-row-table-@NoOfProduct"><img src="~/images/upload/@item.PictureFileName" alt="" width="200px"></a>
                                                 <div class="modal fade" id="modal-row-table-@NoOfProduct" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
->>>>>>> f9fdab97345b9fb1e8a1ffa06a9df11b60acf4c5
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content text-center">
                                                             <div class="modal-header">
@@ -87,11 +64,8 @@
                                                             </div>
                                                         </div>
                                                     </div>
-<<<<<<< HEAD
                                                 </div>*@
-=======
                                                 </div>
->>>>>>> f9fdab97345b9fb1e8a1ffa06a9df11b60acf4c5
 
                                                 @if (Model.LoginViewModel.IsLogin)
                                                 {
@@ -102,78 +76,75 @@
 
                                                 }
 
-                                                <div class="label_product">
+                                                @*<div class="label_product">
                                                     <span class="label_new">New</span>
-                                                </div>
+                                                </div>*@
                                             </div>
 
-                                            <div class="product_content grid_content">
-                                                <div class="content_inner">
-                                                    <div class="product_name">
-                                                        @*<h3><a href="product-details.html"> @item.Name</a></h3>*@
-                                                        <h3> <a href="#" data-toggle="modal" data-target="#modal-row-table-@NoOfProduct"> @item.Name</a></h3>
-
-                                                    </div>
-
-                                                    @if (Model.LoginViewModel.IsLogin)
-                                                    {
-
-                                                        <div class="price_box">
-                                                            <span class="old_price">420.00</span>
-                                                            <span class="current_price">@item.UnitPrice บาท</span>
-                                                        </div>
-
-                                                        <div class="action_links">
-                                                            <ul>
-                                                                <li class="add_to_cart"><a onclick="OpenProductModal(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                                            </ul>
-                                                        </div>
-
-                                                    }
+                                        <div class="product_content grid_content">
+                                            <div class="content_inner">
+                                                <div class="product_name">
+                                                    @*<h3><a href="product-details.html"> @item.Name</a></h3>*@
+                                                    <h3> <a href="#" data-toggle="modal" data-target="#modal-row-table-@NoOfProduct"> @item.Name</a></h3>
 
                                                 </div>
-                                            </div>
 
-                                            <div class="product_content list_content">
-                                                <div>
-                                                    <div class="product_name">
-                                                        <h3>Categories :  @item.ProductCategorieCode</h3>
-                                                    </div>
-                                                    <div class="product_name">
-<<<<<<< HEAD
-                                                        <h3> @*<a href="#" data-toggle="modal" data-target="#modal-row-table-@NoOfProduct">*@ @item.Name@*</a>*@</h3>
-=======
-                                                        <h3><a href="product-details.html"> @item.Name</a></h3>
->>>>>>> f9fdab97345b9fb1e8a1ffa06a9df11b60acf4c5
+                                                @if (Model.LoginViewModel.IsLogin)
+                                                {
+
+                                                    <div class="price_box">
+                                                        <span class="old_price">420.00</span>
+                                                        <span class="current_price">@item.UnitPrice บาท</span>
                                                     </div>
 
-                                                    @if (Model.LoginViewModel.IsLogin)
-                                                    {
+                                                    <div class="action_links">
+                                                        <ul>
+                                                            <li class="add_to_cart"><a onclick="OpenProductModal(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
+                                                        </ul>
+                                                    </div>
 
-                                                        <div class="price_box">
+                                                }
 
-                                                            @if (!item.IsPromotion)
-                                                            {
-                                                                <span class="current_price">@item.UnitPrice บาท</span>
-                                                            }
-                                                            else
-                                                            {
-                                                                <span class="old_price">@item.PromotionPrice บาท </span>
-                                                                <span class="current_price">@item.UnitPrice บาท</span>
-                                                            }
-
-                                                        </div>
-
-                                                        <div class="add_to_links">
-                                                            <ul>
-                                                                <li class="add_to_cart"><a onclick="OpenProductModal(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    }
-
-                                                </div>
                                             </div>
                                         </div>
+
+                                        <div class="product_content list_content">
+                                            <div>
+                                                <div class="product_name">
+                                                    <h3>Categories :  @item.ProductCategorieCode</h3>
+                                                </div>
+                                                <div class="product_name">
+                                                    <h3> @*<a href="#" data-toggle="modal" data-target="#modal-row-table-@NoOfProduct">*@ @item.Name@*</a>*@</h3>
+                                                    <h3><a href="product-details.html"> @item.Name</a></h3>
+                                                </div>
+
+                                                @if (Model.LoginViewModel.IsLogin)
+                                                {
+
+                                                    <div class="price_box">
+
+                                                        @if (!item.IsPromotion)
+                                                        {
+                                                            <span class="current_price">@item.UnitPrice บาท</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="old_price">@item.PromotionPrice บาท </span>
+                                                            <span class="current_price">@item.UnitPrice บาท</span>
+                                                        }
+
+                                                    </div>
+
+                                                    <div class="add_to_links">
+                                                        <ul>
+                                                            <li class="add_to_cart"><a onclick="OpenProductModal(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
+                                                        </ul>
+                                                    </div>
+                                                }
+
+                                            </div>
+                                        </div>
+                          
                                         <input type="submit" name="btn-submit" style="display: none;" />
                                     </form>
                                 </div>
@@ -181,17 +152,15 @@
                                 NoOfProduct++;
 
                             }
+
                         </div>
                     </div>
                 </div>
 
                 <a href="#" class="prev btn btn-primary">< Prev</a>
                 <a href="#" class="next btn btn-primary">Next ></a>
-<<<<<<< HEAD
                 <!--shop toolbar end-->
                 <!--shop wrapper end-->
-=======
->>>>>>> f9fdab97345b9fb1e8a1ffa06a9df11b60acf4c5
             </div>
         </div>
     </div>
@@ -199,7 +168,6 @@
 
 @section Scripts {
 
-<<<<<<< HEAD
     <script src="~/js/frontend/promotion.js"></script>
 
     <script>
@@ -232,10 +200,6 @@
                 if (start == 0) list.hide().filter(':lt(' + (end) + ')').show();
                 else list.hide().filter(':lt(' + (end) + '):gt(' + (start - 1) + ')').show();
             });
-=======
-    <script src="~/js/frontend/shoplist.js"></script>
-
-    <script>
 
         var start = 0;
         var nb = 6;
@@ -260,7 +224,6 @@
 
             if (start == 0) list.hide().filter(':lt(' + (end) + ')').show();
             else list.hide().filter(':lt(' + (end) + '):gt(' + (start - 1) + ')').show();
->>>>>>> f9fdab97345b9fb1e8a1ffa06a9df11b60acf4c5
         });
 
         var _cartItemList = @Html.Raw(Json.Serialize(@Model.PromotionViewModel.CartItemListViewList));
@@ -279,10 +242,7 @@
                 swal("Login Failed", "", "error");
             }
         };
-<<<<<<< HEAD
-=======
 
->>>>>>> f9fdab97345b9fb1e8a1ffa06a9df11b60acf4c5
     </script>
 
 }

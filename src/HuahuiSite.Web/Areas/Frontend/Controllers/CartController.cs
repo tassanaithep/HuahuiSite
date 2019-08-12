@@ -94,14 +94,14 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
         }
 
         [HttpGet]
-        public JsonResult CheckOut(int cartId, int orderId)
+        public JsonResult CheckOut(int cartId)
         {
             bool isSuccess;
             string exceptionMessage = string.Empty;
 
             try
             {
-                _cartService.CheckOut(cartId, orderId);
+                _cartService.CheckOut(cartId);
                 isSuccess = true;
             }
             catch (Exception exception)
