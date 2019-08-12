@@ -54,6 +54,7 @@
 
                     @foreach (var item in Model.HomeViewModel.ProductList.Where(x => x.IsPromotion).Take(10))
                     {
+
                         <form class="form-product-item" id="form-product-@No" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
 
                             <!-- Hidden Value Start -->
@@ -63,6 +64,8 @@
                             <input type="hidden" name="ProductName" value="@item.Name" />
                             <input type="hidden" name="ProductUnitPrice" value="@item.UnitPrice" />
                             <input type="hidden" name="ProductPictureFileName" value="@item.PictureFileName" />
+                            <input type="hidden" name="IsPromotion" value="@(@item.IsPromotion ? "true" : "false")" />
+                            <input type="hidden" name="PromotionPrice" value="@item.PromotionPrice" />
 
                             <input type="hidden" name="QuantityOfItem" />
 
@@ -71,7 +74,6 @@
                             <div class="col-lg-3">
                                 <div class="single_product">
                                     <div class="product_thumb">
-                                    @*    <a class="primary_img" href="product-details.html"><img src="~/images/upload/@item.PictureFileName" alt=""></a>*@
                                         <img src="~/images/upload/@item.PictureFileName" alt="">
                                         @if (Model.LoginViewModel.IsLogin)
                                         {
@@ -79,14 +81,11 @@
                                                 <a title="quick view" onclick="OpenProductModal(this)"><i class="ion-eye"></i></a>
                                             </div>
                                         }
-                                        @*<div class="label_product">
-            <span class="label_sale">-57%</span>
-        </div>*@
+
                                     </div>
                                     <div class="product_content">
                                         <div class="content_inner">
                                             <div class="product_name">
-                                                @*<h3><a href="product-details.html">@item.Name</a></h3>*@
                                                 <h3>@item.Name</h3>
                                             </div>
 
@@ -107,23 +106,22 @@
 
                                                         <!-- If Login will Show Add to Cart Button -->
 
-
                                                         <li class="add_to_cart"><a onclick="OpenProductModal(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
 
                                                     </ul>
-                                                </div> 
+                                                </div>
 
                                             }
 
                                         </div>
                                     </div>
                                 </div>
-
                                 <input type="submit" name="btn-submit" style="display: none;" />
                             </div>
                         </form>
 
                         No++;
+
                     }
 
                 </div>
@@ -179,6 +177,8 @@
                             <input type="hidden" name="ProductName" value="@itemOfProduct.Name" />
                             <input type="hidden" name="ProductUnitPrice" value="@itemOfProduct.UnitPrice" />
                             <input type="hidden" name="ProductPictureFileName" value="@itemOfProduct.PictureFileName" />
+                            <input type="hidden" name="IsPromotion" value="@(itemOfProduct.IsPromotion ? "true" : "false")" />
+                            <input type="hidden" name="PromotionPrice" value="@itemOfProduct.PromotionPrice" />
 
                             <input type="hidden" name="QuantityOfItem" />
 
@@ -241,7 +241,9 @@
                             </div>
                             <input type="submit" name="btn-submit" style="display: none;" />
                         </form>
+
                             NoOfproduct++;
+
                         }
 
                     </div>

@@ -23,10 +23,12 @@ OpenProductModal = (e) => {
     let $form = $(e).closest(".form-product-item");
 
     let $formId = $form.find("[name='hid-form-product-id']").val();
-    let $productId = $form.find("[name='ProductId']").val();
+    let $productId = parseInt($form.find("[name='ProductId']").val());
     let $name = $form.find("[name='ProductName']").val();
-    let $unitPrice = $form.find("[name='ProductUnitPrice']").val();
+    let $unitPrice = parseInt($form.find("[name='ProductUnitPrice']").val());
     let $pictureFileName = $form.find("[name='ProductPictureFileName']").val();
+    let $isPromotion = JSON.parse($form.find("[name='IsPromotion']").val());
+    let $promotionPrice = $form.find("[name='PromotionPrice']").val();
 
     let $quantityOfItem = $form.find("[name='QuantityOfItem']");
 
@@ -38,7 +40,7 @@ OpenProductModal = (e) => {
 
     if (_cartItemList !== null) {
         for (var i = 0; i < _cartItemList.length; i++) {
-            if (_cartItemList[i].productId === parseInt($productId)) {
+            if (_cartItemList[i].productId === $productId) {
                 quantity = _cartItemList[i].quantity;
                 break;
             }
@@ -81,9 +83,16 @@ OpenProductModal = (e) => {
                                         <div class="modal_title mb-10">
                                             <h2>${ $name }</h2>
                                         </div>
-                                        <div class="modal_price mb-10">
-                                            <span class="new_price">$${ $unitPrice }</span>
-                                            <span class="old_price">$78.99</span>
+                                        <div class="modal_price mb-10">  
+                                        ${
+                                            (
+                                                !$isPromotion ? `
+                                                    <span class="new_price">${ $unitPrice }</span>`
+                                                :
+                                                    `<span class="new_price">${ $promotionPrice }</span>
+                                                    <span class="old_price">${ $unitPrice }</span>`
+                                            )    
+                                        }
                                         </div>
                                         <div class="modal_description mb-15">
                                         </div>
