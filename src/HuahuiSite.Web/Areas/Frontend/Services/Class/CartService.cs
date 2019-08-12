@@ -51,16 +51,36 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
             #region If Not Already Cart
 
-            #region Save Cart
-
             var cartOfUser = _unitOfWork.Carts.GetCartActiveByUser(loginViewModelSession.RoleId);
 
             Cart cart = new Cart();
 
             if (cartOfUser == null)
             {
+                #region Save Order
+
+                int OrderID = GenerateRandomNumber();
+
                 #region Create Object to Save
 
+                Order order = new Order()
+                {
+                    Id = OrderID,
+                    Status = "Cart",
+                    CreatedDateTime = DateTime.Now
+                };
+
+                #endregion
+
+                _unitOfWork.Orders.Add(order);
+
+                #endregion
+
+                #region Save Cart
+
+                #region Create Object to Save
+
+                cart.OrderId = order.Id;
                 cart.UserRole = loginViewModelSession.RoleName;
                 cart.UserId = loginViewModelSession.RoleId;
                 cart.Status = "Cart";
@@ -70,11 +90,13 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                 #endregion
 
                 _unitOfWork.Carts.Add(cart);
+
+                #endregion
             }
 
             #endregion
 
-            #endregion
+            #region If Already Cart
 
             CartItemListModel cartItemOfProduct = null;
 
@@ -83,10 +105,10 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                 cartItemOfProduct = _unitOfWork.CartItemLists.GetCartItemListByCardAndProduct(cartOfUser.Id, cartViewModel.ProductId);
             }
 
+            #region Save Cart Item List
+
             if (cartItemOfProduct == null)
             {
-                #region Save Cart Item List
-
                 #region Create Object to Save
 
                 CartItemList cartItemList = new CartItemList()
@@ -102,13 +124,13 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                 #endregion
 
                 _unitOfWork.CartItemLists.Add(cartItemList);
-
-                #endregion
             }
+            #endregion
+
+            #region Update Cart Item List
+
             else
             {
-                #region Update Cart Item List
-
                 #region Create Object to Update
 
                 CartItemList cartItemList = new CartItemList()
@@ -126,9 +148,11 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                 #endregion
 
                 _unitOfWork.CartItemLists.Update(cartItemList);
-
-                #endregion
             }
+
+            #endregion
+
+            #endregion
         }
 
         #endregion
@@ -153,19 +177,6 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
             mainViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();
             mainViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
-
-            //var cart = Mapper.Map<Cart, CartViewModel>(_unitOfWork.Carts.GetCartActiveByUser(loginViewModelSession.RoleId));
-
-            //if (cart == null)
-            //{
-            //    mainViewModel.CartViewModel = new CartViewModel();
-            //}
-            //else
-            //{
-            //    mainViewModel.CartViewModel = cart;
-            //    mainViewModel.CartViewModel.CartItemListViewList = Mapper.Map<IEnumerable<CartItemListModel>, IEnumerable<CartItemListViewModel>>(_unitOfWork.CartItemLists.GetCartItemListByUser(loginViewModelSession.RoleId));
-            //    mainViewModel.CartViewModel.CartItemList = _unitOfWork.CartItemLists.GetCartItemListByCard(mainViewModel.CartViewModel.CartItemListViewList.First().CardId);
-            //}
 
             mainViewModel.CartViewModel = Mapper.Map<Cart, CartViewModel>(_unitOfWork.Carts.GetCartActiveByUser(loginViewModelSession.RoleId));
             mainViewModel.CartViewModel.CartItemListViewList = Mapper.Map<IEnumerable<CartItemListModel>, IEnumerable<CartItemListViewModel>>(_unitOfWork.CartItemLists.GetCartItemListByUser(loginViewModelSession.RoleId));
@@ -207,11 +218,25 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
         public void CheckOut(int cartId)
         {
+            #region Update Cart Status
+
             var cart = _unitOfWork.Carts.Get(cartId);
 
             cart.Status = "Confirm";
 
             _unitOfWork.Carts.Update(cart);
+
+            #endregion
+
+            #region Update Cart Status
+
+            var order = _unitOfWork.Orders.Get(cart.OrderId);
+
+            order.Status = "Confirm";
+
+            _unitOfWork.Orders.Update(order);
+
+            #endregion
         }
 
         #endregion
@@ -219,6 +244,23 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         #region Delete
 
         #endregion
+
+        #endregion
+
+        #region Functions
+
+        public int GenerateRandomNumber()
+        {
+            var random = new Random();
+            string s = string.Empty;
+
+            for (int i = 0; i < 6; i++)
+            {
+                s = String.Concat(s, random.Next(10).ToString());
+            }
+
+            return Convert.ToInt32(s);
+        }
 
         #endregion
     }
