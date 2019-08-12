@@ -95,7 +95,7 @@
                                                 <div class="price_box">
                                                     <div class="row">
                                                         <div class="col-sm-12 col-md-8 col-lg-8">
-                                                            <span class="old_price">@item.UnitPrice</span>
+                                                            <span class="old_price">@item.UnitPrice บาท</span>
                                                             <span class="current_price">@item.PromotionPrice บาท</span>
                                                         </div>
                                                     </div>
@@ -211,12 +211,12 @@
 
                                                             @if (!itemOfProduct.IsPromotion)
                                                             {
-                                                                <span class="current_price">@itemOfProduct.UnitPrice</span>
+                                                            <span class="current_price">@itemOfProduct.UnitPrice บาท</span>
                                                             }
                                                             else
                                                             {
-                                                                <span class="old_price">@itemOfProduct.PromotionPrice</span>
-                                                                <span class="current_price">@itemOfProduct.UnitPrice</span>
+                                                            <span class="old_price">@itemOfProduct.PromotionPrice บาท</span>
+                                                            <span class="current_price">@itemOfProduct.UnitPrice บาท</span>
                                                             }
 
                                                         </div>

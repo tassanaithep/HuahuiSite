@@ -7,81 +7,188 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex no-block">
-                    <h4 class="card-title">รายงานยอดขายสินค้า</h4>
-                    <div class="ml-auto">
-                        <select class="custom-select">
-                            <option selected="">January</option>
-                            <option value="1">February</option>
-                            <option value="2">March</option>
-                            <option value="3">April</option>
-                        </select>
+                    <h4 class="card-title">รายการยอดการขาย</h4>
+
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-12">
+                        <form class="form">
+
+                            <div class="form-group row">
+                                <label for="example-search-input" class="col-2 col-form-label">วันที่เริ่มตัน - สิ้นสุด :</label>
+                                <div class="col-6">
+                                    <div class="input-daterange input-group" id="date-range">
+                                        <input type="text" class="form-control" name="start" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text bg-info b-0 text-white">-</span>
+                                        </div>
+                                        <input type="text" class="form-control" name="end" />
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-search-input" class="col-2 col-form-label">ลูกค้า : </label>
+                                <div class="col-6">
+                                    <input class="form-control" type="search" id="example-search-input">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-email-input" class="col-2 col-form-label">Sale:</label>
+                                <div class="col-6">
+                                    <input class="form-control" type="search" id="example-search-input">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-6">
+                                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">ค้นหา</button>
+                                    <button type="reset" class="btn btn-inverse waves-effect waves-light">ยกเลิก</button>
+                                </div>
+                            </div>
+                                <hr />
+
+</form>
                     </div>
+                    
+                <div class="table-responsive m-t-20">
+                        <table class="table stylish-table">
+                            <thead>
+                                <tr>
+                                    <th>เลขที่การสั่งซื้อ</th>
+                                    <th>ชื่อลุกค้า</th>
+                                    <th>Sale</th>
+                                    <th>View</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#HH-Order001</td>
+                                    <td>Customer1</td>
+                                    <td>Sale1 Sale1</td>
+                                    <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
+                                </tr>
+                                <tr>
+                                    <td>#HH-Order002</td>
+                                    <td>Customer2</td>
+                                    <td>Sale2 Sale2</td>
+                                    <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
+                                </tr>
+                                <tr>
+                                    <td>#HH-Order003</td>
+                                    <td>Customer3</td>
+                                    <td>Sale3 Sale3</td>
+                                    <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
+                                </tr>
+                                <tr>
+                                    <td>#HH-Order004</td>
+                                    <td>Customer4</td>
+                                    <td>Sale4 Sale4</td>
+                                    <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
+                                </tr>
+                                <tr>
+                                    <td>#HH-Order005</td>
+                                    <td>Customer5</td>
+                                    <td>Sale5 Sale5</td>
+                                    <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
+                                </tr>
+                                <tr>
+                                    <td>#HH-Order006</td>
+                                    <td>Customer6</td>
+                                    <td>Sale6 Sale6</td>
+                                    <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
+                                </tr>
+                                <tr>
+                                    <td>#HH-Order007</td>
+                                    <td>Customer7</td>
+                                    <td>Sale7 Sale7</td>
+                                    <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
+                                </tr>
+                                <tr>
+                                    <td>#HH-Order008</td>
+                                    <td>Customer8</td>
+                                    <td>Sale8 Sale8</td>
+                                    <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</center>
+<center>
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex no-block">
+                    <h4 class="card-title">รายการสั่งซื้อสินค้าที่คงค้าง</h4>
+
                 </div>
                 <div class="table-responsive m-t-20">
                     <table class="table stylish-table">
                         <thead>
                             <tr>
-                                <th colspan="2">Product</th>
-                                <th>จำนวนที่ขาย</th>
-                                <th>ยอดขาย</th>
-                                
+                                <th>เลขที่การสั่งซื้อ</th>
+                                <th>ชื่อลุกค้า</th>
+                                <th>Sale</th>
+                                <th>View</th>
+
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="width:50px;"><span class="round">S</span></td>
-                                <td>
-                                    <h6>Sunil Joshi</h6><small class="text-muted">Web Designer</small>
-                                </td>
-                                <td>100</td>
-                             
-                                <td>$3.9K</td>
-                            </tr>
-                            <tr class="active">
-                                <td><span class="round"><img src="../assets/images/users/2.jpg" alt="user" width="50"></span></td>
-                                <td>
-                                    <h6>Andrew</h6><small class="text-muted">Project Manager</small>
-                                </td>
-                                <td>Real Homes</td>
-                              
-                                <td>$23.9K</td>
+                                <td>#HH-Order001</td>
+                                <td>Customer1</td>
+                                <td>Sale1 Sale1</td>
+                                <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
                             </tr>
                             <tr>
-                                <td><span class="round round-success">B</span></td>
-                                <td>
-                                    <h6>Bhavesh patel</h6><small class="text-muted">Developer</small>
-                                </td>
-                                <td>122</td>
-                              
-                                <td>$12.9K</td>
+                                <td>#HH-Order002</td>
+                                <td>Customer2</td>
+                                <td>Sale2 Sale2</td>
+                                <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
                             </tr>
                             <tr>
-                                <td><span class="round round-primary">N</span></td>
-                                <td>
-                                    <h6>Nirav Joshi</h6><small class="text-muted">Frontend Eng</small>
-                                </td>
-                                <td>123</td>
-                                
-                                <td>$10.9K</td>
+                                <td>#HH-Order003</td>
+                                <td>Customer3</td>
+                                <td>Sale3 Sale3</td>
+                                <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
                             </tr>
                             <tr>
-                                <td><span class="round round-warning">M</span></td>
-                                <td>
-                                    <h6>Micheal Doe</h6><small class="text-muted">Content Writer</small>
-                                </td>
-                                <td>444</td>
-                               
-                                <td>$12.9K</td>
+                                <td>#HH-Order004</td>
+                                <td>Customer4</td>
+                                <td>Sale4 Sale4</td>
+                                <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
                             </tr>
                             <tr>
-                                <td><span class="round round-danger">N</span></td>
-                                <td>
-                                    <h6>Johnathan</h6><small class="text-muted">Graphic</small>
-                                </td>
-                                <td>331</td>
-                             
-                                <td>$2.6K</td>
+                                <td>#HH-Order005</td>
+                                <td>Customer5</td>
+                                <td>Sale5 Sale5</td>
+                                <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
                             </tr>
+                            <tr>
+                                <td>#HH-Order006</td>
+                                <td>Customer6</td>
+                                <td>Sale6 Sale6</td>
+                                <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
+                            </tr>
+                            <tr>
+                                <td>#HH-Order007</td>
+                                <td>Customer7</td>
+                                <td>Sale7 Sale7</td>
+                                <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
+                            </tr>
+                            <tr>
+                                <td>#HH-Order008</td>
+                                <td>Customer8</td>
+                                <td>Sale8 Sale8</td>
+                                <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
+                            </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -89,4 +196,229 @@
         </div>
     </div>
 </center>
+
+
+@section Scripts {
+    <script>
+        /*******************************************/
+        // Basic Date Range Picker
+        /*******************************************/
+        $('.daterange').daterangepicker();
+
+        /*******************************************/
+        // Date & Time
+        /*******************************************/
+        $('.datetime').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            locale: {
+                format: 'MM/DD/YYYY h:mm A'
+            }
+        });
+
+        /*******************************************/
+        //Calendars are not linked
+        /*******************************************/
+        $('.timeseconds').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            timePicker24Hour: true,
+            timePickerSeconds: true,
+            locale: {
+                format: 'MM-DD-YYYY h:mm:ss'
+            }
+        });
+
+        /*******************************************/
+        // Single Date Range Picker
+        /*******************************************/
+        $('.singledate').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true
+        });
+
+        /*******************************************/
+        // Auto Apply Date Range
+        /*******************************************/
+        $('.autoapply').daterangepicker({
+            autoApply: true,
+        });
+
+        /*******************************************/
+        // Calendars are not linked
+        /*******************************************/
+        $('.linkedCalendars').daterangepicker({
+            linkedCalendars: false,
+        });
+
+        /*******************************************/
+        // Date Limit
+        /*******************************************/
+        $('.dateLimit').daterangepicker({
+            dateLimit: {
+                days: 7
+            },
+        });
+
+        /*******************************************/
+        // Show Dropdowns
+        /*******************************************/
+        $('.showdropdowns').daterangepicker({
+            showDropdowns: true,
+        });
+
+        /*******************************************/
+        // Show Week Numbers
+        /*******************************************/
+        $('.showweeknumbers').daterangepicker({
+            showWeekNumbers: true,
+        });
+
+        /*******************************************/
+        // Date Ranges
+        /*******************************************/
+        $('.dateranges').daterangepicker({
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        });
+
+        /*******************************************/
+        // Always Show Calendar on Ranges
+        /*******************************************/
+        $('.shawCalRanges').daterangepicker({
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            },
+            alwaysShowCalendars: true,
+        });
+
+        /*******************************************/
+        // Top of the form-control open alignment
+        /*******************************************/
+        $('.drops').daterangepicker({
+            drops: "up" // up/down
+        });
+
+        /*******************************************/
+        // Custom button options
+        /*******************************************/
+        $('.buttonClass').daterangepicker({
+            drops: "up",
+            buttonClasses: "btn",
+            applyClass: "btn-info",
+            cancelClass: "btn-danger"
+        });
+
+        /*******************************************/
+        // Language
+        /*******************************************/
+        $('.localeRange').daterangepicker({
+            ranges: {
+                "Aujourd'hui": [moment(), moment()],
+                'Hier': [moment().subtract('days', 1), moment().subtract('days', 1)],
+                'Les 7 derniers jours': [moment().subtract('days', 6), moment()],
+                'Les 30 derniers jours': [moment().subtract('days', 29), moment()],
+                'Ce mois-ci': [moment().startOf('month'), moment().endOf('month')],
+                'le mois dernier': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+            },
+            locale: {
+                applyLabel: "Vers l'avant",
+                cancelLabel: 'Annulation',
+                startLabel: 'Date initiale',
+                endLabel: 'Date limite',
+                customRangeLabel: 'SÃ©lectionner une date',
+                // daysOfWeek: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi','Samedi'],
+                daysOfWeek: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+                monthNames: ['Janvier', 'fÃ©vrier', 'Mars', 'Avril', 'ÐœÐ°i', 'Juin', 'Juillet', 'AoÃ»t', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+                firstDay: 1
+            }
+        });
+    </script>
+    <script>
+        // MAterial Date picker
+        $('#mdate').bootstrapMaterialDatePicker({ weekStart: 0, time: false });
+        $('#timepicker').bootstrapMaterialDatePicker({ format: 'HH:mm', time: true, date: false });
+        $('#date-format').bootstrapMaterialDatePicker({ format: 'dddd DD MMMM YYYY - HH:mm' });
+
+        $('#min-date').bootstrapMaterialDatePicker({ format: 'DD/MM/YYYY HH:mm', minDate: new Date() });
+        // Clock pickers
+        $('#single-input').clockpicker({
+            placement: 'bottom',
+            align: 'left',
+            autoclose: true,
+            'default': 'now'
+        });
+        $('.clockpicker').clockpicker({
+            donetext: 'Done',
+        }).find('input').change(function () {
+            console.log(this.value);
+        });
+        $('#check-minutes').click(function (e) {
+            // Have to stop propagation here
+            e.stopPropagation();
+            input.clockpicker('show').clockpicker('toggleView', 'minutes');
+        });
+        if (/mobile/i.test(navigator.userAgent)) {
+            $('input').prop('readOnly', true);
+        }
+        // Colorpicker
+        $(".colorpicker").asColorPicker();
+        $(".complex-colorpicker").asColorPicker({
+            mode: 'complex'
+        });
+        $(".gradient-colorpicker").asColorPicker({
+            mode: 'gradient'
+        });
+        // Date Picker
+        jQuery('.mydatepicker, #datepicker').datepicker();
+        jQuery('#datepicker-autoclose').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        });
+        jQuery('#date-range').datepicker({
+            toggleActive: true
+        });
+        jQuery('#datepicker-inline').datepicker({
+            todayHighlight: true
+        });
+        // Daterange picker
+        $('.input-daterange-datepicker').daterangepicker({
+            buttonClasses: ['btn', 'btn-sm'],
+            applyClass: 'btn-danger',
+            cancelClass: 'btn-inverse'
+        });
+        $('.input-daterange-timepicker').daterangepicker({
+            timePicker: true,
+            format: 'MM/DD/YYYY h:mm A',
+            timePickerIncrement: 30,
+            timePicker12Hour: true,
+            timePickerSeconds: false,
+            buttonClasses: ['btn', 'btn-sm'],
+            applyClass: 'btn-danger',
+            cancelClass: 'btn-inverse'
+        });
+        $('.input-limit-datepicker').daterangepicker({
+            format: 'MM/DD/YYYY',
+            minDate: '06/01/2015',
+            maxDate: '06/30/2015',
+            buttonClasses: ['btn', 'btn-sm'],
+            applyClass: 'btn-danger',
+            cancelClass: 'btn-inverse',
+            dateLimit: {
+                days: 6
+            }
+        });
+    </script>
+}
 

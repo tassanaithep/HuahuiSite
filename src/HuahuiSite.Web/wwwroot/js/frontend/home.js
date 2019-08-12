@@ -87,10 +87,10 @@ OpenProductModal = (e) => {
                                         ${
                                             (
                                                 !$isPromotion ? `
-                                                    <span class="new_price">${ $unitPrice }</span>`
+                                                    <span class="new_price">${ $unitPrice } บาท</span>`
                                                 :
-                                                    `<span class="new_price">${ $promotionPrice }</span>
-                                                    <span class="old_price">${ $unitPrice }</span>`
+            `<span class="new_price">${$promotionPrice } บาท</span>
+                                                    <span class="old_price">${ $unitPrice } บาท</span>`
                                             )    
                                         }
                                         </div>
