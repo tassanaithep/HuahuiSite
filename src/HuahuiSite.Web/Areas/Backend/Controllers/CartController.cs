@@ -132,84 +132,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
         #endregion
 
-        //#region Actions
-
-        ///// <summary>
-        ///// Save.
-        ///// </summary>
-        //// Author: Mod Nattasit
-        //// Updated: 07/07/2019
-        //[HttpPost]
-        //public IActionResult Save(CustomerViewModel customerViewModel)
-        //{
-        //    bool isSuccess;
-        //    string exceptionMessage = string.Empty;
-
-        //    try
-        //    {
-        //        int customerId = _customerService.SaveCustomer(customerViewModel);
-        //        _userService.SaveUser(null, null, customerViewModel, customerId);
-        //        isSuccess = true;
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        exceptionMessage = exception.Message;
-        //        isSuccess = false;
-        //    }
-
-        //    return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
-        //}
-
-        ///// <summary>
-        ///// Update.
-        ///// </summary>
-        //// Author: Mod Nattasit
-        //// Updated: 07/07/2019
-        //[HttpPost]
-        //public IActionResult Update(CustomerViewModel customerViewModel)
-        //{
-        //    bool isSuccess;
-        //    string exceptionMessage = string.Empty;
-
-        //    try
-        //    {
-        //        _customerService.UpdateCustomer(customerViewModel);
-        //        //_userService.UpdateUser(null, null, customerViewModel);
-        //        isSuccess = true;
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        exceptionMessage = exception.Message;
-        //        isSuccess = false;
-        //    }
-
-        //    return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
-        //}
-
-        ///// <summary>
-        ///// Delete.
-        ///// </summary>
-        //// Author: Mod Nattasit
-        //// Updated: 07/07/2019
-        //[HttpPost]
-        //public JsonResult Delete(CustomerViewModel customerViewModel)
-        //{
-        //    bool isSuccess;
-        //    string exceptionMessage = string.Empty;
-
-        //    try
-        //    {
-        //        _customerService.DeleteCustomer(customerViewModel);
-        //        isSuccess = true;
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        exceptionMessage = exception.Message;
-        //        isSuccess = false;
-        //    }
-
-        //    return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
-        //}
+        #region Actions
 
         /// <summary>
         /// Update Table.
@@ -232,6 +155,6 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
             return PartialView("_Table", cartViewModel);
         }
 
-        //#endregion
+        #endregion
     }
 }

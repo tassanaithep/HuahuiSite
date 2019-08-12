@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace HuahuiSite.Web.Areas.Backend.Services.Class
@@ -112,8 +113,11 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #region Save Order
 
+            int OrderID = GenerateRandomNumber();
+
             Order order = new Order()
             {
+                Id = OrderID,
                 Status = "Complete",
                 CreatedDateTime = DateTime.Now
             };
@@ -145,6 +149,23 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
             _unitOfWork.CartItemLists.RemoveRange(cartItemList);
 
             #endregion
+        }
+
+        #endregion
+
+        #region Functions
+
+        public int GenerateRandomNumber()
+        {
+            var random = new Random();
+            string s = string.Empty;
+
+            for (int i = 0; i < 6; i++)
+            {
+                s = String.Concat(s, random.Next(10).ToString());
+            }
+                
+            return Convert.ToInt32(s);
         }
 
         #endregion

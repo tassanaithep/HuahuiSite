@@ -189,10 +189,19 @@
                                                                         @if (Model.LoginViewModel.IsLogin)
                                                                         {
 
-                                                                            <div class="price_box">
-                                                                                <span class="old_price">$420.00</span>
-                                                                                <span class="current_price">@item.UnitPrice</span>
-                                                                            </div>
+                                                                <div class="price_box">
+
+                                                                    @if (!item.IsPromotion)
+                                                                    {
+                                                                        <span class="current_price">@item.UnitPrice</span>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span class="old_price">@item.PromotionPrice</span>
+                                                                        <span class="current_price">@item.UnitPrice</span>
+                                                                    }
+
+                                                                </div>
 
                                                                             <div class="add_to_links">
                                                                                 <ul>

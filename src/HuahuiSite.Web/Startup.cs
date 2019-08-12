@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using HuahuiSite.Core.Entities;
 using HuahuiSite.Core.Interfaces;
 using HuahuiSite.Core.Models;
 using HuahuiSite.Infrastructure;
@@ -101,6 +102,7 @@ namespace HuahuiSite.Web
             {
                 cfg.CreateMap<SaleModel, SaleViewModel>();
                 cfg.CreateMap<CustomerModel, CustomerViewModel>();
+                cfg.CreateMap<Cart, Areas.Frontend.Models.CartViewModel>();
                 cfg.CreateMap<CartItemListModel, Areas.Frontend.Models.CartItemListViewModel>();
                 cfg.CreateMap<ProductModel, Areas.Frontend.Models.ProductViewModel>();
 

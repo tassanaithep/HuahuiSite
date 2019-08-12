@@ -106,14 +106,16 @@ UpdateCart = () => {
 
 /**
   * @desc Update Cart
-  * @param {Number} cartId - Cart Id of Cart
+  * @param {Object} e - Element of Check Out Button
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
-CheckOutCart = (cartId) => {
+CheckOutCart = (e) => {
+    let $cartId = $(e).closest("#form-cart-item").find("[name='hid-cart-id']").val();
+
     $.ajax({
         type: "GET",
         url: "/Cart/CheckOut",
-        data: { cartId: cartId },
+        data: { cartId: $cartId },
         success: function (res) {
             if (res.isSuccess) {
                 window.location = "/Cart/Index";

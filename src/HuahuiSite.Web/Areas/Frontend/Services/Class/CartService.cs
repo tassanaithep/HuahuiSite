@@ -154,7 +154,20 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             mainViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();
             mainViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
 
-            mainViewModel.CartViewModel = new CartViewModel();
+            //var cart = Mapper.Map<Cart, CartViewModel>(_unitOfWork.Carts.GetCartActiveByUser(loginViewModelSession.RoleId));
+
+            //if (cart == null)
+            //{
+            //    mainViewModel.CartViewModel = new CartViewModel();
+            //}
+            //else
+            //{
+            //    mainViewModel.CartViewModel = cart;
+            //    mainViewModel.CartViewModel.CartItemListViewList = Mapper.Map<IEnumerable<CartItemListModel>, IEnumerable<CartItemListViewModel>>(_unitOfWork.CartItemLists.GetCartItemListByUser(loginViewModelSession.RoleId));
+            //    mainViewModel.CartViewModel.CartItemList = _unitOfWork.CartItemLists.GetCartItemListByCard(mainViewModel.CartViewModel.CartItemListViewList.First().CardId);
+            //}
+
+            mainViewModel.CartViewModel = Mapper.Map<Cart, CartViewModel>(_unitOfWork.Carts.GetCartActiveByUser(loginViewModelSession.RoleId));
             mainViewModel.CartViewModel.CartItemListViewList = Mapper.Map<IEnumerable<CartItemListModel>, IEnumerable<CartItemListViewModel>>(_unitOfWork.CartItemLists.GetCartItemListByUser(loginViewModelSession.RoleId));
             mainViewModel.CartViewModel.CartItemList = _unitOfWork.CartItemLists.GetCartItemListByCard(mainViewModel.CartViewModel.CartItemListViewList.First().CardId);
         }
@@ -163,25 +176,31 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
         #region Update
 
-        ///// <summary>
-        ///// Update Cart.
-        ///// </summary>
-        //// Author: Mod Nattasit
-        //// Updated: 07/07/2019
+        /// <summary>
+        /// Update Cart.
+        /// </summary>
+        // Author: Mod Nattasit
+        // Updated: 07/07/2019
         public void UpdateCart(CartViewModel cartViewModel)
         {
             #region Delete Old Cart Item List
 
-            var cartItemListToRemove = _unitOfWork.CartItemLists.GetCartItemListByCard(cartViewModel.CartItemList.First().CardId);
+            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
+
+            var cartOfUser = _unitOfWork.Carts.GetCartActiveByUser(loginViewModelSession.RoleId);
+            var cartItemListToRemove = _unitOfWork.CartItemLists.GetCartItemListByCard(cartOfUser.Id);
             _unitOfWork.CartItemLists.RemoveRange(cartItemListToRemove);
 
             #endregion
 
             #region Update Cart Item List
 
-            cartViewModel.CartItemList.ToList().ForEach(i => i.Id = 0);
+            if (cartViewModel.CartItemList.Count() > 0)
+            {
+                cartViewModel.CartItemList.ToList().ForEach(i => i.Id = 0);
 
-            _unitOfWork.CartItemLists.AddRange(cartViewModel.CartItemList);
+                _unitOfWork.CartItemLists.AddRange(cartViewModel.CartItemList);
+            }
 
             #endregion
         }

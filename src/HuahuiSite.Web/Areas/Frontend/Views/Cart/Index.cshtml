@@ -24,6 +24,18 @@
 <div class="shopping_cart_area">
     <div class="container">
         <form id="form-cart-item">
+
+            @if (@Model.CartViewModel != null)
+            {
+
+                <!-- Hidden Value Start -->
+
+                <input type="hidden" name="hid-cart-id" value="@Model.CartViewModel.Id" />
+
+                <!-- Hidden Value End -->
+
+            }
+
             <div class="row">
                 <div class="col-12">
                     <div class="table_desc">
@@ -41,32 +53,50 @@
                                 </thead>
                                 <tbody>
 
-                                    @foreach (var item in Model.CartViewModel.CartItemListViewList)
+                                    @if (Model.CartViewModel != null)
                                     {
-                                        <tr class="tr-data-row">
+                                        @foreach (var item in Model.CartViewModel.CartItemListViewList)
+                                        {
 
-                                            <!-- Hidden Value -->
+                                            <tr class="tr-data-row">
 
-                                            <input type="hidden" name="hid-cart-item-id" value="@item.Id" />
+                                                <!-- Hidden Value Start -->
 
-                                            <!-- End Hidden Value -->
+                                                <input type="hidden" name="hid-cart-item-id" value="@item.Id" />
 
-                                            <td class="product_remove"><a onclick="RemoveCartItem(this)"><i class="fa fa-trash-o"></i></a></td>
-                                            <td class="product_thumb"><a href="#"><img src="~/images/upload/@item.PictureFileName" alt=""></a></td>
-                                            <td class="product_name"><a href="#">@item.ProductName</a></td>
-                                            <td class="product-price">@item.UnitPrice</td>
-                                            <td class="product_quantity"><label>Quantity</label> <input type="number" name="ProductQuantity" min="0" max="100" value="@item.Quantity" onchange="CalculateTotalPrice(this)" /></td>
-                                            <td class="product_total">@item.TotalPrice</td>
-                                        </tr>
+                                                <!-- Hidden Value End -->
+
+                                                @if (!Model.CartViewModel.Status.Equals("Confirm"))
+                                                {
+                                                    <td class="product_remove"><a onclick="RemoveCartItem(this)"><i class="fa fa-trash-o"></i></a></td>
+                                                }
+                                                else
+                                                {
+                                                    <td class="product_remove"></td>
+                                                }
+
+                                                <td class="product_thumb"><a href="#"><img src="~/images/upload/@item.PictureFileName" alt=""></a></td>
+                                                <td class="product_name"><a href="#">@item.ProductName</a></td>
+                                                <td class="product-price">@item.UnitPrice</td>
+                                                <td class="product_quantity"><label>Quantity</label> <input type="number" name="ProductQuantity" min="0" max="100" value="@item.Quantity" onchange="CalculateTotalPrice(this)" /></td>
+                                                <td class="product_total">@item.TotalPrice</td>
+                                            </tr>
+
+                                        }
                                     }
 
                                 </tbody>
                             </table>
                         </div>
-                        <div class="cart_submit">
-                            <button type="button" onclick="UpdateCart()">ยืนยันการแก้ไข</button>
-                            <button type="button" onclick="CheckOutCart('@Model.CartViewModel.CartItemListViewList.First().CardId')">สั่งซื้อสินค้า</button>
-                        </div>
+
+                        @if (Model.CartViewModel != null && !Model.CartViewModel.Status.Equals("Confirm"))
+                        {
+                            <div class="cart_submit">
+                                <button type="button" onclick="UpdateCart()">ยืนยันการแก้ไข</button>
+                                <button type="button" onclick="CheckOutCart(this)">สั่งซื้อสินค้า</button>
+                            </div>
+                        }
+
                     </div>
                 </div>
             </div>
@@ -81,7 +111,10 @@
 
     <script>
 
-        var _cartItemList = @Html.Raw(Json.Serialize(@Model.CartViewModel.CartItemList));
+        @if (Model.CartViewModel != null)
+        {
+            var _cartItemList = @Html.Raw(Json.Serialize(@Model.CartViewModel.CartItemList));
+        }
 
     </script>
 
