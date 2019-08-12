@@ -32,7 +32,7 @@
 
                             @{ int NoOfProduct = 0; }
 
-                            @foreach (var item in Model.PromotionViewModel.ProductList)
+                            @foreach (var item in Model.PromotionViewModel.ProductList.Where(w => w.IsPromotion))
                             {
 
                                 <div class="col-lg-4 showPromotion">
@@ -84,15 +84,14 @@
                                                 <div class="product_name">
                                                     @*<h3><a href="product-details.html"> @item.Name</a></h3>*@
                                                     <h3> <a href="#" data-toggle="modal" data-target="#modal-row-table-@NoOfProduct"> @item.Name</a></h3>
-
                                                 </div>
 
                                                 @if (Model.LoginViewModel.IsLogin)
                                                 {
 
                                                     <div class="price_box">
-                                                        <span class="old_price">420.00</span>
-                                                        <span class="current_price">@item.UnitPrice บาท</span>
+                                                        <span class="old_price">@item.UnitPrice</span>
+                                                        <span class="current_price">@item.PromotionPrice บาท</span>
                                                     </div>
 
                                                     <div class="action_links">
