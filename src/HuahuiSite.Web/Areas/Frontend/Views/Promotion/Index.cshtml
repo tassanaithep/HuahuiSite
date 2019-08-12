@@ -49,9 +49,7 @@
 
                                         <div class="single_product">
                                             <div class="product_thumb" style="text-align:center;">
-                                                @*<a href="#" data-toggle="modal" data-target="#modal-row-table-@NoOfProduct">*@<img src="~/images/upload/@item.PictureFileName" alt="" width="200">@*</a>*@
-                                                @*<div class="modal fade" id="modal-row-table-@NoOfProduct" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
-                                                <a href="#" data-toggle="modal" data-target="#modal-row-table-@NoOfProduct"><img src="~/images/upload/@item.PictureFileName" alt="" width="200px"></a>
+                                                <a href="#" data-toggle="modal" data-target="#modal-row-table-@NoOfProduct"><img src="~/images/upload/@item.PictureFileName" alt="" width="200"></a>
                                                 <div class="modal fade" id="modal-row-table-@NoOfProduct" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content text-center">
@@ -60,12 +58,12 @@
                                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <img src="~/images/upload/@item.PictureFileName" alt="" width="600px">
+                                                                <img src="~/images/upload/@item.PictureFileName" alt="" width="600">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>*@
                                                 </div>
+                                            </div>
 
                                                 @if (Model.LoginViewModel.IsLogin)
                                                 {
@@ -163,6 +161,7 @@
                 <!--shop wrapper end-->
             </div>
         </div>
+    </div>
     </div>
 </div>
 

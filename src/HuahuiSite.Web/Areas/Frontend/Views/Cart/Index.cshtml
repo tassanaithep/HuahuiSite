@@ -43,7 +43,7 @@
                     @if (@Model.CartViewModel != null)
                     {
                         <h4>ORDER ID: @Model.CartViewModel.OrderId</h4>
-                        <h4>Status: @(Model.CartViewModel.Status.Equals("Cart") ? "รอยืนยันการสั่งซื้อแล้ว" : "ยืนยันการสั่งซื้อแล้ว")</h4>
+                        <h4>Status: @(Model.CartViewModel.Status.Equals("Cart") ? "รอยืนยันการสั่งซื้อแล้ว" : Model.CartViewModel.Status.Equals("Confirm") ? "ยืนยันการสั่งซื้อแล้ว" : "อนุมัติการสั่งซื้อแล้ว")</h4>
                     }
 
                     <div class="table_desc">

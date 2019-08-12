@@ -7,7 +7,7 @@
 $(function () {
     //RenderImage();
     //BindData();
-    //$("#table-data").DataTable();
+    $("#table-data").DataTable();
 });
 
 // #endregion
