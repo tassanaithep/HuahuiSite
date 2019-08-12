@@ -10,5 +10,7 @@ namespace HuahuiSite.Core.Interfaces.Repositories
     {
         IEnumerable<OrderItemListModel> GetOrderItemList();
         IEnumerable<OrderItemListModel> GetCompleteOrderItemList();
+        IEnumerable<OrderItemListModel> GetNotCompleteOrderItemList();
+
     }
 }

@@ -110,6 +110,10 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
             return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
         }
 
+        #endregion
+
+        #region Actions
+
         [HttpGet]
         public JsonResult Approve(int cartId)
         {
@@ -129,10 +133,6 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
             return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
         }
-
-        #endregion
-
-        #region Actions
 
         /// <summary>
         /// Update Table.
