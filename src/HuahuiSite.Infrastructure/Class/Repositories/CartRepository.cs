@@ -28,6 +28,7 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                     select new CartModel
                     {
                         Id = cart.Id,
+                        OrderId = cart.OrderId,
                         UserRole = cart.UserRole,
                         UserId = cart.UserId,
                         Status = cart.Status,

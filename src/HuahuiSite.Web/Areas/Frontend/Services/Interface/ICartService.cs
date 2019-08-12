@@ -12,5 +12,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Interface
         void GetCartItemList(ref MainViewModel mainViewModel);
         void UpdateCart(CartViewModel cartViewModel);
         void CheckOut(int cartId);
+
+        int GenerateRandomNumber();
     }
 }

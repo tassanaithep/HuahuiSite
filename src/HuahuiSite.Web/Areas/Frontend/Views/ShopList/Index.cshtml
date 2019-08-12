@@ -50,7 +50,7 @@
                             </ul>
                         </div>
 
-                        <div class="widget_list widget_categories" style="width: auto; max-height:700px;min-height:100%; overflow-y: scroll;">
+                        <div class="widget_list widget_categories" style="width: auto; max-height: 700px;min-height: 100%; overflow-y: scroll;">
                             <h2>
                                 กลุ่มสินค้า
                             </h2>
@@ -120,8 +120,8 @@
 
                                                 <div class="single_product">
                                                     <div class="product_thumb" style="text-align:center;">
-                                                        <a href="#" data-toggle="modal" data-target="#modal-row-table-@NoOfProduct"><img src="~/images/upload/@item.PictureFileName" alt="" width="200px"></a>
-                                                        <div class="modal fade" id="modal-row-table-@NoOfProduct" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+                                                        @*<a href="#" data-toggle="modal" data-target="#modal-row-table-@NoOfProduct">*@<img src="~/images/upload/@item.PictureFileName" alt="" width="200">@*</a>*@
+                                                        @*<div class="modal fade" id="modal-row-table-@NoOfProduct" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
                                                             <div class="modal-dialog modal-lg" role="document">
                                                                 <div class="modal-content text-center">
                                                                     <div class="modal-header">
@@ -129,11 +129,11 @@
                                                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <img src="~/images/upload/@item.PictureFileName" alt="" width="600px">
+                                                                        <img src="~/images/upload/@item.PictureFileName" alt="" width="600">
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div>*@
 
                                                         @if (Model.LoginViewModel.IsLogin)
                                                         {
@@ -159,6 +159,7 @@
 
                                                             @if (Model.LoginViewModel.IsLogin)
                                                             {
+
                                                                 <div class="price_box">
                                                                     <span class="old_price">420.00</span>
                                                                     <span class="current_price">@item.UnitPrice บาท</span>
@@ -169,6 +170,7 @@
                                                                         <li class="add_to_cart"><a onclick="OpenProductModal(this)" title="add to cart"><i class="ion-bag"></i> add to cart</a></li>
                                                                     </ul>
                                                                 </div>
+
                                                             }
 
                                                         </div>
@@ -180,7 +182,7 @@
                                                                 <h3>Categories :  @item.ProductCategorieCode</h3>
                                                             </div>
                                                             <div class="product_name">
-                                                                <h3><a href="product-details.html"> @item.Name</a></h3>
+                                                                <h3>@*<a href="product-details.html">*@ @item.Name@*</a>*@</h3>
                                                             </div>
 
                                                             @if (Model.LoginViewModel.IsLogin)
@@ -218,6 +220,7 @@
                                     NoOfProduct++;
 
                                 }
+
                             </tbody>
                         </table>
                     </div>

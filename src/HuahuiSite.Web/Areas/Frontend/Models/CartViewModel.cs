@@ -9,6 +9,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Models
     public class CartViewModel
     {
         public int Id { get; set; }
+        public int OrderId { get; set; }
         public string UserRole { get; set; }
         public int UserId { get; set; }
         public string Status { get; set; }

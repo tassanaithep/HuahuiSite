@@ -13,7 +13,5 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Interface
         void UpdateCart(CartViewModel cartViewModel);
         void DeleteCart(int cartId);
         void ApproveCart(int cartId);
-
-        int GenerateRandomNumber();
     }
 }

@@ -111,27 +111,31 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #endregion
 
-            #region Save Order
+            #region Update Cart Status
 
-            int OrderID = GenerateRandomNumber();
+            cart.Status = "Approve";
 
-            Order order = new Order()
-            {
-                Id = OrderID,
-                Status = "Complete",
-                CreatedDateTime = DateTime.Now
-            };
+            _unitOfWork.Carts.Update(cart);
 
-            _unitOfWork.Orders.Add(order);
+            #endregion
+
+            #region Update Order Status
+
+            var order = _unitOfWork.Orders.Get(cart.OrderId);
+
+            order.Status = "Approve";
+
+            _unitOfWork.Orders.Update(order);
 
             #endregion
 
             #region Save Order Item List
 
-            cartItemList.ToList().ForEach(i => {
+            cartItemList.ToList().ForEach(i =>
+            {
                 OrderItemList orderItemList = new OrderItemList()
                 {
-                    OrderId = order.Id,
+                    OrderId = cart.OrderId,
                     ProductId = i.ProductId,
                     Quantity = i.Quantity,
                     TotalPrice = i.TotalPrice,
@@ -143,29 +147,12 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #endregion
 
-            #region Delete Cart
+            //#region Delete Cart
 
-            _unitOfWork.Carts.Remove(cart);
-            _unitOfWork.CartItemLists.RemoveRange(cartItemList);
+            //_unitOfWork.Carts.Remove(cart);
+            //_unitOfWork.CartItemLists.RemoveRange(cartItemList);
 
-            #endregion
-        }
-
-        #endregion
-
-        #region Functions
-
-        public int GenerateRandomNumber()
-        {
-            var random = new Random();
-            string s = string.Empty;
-
-            for (int i = 0; i < 6; i++)
-            {
-                s = String.Concat(s, random.Next(10).ToString());
-            }
-                
-            return Convert.ToInt32(s);
+            //#endregion
         }
 
         #endregion
