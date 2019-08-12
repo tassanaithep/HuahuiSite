@@ -91,6 +91,10 @@ namespace HuahuiSite.Infrastructure
                     .HasMaxLength(30);
 
                 entity.Property(e => e.UpdatedDateTime).HasColumnType("datetime");
+
+                entity.Property(e => e.UserRole)
+                    .IsRequired()
+                    .HasMaxLength(30);
             });
 
             modelBuilder.Entity<OrderItemList>(entity =>

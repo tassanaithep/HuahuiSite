@@ -8,6 +8,6 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Interface
 {
     public interface IPromotionService
     {
-        void GetShopList(ref MainViewModel shopListViewModel);
+        void GetPromotionList(ref MainViewModel shopListViewModel);
     }
 }

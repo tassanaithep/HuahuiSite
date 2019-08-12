@@ -7,7 +7,6 @@
                 <div class="breadcrumb_content" style="padding-bottom: 10px;">
                     <ul>
                         <li><a asp-controller="Home" asp-action="Index">home</a></li>
-
                         <li>Promotion</li>
                     </ul>
                 </div>
@@ -82,8 +81,7 @@
                                         <div class="product_content grid_content">
                                             <div class="content_inner">
                                                 <div class="product_name">
-                                                    @*<h3><a href="product-details.html"> @item.Name</a></h3>*@
-                                                    <h3> <a href="#" data-toggle="modal" data-target="#modal-row-table-@NoOfProduct"> @item.Name</a></h3>
+                                                    <h3>@item.Name</h3>
                                                 </div>
 
                                                 @if (Model.LoginViewModel.IsLogin)
@@ -111,7 +109,7 @@
                                                     <h3>Categories :  @item.ProductCategorieCode</h3>
                                                 </div>
                                                 <div class="product_name">
-                                                    <h3> @*<a href="#" data-toggle="modal" data-target="#modal-row-table-@NoOfProduct">*@ @item.Name@*</a>*@</h3>
+                                                    <h3> <a href="#" data-toggle="modal" data-target="#modal-row-table-@NoOfProduct"> @item.Name</a></h3>
                                                     <h3><a href="product-details.html"> @item.Name</a></h3>
                                                 </div>
 
@@ -141,7 +139,6 @@
 
                                             </div>
                                         </div>
-                          
                                         <input type="submit" name="btn-submit" style="display: none;" />
                                     </form>
                                 </div>
@@ -171,9 +168,11 @@
     <script>
 
         $(document).ready(function () {
+
             $('#dataproduct').DataTable({
                 "ordering": false
             });
+
             var start = 0;
             var nb = 6;
             var end = start + nb;
@@ -181,7 +180,6 @@
             var list = $('.img-list .showPromotion');
 
             list.hide().filter(':lt(' + (end) + ')').show();
-
 
             $('.prev, .next').click(function (e) {
                 e.preventDefault();
@@ -199,14 +197,15 @@
                 else list.hide().filter(':lt(' + (end) + '):gt(' + (start - 1) + ')').show();
             });
 
-        var start = 0;
-        var nb = 6;
-        var end = start + nb;
-        var length = $('.img-list .showPromotion').length;
-        var list = $('.img-list .showPromotion');
+            var start = 0;
+            var nb = 6;
+            var end = start + nb;
+            var length = $('.img-list .showPromotion').length;
+            var list = $('.img-list .showPromotion');
 
-        list.hide().filter(':lt(' + (end) + ')').show();
+            list.hide().filter(':lt(' + (end) + ')').show();
 
+        });
 
         $('.prev, .next').click(function (e) {
             e.preventDefault();
@@ -224,7 +223,10 @@
             else list.hide().filter(':lt(' + (end) + '):gt(' + (start - 1) + ')').show();
         });
 
-        var _cartItemList = @Html.Raw(Json.Serialize(@Model.PromotionViewModel.CartItemListViewList));
+        @if (Model.PromotionViewModel != null)
+        {
+            var _cartItemList = @Html.Raw(Json.Serialize(@Model.PromotionViewModel.CartItemListViewList));
+        }
 
         AddToCartSubmit = (e) => {
             alert('submit');

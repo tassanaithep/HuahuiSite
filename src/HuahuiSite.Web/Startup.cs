@@ -73,6 +73,7 @@ namespace HuahuiSite.Web
             #region Backend
 
             services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.ILoginService, HuahuiSite.Web.Areas.Backend.Services.Class.LoginService>();
+            services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.IHomeService, HuahuiSite.Web.Areas.Backend.Services.Class.HomeService>();
             services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.ICartService, HuahuiSite.Web.Areas.Backend.Services.Class.CartService>();
             services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.IOrderService, HuahuiSite.Web.Areas.Backend.Services.Class.OrderService>();
             services.AddScoped<HuahuiSite.Web.Areas.Backend.Services.Interface.ICustomerService, HuahuiSite.Web.Areas.Backend.Services.Class.CustomerService>();

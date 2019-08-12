@@ -39,5 +39,28 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         PictureFileName = product.PictureFileName
                     }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
         }
+
+        public IEnumerable<OrderItemListModel> GetCompleteOrderItemList()
+        {
+            return (from orderItemList in HuahuiDbContext.OrderItemList
+                    join orderJoin in HuahuiDbContext.Order.Where(w => w.Status.Equals("Approve")) on orderItemList.OrderId equals orderJoin.Id into OrderItemListJoinOrder
+                    from order in OrderItemListJoinOrder.DefaultIfEmpty()
+                    join productJoin in HuahuiDbContext.Product on orderItemList.ProductId equals productJoin.Id into CartItemListJoinProduct
+                    from product in CartItemListJoinProduct.DefaultIfEmpty()
+                    join productGroupJoin in HuahuiDbContext.ProductGroup on product.ProductGroupCode equals productGroupJoin.Code into ProductJoinProductGroup
+                    from productGroup in ProductJoinProductGroup.DefaultIfEmpty()
+                    select new OrderItemListModel
+                    {
+                        Id = orderItemList.Id,
+                        OrderId = orderItemList.OrderId,
+                        ProductId = orderItemList.ProductId,
+                        Quantity = orderItemList.Quantity,
+                        TotalPrice = orderItemList.TotalPrice,
+                        CreatedDateTime = orderItemList.CreatedDateTime,
+                        ProductName = product.Name,
+                        UnitPrice = productGroup.UnitPrice,
+                        PictureFileName = product.PictureFileName
+                    }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
+        }
     }
 }

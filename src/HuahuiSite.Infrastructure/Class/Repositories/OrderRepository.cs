@@ -18,5 +18,20 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
         {
             get { return Context as HuahuiDbContext; }
         }
+
+        public IEnumerable<OrderModel> GetCompleteOrderList()
+        {
+            return (from order in HuahuiDbContext.Order.Where(w => w.Status.Equals("Approve"))
+                    join customerJoin in HuahuiDbContext.Customer on order.UserId equals customerJoin.Id into OrderJoinCustomer
+                    from customer in OrderJoinCustomer.DefaultIfEmpty()
+                    join saleJoin in HuahuiDbContext.Sale on customer.SaleId equals saleJoin.Id into CustomerJoinSale
+                    from sale in CustomerJoinSale.DefaultIfEmpty()
+                    select new OrderModel
+                    {
+                        Id = order.Id,
+                        CustomerName = customer.Firstname + " " + customer.Lastname,
+                        SaleName = sale.Firstname + " " + sale.Lastname,
+                    }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
+        }
     }
 }

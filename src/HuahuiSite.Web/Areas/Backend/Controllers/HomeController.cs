@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HuahuiSite.Web.Areas.Backend.Models;
 using HuahuiSite.Web.Areas.Backend.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,6 +15,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         #region Members
 
         private readonly ILoginService _loginService;
+        private readonly IHomeService _homeService;
 
         #endregion
 
@@ -21,10 +23,12 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
         public HomeController
         (
-            ILoginService loginService
+            ILoginService loginService,
+            IHomeService homeService
         )
         {
             _loginService = loginService;
+            _homeService = homeService;
         }
 
         #endregion
@@ -43,7 +47,18 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
                 return RedirectToAction("Index", "Login");
             }
 
-            return View();
+            HomeViewModel homeViewModel = new HomeViewModel();
+
+            try
+            {
+                _homeService.GetCompleteOrderList(ref homeViewModel);
+            }
+            catch (Exception exception)
+            {
+
+            }
+
+            return View(homeViewModel);
         }
     }
 }

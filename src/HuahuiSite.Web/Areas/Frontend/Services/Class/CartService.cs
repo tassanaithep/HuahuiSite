@@ -66,6 +66,8 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                 Order order = new Order()
                 {
                     Id = OrderID,
+                    UserRole = loginViewModelSession.RoleName,
+                    UserId = loginViewModelSession.RoleId,
                     Status = "Cart",
                     CreatedDateTime = DateTime.Now
                 };

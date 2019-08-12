@@ -1,4 +1,6 @@
-﻿@{
+﻿@model HuahuiSite.Web.Areas.Backend.Models.HomeViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -47,8 +49,7 @@
                                 </div>
                             </div>
                                 <hr />
-
-</form>
+                        </form>
                     </div>
                     
                 <div class="table-responsive m-t-20">
@@ -59,58 +60,19 @@
                                     <th>ชื่อลุกค้า</th>
                                     <th>Sale</th>
                                     <th>View</th>
-
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>#HH-Order001</td>
-                                    <td>Customer1</td>
-                                    <td>Sale1 Sale1</td>
-                                    <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
-                                </tr>
-                                <tr>
-                                    <td>#HH-Order002</td>
-                                    <td>Customer2</td>
-                                    <td>Sale2 Sale2</td>
-                                    <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
-                                </tr>
-                                <tr>
-                                    <td>#HH-Order003</td>
-                                    <td>Customer3</td>
-                                    <td>Sale3 Sale3</td>
-                                    <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
-                                </tr>
-                                <tr>
-                                    <td>#HH-Order004</td>
-                                    <td>Customer4</td>
-                                    <td>Sale4 Sale4</td>
-                                    <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
-                                </tr>
-                                <tr>
-                                    <td>#HH-Order005</td>
-                                    <td>Customer5</td>
-                                    <td>Sale5 Sale5</td>
-                                    <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
-                                </tr>
-                                <tr>
-                                    <td>#HH-Order006</td>
-                                    <td>Customer6</td>
-                                    <td>Sale6 Sale6</td>
-                                    <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
-                                </tr>
-                                <tr>
-                                    <td>#HH-Order007</td>
-                                    <td>Customer7</td>
-                                    <td>Sale7 Sale7</td>
-                                    <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
-                                </tr>
-                                <tr>
-                                    <td>#HH-Order008</td>
-                                    <td>Customer8</td>
-                                    <td>Sale8 Sale8</td>
-                                    <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
-                                </tr>
+
+                                @foreach (var item in Model.CompleteOrderList)
+                                {
+                                    <tr>
+                                        <td>@item.Id</td>
+                                        <td>@item.CustomerName</td>
+                                        <td>@item.SaleName</td>
+                                        <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
+                                    </tr>
+                                }
 
                             </tbody>
                         </table>

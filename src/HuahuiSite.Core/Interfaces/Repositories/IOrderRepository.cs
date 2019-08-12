@@ -8,5 +8,6 @@ namespace HuahuiSite.Core.Interfaces.Repositories
 {
     public interface IOrderRepository : IRepository<Order>
     {
+        IEnumerable<OrderModel> GetCompleteOrderList();
     }
 }

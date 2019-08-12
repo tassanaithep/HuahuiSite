@@ -13,20 +13,42 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 {
     public class PromotionService :IPromotionService
     {
+        #region Members
+
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUnitOfWork _unitOfWork;
 
-        public PromotionService(IHttpContextAccessor httpContextAccessor, IUnitOfWork unitOfWork)
+        #endregion
+
+        #region Constructor
+
+        public PromotionService
+        (
+            IHttpContextAccessor httpContextAccessor,
+            IUnitOfWork unitOfWork
+        )
         {
             _httpContextAccessor = httpContextAccessor;
             _unitOfWork = unitOfWork;
         }
 
-        public void GetShopList(ref MainViewModel mainViewModel)
-        {
-            //var loginViewModel = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserData");
+        #endregion
 
-            //mainViewModel.LoginViewModel.IsLogin = loginViewModel != null ? true : false;
+        #region CRUD
+
+        #region Create
+
+        #endregion
+
+        #region Read
+
+        /// <summary>
+        /// Get Promotion List.
+        /// </summary>
+        // Author: Mod Nattasit
+        // Updated: 12/08/2019
+        public void GetPromotionList(ref MainViewModel mainViewModel)
+        {
             var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
 
             mainViewModel.LoginViewModel = new LoginViewModel();
@@ -34,11 +56,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
             mainViewModel.PromotionViewModel = new PromotionViewModel();
             mainViewModel.PromotionViewModel.ProductList = Mapper.Map<IEnumerable<ProductModel>, IEnumerable<ProductViewModel>>(_unitOfWork.Products.GetProductList());
-            //  mainViewModel.HomeViewModel.ProductList = Mapper.Map<IEnumerable<ProductModel>, IEnumerable<ProductViewModel>>(_unitOfWork.Products.GetProductList());
-
             mainViewModel.PromotionViewModel.ProductCategoriesList = _unitOfWork.ProductCategories.GetAll();
-
-    
 
             if (mainViewModel.LoginViewModel.IsLogin)
             {
@@ -47,9 +65,18 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
             mainViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();
             mainViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
-
         }
+
+        #endregion
+
+        #region Update
+
+        #endregion
+
+        #region Delete
+
+        #endregion
+
+        #endregion
     }
-
-
 }
