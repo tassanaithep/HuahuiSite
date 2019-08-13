@@ -33,32 +33,6 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
         #region Create
 
-        /// <summary>
-        /// Save Order.
-        /// </summary>
-        // Author: Mod Nattasit
-        // Updated: 07/07/2019
-        //public int SaveOrder(OrderViewModel customerViewModel)
-        //{
-        //    #region Create Object to Save
-
-        //    Order customer = new Order()
-        //    {
-        //        Firstname = customerViewModel.Firstname,
-        //        Lastname = customerViewModel.Lastname,
-        //        Address = customerViewModel.PhoneNumber,
-        //        PhoneNumber = customerViewModel.PhoneNumber,
-        //        Email = customerViewModel.Email,
-        //        SaleId = customerViewModel.SaleId
-        //    };
-
-        //    #endregion
-
-        //    _unitOfWork.Orders.Add(customer);
-
-        //    return customer.Id;
-        //}
-
         #endregion
 
         #region Read
@@ -76,57 +50,15 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
         #endregion
 
-        //#region Update
+        #region Update
 
-        ///// <summary>
-        ///// Update Order.
-        ///// </summary>
-        //// Author: Mod Nattasit
-        //// Updated: 07/07/2019
-        //public void UpdateOrder(OrderViewModel customerViewModel)
-        //{
-        //    #region Create Object to Update
 
-        //    Order customer = new Order()
-        //    {
-        //        Id = customerViewModel.Id,
-        //        Firstname = customerViewModel.Firstname,
-        //        Lastname = customerViewModel.Lastname,
-        //        Address = customerViewModel.Address,
-        //        PhoneNumber = customerViewModel.PhoneNumber,
-        //        Email = customerViewModel.Email,
-        //        SaleId = customerViewModel.SaleId
-        //    };
 
-        //    #endregion
+        #endregion
 
-        //    _unitOfWork.Orders.Update(customer);
-        //}
+        #region Delete
 
-        //#endregion
-
-        //#region Delete
-
-        ///// <summary>
-        ///// Delete Order.
-        ///// </summary>
-        //// Author: Mod Nattasit
-        //// Updated: 07/07/2019
-        //public void DeleteOrder(OrderViewModel customerViewModel)
-        //{
-        //    #region Create Object to Delete
-
-        //    Order customer = new Order()
-        //    {
-        //        Id = customerViewModel.Id,
-        //    };
-
-        //    #endregion
-
-        //    _unitOfWork.Orders.Remove(customer);
-        //}
-
-        //#endregion
+        #endregion
 
         #endregion
 
@@ -134,11 +66,23 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
         public void CompleteOrder(int orderId)
         {
+            #region Update Cart Status
+
+            var cart = _unitOfWork.Carts.GetCartByOrder(orderId);
+
+            cart.Status = "Complete";
+            cart.IsActive = false;
+
+            _unitOfWork.Carts.Update(cart);
+
+            #endregion
+
             #region Update Order Status
 
             var order = _unitOfWork.Orders.Get(orderId);
 
             order.Status = "Complete";
+            order.IsActive = false;
 
             _unitOfWork.Orders.Update(order);
 

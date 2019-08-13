@@ -8,6 +8,7 @@ namespace HuahuiSite.Core.Interfaces.Repositories
 {
     public interface IOrderItemListRepository : IRepository<OrderItemList>
     {
+        IEnumerable<OrderItemList> GetOrderItemListByOrder(int orderId);
         IEnumerable<OrderItemListModel> GetOrderItemList();
         IEnumerable<OrderItemListModel> GetCompleteOrderItemList();
         IEnumerable<OrderItemListModel> GetNotCompleteOrderItemList();

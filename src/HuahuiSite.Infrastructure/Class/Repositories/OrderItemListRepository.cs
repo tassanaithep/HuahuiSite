@@ -19,6 +19,11 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
             get { return Context as HuahuiDbContext; }
         }
 
+        public IEnumerable<OrderItemList> GetOrderItemListByOrder(int orderId)
+        {
+            return HuahuiDbContext.OrderItemList.Where(w => w.OrderId.Equals(orderId));
+        }
+
         public IEnumerable<OrderItemListModel> GetOrderItemList()
         {
             return (from orderItemList in HuahuiDbContext.OrderItemList

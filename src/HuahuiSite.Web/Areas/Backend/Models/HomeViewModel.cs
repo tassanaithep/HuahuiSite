@@ -12,6 +12,7 @@ namespace HuahuiSite.Web.Areas.Backend.Models
     public class HomeViewModel
     {
         public IEnumerable<OrderModel> OrderList { get; set; }
+        public IEnumerable<OrderItemListModel> OrderItemList { get; set; }
         public IEnumerable<OrderItemListModel> CompleteOrderItemList { get; set; }
     }
 }

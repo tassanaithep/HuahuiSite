@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HuahuiSite.Core.Entities;
+using HuahuiSite.Core.Models;
 using HuahuiSite.Web.Areas.Frontend.Models;
 using HuahuiSite.Web.Areas.Frontend.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -71,10 +72,10 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
         }
 
         [HttpPost]
-        public JsonResult UpdateCart([FromBody]IEnumerable<CartItemList> cartItemList)
+        public JsonResult UpdateCart([FromBody]IEnumerable<CartItemListModel> cartItemList)
         {
             CartViewModel cartViewModel = new CartViewModel();
-            cartViewModel.CartItemList = cartItemList;
+            cartViewModel.CartItemModelList = cartItemList;
 
             bool isSuccess;
             string exceptionMessage = string.Empty;

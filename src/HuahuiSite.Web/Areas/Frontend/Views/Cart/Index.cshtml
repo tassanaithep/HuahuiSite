@@ -63,7 +63,7 @@
 
                                     @if (Model.CartViewModel != null)
                                     {
-                                        @foreach (var item in Model.CartViewModel.CartItemListViewList)
+                                        @foreach (var item in Model.CartViewModel.CartItemModelList)
                                         {
 
                                             <tr class="tr-data-row">
@@ -123,7 +123,7 @@
 
         @if (Model.CartViewModel != null)
         {
-            var _cartItemList = @Html.Raw(Json.Serialize(@Model.CartViewModel.CartItemList));
+            var _cartItemList = @Html.Raw(Json.Serialize(@Model.CartViewModel.CartItemModelList));
         }
 
     </script>

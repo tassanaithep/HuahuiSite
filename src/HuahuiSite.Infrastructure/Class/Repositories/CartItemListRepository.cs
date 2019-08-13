@@ -34,7 +34,6 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         ProductId = cartItemList.ProductId,
                         Quantity = cartItemList.Quantity,
                         TotalPrice = cartItemList.TotalPrice,
-                        IsActive = cartItemList.IsActive,
                         CreatedDateTime = cartItemList.CreatedDateTime,
                         ProductName = product.Name,
                         UnitPrice = productGroup.UnitPrice,
@@ -45,6 +44,8 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
         public IEnumerable<CartItemListModel> GetCartItemListByUser(int userId)
         {
             return (from cartItemList in HuahuiDbContext.CartItemList
+                    join cartJoin in HuahuiDbContext.Cart.Where(w => w.IsActive.Equals(true)) on cartItemList.CardId equals cartJoin.Id into CartItemListJoinCart
+                    from cart in CartItemListJoinCart
                     join productJoin in HuahuiDbContext.Product on cartItemList.ProductId equals productJoin.Id into CartItemListJoinProduct
                     from product in CartItemListJoinProduct.DefaultIfEmpty()
                     join productGroupJoin in HuahuiDbContext.ProductGroup on product.ProductGroupCode equals productGroupJoin.Code into ProductJoinProductGroup
@@ -56,7 +57,6 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         ProductId = cartItemList.ProductId,
                         Quantity = cartItemList.Quantity,
                         TotalPrice = cartItemList.TotalPrice,
-                        IsActive = cartItemList.IsActive,
                         CreatedDateTime = cartItemList.CreatedDateTime,
                         ProductName = product.Name,
                         UnitPrice = productGroup.UnitPrice,
@@ -78,7 +78,6 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                 ProductId = s.ProductId,
                 Quantity = s.Quantity,
                 TotalPrice = s.TotalPrice,
-                IsActive = s.IsActive,
                 CreatedDateTime = s.CreatedDateTime,
                 UpdatedDateTime = s.UpdatedDateTime
             }).FirstOrDefault();

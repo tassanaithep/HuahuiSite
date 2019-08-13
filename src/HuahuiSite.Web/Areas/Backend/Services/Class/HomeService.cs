@@ -50,6 +50,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         public void GetCompleteOrderList(ref HomeViewModel homeViewModel)
         {
             homeViewModel.OrderList = _unitOfWork.Orders.GetOrderList();
+            homeViewModel.OrderItemList = _unitOfWork.OrderItemLists.GetOrderItemList();
             homeViewModel.CompleteOrderItemList = _unitOfWork.OrderItemLists.GetCompleteOrderItemList();
         }
 

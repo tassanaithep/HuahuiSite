@@ -1,4 +1,5 @@
 ﻿using HuahuiSite.Core.Entities;
+using HuahuiSite.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,6 @@ namespace HuahuiSite.Web.Areas.Frontend.Models
 
         public int QuantityOfItem { get; set; }
 
-        public IEnumerable<CartItemList> CartItemList { get; set; }
-        public IEnumerable<CartItemListViewModel> CartItemListViewList { get; set; }
+        public IEnumerable<CartItemListModel> CartItemModelList { get; set; }
     }
 }

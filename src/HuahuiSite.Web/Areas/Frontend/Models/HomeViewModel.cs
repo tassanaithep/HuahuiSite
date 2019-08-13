@@ -1,4 +1,5 @@
 ﻿using HuahuiSite.Core.Entities;
+using HuahuiSite.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +9,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Models
 {
     public class HomeViewModel
     {
-        //public IEnumerable<ProductCategorie> ProductCategorieList { get; set; }
         public IEnumerable<ProductViewModel> ProductList { get; set; }
-        public IEnumerable<CartItemListViewModel> CartItemListViewList { get; set; }
+        public IEnumerable<CartItemListModel> CartItemModelList { get; set; }
     }
 }

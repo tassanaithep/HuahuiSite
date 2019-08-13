@@ -10,13 +10,11 @@
             <div class="card-body">
                 <div class="d-flex no-block">
                     <h4 class="card-title">รายการยอดการขาย</h4>
-
                 </div>
                 <hr />
                 <div class="row">
                     <div class="col-12">
                         <form class="form">
-
                             <div class="form-group row">
                                 <label for="example-search-input" class="col-2 col-form-label">วันที่เริ่มตัน - สิ้นสุด :</label>
                                 <div class="col-6">
@@ -27,7 +25,6 @@
                                         </div>
                                         <input type="text" class="form-control" name="end" />
                                     </div>
-
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -64,14 +61,101 @@
                             </thead>
                             <tbody>
 
-                                @foreach (var item in Model.OrderList.Where(w => w.Status.Equals("Complete")))
+                                @{ int No = 0; }
+
+                                @foreach (var itemOfOrder in Model.OrderList.Where(w => w.Status.Equals("Complete")))
                                 {
 
                                     <tr>
-                                        <td>@item.Id</td>
-                                        <td>@item.CustomerName</td>
-                                        <td>@item.SaleName</td>
-                                        <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
+                                        <td>@itemOfOrder.Id</td>
+                                        <td>@itemOfOrder.CustomerName</td>
+                                        <td>@itemOfOrder.SaleName</td>
+                                        <td>
+                                            <a href="#" data-toggle="modal" data-target="#modal-row-table-order-1-@No">รายละเอียดการสั่งซื้อ</a>
+                                            <div class="modal fade" id="modal-row-table-order-1-@No" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <form class="form-row-table">
+
+                                                            <!-- Hidden Value Start -->
+
+                                                            <input type="hidden" name="hid-cart-id" value="@itemOfOrder.Id" />
+
+                                                            <!-- Hidden Value End -->
+
+                                                            <div class="modal-header" style="background-color: #ff6a00;">
+                                                                <h4 class="modal-title text-white">View Order</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="text-white">×</span></button>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                                    <div class="modal-body">
+                                                                        <div class="card">
+                                                                            <div class="card-header">
+                                                                                <div class="card-actions">
+                                                                                    <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="card-body collapse show">
+                                                                                <div class="table-responsive">
+                                                                                    <table class="table" id="table-data">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th>Product Name</th>
+                                                                                                <th>Picture</th>
+                                                                                                <th>Quantity</th>
+                                                                                                <th>Total Price</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+
+                                                                                            @foreach (var itemOfOrderItem in Model.OrderItemList.Where(w => w.OrderId.Equals(itemOfOrder.Id)))
+                                                                                            {
+
+                                                                                                <tr class="tr-data-row">
+
+                                                                                                    <!-- Hidden Value of Cart Item Start -->
+
+                                                                                                    @*<input type="hidden" name="hid-cart-item-id" value="@itemOfOrderItem.Id" />
+                                                                                                    <input type="hidden" name="hid-cart-item-cart-id" value="@itemOfOrderItem.CardId" />
+                                                                                                    <input type="hidden" name="hid-cart-item-product-id" value="@itemOfOrderItem.ProductId" />
+                                                                                                    <input type="hidden" name="hid-cart-item-is-active" value="@(itemOfOrderItem.IsActive ? "true" : "false")" />
+                                                                                                    <input type="hidden" name="hid-cart-item-created-datetime" value="@itemOfOrderItem.CreatedDateTime" />*@
+
+                                                                                                    <!-- Hidden Value of Cart Item End -->
+
+                                                                                                    <td>@itemOfOrderItem.ProductName</td>
+                                                                                                    <td>
+                                                                                                        <img src="~/images/upload/@itemOfOrderItem.PictureFileName" alt="Picture" width="80" />
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                        <input type="number" class="form-control col-sm-4" name="Quantity" value="@itemOfOrderItem.Quantity" onchange="CalculateTotalPrice(this)" disabled />
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                        <input type="text" class="form-control col-sm-6" name="TotalPrice" value="@itemOfOrderItem.TotalPrice" disabled />
+                                                                                                    </td>
+                                                                                                </tr>
+
+                                                                                            }
+
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                @*<button type="button" class="btn btn-success" onclick="UpdateCart(this)"><i class="fa fa-check"></i> Success</button>*@
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
 
                                 }
@@ -90,7 +174,6 @@
             <div class="card-body">
                 <div class="d-flex no-block">
                     <h4 class="card-title">รายการสั่งซื้อสินค้าที่คงค้าง</h4>
-
                 </div>
                 <div class="table-responsive m-t-20">
                     <table class="table stylish-table">
@@ -104,14 +187,103 @@
                         </thead>
                         <tbody>
 
-                            @foreach (var item in Model.OrderList.Where(w => w.Status.Equals("Confirm") || w.Status.Equals("Approve")))
+                            @{ int NoOfOrder2 = 0; }
+
+                            @foreach (var itemOfOrder in Model.OrderList.Where(w => w.Status.Equals("Confirm") || w.Status.Equals("Approve")))
                             {
 
                                 <tr>
-                                    <td>@item.Id</td>
-                                    <td>@item.CustomerName</td>
-                                    <td>@item.SaleName</td>
-                                    <td><a href="#">รายละเอียดการสั่งซื้อ</a></td>
+                                    <td>@itemOfOrder.Id</td>
+                                    <td>@itemOfOrder.CustomerName</td>
+                                    <td>@itemOfOrder.SaleName</td>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target="#modal-row-table-order-2-@NoOfOrder2">รายละเอียดการสั่งซื้อ</a>
+                                        <div class="modal fade" id="modal-row-table-order-2-@NoOfOrder2" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <form class="form-row-table">
+
+                                                        <!-- Hidden Value Start -->
+
+                                                        <input type="hidden" name="hid-cart-id" value="@itemOfOrder.Id" />
+
+                                                        <!-- Hidden Value End -->
+
+                                                        <div class="modal-header" style="background-color: #ff6a00;">
+                                                            <h4 class="modal-title text-white">View Order</h4>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="text-white">×</span></button>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                                <div class="modal-body">
+                                                                    <div class="card">
+                                                                        <div class="card-header">
+                                                                            <div class="card-actions">
+                                                                                <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="card-body collapse show">
+                                                                            <div class="table-responsive">
+                                                                                <table class="table" id="table-data">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>Product Name</th>
+                                                                                            <th>Picture</th>
+                                                                                            <th>Quantity</th>
+                                                                                            <th>Total Price</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+
+                                                                                        @{ int NoOfItemOrder2 = 0; }
+
+                                                                                        @foreach (var itemOfItemOrder in Model.OrderItemList.Where(w => w.OrderId.Equals(itemOfOrder.Id)))
+                                                                                        {
+
+                                                                                            <tr class="tr-data-row">
+
+                                                                                                <!-- Hidden Value of Cart Item Start -->
+
+                                                                                                @*<input type="hidden" name="hid-cart-item-id" value="@itemOfOrderItem.Id" />
+                                                                                                <input type="hidden" name="hid-cart-item-cart-id" value="@itemOfOrderItem.CardId" />
+                                                                                                <input type="hidden" name="hid-cart-item-product-id" value="@itemOfOrderItem.ProductId" />
+                                                                                                <input type="hidden" name="hid-cart-item-is-active" value="@(itemOfOrderItem.IsActive ? "true" : "false")" />
+                                                                                                <input type="hidden" name="hid-cart-item-created-datetime" value="@itemOfOrderItem.CreatedDateTime" />*@
+
+                                                                                                <!-- Hidden Value of Cart Item End -->
+
+                                                                                                <td>@itemOfItemOrder.ProductName</td>
+                                                                                                <td>
+                                                                                                    <img src="~/images/upload/@itemOfItemOrder.PictureFileName" alt="Picture" width="80" />
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input type="number" class="form-control col-sm-4" name="Quantity" value="@itemOfItemOrder.Quantity" onchange="CalculateTotalPrice(this)" disabled />
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input type="text" class="form-control col-sm-6" name="TotalPrice" value="@itemOfItemOrder.TotalPrice" disabled />
+                                                                                                </td>
+                                                                                            </tr>
+
+                                                                                        }
+
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            @*<button type="button" class="btn btn-success" onclick="UpdateCart(this)"><i class="fa fa-check"></i> Success</button>*@
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
 
                             }
@@ -126,6 +298,7 @@
 
 
 @section Scripts {
+
     <script>
         /*******************************************/
         // Basic Date Range Picker
@@ -271,7 +444,9 @@
                 firstDay: 1
             }
         });
+
     </script>
+
     <script>
         // MAterial Date picker
         $('#mdate').bootstrapMaterialDatePicker({ weekStart: 0, time: false });
@@ -346,6 +521,8 @@
                 days: 6
             }
         });
+
     </script>
+
 }
 

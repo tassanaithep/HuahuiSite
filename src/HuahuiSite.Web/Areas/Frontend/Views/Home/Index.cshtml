@@ -211,12 +211,16 @@
 
                                                             @if (!itemOfProduct.IsPromotion)
                                                             {
-                                                            <span class="current_price">@itemOfProduct.UnitPrice บาท</span>
+
+                                                                <span class="current_price">@itemOfProduct.UnitPrice บาท</span>
+
                                                             }
                                                             else
                                                             {
-                                                            <span class="old_price">@itemOfProduct.PromotionPrice บาท</span>
-                                                            <span class="current_price">@itemOfProduct.UnitPrice บาท</span>
+
+                                                                <span class="old_price">@itemOfProduct.PromotionPrice บาท</span>
+                                                                <span class="current_price">@itemOfProduct.UnitPrice บาท</span>
+
                                                             }
 
                                                         </div>
@@ -337,7 +341,7 @@
 
     <script>
 
-        var _cartItemList = @Html.Raw(Json.Serialize(@Model.HomeViewModel.CartItemListViewList));
+        var _cartItemList = @Html.Raw(Json.Serialize(@Model.HomeViewModel.CartItemModelList));
 
         AddToCartSubmit = (e) => {
             $(e).closest(".form-product-item").find(".btn-submit").click();

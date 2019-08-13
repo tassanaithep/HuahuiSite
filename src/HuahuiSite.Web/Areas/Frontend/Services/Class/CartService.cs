@@ -119,7 +119,6 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                     ProductId = cartViewModel.ProductId,
                     Quantity = cartViewModel.QuantityOfItem,
                     TotalPrice = (cartViewModel.ProductUnitPrice * cartViewModel.QuantityOfItem),
-                    IsActive = true,
                     CreatedDateTime = DateTime.Now
                 };
 
@@ -142,7 +141,6 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                     ProductId = cartViewModel.ProductId,
                     Quantity = cartViewModel.QuantityOfItem,
                     TotalPrice = (cartViewModel.ProductUnitPrice * cartViewModel.QuantityOfItem),
-                    IsActive = cartItemOfProduct.IsActive,
                     CreatedDateTime = cartItemOfProduct.CreatedDateTime,
                     UpdatedDateTime = DateTime.Now
                 };
@@ -181,8 +179,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             mainViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
 
             mainViewModel.CartViewModel = Mapper.Map<Cart, CartViewModel>(_unitOfWork.Carts.GetCartActiveByUser(loginViewModelSession.RoleId));
-            mainViewModel.CartViewModel.CartItemListViewList = Mapper.Map<IEnumerable<CartItemListModel>, IEnumerable<CartItemListViewModel>>(_unitOfWork.CartItemLists.GetCartItemListByUser(loginViewModelSession.RoleId));
-            mainViewModel.CartViewModel.CartItemList = _unitOfWork.CartItemLists.GetCartItemListByCard(mainViewModel.CartViewModel.CartItemListViewList.First().CardId);
+            mainViewModel.CartViewModel.CartItemModelList = _unitOfWork.CartItemLists.GetCartItemListByUser(loginViewModelSession.RoleId);
         }
 
         #endregion
@@ -208,11 +205,11 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
             #region Update Cart Item List
 
-            if (cartViewModel.CartItemList.Count() > 0)
+            if (cartViewModel.CartItemModelList.Count() > 0)
             {
-                cartViewModel.CartItemList.ToList().ForEach(i => i.Id = 0);
+                cartViewModel.CartItemModelList.ToList().ForEach(i => i.Id = 0);
 
-                _unitOfWork.CartItemLists.AddRange(cartViewModel.CartItemList);
+                _unitOfWork.CartItemLists.AddRange(cartViewModel.CartItemModelList);
             }
 
             #endregion
