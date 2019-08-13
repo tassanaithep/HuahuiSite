@@ -129,5 +129,22 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         //#endregion
 
         #endregion
+
+        #region Actions
+
+        public void CompleteOrder(int orderId)
+        {
+            #region Update Order Status
+
+            var order = _unitOfWork.Orders.Get(orderId);
+
+            order.Status = "Complete";
+
+            _unitOfWork.Orders.Update(order);
+
+            #endregion
+        }
+
+        #endregion
     }
 }

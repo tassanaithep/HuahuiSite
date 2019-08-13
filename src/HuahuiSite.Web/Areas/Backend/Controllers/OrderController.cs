@@ -67,6 +67,26 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
         #region Actions
 
+        [HttpGet]
+        public JsonResult Complete(int orderId)
+        {
+            bool isSuccess;
+            string exceptionMessage = string.Empty;
+
+            try
+            {
+                _orderService.CompleteOrder(orderId);
+                isSuccess = true;
+            }
+            catch (Exception exception)
+            {
+                exceptionMessage = exception.Message;
+                isSuccess = false;
+            }
+
+            return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
+        }
+
         /// <summary>
         /// Update Table.
         /// </summary>
