@@ -146,13 +146,6 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
             });
 
             #endregion
-
-            //#region Delete Cart
-
-            //_unitOfWork.Carts.Remove(cart);
-            //_unitOfWork.CartItemLists.RemoveRange(cartItemList);
-
-            //#endregion
         }
 
         #endregion

@@ -9,6 +9,7 @@ namespace HuahuiSite.Core.Entities
         public int OrderId { get; set; }
         public string UserRole { get; set; }
         public int UserId { get; set; }
+        public int? CustomerId { get; set; }
         public string Status { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreatedDateTime { get; set; }

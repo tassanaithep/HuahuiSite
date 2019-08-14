@@ -5,6 +5,7 @@ using HuahuiSite.Core.Models;
 using HuahuiSite.Web.Areas.Frontend.Models;
 using HuahuiSite.Web.Areas.Frontend.Services.Interface;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -180,6 +181,28 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
             mainViewModel.CartViewModel = Mapper.Map<Cart, CartViewModel>(_unitOfWork.Carts.GetCartActiveByUser(loginViewModelSession.RoleId));
             mainViewModel.CartViewModel.CartItemModelList = _unitOfWork.CartItemLists.GetCartItemListByUser(loginViewModelSession.RoleId);
+
+            #region Get Sale of Cart
+
+            if (mainViewModel.CartViewModel.UserRole.Equals("Customer"))
+            {
+                var customer = _unitOfWork.Customers.Get(mainViewModel.CartViewModel.UserId);
+
+                mainViewModel.CartViewModel.Sale = _unitOfWork.Sales.Get(customer.SaleId);
+            }
+            else if (mainViewModel.CartViewModel.UserRole.Equals("Sale"))
+            {
+                if (mainViewModel.CartViewModel.Status.Equals("Cart"))
+                {
+                    mainViewModel.CartViewModel.CustomerSelectList = _unitOfWork.Customers.GetAll().Select(s => new SelectListItem { Value = s.Id.ToString(), Text = s.Firstname + " " + s.Lastname });
+                }
+                else if (!mainViewModel.CartViewModel.Status.Equals("Cart"))
+                {
+                    mainViewModel.CartViewModel.Customer = _unitOfWork.Customers.Get(mainViewModel.CartViewModel.CustomerId.Value);
+                }
+            }
+
+            #endregion
         }
 
         #endregion
@@ -215,12 +238,19 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             #endregion
         }
 
-        public void CheckOut(int cartId)
+        public void CheckOut(int cartId, int customerId)
         {
+            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
+
             #region Update Cart Status
 
             var cart = _unitOfWork.Carts.Get(cartId);
 
+            if (loginViewModelSession.RoleName.Equals("Sale"))
+            {
+                cart.CustomerId = customerId;
+            }
+        
             cart.Status = "Confirm";
 
             _unitOfWork.Carts.Update(cart);
@@ -230,6 +260,11 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             #region Update Order Status
 
             var order = _unitOfWork.Orders.Get(cart.OrderId);
+
+            if (loginViewModelSession.RoleName.Equals("Sale"))
+            {
+                order.CustomerId = customerId;
+            }
 
             order.Status = "Confirm";
 

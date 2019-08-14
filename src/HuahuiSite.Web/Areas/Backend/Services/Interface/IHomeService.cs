@@ -9,5 +9,6 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Interface
     public interface IHomeService
     {
         void GetCompleteOrderList(ref HomeViewModel homeViewModel);
+        void Search(ref HomeViewModel homeViewModel);
     }
 }

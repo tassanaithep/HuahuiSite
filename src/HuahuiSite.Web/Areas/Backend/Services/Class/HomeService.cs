@@ -65,5 +65,16 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         #endregion
 
         #endregion
+
+        #region Actions
+
+        public void Search(ref HomeViewModel homeViewModel)
+        {
+            homeViewModel.OrderList = _unitOfWork.Orders.GetOrderListOfSearch(homeViewModel.CustomerName, homeViewModel.SaleName);
+            homeViewModel.OrderItemList = _unitOfWork.OrderItemLists.GetOrderItemList();
+            homeViewModel.CompleteOrderItemList = _unitOfWork.OrderItemLists.GetCompleteOrderItemList();
+        }
+
+        #endregion
     }
 }

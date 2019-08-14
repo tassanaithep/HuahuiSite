@@ -9,5 +9,6 @@ namespace HuahuiSite.Core.Interfaces.Repositories
     public interface IOrderRepository : IRepository<Order>
     {
         IEnumerable<OrderModel> GetOrderList();
+        IEnumerable<OrderModel> GetOrderListOfSearch(string customerName, string saleName);
     }
 }

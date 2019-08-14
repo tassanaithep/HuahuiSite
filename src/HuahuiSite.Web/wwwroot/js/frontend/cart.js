@@ -110,12 +110,14 @@ UpdateCart = () => {
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
 CheckOutCart = (e) => {
-    let $cartId = $(e).closest("#form-cart-item").find("[name='hid-cart-id']").val();
+    let $form = $(e).closest("#form-cart-item");
+    let $cartId = $form.find("[name='hid-cart-id']").val();
+    let $customerId = $form.find("[name='select-customer']").val();
 
     $.ajax({
         type: "GET",
         url: "/Cart/CheckOut",
-        data: { cartId: $cartId },
+        data: { cartId: $cartId, customerId: $customerId },
         success: function (res) {
             if (res.isSuccess) {
                 window.location = "/Cart/Index";

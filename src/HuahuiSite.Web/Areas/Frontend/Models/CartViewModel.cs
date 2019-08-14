@@ -1,5 +1,6 @@
 ﻿using HuahuiSite.Core.Entities;
 using HuahuiSite.Core.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,14 @@ namespace HuahuiSite.Web.Areas.Frontend.Models
         public int OrderId { get; set; }
         public string UserRole { get; set; }
         public int UserId { get; set; }
+        public int? CustomerId { get; set; }
         public string Status { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreatedDateTime { get; set; }
+        
+        public Customer Customer { get; set; }
+        public Sale Sale { get; set; }
+        public IEnumerable<SelectListItem> CustomerSelectList { get; set; }
 
         #region Product
 
