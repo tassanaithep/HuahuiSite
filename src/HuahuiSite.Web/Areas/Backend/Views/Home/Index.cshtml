@@ -61,7 +61,7 @@
                             </thead>
                             <tbody>
 
-                                @{ int No = 0; }
+                                @{ int NoOfOrderComplete = 0; }
 
                                 @foreach (var itemOfOrder in Model.OrderList.Where(w => w.Status.Equals("Complete")))
                                 {
@@ -71,8 +71,8 @@
                                         <td>@itemOfOrder.CustomerName</td>
                                         <td>@itemOfOrder.SaleName</td>
                                         <td>
-                                            <a href="#" data-toggle="modal" data-target="#modal-row-table-order-1-@No">รายละเอียดการสั่งซื้อ</a>
-                                            <div class="modal fade" id="modal-row-table-order-1-@No" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+                                            <a href="#" data-toggle="modal" data-target="#modal-row-table-order-1-@NoOfOrderComplete">รายละเอียดการสั่งซื้อ</a>
+                                            <div class="modal fade" id="modal-row-table-order-1-@NoOfOrderComplete" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <form class="form-row-table">
@@ -158,6 +158,8 @@
                                         </td>
                                     </tr>
 
+                                    NoOfOrderComplete++;
+
                                 }
 
                             </tbody>
@@ -187,7 +189,7 @@
                         </thead>
                         <tbody>
 
-                            @{ int NoOfOrder2 = 0; }
+                            @{ int NoOfOrderNotComplete = 0; }
 
                             @foreach (var itemOfOrder in Model.OrderList.Where(w => w.Status.Equals("Confirm") || w.Status.Equals("Approve")))
                             {
@@ -197,8 +199,8 @@
                                     <td>@itemOfOrder.CustomerName</td>
                                     <td>@itemOfOrder.SaleName</td>
                                     <td>
-                                        <a href="#" data-toggle="modal" data-target="#modal-row-table-order-2-@NoOfOrder2">รายละเอียดการสั่งซื้อ</a>
-                                        <div class="modal fade" id="modal-row-table-order-2-@NoOfOrder2" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+                                        <a href="#" data-toggle="modal" data-target="#modal-row-table-order-2-@NoOfOrderNotComplete">รายละเอียดการสั่งซื้อ</a>
+                                        <div class="modal fade" id="modal-row-table-order-2-@NoOfOrderNotComplete" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <form class="form-row-table">
@@ -234,8 +236,6 @@
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
-
-                                                                                        @{ int NoOfItemOrder2 = 0; }
 
                                                                                         @foreach (var itemOfItemOrder in Model.OrderItemList.Where(w => w.OrderId.Equals(itemOfOrder.Id)))
                                                                                         {
@@ -285,6 +285,8 @@
                                         </div>
                                     </td>
                                 </tr>
+
+                                NoOfOrderNotComplete++;
 
                             }
 

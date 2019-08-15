@@ -23,9 +23,9 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
         {
             return (from order in HuahuiDbContext.Order
                     join customerJoin in HuahuiDbContext.Customer on order.UserId equals customerJoin.Id into OrderJoinCustomer
-                    from customer in OrderJoinCustomer.DefaultIfEmpty()
+                    from customer in OrderJoinCustomer
                     join saleJoin in HuahuiDbContext.Sale on customer.SaleId equals saleJoin.Id into CustomerJoinSale
-                    from sale in CustomerJoinSale.DefaultIfEmpty()
+                    from sale in CustomerJoinSale
                     select new OrderModel
                     {
                         Id = order.Id,
@@ -39,16 +39,17 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
         {
             return (from order in HuahuiDbContext.Order
                     join customerJoin in HuahuiDbContext.Customer on order.UserId equals customerJoin.Id into OrderJoinCustomer
-                    from customer in OrderJoinCustomer.DefaultIfEmpty()
-                    join saleJoin in HuahuiDbContext.Sale on order.UserId equals saleJoin.Id into OrderJoinSale
-                    from sale in OrderJoinSale.DefaultIfEmpty()
+                    from customer in OrderJoinCustomer
+                    join saleJoin in HuahuiDbContext.Sale on customer.SaleId equals saleJoin.Id into CustomerJoinSale
+                    from sale in CustomerJoinSale
                     select new OrderModel
                     {
                         Id = order.Id,
                         CustomerName = customer.Firstname + " " + customer.Lastname,
                         SaleName = sale.Firstname + " " + sale.Lastname,
-                        Status = order.Status
-                    }).Where(w => w.CustomerName.Contains(customerName) || w.SaleName.Contains(saleName)).GroupBy(g => g.Id).Select(s => s.First()).ToList();
+                        Status = order.Status,
+                        CreatedDateTime = order.CreatedDateTime
+                    }).Where(w => w.CreatedDateTime.Date >= Convert.ToDateTime(startDate).Date && w.CreatedDateTime.Date <= Convert.ToDateTime(endDate).Date || w.CustomerName.Contains(customerName) || w.SaleName.Contains(saleName)).GroupBy(g => g.Id).Select(s => s.First()).ToList();
         }
     }
 }
