@@ -70,9 +70,14 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
         public void Search(ref HomeViewModel homeViewModel)
         {
-            homeViewModel.OrderList = _unitOfWork.Orders.GetOrderListOfSearch(homeViewModel.CustomerName, homeViewModel.SaleName);
-            homeViewModel.OrderItemList = _unitOfWork.OrderItemLists.GetOrderItemList();
-            homeViewModel.CompleteOrderItemList = _unitOfWork.OrderItemLists.GetCompleteOrderItemList();
+            var startDate = Convert.ToDateTime(homeViewModel.StartDate).Date;
+            homeViewModel.OrderList = _unitOfWork.Orders.GetOrderListOfSearch(homeViewModel.StartDate, homeViewModel.EndDate, homeViewModel.CustomerName, homeViewModel.SaleName);
+
+            if (homeViewModel.OrderList.Count() > 0)
+            {
+                homeViewModel.OrderItemList = _unitOfWork.OrderItemLists.GetOrderItemList();
+                homeViewModel.CompleteOrderItemList = _unitOfWork.OrderItemLists.GetCompleteOrderItemList();
+            }
         }
 
         #endregion

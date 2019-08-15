@@ -35,20 +35,20 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                     }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
         }
 
-        public IEnumerable<OrderModel> GetOrderListOfSearch(string customerName, string saleName)
+        public IEnumerable<OrderModel> GetOrderListOfSearch(string startDate, string endDate, string customerName, string saleName)
         {
             return (from order in HuahuiDbContext.Order
-                    join customerJoin in HuahuiDbContext.Customer.Where(w => w.Firstname.Contains(customerName)) on order.UserId equals customerJoin.Id into OrderJoinCustomer
+                    join customerJoin in HuahuiDbContext.Customer on order.UserId equals customerJoin.Id into OrderJoinCustomer
                     from customer in OrderJoinCustomer.DefaultIfEmpty()
-                    join saleJoin in HuahuiDbContext.Sale.Where(w => w.Firstname.Contains(saleName)) on customer.SaleId equals saleJoin.Id into CustomerJoinSale
-                    from sale in CustomerJoinSale.DefaultIfEmpty()
+                    join saleJoin in HuahuiDbContext.Sale on order.UserId equals saleJoin.Id into OrderJoinSale
+                    from sale in OrderJoinSale.DefaultIfEmpty()
                     select new OrderModel
                     {
                         Id = order.Id,
                         CustomerName = customer.Firstname + " " + customer.Lastname,
                         SaleName = sale.Firstname + " " + sale.Lastname,
                         Status = order.Status
-                    }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
+                    }).Where(w => w.CustomerName.Contains(customerName) || w.SaleName.Contains(saleName)).GroupBy(g => g.Id).Select(s => s.First()).ToList();
         }
     }
 }

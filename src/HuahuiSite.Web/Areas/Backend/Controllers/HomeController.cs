@@ -68,7 +68,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         #region Actions
 
         [HttpPost]
-        public PartialViewResult Search(HomeViewModel homeViewModel)
+        public IActionResult Search(HomeViewModel homeViewModel)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
             }
 
-            return PartialView("_Table", homeViewModel);
+            return View("Index", homeViewModel);
         }
 
         #endregion
