@@ -51,5 +51,10 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         CreatedDateTime = order.CreatedDateTime
                     }).Where(w => w.CreatedDateTime.Date >= Convert.ToDateTime(startDate).Date && w.CreatedDateTime.Date <= Convert.ToDateTime(endDate).Date || w.CustomerName.Contains(customerName) || w.SaleName.Contains(saleName)).GroupBy(g => g.Id).Select(s => s.First()).ToList();
         }
+
+        public Order GetOrderActiveByUser(int userId)
+        {
+            return HuahuiDbContext.Order.FirstOrDefault(w => w.UserId.Equals(userId) && w.IsActive.Equals(true));
+        }
     }
 }

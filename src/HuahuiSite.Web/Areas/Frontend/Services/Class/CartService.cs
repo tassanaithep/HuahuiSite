@@ -50,28 +50,29 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         {
             var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
 
-            #region If Not Already Cart
+            #region Save Cart and Order
 
             var cartOfUser = _unitOfWork.Carts.GetCartActiveByUser(loginViewModelSession.RoleId);
+            var orderOfUser = _unitOfWork.Orders.GetOrderActiveByUser(loginViewModelSession.RoleId);
 
             Cart cart = new Cart();
+            Order order = new Order();
 
             if (cartOfUser == null)
             {
                 #region Save Order
 
-                int OrderID = GenerateRandomNumber();
+                // Generate Order Id
+                int orderId = GenerateRandomNumber();
 
                 #region Create Object to Save
 
-                Order order = new Order()
-                {
-                    Id = OrderID,
-                    UserRole = loginViewModelSession.RoleName,
-                    UserId = loginViewModelSession.RoleId,
-                    Status = "Cart",
-                    CreatedDateTime = DateTime.Now
-                };
+                order.Id = orderId;
+                order.UserRole = loginViewModelSession.RoleName;
+                order.UserId = loginViewModelSession.RoleId;
+                order.Status = "Cart";
+                order.IsActive = true;
+                order.CreatedDateTime = DateTime.Now;
 
                 #endregion
 
@@ -99,19 +100,27 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
             #endregion
 
-            #region If Already Cart
+            #region Save Cart Item List
 
             CartItemListModel cartItemOfProduct = null;
+            OrderItemListModel orderItemOfProduct = null;
 
+            // If Already Cart
             if (cartOfUser != null)
             {
+                // Get Cart Item List of Cart
                 cartItemOfProduct = _unitOfWork.CartItemLists.GetCartItemListByCardAndProduct(cartOfUser.Id, cartViewModel.ProductId);
+
+                // Get Order Item List of Order
+                orderItemOfProduct = _unitOfWork.OrderItemLists.GetOrderItemListByCardAndProduct(cartOfUser.Id, cartViewModel.ProductId);
             }
 
-            #region Save Cart Item List
+            #region Save Cart Item List and Order Item List
 
             if (cartItemOfProduct == null)
             {
+                #region Save Cart Item List
+
                 #region Create Object to Save
 
                 CartItemList cartItemList = new CartItemList()
@@ -126,13 +135,37 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                 #endregion
 
                 _unitOfWork.CartItemLists.Add(cartItemList);
+
+                #endregion
+
+                #region Save Order Item List 
+
+                #region Create Object to Save
+
+                OrderItemList orderItemList = new OrderItemList()
+                {
+                    OrderId = cartOfUser == null ? order.Id : orderOfUser.Id,
+                    ProductId = cartViewModel.ProductId,
+                    Quantity = cartViewModel.QuantityOfItem,
+                    TotalPrice = (cartViewModel.ProductUnitPrice * cartViewModel.QuantityOfItem),
+                    CreatedDateTime = DateTime.Now
+                };
+
+                #endregion
+
+                _unitOfWork.OrderItemLists.Add(orderItemList);
+
+                #endregion
             }
+
             #endregion
 
-            #region Update Cart Item List
+            #region Update Cart Item List and Order Item List
 
             else
             {
+                #region Update Cart Item List
+
                 #region Create Object to Update
 
                 CartItemList cartItemList = new CartItemList()
@@ -149,6 +182,29 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                 #endregion
 
                 _unitOfWork.CartItemLists.Update(cartItemList);
+
+                #endregion
+
+                #region Update Order Item List
+
+                #region Create Object to Update
+
+                OrderItemList orderItemList = new OrderItemList()
+                {
+                    Id = cartItemOfProduct.Id,
+                    OrderId = orderItemOfProduct.Id,
+                    ProductId = cartViewModel.ProductId,
+                    Quantity = cartViewModel.QuantityOfItem,
+                    TotalPrice = (cartViewModel.ProductUnitPrice * cartViewModel.QuantityOfItem),
+                    CreatedDateTime = cartItemOfProduct.CreatedDateTime,
+                    UpdatedDateTime = DateTime.Now
+                };
+
+                #endregion
+
+                _unitOfWork.CartItemLists.Update(cartItemList);
+
+                #endregion
             }
 
             #endregion
@@ -230,13 +286,47 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
             #endregion
 
+            #region Delete Old Order Item List
+
+            var orderOfUser = _unitOfWork.Orders.GetOrderActiveByUser(loginViewModelSession.RoleId);
+            var orderItemListToRemove = _unitOfWork.OrderItemLists.GetOrderItemListByOrder(orderOfUser.Id);
+            _unitOfWork.OrderItemLists.RemoveRange(orderItemListToRemove);
+
+            #endregion
+
             #region Update Cart Item List
 
             if (cartViewModel.CartItemModelList.Count() > 0)
             {
                 cartViewModel.CartItemModelList.ToList().ForEach(i => i.Id = 0);
+                cartViewModel.CartItemModelList.ToList().ForEach(i => i.UpdatedDateTime = DateTime.Now);
 
                 _unitOfWork.CartItemLists.AddRange(cartViewModel.CartItemModelList);
+            }
+
+            #endregion
+
+            #region Update Order Item List
+
+            if (cartViewModel.CartItemModelList.Count() > 0)
+            {
+                List<OrderItemList> orderItemList = new List<OrderItemList>();
+
+                cartViewModel.CartItemModelList.ToList().ForEach(i => 
+                {
+                    orderItemList.Add(new OrderItemList
+                    {
+                        Id = 0,
+                        OrderId = orderOfUser.Id,
+                        ProductId = i.ProductId,
+                        Quantity = i.Quantity,
+                        TotalPrice = i.TotalPrice,
+                        CreatedDateTime = i.CreatedDateTime,
+                        UpdatedDateTime = DateTime.Now
+                    });
+                });
+
+                _unitOfWork.OrderItemLists.AddRange(orderItemList);
             }
 
             #endregion

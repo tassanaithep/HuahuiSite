@@ -90,5 +90,19 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         PictureFileName = product.PictureFileName
                     }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
         }
+
+        public OrderItemListModel GetOrderItemListByCardAndProduct(int orderId, int productId)
+        {
+            return HuahuiDbContext.OrderItemList.Where(w => w.OrderId.Equals(orderId) && w.ProductId.Equals(productId)).Select(s => new OrderItemListModel
+            {
+                Id = s.Id,
+                OrderId = s.OrderId,
+                ProductId = s.ProductId,
+                Quantity = s.Quantity,
+                TotalPrice = s.TotalPrice,
+                CreatedDateTime = s.CreatedDateTime,
+                UpdatedDateTime = s.UpdatedDateTime
+            }).FirstOrDefault();
+        }
     }
 }

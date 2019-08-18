@@ -42,6 +42,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
 
                 throw;
             }
+
             return View(mainViewModel);
         }
 

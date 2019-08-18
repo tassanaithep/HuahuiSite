@@ -86,7 +86,7 @@
                         <div class="middel_right">
                             <div class="search-container">
                                 <form asp-action="index" asp-controller="Shoplist" method="get">
-                                    <div class="hover_category" style="width:250px">
+                                    <div class="hover_category" style="width: 250px">
                                         <select class="select_option" name="param" id="param">
                                             <option selected value="all">ทุกหมวดหมู่</option>
 
@@ -156,7 +156,7 @@
                                             <li class="menu_item_children">
                                                 <a asp-controller="ShopList" asp-action="Index" asp-route-param="@itemOfProductCategorie.Code"> 
                                                     @*<img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu2.png" alt="">*@
-                                                    <span>
+                                                    <span class="menu-item-categorie" onclick="SelectCategorieMenu(this)">
                                                         @itemOfProductCategorie.Name        |
                                                         @*<i class="fa fa-angle-down"></i>*@
                                                     </span>
@@ -220,10 +220,12 @@
                                 <div class="hover_category">
                                     <select class="select_option" name="param" id="param">
                                         <option selected value="all">ทุกหมวดหมู่</option>
+
                                         @foreach (var itemOfProductCategorie in Model.ProductCategorieList.Select(i => new { i.Code, i.Name }))
                                         {
                                             <option value="@itemOfProductCategorie.Code">@itemOfProductCategorie.Name</option>
                                         }
+
                                     </select>
                                 </div>
                                 <div class="search_box">
@@ -340,6 +342,15 @@
         <script src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/js/main.js"></script>
         <script src="~/lib/material-pro/assets/plugins/datatables/datatables.min.js"></script>
     </environment>
+
+    <script>
+
+        SelectCategorieMenu = (e) => {
+            let categorieMenuLink = $(e).closest("a").prop("href");
+            window.location = categorieMenuLink;
+        };
+
+    </script>
 
     @RenderSection("Scripts", required: false)
 </body>

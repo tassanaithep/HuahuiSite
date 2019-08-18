@@ -128,24 +128,6 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
             _unitOfWork.Orders.Update(order);
 
             #endregion
-
-            #region Save Order Item List
-
-            cartItemList.ToList().ForEach(i =>
-            {
-                OrderItemList orderItemList = new OrderItemList()
-                {
-                    OrderId = cart.OrderId,
-                    ProductId = i.ProductId,
-                    Quantity = i.Quantity,
-                    TotalPrice = i.TotalPrice,
-                    CreatedDateTime = DateTime.Now
-                };
-
-                _unitOfWork.OrderItemLists.Add(orderItemList);
-            });
-
-            #endregion
         }
 
         #endregion
