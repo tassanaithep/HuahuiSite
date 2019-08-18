@@ -119,21 +119,29 @@
                                                 <input type="hidden" name="QuantityOfItem" />
 
                                                 <div class="single_product">
-                                                    <div class="product_thumb" style="text-align:center;">
-                                                        <a href="#" data-toggle="modal" data-target="#modal-row-table-@NoOfProduct"><img src="~/images/upload/@item.PictureFileName" alt="" width="200"></a>
-                                                        <div class="modal fade" id="modal-row-table-@NoOfProduct" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
-                                                            <div class="modal-dialog modal-lg" role="document">
-                                                                <div class="modal-content text-center">
-                                                                    <div class="modal-header">
-                                                                        <h4 class="modal-title" id="myModalLabel">@item.Name</h4>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <img src="~/images/upload/@item.PictureFileName" alt="" width="600">
+                                                    <div class="product_thumb" style="text-align: center;">
+
+                                                        @if (Model.LoginViewModel.IsLogin)
+                                                        {
+                                                            <img src="~/images/upload/@item.PictureFileName" alt="" width="200">
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="#" data-toggle="modal" data-target="#modal-row-table-@NoOfProduct"><img src="~/images/upload/@item.PictureFileName" alt="" width="200"></a>
+                                                            <div class="modal fade" id="modal-row-table-@NoOfProduct" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+                                                                <div class="modal-dialog modal-lg" role="document">
+                                                                    <div class="modal-content text-center">
+                                                                        <div class="modal-header">
+                                                                            <h4 class="modal-title" id="myModalLabel">@item.Name</h4>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <img src="~/images/upload/@item.PictureFileName" alt="" width="600">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        }
 
                                                         @if (Model.LoginViewModel.IsLogin)
                                                         {
@@ -144,25 +152,29 @@
 
                                                         }
 
-                                                        <div class="label_product">
-                                                            <span class="label_new">New</span>
-                                                        </div>
                                                     </div>
 
                                                     <div class="product_content grid_content">
                                                         <div class="content_inner">
                                                             <div class="product_name">
-                                                                @*<h3><a href="product-details.html"> @item.Name</a></h3>*@
-                                                                <h3> <a href="#" data-toggle="modal" data-target="#modal-row-table-@NoOfProduct"> @item.Name</a></h3>
-
+                                                                <h3>@item.Name</h3>
                                                             </div>
 
                                                             @if (Model.LoginViewModel.IsLogin)
                                                             {
 
                                                                 <div class="price_box">
-                                                                    <span class="old_price">420.00</span>
-                                                                    <span class="current_price">@item.UnitPrice บาท</span>
+
+                                                                    @if (!item.IsPromotion)
+                                                                    {
+                                                                        <span class="current_price">@item.UnitPrice บาท</span>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span class="old_price">@item.PromotionPrice บาท</span>
+                                                                        <span class="current_price">@item.UnitPrice บาท</span>
+                                                                    }
+
                                                                 </div>
 
                                                                 <div class="action_links">
@@ -248,7 +260,6 @@
                 window.location = "/Cart/Index";
             }
             else {
-                
                 swal("Login Failed", "", "error");
             }
         };

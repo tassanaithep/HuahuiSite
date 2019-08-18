@@ -38,6 +38,11 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
             try
             {
                 _cartService.GetCartItemList(ref mainViewModel);
+
+                if (mainViewModel.CartViewModel == null)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
             catch (Exception exception)
             {

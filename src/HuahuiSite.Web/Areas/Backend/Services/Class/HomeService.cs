@@ -49,9 +49,20 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void GetCompleteOrderList(ref HomeViewModel homeViewModel)
         {
+            #region Bind Order List Data
+
             homeViewModel.OrderList = _unitOfWork.Orders.GetOrderList();
             homeViewModel.OrderItemList = _unitOfWork.OrderItemLists.GetOrderItemList();
             homeViewModel.CompleteOrderItemList = _unitOfWork.OrderItemLists.GetCompleteOrderItemList();
+
+            #endregion
+
+            #region Bind StartDate and EndDate of Last Month
+
+            homeViewModel.StartDate = DateTime.Today.AddMonths(-1).AddDays(-(DateTime.Today.Day - 1)).ToString("MM/dd/yyyy");
+            homeViewModel.EndDate = DateTime.Today.AddDays(-(DateTime.Today.Day - 1)).AddDays(-1).ToString("MM/dd/yyyy");
+
+            #endregion
         }
 
         #endregion

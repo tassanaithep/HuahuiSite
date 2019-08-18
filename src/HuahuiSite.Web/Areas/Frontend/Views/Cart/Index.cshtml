@@ -8,14 +8,14 @@
 <div class="breadcrumbs_area">
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            @*<div class="col-12">
                 <div class="breadcrumb_content">
                     <ul>
                         <li><a href="index.html">home</a></li>
                         <li>Shopping Cart</li>
                     </ul>
                 </div>
-            </div>
+            </div>*@
         </div>
     </div>
 </div>
@@ -101,7 +101,18 @@
                                                 <td class="product_thumb"><a href="#"><img src="~/images/upload/@item.PictureFileName" alt=""></a></td>
                                                 <td class="product_name"><a href="#">@item.ProductName</a></td>
                                                 <td class="product-price">@item.UnitPrice</td>
-                                                <td class="product_quantity"><input type="number" name="ProductQuantity" min="0" max="100" value="@item.Quantity" onchange="CalculateTotalPrice(this)" /></td>
+                                                <td class="product_quantity">
+
+                                                    @if (Model.CartViewModel.Status != "Approve")
+                                                    {
+                                                        <input type="number" name="ProductQuantity" min="0" max="100" value="@item.Quantity" onchange="CalculateTotalPrice(this)" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="number" name="ProductQuantity" min="0" max="100" value="@item.Quantity" disabled />
+                                                    }
+
+                                                </td>
                                                 <td class="product_total">@item.TotalPrice</td>
                                             </tr>
 
@@ -116,7 +127,6 @@
                         {
                             <div class="cart_submit">
                                 <button type="button" onclick="UpdateCart()">ยืนยันการแก้ไข</button>
-                                @*<button type="button" onclick="CheckOutCart(this)">ยืนยันการสั่งซื้อสินค้า</button>*@
                                 <hr />
                                 <span class="text-info"> เมื่อต้องการสั่งซื้อสินค้ากรุณากดที่ปุ่ม =></span><button type="button" onclick="CheckOutCart(this)">สั่งซื้อสินค้า</button>
                             </div>
@@ -136,12 +146,7 @@
 
     <script>
 
-        $(function () {
-            @if (Model.CartViewModel != null)
-            {
-                var _cartItemList = @Html.Raw(Json.Serialize(@Model.CartViewModel.CartItemModelList));
-            }
-        });
+            var _cartItemList = @Html.Raw(Json.Serialize(@Model.CartViewModel.CartItemModelList));
 
     </script>
 

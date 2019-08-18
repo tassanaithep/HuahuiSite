@@ -180,29 +180,33 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             mainViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
 
             mainViewModel.CartViewModel = Mapper.Map<Cart, CartViewModel>(_unitOfWork.Carts.GetCartActiveByUser(loginViewModelSession.RoleId));
-            mainViewModel.CartViewModel.CartItemModelList = _unitOfWork.CartItemLists.GetCartItemListByUser(loginViewModelSession.RoleId);
 
-            #region Get Sale of Cart
-
-            if (mainViewModel.CartViewModel.UserRole.Equals("Customer"))
+            if (mainViewModel.CartViewModel != null)
             {
-                var customer = _unitOfWork.Customers.Get(mainViewModel.CartViewModel.UserId);
+                mainViewModel.CartViewModel.CartItemModelList = _unitOfWork.CartItemLists.GetCartItemListByUser(loginViewModelSession.RoleId);
 
-                mainViewModel.CartViewModel.Sale = _unitOfWork.Sales.Get(customer.SaleId);
-            }
-            else if (mainViewModel.CartViewModel.UserRole.Equals("Sale"))
-            {
-                if (mainViewModel.CartViewModel.Status.Equals("Cart"))
-                {
-                    mainViewModel.CartViewModel.CustomerSelectList = _unitOfWork.Customers.GetAll().Select(s => new SelectListItem { Value = s.Id.ToString(), Text = s.Firstname + " " + s.Lastname });
-                }
-                else if (!mainViewModel.CartViewModel.Status.Equals("Cart"))
-                {
-                    mainViewModel.CartViewModel.Customer = _unitOfWork.Customers.Get(mainViewModel.CartViewModel.CustomerId.Value);
-                }
-            }
+                #region Get Sale of Cart
 
-            #endregion
+                if (mainViewModel.CartViewModel.UserRole.Equals("Customer"))
+                {
+                    var customer = _unitOfWork.Customers.Get(mainViewModel.CartViewModel.UserId);
+
+                    mainViewModel.CartViewModel.Sale = _unitOfWork.Sales.Get(customer.SaleId);
+                }
+                else if (mainViewModel.CartViewModel.UserRole.Equals("Sale"))
+                {
+                    if (mainViewModel.CartViewModel.Status.Equals("Cart"))
+                    {
+                        mainViewModel.CartViewModel.CustomerSelectList = _unitOfWork.Customers.GetAll().Select(s => new SelectListItem { Value = s.Id.ToString(), Text = s.Firstname + " " + s.Lastname });
+                    }
+                    else if (!mainViewModel.CartViewModel.Status.Equals("Cart"))
+                    {
+                        mainViewModel.CartViewModel.Customer = _unitOfWork.Customers.Get(mainViewModel.CartViewModel.CustomerId.Value);
+                    }
+                }
+
+                #endregion
+            }
         }
 
         #endregion

@@ -22,7 +22,7 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
 
         public IEnumerable<CartModel> GetCartList()
         {
-            return (from cart in HuahuiDbContext.Cart
+            return (from cart in HuahuiDbContext.Cart.Where(w => w.Status.Equals("Cart") || w.Status.Equals("Confirm"))
                     join userJoin in HuahuiDbContext.User on cart.UserId equals userJoin.RoleId into CartJoinUser
                     from user in CartJoinUser.DefaultIfEmpty()
                     select new CartModel

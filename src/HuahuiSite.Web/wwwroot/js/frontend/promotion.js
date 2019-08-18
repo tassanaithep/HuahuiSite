@@ -99,7 +99,7 @@ OpenProductModal = (e) => {
                                         <div class="variants_selects">
                                             <div class="modal_add_to_cart">
                                                 <form action="#">
-                                                    <input type="number" min="0" step="1" onclick="ChangeQuantityOfProduct(this.value, '${ $formId }')" value="${ (quantity !== null ? quantity : 1) }" />
+                                                    <input type="number" min="0" step="1" onkeyup="ChangeQuantityOfProduct(this.value, '${ $formId }')" onclick="ChangeQuantityOfProduct(this.value, '${ $formId }')" value="${ (quantity !== null ? quantity : 1) }" />
                                                     <button type="button" onclick="ProductModalSubmit('${ $formId }')">add to cart</button>
                                                 </form>
                                             </div>
@@ -119,6 +119,10 @@ OpenProductModal = (e) => {
     $("#modal-product").modal("show");
 };
 
+/**
+  * @desc Clear Modal of Product
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
 ClearProductModal = () => {
     $("#modal-product").remove();
     $(".modal-backdrop").remove();
@@ -126,10 +130,21 @@ ClearProductModal = () => {
     $("body").removeProp("style");
 };
 
+/**
+  * @desc Change Quantity of Product
+  * @param {Number} quantity - Number Quantity of Product
+  * @param {String} formId - Id Name of Product Form
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
 ChangeQuantityOfProduct = (quantity, formId) => {
     $("#" + formId).find("[name='QuantityOfItem']").val(quantity);
 };
 
+/**
+  * @desc Submit Form Product form Modal
+  * @param {String} formId - Id Name of Product Form
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
 ProductModalSubmit = (formId) => {
     $("#" + formId).find("[name='btn-submit']").click();
 };
