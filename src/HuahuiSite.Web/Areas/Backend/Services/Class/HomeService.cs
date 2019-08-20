@@ -57,12 +57,19 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #endregion
 
-            #region Bind StartDate and EndDate of Last Month
+            #region Bind StartDate and EndDate of Current Month
 
-            homeViewModel.StartDate = DateTime.Today.AddMonths(-1).AddDays(-(DateTime.Today.Day - 1)).ToString("MM/dd/yyyy");
-            homeViewModel.EndDate = DateTime.Today.AddDays(-(DateTime.Today.Day - 1)).AddDays(-1).ToString("MM/dd/yyyy");
+            homeViewModel.StartDate = DateTime.Today.AddDays(-(DateTime.Today.Day - 1)).ToString("MM/dd/yyyy");
+            homeViewModel.EndDate = DateTime.Today.AddMonths(+1).AddDays(-(DateTime.Today.Day - 1)).AddDays(-1).ToString("MM/dd/yyyy");
 
             #endregion
+
+            //#region Bind StartDate and EndDate of Last Month
+
+            //homeViewModel.StartDate = DateTime.Today.AddMonths(-1).AddDays(-(DateTime.Today.Day - 1)).ToString("MM/dd/yyyy");
+            //homeViewModel.EndDate = DateTime.Today.AddDays(-(DateTime.Today.Day - 1)).AddDays(-1).ToString("MM/dd/yyyy");
+
+            //#endregion
         }
 
         #endregion

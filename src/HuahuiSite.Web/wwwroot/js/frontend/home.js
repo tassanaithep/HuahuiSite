@@ -13,6 +13,34 @@ $(function () {
 // #region Functions
 
 /**
+  * @desc Open Picture Modal of Product
+  * @param {Object} e - Element of Open Modal Button
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+OpenProductPictureModal = (e) => {
+    let $productName = $(e).closest(".form-product-item").find("[name='ProductName']").val();
+    let $pictureFileName = $(e).closest(".form-product-item").find("[name='ProductPictureFileName']").val();
+
+    $("body").append(`
+        <div class="modal fade" id="modal-product-picture" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+	        <div class="modal-dialog modal-lg" role="document">
+		        <div class="modal-content text-center">
+			        <div class="modal-header">
+				        <h4 class="modal-title" id="myModalLabel">${ $productName }</h4>
+				        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="ClearProductPictureModal()">×</button>
+			        </div>
+			        <div class="modal-body">
+				        <img src="/images/upload/${ $pictureFileName }" alt="" width="600">
+			        </div>
+		        </div>
+	        </div>
+        </div>
+    `);
+
+    $("#modal-product-picture").modal("show");
+};
+
+/**
   * @desc Open Modal of Product
   * @param {Object} e - Element of Open Modal Button
   * @author Mod Nattasit mod.nattasit@gmail.com
@@ -117,6 +145,17 @@ OpenProductModal = (e) => {
     // #endregion
 
     $("#modal-product").modal("show");
+};
+
+/**
+  * @desc Clear Modal of Product
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+ClearProductPictureModal = () => {
+    $("#modal-product-picture").remove();
+    $(".modal-backdrop").remove();
+    $("body").removeClass("modal-open");
+    $("body").removeProp("style");
 };
 
 /**

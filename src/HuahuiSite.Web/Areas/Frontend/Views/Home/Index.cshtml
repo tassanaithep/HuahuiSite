@@ -82,8 +82,8 @@
                                         }
                                         else
                                         {
-                                            <a href="#" data-toggle="modal" data-target="#modal-row-table-@No"><img src="~/images/upload/@item.PictureFileName" alt="" width="200"></a>
-                                            <div class="modal fade" id="modal-row-table-@No" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+                                            <a href="#" onclick="OpenProductPictureModal(this)"><img src="~/images/upload/@item.PictureFileName" alt="" width="200"></a>
+                                            @*<div class="modal fade" id="modal-row-table-@No" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content text-center">
                                                         <div class="modal-header">
@@ -95,7 +95,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>*@
                                         }
 
                                         @if (Model.LoginViewModel.IsLogin)
@@ -213,13 +213,23 @@
                             <div class="col-lg-3">
                                 <div class="single_product">
                                     <div class="product_thumb">
-                                        @*<a class="primary_img" href="product-details.html"><img src="~/images/upload/@itemOfProduct.PictureFileName" alt=""></a>*@
-                                        <img src="~/images/upload/@itemOfProduct.PictureFileName" alt="">
 
                                         @if (Model.LoginViewModel.IsLogin)
-                                        {<div class="quick_button">
+                                        {
+                                            <img src="~/images/upload/@itemOfProduct.PictureFileName" alt="" width="200">
+                                        }
+                                        else
+                                        {
+                                            <a href="#" onclick="OpenProductPictureModal(this)"><img src="~/images/upload/@itemOfProduct.PictureFileName" alt="" width="200"></a>
+                                        }
+
+                                        @if (Model.LoginViewModel.IsLogin)
+                                        {
+
+                                            <div class="quick_button">
                                                 <a title="quick view" onclick="OpenProductModal(this)"><i class="ion-eye"></i></a>
                                             </div>
+
                                         }
 
                                     </div>

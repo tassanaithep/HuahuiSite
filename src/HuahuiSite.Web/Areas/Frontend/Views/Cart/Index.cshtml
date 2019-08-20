@@ -76,6 +76,13 @@
                                 </thead>
                                 <tbody>
 
+                                    @{
+
+                                        int SummaryQuantityOfProduct = 0;
+                                        decimal SummaryTotalOfProduct = 0;
+
+                                    }
+
                                     @if (Model.CartViewModel != null)
                                     {
                                         @foreach (var item in Model.CartViewModel.CartItemModelList)
@@ -116,8 +123,20 @@
                                                 <td class="product_total">@item.TotalPrice</td>
                                             </tr>
 
+                                            SummaryQuantityOfProduct += @item.Quantity;
+                                            SummaryTotalOfProduct += @item.TotalPrice;
+
                                         }
                                     }
+
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Total</td>
+                                        <td>@SummaryQuantityOfProduct</td>
+                                        <td>@SummaryTotalOfProduct</td>
+                                    </tr>
 
                                 </tbody>
                             </table>
