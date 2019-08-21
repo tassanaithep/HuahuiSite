@@ -19,6 +19,11 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
             get { return Context as HuahuiDbContext; }
         }
 
+        public Order GetOrderByOrderId(string orderId)
+        {
+            return HuahuiDbContext.Order.Where(w => w.Id.Equals(orderId)).SingleOrDefault();
+        }
+
         public IEnumerable<OrderModel> GetOrderList()
         {
             return (from order in HuahuiDbContext.Order
@@ -55,6 +60,11 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
         public Order GetOrderActiveByUser(int userId)
         {
             return HuahuiDbContext.Order.FirstOrDefault(w => w.UserId.Equals(userId) && w.IsActive.Equals(true));
+        }
+
+        public IEnumerable<Order> GetOrderByLikeOrderId(string orderId)
+        {
+            return HuahuiDbContext.Order.Where(w => w.Id.Contains(orderId)).ToList();
         }
     }
 }

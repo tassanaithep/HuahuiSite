@@ -205,8 +205,8 @@ Delete = (e) => {
     let $cartId = $(e).closest(".tr-data-row").find(".form-row-table").find("[name='hid-cart-id']").val();
 
     swal({
-        title: 'Are you sure?',
-        text: "คุณต้องการลบข้อมูล ใช่หรือไม่?",
+        title: 'Are you sure ?',
+        text: "คุณต้องการลบข้อมูล ใช่หรือไม่ ?",
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -239,8 +239,8 @@ Delete = (e) => {
 */
 DeleteCartItem = (e) => {
     swal({
-        title: 'Are you sure?',
-        text: "คุณต้องการลบข้อมูล ใช่หรือไม่?",
+        title: 'Are you sure ?',
+        text: "คุณต้องการลบข้อมูล ใช่หรือไม่ ?",
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

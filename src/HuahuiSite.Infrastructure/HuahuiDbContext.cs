@@ -43,6 +43,10 @@ namespace HuahuiSite.Infrastructure
             {
                 entity.Property(e => e.CreatedDateTime).HasColumnType("datetime");
 
+                entity.Property(e => e.OrderId)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
                 entity.Property(e => e.Status)
                     .IsRequired()
                     .HasMaxLength(30);
@@ -84,6 +88,10 @@ namespace HuahuiSite.Infrastructure
 
             modelBuilder.Entity<Order>(entity =>
             {
+                entity.Property(e => e.Id)
+                    .HasMaxLength(30)
+                    .ValueGeneratedNever();
+
                 entity.Property(e => e.CreatedDateTime).HasColumnType("datetime");
 
                 entity.Property(e => e.Status)
@@ -100,6 +108,10 @@ namespace HuahuiSite.Infrastructure
             modelBuilder.Entity<OrderItemList>(entity =>
             {
                 entity.Property(e => e.CreatedDateTime).HasColumnType("datetime");
+
+                entity.Property(e => e.OrderId)
+                    .IsRequired()
+                    .HasMaxLength(30);
 
                 entity.Property(e => e.UpdatedDateTime).HasColumnType("datetime");
             });

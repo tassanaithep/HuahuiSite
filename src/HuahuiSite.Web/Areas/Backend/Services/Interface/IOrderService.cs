@@ -11,6 +11,6 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Interface
     {
         void GetOrderList(ref OrderViewModel orderViewModel);
 
-        void CompleteOrder(int orderId);
+        void CompleteOrder(string orderId);
     }
 }

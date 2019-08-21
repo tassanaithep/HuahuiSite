@@ -19,7 +19,7 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
             get { return Context as HuahuiDbContext; }
         }
 
-        public IEnumerable<OrderItemList> GetOrderItemListByOrder(int orderId)
+        public IEnumerable<OrderItemList> GetOrderItemListByOrder(string orderId)
         {
             return HuahuiDbContext.OrderItemList.Where(w => w.OrderId.Equals(orderId));
         }
@@ -91,7 +91,7 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                     }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
         }
 
-        public OrderItemListModel GetOrderItemListByCardAndProduct(int orderId, int productId)
+        public OrderItemListModel GetOrderItemListByCardAndProduct(string orderId, int productId)
         {
             return HuahuiDbContext.OrderItemList.Where(w => w.OrderId.Equals(orderId) && w.ProductId.Equals(productId)).Select(s => new OrderItemListModel
             {

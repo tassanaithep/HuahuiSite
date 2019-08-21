@@ -188,8 +188,12 @@
                     </div>
                     <div class="product_carousel product_column4 owl-carousel">
 
-                        @{ int NoOfproduct = 0;
-                            int cat_Pro = NoOfCategorie + NoOfproduct;}
+                        @{ 
+
+                            int NoOfproduct = 0;
+                            int cat_Pro = NoOfCategorie + NoOfproduct;
+
+                        }
 
                         @foreach (var itemOfProduct in Model.HomeViewModel.ProductList.Where(w => w.ProductCategorieCode.Equals(itemOfProductCategorie.Code)).Take(10))
                         {

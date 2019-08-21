@@ -5,7 +5,7 @@ namespace HuahuiSite.Core.Entities
 {
     public partial class Order
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string UserRole { get; set; }
         public int UserId { get; set; }
         public int? CustomerId { get; set; }

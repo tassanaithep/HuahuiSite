@@ -183,7 +183,7 @@ HideModal = () => {
 */
 UpdateTable = () => {
     $.ajax({
-        url: "/Backend/Cart/UpdateTable",
+        url: "/Backend/Order/UpdateTable",
         async: false,
         success: function (res) {
             $("#parent-table").html(res);
@@ -205,7 +205,7 @@ Delete = (e) => {
     let $cartId = $(e).closest(".tr-data-row").find(".form-row-table").find("[name='hid-cart-id']").val();
 
     swal({
-        title: 'Are you sure?',
+        title: 'Are you sure ?',
         text: "คุณต้องการลบข้อมูล ใช่หรือไม่?",
         type: 'warning',
         showCancelButton: true,
@@ -239,8 +239,8 @@ Delete = (e) => {
 */
 DeleteCartItem = (e) => {
     swal({
-        title: 'Are you sure?',
-        text: "คุณต้องการลบข้อมูล ใช่หรือไม่?",
+        title: 'Are you sure ?',
+        text: "คุณต้องการลบข้อมูล ใช่หรือไม่ ?",
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -309,7 +309,7 @@ CompleteOrder = (e) => {
     let $orderId = $(e).closest(".tr-data-row").find(".form-row-table").find("[name='hid-order-id']").val();
 
     swal({
-        title: 'Are you sure?',
+        title: 'Are you sure ?',
         text: "คุณต้องการอนุมัติการสั่งซื้อ ใช่หรือไม่?",
         type: 'warning',
         showCancelButton: true,

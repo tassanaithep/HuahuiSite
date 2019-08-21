@@ -8,11 +8,11 @@ namespace HuahuiSite.Core.Interfaces.Repositories
 {
     public interface IOrderItemListRepository : IRepository<OrderItemList>
     {
-        IEnumerable<OrderItemList> GetOrderItemListByOrder(int orderId);
+        IEnumerable<OrderItemList> GetOrderItemListByOrder(string orderId);
         IEnumerable<OrderItemListModel> GetOrderItemList();
         IEnumerable<OrderItemListModel> GetCompleteOrderItemList();
         IEnumerable<OrderItemListModel> GetNotCompleteOrderItemList();
-        OrderItemListModel GetOrderItemListByCardAndProduct(int orderId, int productId);
+        OrderItemListModel GetOrderItemListByCardAndProduct(string orderId, int productId);
 
     }
 }

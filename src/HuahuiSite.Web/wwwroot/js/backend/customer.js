@@ -149,8 +149,8 @@ UpdateTable = () => {
 */
 Delete = (e) => {
     swal({
-        title: 'Are you sure?',
-        text: "คุณต้องการลบข้อมูล ใช่หรือไม่?",
+        title: 'Are you sure ?',
+        text: "คุณต้องการลบข้อมูล ใช่หรือไม่ ?",
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

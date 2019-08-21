@@ -121,7 +121,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #region Update Order Status
 
-            var order = _unitOfWork.Orders.Get(cart.OrderId);
+            var order = _unitOfWork.Orders.GetOrderByOrderId(cart.OrderId);
 
             order.Status = "Approve";
 

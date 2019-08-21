@@ -63,7 +63,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                 #region Save Order
 
                 // Generate Order Id
-                int orderId = GenerateRandomNumber();
+                string orderId = GenerateOrderId();
 
                 #region Create Object to Save
 
@@ -112,7 +112,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                 cartItemOfProduct = _unitOfWork.CartItemLists.GetCartItemListByCardAndProduct(cartOfUser.Id, cartViewModel.ProductId);
 
                 // Get Order Item List of Order
-                orderItemOfProduct = _unitOfWork.OrderItemLists.GetOrderItemListByCardAndProduct(cartOfUser.Id, cartViewModel.ProductId);
+                orderItemOfProduct = _unitOfWork.OrderItemLists.GetOrderItemListByCardAndProduct(orderOfUser.Id, cartViewModel.ProductId);
             }
 
             #region Save Cart Item List and Order Item List
@@ -192,7 +192,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                 OrderItemList orderItemList = new OrderItemList()
                 {
                     Id = cartItemOfProduct.Id,
-                    OrderId = orderItemOfProduct.Id,
+                    OrderId = orderItemOfProduct.OrderId,
                     ProductId = cartViewModel.ProductId,
                     Quantity = cartViewModel.QuantityOfItem,
                     TotalPrice = (cartViewModel.ProductUnitPrice * cartViewModel.QuantityOfItem),
@@ -353,7 +353,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
             #region Update Order Status
 
-            var order = _unitOfWork.Orders.Get(cart.OrderId);
+            var order = _unitOfWork.Orders.GetOrderByOrderId(cart.OrderId);
 
             if (loginViewModelSession.RoleName.Equals("Sale"))
             {
@@ -371,23 +371,51 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
         #region Delete
 
+        public void DeleteCartItem(int cartItemId)
+        {
+            var cartItemToDelete = _unitOfWork.CartItemLists.Get(cartItemId);
+            _unitOfWork.CartItemLists.Remove(cartItemToDelete);
+        }
+
         #endregion
 
         #endregion
 
         #region Functions
 
-        public int GenerateRandomNumber()
+        private string GenerateOrderId()
         {
-            var random = new Random();
-            string s = string.Empty;
+            string orderId = string.Empty;
 
-            for (int i = 0; i < 6; i++)
+            orderId += "OR";
+            orderId += DateTime.Now.ToString("yyyyMMdd");
+
+            var orderByOrderId = _unitOfWork.Orders.GetOrderByLikeOrderId(orderId);
+
+            if (orderByOrderId.Count() == 0)
             {
-                s = String.Concat(s, random.Next(10).ToString());
+                orderId += "001";
+            }
+            else
+            {
+                string lastOrderId = orderByOrderId.OrderByDescending(o => o.Id).First().Id.ToString();
+                int lastOrderIdNumber = Convert.ToInt16(lastOrderId.Substring(lastOrderId.Length - 3));
+
+                if (lastOrderIdNumber.ToString().Length == 1)
+                {
+                    orderId += "00" + (lastOrderIdNumber + 1).ToString();
+                }
+                else if (lastOrderIdNumber.ToString().Length == 2)
+                {
+                    orderId += "0" + (lastOrderIdNumber + 1).ToString();
+                }
+                else if (lastOrderIdNumber.ToString().Length == 3)
+                {
+                    orderId += (lastOrderIdNumber + 1).ToString();
+                }
             }
 
-            return Convert.ToInt32(s);
+            return orderId;
         }
 
         #endregion

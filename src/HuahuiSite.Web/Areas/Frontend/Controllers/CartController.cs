@@ -100,6 +100,26 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
         }
 
         [HttpGet]
+        public JsonResult DeleteCartItem(int cartItemId)
+        {
+            bool isSuccess;
+            string exceptionMessage = string.Empty;
+
+            try
+            {
+                _cartService.DeleteCartItem(cartItemId);
+                isSuccess = true;
+            }
+            catch (Exception exception)
+            {
+                exceptionMessage = exception.Message;
+                isSuccess = false;
+            }
+
+            return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
+        }
+
+        [HttpGet]
         public JsonResult CheckOut(int cartId, int customerId)
         {
             bool isSuccess;

@@ -136,17 +136,19 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="modal-footer justify-content-between">
-                                                        <div class="col-sm-4">
+                                                    <div class="modal-footer">
+                                                        <div class="col-sm-6">
 
                                                             @if (@itemOfCart.Status.Equals("Confirm"))
                                                             {
-                                                                <button type="button" class="btn btn-success waves-effect waves-light m-r-10" onclick="ApproveCart(this)">Approve</button>
+                                                                <div class="float-left">
+                                                                    <button type="button" class="btn btn-success waves-effect waves-light m-r-10" onclick="ApproveCart(this)">Approve</button>
+                                                                </div>
                                                             }
 
                                                         </div>
-                                                        <div class="col-sm-4 align-items-end">
-                                                            <div>
+                                                        <div class="col-sm-6">
+                                                            <div class="float-right">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                                 <button type="button" class="btn btn-success" onclick="UpdateCart(this)"><i class="fa fa-check"></i> Success</button>
                                                             </div>

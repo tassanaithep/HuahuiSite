@@ -8,8 +8,10 @@ namespace HuahuiSite.Core.Interfaces.Repositories
 {
     public interface IOrderRepository : IRepository<Order>
     {
+        Order GetOrderByOrderId(string orderId);
         IEnumerable<OrderModel> GetOrderList();
         Order GetOrderActiveByUser(int userId);
         IEnumerable<OrderModel> GetOrderListOfSearch(string startDate, string endDate, string customerName, string saleName);
+        IEnumerable<Order> GetOrderByLikeOrderId(string orderId);
     }
 }

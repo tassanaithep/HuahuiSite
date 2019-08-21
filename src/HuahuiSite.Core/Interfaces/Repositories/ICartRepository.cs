@@ -10,6 +10,6 @@ namespace HuahuiSite.Core.Interfaces.Repositories
     {
         IEnumerable<CartModel> GetCartList();
         Cart GetCartActiveByUser(int userId);
-        Cart GetCartByOrder(int orderId);
+        Cart GetCartByOrder(string orderId);
     }
 }

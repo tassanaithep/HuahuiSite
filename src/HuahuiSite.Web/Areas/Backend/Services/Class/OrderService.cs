@@ -64,7 +64,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
         #region Actions
 
-        public void CompleteOrder(int orderId)
+        public void CompleteOrder(string orderId)
         {
             #region Update Cart Status
 
@@ -79,7 +79,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #region Update Order Status
 
-            var order = _unitOfWork.Orders.Get(orderId);
+            var order = _unitOfWork.Orders.GetOrderByOrderId(orderId);
 
             order.Status = "Complete";
             order.IsActive = false;

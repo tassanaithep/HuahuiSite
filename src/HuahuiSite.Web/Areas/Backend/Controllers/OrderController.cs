@@ -68,7 +68,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         #region Actions
 
         [HttpGet]
-        public JsonResult Complete(int orderId)
+        public JsonResult Complete(string orderId)
         {
             bool isSuccess;
             string exceptionMessage = string.Empty;

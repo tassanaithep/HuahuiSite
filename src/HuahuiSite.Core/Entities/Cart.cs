@@ -6,7 +6,7 @@ namespace HuahuiSite.Core.Entities
     public partial class Cart
     {
         public int Id { get; set; }
-        public int OrderId { get; set; }
+        public string OrderId { get; set; }
         public string UserRole { get; set; }
         public int UserId { get; set; }
         public int? CustomerId { get; set; }

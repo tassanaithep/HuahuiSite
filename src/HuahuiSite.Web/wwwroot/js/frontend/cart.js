@@ -18,17 +18,36 @@ $(function () {
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
 RemoveCartItem = (e) => {
-    let $cartItemId = parseInt($(e).closest(".tr-data-row").find("[name='hid-cart-item-id']").val());
+    swal({
+        title: 'Are you sure ?',
+        text: "คุณต้องการลบข้อมูล ใช่หรือไม่?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.value) {
+            let $cartItemId = parseInt($(e).closest(".tr-data-row").find("[name='hid-cart-item-id']").val());
 
-    // #region Remove Cart Item from Cart Item List
+            $.ajax({
+                type: "GET",
+                url: "/Cart/DeleteCartItem",
+                data: { cartItemId: $cartItemId },
+                success: function (res) {
+                    if (res.isSuccess) {
+                        Swal('Deleted!', 'ลบข้อมูลสำเร็จ', 'success');
+                        window.location = "/Cart/Index";
+                    } else {
+                        swal("Deleted Failed", "", "error");
+                    }
+                },
+                error: function () { }
+            });
 
-    _cartItemList = _cartItemList.filter(function (cartItemList) {
-        return cartItemList.id !== $cartItemId;
-    });
-
-    // #endregion
-
-    $(e).closest(".tr-data-row").remove();
+            
+        }
+        });
 };
 
 /**
@@ -59,10 +78,10 @@ CalculateTotalPrice = (e) => {
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
 UpdateCartItemList = (trOfProduct, productQuantity, totalPrice) => {
-    let cartItemId = trOfProduct.find("[name='hid-cart-item-id']").val();
+    let $cartItemId = trOfProduct.find("[name='hid-cart-item-id']").val();
 
     for (var i = 0; i < _cartItemList.length; i++) {
-        if (_cartItemList[i].id === parseInt(cartItemId)) {
+        if (_cartItemList[i].id === parseInt($cartItemId)) {
             _cartItemList[i].quantity = productQuantity;
             _cartItemList[i].totalPrice = totalPrice;
             break;
@@ -97,7 +116,7 @@ UpdateCart = () => {
             if (res.isSuccess) {
                 window.location = "/Cart/Index";
             } else {
-                alert("Error");
+                swal("Updated Failed", "", "error");
             }
         },
         error: function () { }
@@ -112,6 +131,7 @@ UpdateCart = () => {
 CheckOutCart = (e) => {
     let $form = $(e).closest("#form-cart-item");
     let $cartId = $form.find("[name='hid-cart-id']").val();
+    let $orderId = $form.find("[name='hid-order-id']").val();
     let $customerId = $form.find("[name='select-customer']").val();
 
     $.ajax({
@@ -120,6 +140,7 @@ CheckOutCart = (e) => {
         data: { cartId: $cartId, customerId: $customerId },
         success: function (res) {
             if (res.isSuccess) {
+                Swal('ทำการยืนยันการสั่งซื้อเรียบร้อย !', `หมายเลขการสั่งซื้อ: ${ $orderId }`, 'success');
                 window.location = "/Cart/Index";
             } else {
                 alert("Error");
