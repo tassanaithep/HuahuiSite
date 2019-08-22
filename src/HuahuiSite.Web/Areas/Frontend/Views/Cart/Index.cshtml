@@ -63,7 +63,7 @@
 
                     <div class="table_desc mt-2">
                         <div class="cart_page table-responsive">
-                            <table>
+                            <table id="table-data">
                                 <thead>
                                     <tr>
                                         <th>Delete</th>
@@ -112,7 +112,7 @@
 
                                                     @if (Model.CartViewModel.Status != "Approve")
                                                     {
-                                                        <input type="number" name="ProductQuantity" min="0" max="100" value="@item.Quantity" onchange="CalculateTotalPrice(this)" />
+                                                        <input type="number" name="ProductQuantity" min="0" max="100" value="@item.Quantity" onkeyup="CalculateTotalPrice(this)" />
                                                     }
                                                     else
                                                     {
@@ -134,8 +134,8 @@
                                         <td></td>
                                         <td></td>
                                         <td>Total</td>
-                                        <td>@SummaryQuantityOfProduct</td>
-                                        <td>@SummaryTotalOfProduct</td>
+                                        <td id="td-summary-quantity-product">@SummaryQuantityOfProduct</td>
+                                        <td id="td-summary-total-product">@SummaryTotalOfProduct</td>
                                     </tr>
 
                                 </tbody>

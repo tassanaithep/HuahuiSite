@@ -32,7 +32,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
             mainViewModel.LoginViewModel = new LoginViewModel();
             mainViewModel.LoginViewModel.IsLogin = loginViewModelSession != null ? true : false;
             mainViewModel.HomeViewModel = new HomeViewModel();
-            mainViewModel.HomeViewModel.ProductList = Mapper.Map<IEnumerable<ProductModel>, IEnumerable<ProductViewModel>>(_unitOfWork.Products.GetProductList());
+            mainViewModel.HomeViewModel.ProductList = _unitOfWork.Products.GetProductList();
 
             if (mainViewModel.LoginViewModel != null)
             {

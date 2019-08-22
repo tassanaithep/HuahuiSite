@@ -41,7 +41,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             }
 
             mainViewModel.ShopListViewModel = new ShopListViewModel();
-            mainViewModel.ShopListViewModel.ProductList = Mapper.Map<IEnumerable<ProductModel>, IEnumerable<ProductViewModel>>(_unitOfWork.Products.GetProductList());
+            mainViewModel.ShopListViewModel.ProductList = _unitOfWork.Products.GetProductList();
 
             mainViewModel.ShopListViewModel.ProductCategoriesList = _unitOfWork.ProductCategories.GetAll();
 

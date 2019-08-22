@@ -38,7 +38,9 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         CreatedDateTime = product.CreatedDateTime,
                         UpdatedDateTime = product.UpdatedDateTime,
                         UnitPrice = productGroup.UnitPrice,
-                        PromotionPrice = productGroup.PromotionPrice
+                        PromotionPrice = productGroup.PromotionPrice,
+                        MinQuantity = productGroup.MinQuantity,
+                        MaxQuantity = productGroup.MaxQuantity
                     }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
         }
     }

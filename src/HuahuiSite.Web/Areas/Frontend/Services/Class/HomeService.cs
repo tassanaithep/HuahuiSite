@@ -61,7 +61,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             }
 
             mainViewModel.HomeViewModel = new HomeViewModel();
-            mainViewModel.HomeViewModel.ProductList = Mapper.Map<IEnumerable<ProductModel>, IEnumerable<ProductViewModel>>(_unitOfWork.Products.GetProductList());
+            mainViewModel.HomeViewModel.ProductList = _unitOfWork.Products.GetProductList();
 
             if (mainViewModel.LoginViewModel.IsLogin)
             {

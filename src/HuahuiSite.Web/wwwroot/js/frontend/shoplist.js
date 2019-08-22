@@ -29,6 +29,8 @@ OpenProductModal = (e) => {
     let $pictureFileName = $form.find("[name='ProductPictureFileName']").val();
     let $isPromotion = JSON.parse($form.find("[name='IsPromotion']").val());
     let $promotionPrice = $form.find("[name='PromotionPrice']").val();
+    let $minQuantity = $form.find("[name='MinQuantity']").val();
+    let $maxQuantity = $form.find("[name='MaxQuantity']").val();
 
     let $quantityOfItem = $form.find("[name='QuantityOfItem']");
 
@@ -99,7 +101,7 @@ OpenProductModal = (e) => {
                                         <div class="variants_selects">
                                             <div class="modal_add_to_cart">
                                                 <form action="#">
-                                                    <input type="number" min="0" step="1" onkeyup="ChangeQuantityOfProduct(this.value, '${ $formId }')" onclick="ChangeQuantityOfProduct(this.value, '${ $formId }')" value="${ (quantity !== null ? quantity : 1) }" />
+                                                    <input type="number" min="${ $minQuantity}" max="${ $maxQuantity }" step="1" onkeyup="ChangeQuantityOfProduct(this.value, '${ $formId }')" onclick="ChangeQuantityOfProduct(this.value, '${ $formId }')" value="${ (quantity !== null ? quantity : 1) }" />
                                                     <button type="button" onclick="ProductModalSubmit('${ $formId }')">add to cart</button>
                                                 </form>
                                             </div>

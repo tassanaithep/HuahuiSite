@@ -9,7 +9,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Models
 {
     public class HomeViewModel
     {
-        public IEnumerable<ProductViewModel> ProductList { get; set; }
+        public IEnumerable<ProductModel> ProductList { get; set; }
         public IEnumerable<CartItemListModel> CartItemModelList { get; set; }
     }
 }

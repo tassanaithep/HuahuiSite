@@ -68,6 +68,21 @@ CalculateTotalPrice = (e) => {
     $totalPriceElement.text($totalPrice);
 
     UpdateCartItemList($trOfCartItem, $productQuantity, $totalPrice);
+
+    UpdateTotalOfSummary();
+};
+
+UpdateTotalOfSummary = () => {
+    let $totalQuantity = 0;
+    let $totalPrice = 0;
+
+    $("#form-cart-item").find("#table-data").find(".tr-data-row").each(function (index, element) {
+        $totalQuantity += parseInt($(element).find("[name='ProductQuantity']").val());
+        $totalPrice += parseInt($(element).find(".product_total").text());
+    });
+
+    $("#td-summary-quantity-product").text($totalQuantity);
+    $("#td-summary-total-product").text($totalPrice);
 };
 
 /**

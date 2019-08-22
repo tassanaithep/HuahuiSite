@@ -9,5 +9,7 @@ namespace HuahuiSite.Core.Models
     {
         public decimal UnitPrice { get; set; }
         public decimal? PromotionPrice { get; set; }
+        public int MinQuantity { get; set; }
+        public int MaxQuantity { get; set; }
     }
 }
