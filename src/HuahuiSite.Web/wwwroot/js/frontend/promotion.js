@@ -57,7 +57,7 @@ OpenProductModal = (e) => {
 
     // #endregion
 
-    // #region Add Modal Element
+    // #region Create Modal of Product
 
     $("body").append(`
         <div class="modal fade" id="modal-product" tabindex="-1" role="dialog" aria-hidden="true">

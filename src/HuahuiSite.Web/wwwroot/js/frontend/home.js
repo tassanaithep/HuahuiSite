@@ -18,8 +18,16 @@ $(function () {
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
 OpenProductPictureModal = (e) => {
-    let $productName = $(e).closest(".form-product-item").find("[name='ProductName']").val();
-    let $pictureFileName = $(e).closest(".form-product-item").find("[name='ProductPictureFileName']").val();
+    // #region Get Value form Form
+
+    let $form = $(e).closest(".form-product-item");
+
+    let $productName = $form.find("[name='ProductName']").val();
+    let $pictureFileName = $form.find("[name='ProductPictureFileName']").val();
+
+    // #endregion
+
+    // #region Create Product Picture Modal
 
     $("body").append(`
         <div class="modal fade" id="modal-product-picture" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
@@ -37,6 +45,9 @@ OpenProductPictureModal = (e) => {
         </div>
     `);
 
+    // #endregion
+
+    // Show Product Picture Modal
     $("#modal-product-picture").modal("show");
 };
 
@@ -85,7 +96,7 @@ OpenProductModal = (e) => {
 
     // #endregion
 
-    // #region Add Modal Element
+    // #region Create Modal of Product
 
     $("body").append(`
         <div class="modal fade" id="modal-product" tabindex="-1" role="dialog" aria-hidden="true">
@@ -146,6 +157,7 @@ OpenProductModal = (e) => {
 
     // #endregion
 
+    // Show Product Picture Modal
     $("#modal-product").modal("show");
 };
 
