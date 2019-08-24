@@ -60,6 +60,33 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         CreatedDateTime = cartItemList.CreatedDateTime,
                         ProductName = product.Name,
                         UnitPrice = productGroup.UnitPrice,
+                        MinQuantity = productGroup.MinQuantity,
+                        MaxQuantity = productGroup.MaxQuantity,
+                        PictureFileName = product.PictureFileName
+                    }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
+        }
+
+        public IEnumerable<CartItemListModel> GetCartItemListNotApproveByUser(int userId)
+        {
+            return (from cartItemList in HuahuiDbContext.CartItemList
+                    join cartJoin in HuahuiDbContext.Cart.Where(w => w.UserId.Equals(userId) && w.Status.Equals("Confirm") || w.Status.Equals("Cart") && w.IsActive.Equals(true)) on cartItemList.CardId equals cartJoin.Id into CartItemListJoinCart
+                    from cart in CartItemListJoinCart
+                    join productJoin in HuahuiDbContext.Product on cartItemList.ProductId equals productJoin.Id into CartItemListJoinProduct
+                    from product in CartItemListJoinProduct.DefaultIfEmpty()
+                    join productGroupJoin in HuahuiDbContext.ProductGroup on product.ProductGroupCode equals productGroupJoin.Code into ProductJoinProductGroup
+                    from productGroup in ProductJoinProductGroup.DefaultIfEmpty()
+                    select new CartItemListModel
+                    {
+                        Id = cartItemList.Id,
+                        CardId = cartItemList.CardId,
+                        ProductId = cartItemList.ProductId,
+                        Quantity = cartItemList.Quantity,
+                        TotalPrice = cartItemList.TotalPrice,
+                        CreatedDateTime = cartItemList.CreatedDateTime,
+                        ProductName = product.Name,
+                        UnitPrice = productGroup.UnitPrice,
+                        MinQuantity = productGroup.MinQuantity,
+                        MaxQuantity = productGroup.MaxQuantity,
                         PictureFileName = product.PictureFileName
                     }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
         }

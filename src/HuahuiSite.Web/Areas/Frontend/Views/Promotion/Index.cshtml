@@ -127,7 +127,7 @@
                                                 {
 
                                                     <div class="price_box">
-                                                        <span class="old_price">@item.PromotionPrice บาท</span>
+                                                        <span class="old_price">@item.PromotionPrice</span>
                                                         <span class="current_price">@item.UnitPrice บาท</span>
                                                     </div>
 
@@ -224,7 +224,7 @@
             else list.hide().filter(':lt(' + (end) + '):gt(' + (start - 1) + ')').show();
         });
 
-        var _cartItemList = @Html.Raw(Json.Serialize(@Model.PromotionViewModel.CartItemListViewList));
+        var _cartItemList = @Html.Raw(Json.Serialize(@Model.PromotionViewModel.CartItemListModelList));
 
         AddToCartSubmit = (e) => {
             alert('submit');

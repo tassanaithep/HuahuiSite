@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 {
-    public class ShopListService : IShopListService
+    public class AboutUsService : IAboutUsService
     {
         #region Members
 
@@ -21,15 +21,33 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         #endregion
 
         #region Constructor
-        public ShopListService(IHttpContextAccessor httpContextAccessor,
-            IUnitOfWork unitOfWork)
+
+        public AboutUsService
+        (
+            IHttpContextAccessor httpContextAccessor,
+            IUnitOfWork unitOfWork
+        )
         {
             _httpContextAccessor = httpContextAccessor;
             _unitOfWork = unitOfWork;
         }
+
         #endregion
 
-        public void GetShopList(ref MainViewModel mainViewModel)
+        #region CRUD
+
+        #region Create
+
+        #endregion
+
+        #region Read
+
+        /// <summary>
+        /// Get About Us.
+        /// </summary>
+        // Author: Mod Nattasit
+        // Updated: 12/08/2019
+        public void GetAboutUs(ref MainViewModel mainViewModel)
         {
             var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
 
@@ -40,19 +58,20 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                 mainViewModel.LoginViewModel = loginViewModelSession;
             }
 
-            mainViewModel.ShopListViewModel = new ShopListViewModel();
-            mainViewModel.ShopListViewModel.ProductList = _unitOfWork.Products.GetProductList();
-
-            mainViewModel.ShopListViewModel.ProductCategoriesList = _unitOfWork.ProductCategories.GetAll();
-
-            if (mainViewModel.LoginViewModel.IsLogin)
-            {
-                mainViewModel.ShopListViewModel.CartItemListModelList = _unitOfWork.CartItemLists.GetCartItemListNotApproveByUser(mainViewModel.LoginViewModel.RoleId);
-            }
-
             mainViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();
             mainViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
-
         }
+
+        #endregion
+
+        #region Update
+
+        #endregion
+
+        #region Delete
+
+        #endregion
+
+        #endregion
     }
 }

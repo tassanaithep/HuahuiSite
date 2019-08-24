@@ -53,25 +53,42 @@ RemoveCartItem = (e) => {
 /**
   * @desc Calculate Total Price of Unit Product
   * @param {Object} e - Element of Quantity Input
+  * @param {Event} event - Event of Quantity Input
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
 CalculateTotalPrice = (e) => {
-    let $trOfCartItem = $(e).closest("tr");
+    let inputQuantity = parseInt($(e).val());
+    let maxQuantityOfProduct = parseInt($(e).prop("max"));
 
-    let $totalPriceElement = $trOfCartItem.find(".product_total");
+    // #region Check Input Quantity more than Max Quantity
 
-    let $productUnitPrice = parseInt($trOfCartItem.find(".product-price").text());
-    let $productQuantity = parseInt($trOfCartItem.find("[name='ProductQuantity']").val());
+    if (inputQuantity <= maxQuantityOfProduct) {
+        let $trOfCartItem = $(e).closest("tr");
 
-    let $totalPrice = $productUnitPrice * $productQuantity;
+        let $totalPriceElement = $trOfCartItem.find(".product_total");
 
-    $totalPriceElement.text($totalPrice);
+        let $productUnitPrice = parseInt($trOfCartItem.find(".product-price").text());
+        let $productQuantity = parseInt($trOfCartItem.find("[name='ProductQuantity']").val());
 
-    UpdateCartItemList($trOfCartItem, $productQuantity, $totalPrice);
+        let $totalPrice = $productUnitPrice * $productQuantity;
 
-    UpdateTotalOfSummary();
+        $totalPriceElement.text($totalPrice);
+
+        UpdateCartItemList($trOfCartItem, $productQuantity, $totalPrice);
+
+        UpdateTotalOfSummary();
+    } else {
+        // If Input Quantity more than Max Quantity to Remove last Character
+        $(e).val(inputQuantity.toString().substr(0, inputQuantity.toString().length - 1));
+    }
+
+    // #endregion
 };
 
+/**
+  * @desc Update Total Of Summary
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
 UpdateTotalOfSummary = () => {
     let $totalQuantity = 0;
     let $totalPrice = 0;
@@ -139,7 +156,7 @@ UpdateCart = () => {
 };
 
 /**
-  * @desc Update Cart
+  * @desc Check Out Cart
   * @param {Object} e - Element of Check Out Button
   * @author Mod Nattasit mod.nattasit@gmail.com
 */

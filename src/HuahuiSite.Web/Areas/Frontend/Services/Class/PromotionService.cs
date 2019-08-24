@@ -64,7 +64,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
             if (mainViewModel.LoginViewModel.IsLogin)
             {
-                mainViewModel.PromotionViewModel.CartItemListViewList = Mapper.Map<IEnumerable<CartItemListModel>, IEnumerable<CartItemListViewModel>>(_unitOfWork.CartItemLists.GetCartItemListByUser(mainViewModel.LoginViewModel.RoleId));
+                mainViewModel.PromotionViewModel.CartItemListModelList = _unitOfWork.CartItemLists.GetCartItemListNotApproveByUser(mainViewModel.LoginViewModel.RoleId);
             }
 
             mainViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();

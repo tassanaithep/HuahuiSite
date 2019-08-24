@@ -1,10 +1,10 @@
 ﻿@model HuahuiSite.Web.Areas.Frontend.Models.MainViewModel
 
-<div class="breadcrumbs_area" style="margin-bottom:10px;">
+<div class="breadcrumbs_area" style="margin-bottom: 10px;">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="breadcrumb_content" style="padding-bottom:10px;">
+                <div class="breadcrumb_content" style="padding-bottom: 10px;">
                     <ul>
                         <li><a asp-controller="Home" asp-action="Index">home</a></li>
 
@@ -250,7 +250,7 @@
 
     <script>
 
-        var _cartItemList = @Html.Raw(Json.Serialize(@Model.ShopListViewModel.CartItemListViewList));
+        var _cartItemList = @Html.Raw(Json.Serialize(@Model.ShopListViewModel.CartItemListModelList));
 
         AddToCartSubmit = (e) => {
             alert('submit');

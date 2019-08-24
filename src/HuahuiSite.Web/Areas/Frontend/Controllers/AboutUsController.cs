@@ -6,6 +6,7 @@ using AutoMapper;
 using HuahuiSite.Core.Interfaces;
 using HuahuiSite.Core.Models;
 using HuahuiSite.Web.Areas.Frontend.Models;
+using HuahuiSite.Web.Areas.Frontend.Services.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,36 +15,43 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
     [Area("Frontend")]
     public class AboutUsController : Controller
     {
+        #region Members
 
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IUnitOfWork _unitOfWork;
-        public AboutUsController(IHttpContextAccessor httpContextAccessor,
-            IUnitOfWork unitOfWork
-            )
+        private readonly IAboutUsService _aboutUsService;
+
+        #endregion
+
+        #region Constructor
+
+        public AboutUsController
+        (
+            IAboutUsService aboutUsService
+        )
         {
-            _httpContextAccessor = httpContextAccessor;
-            _unitOfWork = unitOfWork;
+            _aboutUsService = aboutUsService;
         }
+
+        #endregion
+
+        #region Views
+
         public IActionResult Index()
         {
             MainViewModel mainViewModel = new MainViewModel();
 
-            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
-
-            mainViewModel.LoginViewModel = new LoginViewModel();
-            mainViewModel.LoginViewModel.IsLogin = loginViewModelSession != null ? true : false;
-            mainViewModel.HomeViewModel = new HomeViewModel();
-            mainViewModel.HomeViewModel.ProductList = _unitOfWork.Products.GetProductList();
-
-            if (mainViewModel.LoginViewModel != null)
+            try
             {
-                mainViewModel.HomeViewModel.CartItemModelList = _unitOfWork.CartItemLists.GetCartItemListByUser(mainViewModel.LoginViewModel.RoleId);
+                _aboutUsService.GetAboutUs(ref mainViewModel);
             }
+            catch (Exception exception)
+            {
 
-            mainViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();
-            mainViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
+                throw;
+            }
 
             return View(mainViewModel);
         }
+
+        #endregion
     }
 }

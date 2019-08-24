@@ -65,7 +65,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
             if (mainViewModel.LoginViewModel.IsLogin)
             {
-                mainViewModel.HomeViewModel.CartItemModelList = _unitOfWork.CartItemLists.GetCartItemListByUser(mainViewModel.LoginViewModel.RoleId);
+                mainViewModel.HomeViewModel.CartItemModelList = _unitOfWork.CartItemLists.GetCartItemListNotApproveByUser(mainViewModel.LoginViewModel.RoleId);
             }
 
             mainViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();
