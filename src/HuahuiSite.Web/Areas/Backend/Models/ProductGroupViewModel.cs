@@ -14,6 +14,7 @@ namespace HuahuiSite.Web.Areas.Backend.Models
         public string Code { get; set; }
         public string Name { get; set; }
         public int UnitPrice { get; set; }
+        public int PromotionPrice { get; set; }
         public int MinQuantity { get; set; }
         public int MaxQuantity { get; set; }
         public bool IsActive { get; set; }

@@ -223,19 +223,29 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         // Updated: 07/07/2019
         public void GetCartItemList(ref MainViewModel mainViewModel)
         {
-            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
+            #region Initial Login
 
             mainViewModel.LoginViewModel = new LoginViewModel();
+
+            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
 
             if (loginViewModelSession != null)
             {
                 mainViewModel.LoginViewModel = loginViewModelSession;
             }
 
+            #endregion
+
+            #region Get Product Categorie List and Product Group List
+
             mainViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();
             mainViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
 
+            #endregion
+
             mainViewModel.CartViewModel = Mapper.Map<Cart, CartViewModel>(_unitOfWork.Carts.GetCartActiveByUser(loginViewModelSession.RoleId));
+
+            #region Bind Data to Cart View Model
 
             if (mainViewModel.CartViewModel != null)
             {
@@ -263,6 +273,8 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
                 #endregion
             }
+
+            #endregion
         }
 
         #endregion
@@ -276,9 +288,10 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         // Updated: 07/07/2019
         public void UpdateCart(CartViewModel cartViewModel)
         {
-            #region Delete Old Cart Item List
-
+            // Get Login User Data from Sesssion
             var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
+
+            #region Delete Old Cart Item List
 
             var cartOfUser = _unitOfWork.Carts.GetCartActiveByUser(loginViewModelSession.RoleId);
             var cartItemListToRemove = _unitOfWork.CartItemLists.GetCartItemListByCard(cartOfUser.Id);
@@ -334,6 +347,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
         public void CheckOut(int cartId, int customerId)
         {
+            // Get Login User Data from Sesssion
             var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
 
             #region Update Cart Status

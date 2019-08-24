@@ -27,13 +27,15 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
 
         #endregion
 
+        #region Views
+
         public IActionResult Index()
         {
             MainViewModel mainViewModel = new MainViewModel();
 
             try
             {
-                _homeService.GetProductList(ref mainViewModel);
+                _homeService.GetHome(ref mainViewModel);
             }
             catch (Exception exception)
             {
@@ -42,5 +44,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
 
             return View(mainViewModel);
         }
+
+        #endregion
     }
 }

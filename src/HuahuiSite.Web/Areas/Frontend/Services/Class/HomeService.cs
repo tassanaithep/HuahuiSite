@@ -49,27 +49,39 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
-        public void GetProductList(ref MainViewModel mainViewModel)
+        public void GetHome(ref MainViewModel mainViewModel)
         {
-            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
+            #region Initial Login
 
             mainViewModel.LoginViewModel = new LoginViewModel();
+
+            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
 
             if (loginViewModelSession != null)
             {
                 mainViewModel.LoginViewModel = loginViewModelSession;
             }
 
+            #endregion
+
+            #region Get Product Categorie List and Product Group List
+
+            mainViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();
+            mainViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
+
+            #endregion
+
+            #region Bind Data to Home View Model
+
             mainViewModel.HomeViewModel = new HomeViewModel();
             mainViewModel.HomeViewModel.ProductList = _unitOfWork.Products.GetProductList();
+
+            #endregion
 
             if (mainViewModel.LoginViewModel.IsLogin)
             {
                 mainViewModel.HomeViewModel.CartItemModelList = _unitOfWork.CartItemLists.GetCartItemListNotApproveByUser(mainViewModel.LoginViewModel.RoleId);
             }
-
-            mainViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();
-            mainViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
         }
 
         #endregion
