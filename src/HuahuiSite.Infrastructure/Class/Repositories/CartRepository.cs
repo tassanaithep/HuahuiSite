@@ -41,7 +41,7 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
 
         public Cart GetCartActiveByUser(int userId)
         {
-            return HuahuiDbContext.Cart.FirstOrDefault(w => w.UserId.Equals(userId) && w.IsActive.Equals(true));
+            return HuahuiDbContext.Cart.FirstOrDefault(w => w.UserId.Equals(userId) && w.Status.Equals("Cart") || w.Status.Equals("Confirm") && w.IsActive.Equals(true));
         }
 
         public Cart GetCartByOrder(string orderId)

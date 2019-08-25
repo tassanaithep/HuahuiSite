@@ -217,7 +217,7 @@
 
                             @{ int NoOfOrderNotComplete = 0; }
 
-                            @foreach (var itemOfOrder in Model.OrderList.Where(w => w.Status.Equals("Confirm") || w.Status.Equals("Approve")))
+                            @foreach (var itemOfOrder in Model.OrderList.Where(w => w.Status.Equals("Cart") || w.Status.Equals("Confirm") || w.Status.Equals("Approve")))
                             {
 
                                 <tr>

@@ -44,10 +44,8 @@ RemoveCartItem = (e) => {
                 },
                 error: function () { }
             });
-
-            
         }
-        });
+    });
 };
 
 /**
@@ -172,10 +170,13 @@ CheckOutCart = (e) => {
         data: { cartId: $cartId, customerId: $customerId },
         success: function (res) {
             if (res.isSuccess) {
-                Swal('ทำการยืนยันการสั่งซื้อเรียบร้อย !', `หมายเลขการสั่งซื้อ: ${ $orderId }`, 'success');
-                window.location = "/Cart/Index";
+                Swal('ทำการยืนยันการสั่งซื้อเรียบร้อย !', `หมายเลขการสั่งซื้อ: ${$orderId}`, 'success').then((result) => {
+                    if (result.value) {
+                        window.location = "/Cart/Index";
+                    }
+                });
             } else {
-                alert("Error");
+                swal("ทำการยืนยันการสั่งซื้อไม่สำเร็จ !", "เกิดข้อผิดพลาดบางอย่าง", "error");
             }
         },
         error: function () { }

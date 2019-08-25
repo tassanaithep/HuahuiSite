@@ -101,7 +101,7 @@ OpenProductModal = (e) => {
                                         <div class="variants_selects">
                                             <div class="modal_add_to_cart">
                                                 <form action="#">
-                                                    <input type="number" min="${ $minQuantity }" max="${ $maxQuantity }" step="1" onkeyup="ChangeQuantityOfProduct(this.value, '${ $formId }')" onclick="ChangeQuantityOfProduct(this.value, '${ $formId }')" value="${ (quantity !== null ? quantity : 1) }" />
+                                                    <input type="number" min="${ $minQuantity }" max="${ $maxQuantity }" step="1" onkeyup="ChangeQuantityOfProduct(this, '${ $formId }')" onclick="ChangeQuantityOfProduct(this, '${ $formId }')" value="${ (quantity !== null ? quantity : 1) }" />
                                                     <button type="button" onclick="ProductModalSubmit('${ $formId }')">add to cart</button>
                                                 </form>
                                             </div>
@@ -134,12 +134,22 @@ ClearProductModal = () => {
 
 /**
   * @desc Change Quantity of Product
-  * @param {Number} quantity - Number Quantity of Product
+  * @param {Object} e - Element of Input Quantity
   * @param {String} formId - Id Name of Product Form
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
-ChangeQuantityOfProduct = (quantity, formId) => {
-    $("#" + formId).find("[name='QuantityOfItem']").val(quantity);
+ChangeQuantityOfProduct = (e, formId) => {
+    let inputQuantity = parseInt($(e).val());
+    let maxQuantityOfProduct = parseInt($(e).prop("max"));
+
+    // #region Check Input Quantity more than Max Quantity
+
+    if (inputQuantity <= maxQuantityOfProduct) {
+        $("#" + formId).find("[name='QuantityOfItem']").val(quantity);
+    } else {
+        // If Input Quantity more than Max Quantity to Remove last Character
+        $(e).val(inputQuantity.toString().substr(0, inputQuantity.toString().length - 1));
+    }
 };
 
 /**

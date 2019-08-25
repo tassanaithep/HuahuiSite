@@ -13,8 +13,8 @@ namespace HuahuiSite.Web.Areas.Backend.Models
         public int Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
-        public int UnitPrice { get; set; }
-        public int PromotionPrice { get; set; }
+        public decimal UnitPrice { get; set; }
+        public decimal? PromotionPrice { get; set; }
         public int MinQuantity { get; set; }
         public int MaxQuantity { get; set; }
         public bool IsActive { get; set; }
