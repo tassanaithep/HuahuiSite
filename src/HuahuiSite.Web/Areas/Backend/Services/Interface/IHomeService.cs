@@ -10,5 +10,6 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Interface
     {
         void GetCompleteOrderList(ref HomeViewModel homeViewModel);
         void Search(ref HomeViewModel homeViewModel);
+        void ExportToFile(ref byte[] result, string orderId);
     }
 }

@@ -302,7 +302,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             #region Delete Old Order Item List
 
             var orderOfUser = _unitOfWork.Orders.GetOrderActiveByUser(loginViewModelSession.RoleId);
-            var orderItemListToRemove = _unitOfWork.OrderItemLists.GetOrderItemListByOrder(orderOfUser.Id);
+            var orderItemListToRemove = _unitOfWork.OrderItemLists.GetOrderItemListByOrderId(orderOfUser.Id);
             _unitOfWork.OrderItemLists.RemoveRange(orderItemListToRemove);
 
             #endregion

@@ -19,9 +19,40 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
             get { return Context as HuahuiDbContext; }
         }
 
-        public IEnumerable<OrderItemList> GetOrderItemListByOrder(string orderId)
+        public IEnumerable<OrderItemList> GetOrderItemListByOrderId(string orderId)
         {
             return HuahuiDbContext.OrderItemList.Where(w => w.OrderId.Equals(orderId));
+        }
+
+        public IEnumerable<OrderItemListModel> GetOrderItemListDataByOrderId(string orderId)
+        {
+            return (from orderItemList in HuahuiDbContext.OrderItemList.Where(w => w.OrderId.Equals(orderId))
+                    join orderJoin in HuahuiDbContext.Order on orderItemList.OrderId equals orderJoin.Id into OrderItemListJoinOrder
+                    from order in OrderItemListJoinOrder.DefaultIfEmpty()
+                    join customerJoin in HuahuiDbContext.Customer on order.UserId equals customerJoin.Id into OrderJoinCustomer
+                    from customer in OrderJoinCustomer.DefaultIfEmpty()
+                    join saleJoin in HuahuiDbContext.Sale on customer.SaleId equals saleJoin.Id into CustomerJoinSale
+                    from sale in CustomerJoinSale.DefaultIfEmpty()
+                    join productJoin in HuahuiDbContext.Product on orderItemList.ProductId equals productJoin.Id into OrderItemListJoinProduct
+                    from product in OrderItemListJoinProduct.DefaultIfEmpty()
+                    join productGroupJoin in HuahuiDbContext.ProductGroup on product.ProductGroupCode equals productGroupJoin.Code into ProductJoinProductGroup
+                    from productGroup in ProductJoinProductGroup.DefaultIfEmpty()
+                    select new OrderItemListModel
+                    {
+                        Id = orderItemList.Id,
+                        OrderId = orderItemList.OrderId,
+                        ProductId = orderItemList.ProductId,
+                        Quantity = orderItemList.Quantity,
+                        TotalPrice = orderItemList.TotalPrice,
+                        CreatedDateTime = orderItemList.CreatedDateTime,
+                        ProductName = product.Name,
+                        UnitPrice = productGroup.UnitPrice,
+                        PictureFileName = product.PictureFileName,
+                        CustomerName = customer.Firstname + " " + customer.Lastname,
+                        CustomerAddress = customer.Address,
+                        CustomerPhoneNumber = customer.PhoneNumber,
+                        SaleName = sale.Firstname + " " + sale.Lastname
+                    }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
         }
 
         public IEnumerable<OrderItemListModel> GetOrderItemList()

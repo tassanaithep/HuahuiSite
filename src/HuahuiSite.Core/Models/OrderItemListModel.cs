@@ -10,5 +10,9 @@ namespace HuahuiSite.Core.Models
         public string ProductName { get; set; }
         public decimal UnitPrice { get; set; }
         public string PictureFileName { get; set; }
+        public string CustomerName { get; set; }
+        public string CustomerAddress { get; set; }
+        public string CustomerPhoneNumber { get; set; }
+        public string SaleName { get; set; }
     }
 }

@@ -82,6 +82,23 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
             return View("Index", homeViewModel);
         }
 
+        [HttpGet]
+        public IActionResult ExportToFile(string orderId)
+        {
+            byte[] result = new byte[0];
+
+            try
+            {
+                _homeService.ExportToFile(ref result, orderId);
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+
+            return File(result, "application/ms-excel", $"Report_"+ orderId + ".xlsx");
+        }
+
         #endregion
 
         /// <summary>
