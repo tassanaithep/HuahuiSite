@@ -147,6 +147,7 @@ ChangeQuantityOfProduct = (e, formId) => {
     if (inputQuantity <= maxQuantityOfProduct) {
         $("#" + formId).find("[name='QuantityOfItem']").val(quantity);
     } else {
+        swal("จำนวนสินค้าเกิน", "", "error");
         // If Input Quantity more than Max Quantity to Remove last Character
         $(e).val(inputQuantity.toString().substr(0, inputQuantity.toString().length - 1));
     }
