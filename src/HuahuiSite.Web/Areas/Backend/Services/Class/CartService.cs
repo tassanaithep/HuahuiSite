@@ -111,21 +111,51 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #endregion
 
-            #region Update Cart Status
+            #region Save Order
 
-            cart.Status = "Approve";
+            #region Create Object to Save
 
-            _unitOfWork.Carts.Update(cart);
+            Order order = new Order()
+            {
+                Id = cart.OrderId,
+                UserRole = cart.UserRole,
+                UserId = cart.UserId,
+                CustomerId = cart.CustomerId,
+                Status = "Approve",
+                IsActive = true,
+                CreatedDateTime = DateTime.Now
+            };
 
             #endregion
 
-            #region Update Order Status
+            _unitOfWork.Orders.Add(order);
 
-            var order = _unitOfWork.Orders.GetOrderByOrderId(cart.OrderId);
+            #endregion
 
-            order.Status = "Approve";
+            #region Save Order Item List
 
-            _unitOfWork.Orders.Update(order);
+            List<OrderItemList> orderItemList = new List<OrderItemList>();
+
+            cartItemList.ToList().ForEach(i =>
+            {
+                orderItemList.Add(new OrderItemList
+                {
+                    OrderId = cart.OrderId,
+                    ProductId = i.ProductId,
+                    Quantity = i.Quantity,
+                    TotalPrice = i.TotalPrice,
+                    CreatedDateTime = DateTime.Now
+                });
+            });
+
+            _unitOfWork.OrderItemLists.AddRange(orderItemList);
+
+            #endregion
+
+            #region Remove Cart
+
+            _unitOfWork.Carts.Remove(cart);
+            _unitOfWork.CartItemLists.RemoveRange(cartItemList);
 
             #endregion
         }

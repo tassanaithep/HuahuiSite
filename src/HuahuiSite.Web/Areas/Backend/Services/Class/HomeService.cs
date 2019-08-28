@@ -6,6 +6,7 @@ using HuahuiSite.Web.Areas.Backend.Models;
 using HuahuiSite.Web.Areas.Backend.Services.Interface;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -108,31 +109,33 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #region Add Column Header
 
-            var comlumHeadrsOrderId = new string[]
-            {
-                "Order Id:",
-                orderId,
-                "",
-                "",
-                "",
-                ""
-            };
+            //var comlumHeadrsOrderId = new string[]
+            //{
+            //    "Order Id:",
+            //    orderId,
+            //    "",
+            //    "",
+            //    "",
+            //    ""
+            //};
 
             var comlumHeadrsCustomerName = new string[]
             {
-                "Customer Name:",
+                "ชื่อลูกค้า :",
                 orderList.FirstOrDefault().CustomerName,
                 "",
-                "",
-                "",
+                "วันที่ "+DateTime.Now.ToShortDateString(),
+                "เวลาออกใบสั่งซื้อ "+DateTime.Now.ToShortTimeString(),
+                "เซลล์ "+orderList.FirstOrDefault().SaleName,
                 ""
             };
 
             var comlumHeadrsCustomerAddress = new string[]
             {
-                "Address:",
+                "ที่อยู่จัดส่ง :",
                 orderList.FirstOrDefault().CustomerAddress,
                 "",
+                "จ่าย ",
                 "",
                 "",
                 ""
@@ -140,42 +143,24 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             var comlumHeadrsCustomerPhoneNumber = new string[]
             {
-                "Phone Number:",
+                "เบอร์โทร :",
                 orderList.FirstOrDefault().CustomerPhoneNumber,
                 "",
-                "",
-                "",
-                ""
-            };
-
-            var comlumHeadrsSaleName = new string[]
-            {
-                "Sale Name:",
-                orderList.FirstOrDefault().SaleName,
-                "",
-                "",
+                "VAT ",
+                "NO VAT",
                 "",
                 ""
             };
-
-            var comlumHeadrsDate = new string[]
-            {
-                "Date:",
-                DateTime.Now.ToString(),
-                "",
-                "",
-                "",
-                ""
-            };
-
+            
             var comlumHeadrs = new string[]
             {
-                "No",
-                "Product Id",
-                "Product Name",
-                "Unit Price",
-                "Quantity",
-                "Total Price"
+                "ที่",
+                "รหัสสินค้า",
+                "ชื่อ-รายการสินค้า",
+                "ราคาต่อหน่วย",
+                "จำนวน",
+                "ราคารวม",
+                "หมายเหตุ"
             };
 
             #endregion
@@ -185,55 +170,53 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
                 // add a new worksheet to the empty workbook
 
                 var worksheet = package.Workbook.Worksheets.Add("Report-Order-"+orderId); //Worksheet name
-                using (var cells = worksheet.Cells[1, 1, 1, 5]) //(1,1) (1,5)
-                {
-                    cells.Style.Font.Bold = true;
-                }
+
+                //using (var cells = worksheet.Cells[1, 1, 1, 5]) //(1,1) (1,5)
+                //{
+                //    cells.Style.Font.Bold = true;
+                //}
 
                 //First add the headers
-                for (var i = 0; i < comlumHeadrsOrderId.Count(); i++)
-                {
-                    worksheet.Cells[1, i + 1].Value = comlumHeadrsOrderId[i];
-                }
+                //for (var i = 0; i < comlumHeadrsOrderId.Count(); i++)
+                //{
+                //    worksheet.Cells[1, i + 1].Value = comlumHeadrsOrderId[i];
+                //}
 
                 //First add the headers
                 for (var i = 0; i < comlumHeadrsCustomerName.Count(); i++)
                 {
-                    worksheet.Cells[2, i + 1].Value = comlumHeadrsCustomerName[i];
+                    worksheet.Cells[1, i + 1].Value = comlumHeadrsCustomerName[i];
                 }
 
                 //First add the headers
                 for (var i = 0; i < comlumHeadrsCustomerAddress.Count(); i++)
                 {
-                    worksheet.Cells[3, i + 1].Value = comlumHeadrsCustomerAddress[i];
+                    worksheet.Cells[2, i + 1].Value = comlumHeadrsCustomerAddress[i];
                 }
 
                 //First add the headers
                 for (var i = 0; i < comlumHeadrsCustomerPhoneNumber.Count(); i++)
                 {
-                    worksheet.Cells[4, i + 1].Value = comlumHeadrsCustomerPhoneNumber[i];
-                }
-
-                //First add the headers
-                for (var i = 0; i < comlumHeadrsSaleName.Count(); i++)
-                {
-                    worksheet.Cells[5, i + 1].Value = comlumHeadrsSaleName[i];
-                }
-
-                //First add the headers
-                for (var i = 0; i < comlumHeadrsDate.Count(); i++)
-                {
-                    worksheet.Cells[6, i + 1].Value = comlumHeadrsDate[i];
+                    worksheet.Cells[3, i + 1].Value = comlumHeadrsCustomerPhoneNumber[i];
                 }
 
                 //First add the headers
                 for (var i = 0; i < comlumHeadrs.Count(); i++)
                 {
-                    worksheet.Cells[8, i + 1].Value = comlumHeadrs[i];
+                    worksheet.Cells[5, i + 1].Value = comlumHeadrs[i];
                 }
 
-                int indexOfCell = 9;
+                int indexOfCell = 6;
                 int numberCount = 1;
+
+                #region Add Borders to Table
+
+                worksheet.Cells["A" + 5 + ":G" + 5].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells["A" + 5 + ":G" + 5].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells["A" + 5 + ":G" + 5].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells["A" + 5 + ":G" + 5].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+
+                #endregion
 
                 foreach (var item in orderList)
                 {
@@ -243,8 +226,56 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
                     worksheet.Cells["D" + indexOfCell].Value = item.UnitPrice;
                     worksheet.Cells["E" + indexOfCell].Value = item.Quantity;
                     worksheet.Cells["F" + indexOfCell].Value = item.TotalPrice;
+                    worksheet.Cells["G" + indexOfCell].Value = "";
+
+                    #region Add Borders to Table
+
+                    worksheet.Cells["A" + indexOfCell + ":G" + indexOfCell].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells["A" + indexOfCell + ":G" + indexOfCell].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells["A" + indexOfCell + ":G" + indexOfCell].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells["A" + indexOfCell + ":G" + indexOfCell].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+
+                    #endregion
 
                     indexOfCell++;
+                }
+
+                var BottomRow1 = new string[]
+                {
+                    "เวลาออกใบสั่งซื้อ "+DateTime.Now.ToShortTimeString(),
+                    "",
+                    "",
+                    "จัดสินค้าโดย ",
+                    "",
+                    "",
+                    ""
+                };
+
+                var BottomRow2 = new string[]
+                {
+                    "ออกบิลขายโดย ",
+                    "",
+                    "",
+                    "เวลาจัดของเสร็จ ",
+                    "",
+                    "",
+                    ""
+                };
+
+                indexOfCell++;
+
+                //First add the headers
+                for (var i = 0; i < BottomRow1.Count(); i++)
+                {
+                    worksheet.Cells[indexOfCell, i + 1].Value = BottomRow1[i];
+                }
+
+                indexOfCell++;
+
+                //First add the headers
+                for (var i = 0; i < BottomRow2.Count(); i++)
+                {
+                    worksheet.Cells[indexOfCell, i + 1].Value = BottomRow2[i];
                 }
 
                 result = package.GetAsByteArray();

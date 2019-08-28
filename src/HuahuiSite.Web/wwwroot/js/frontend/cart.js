@@ -51,37 +51,23 @@ RemoveCartItem = (e) => {
 /**
   * @desc Calculate Total Price of Unit Product
   * @param {Object} e - Element of Quantity Input
-  * @param {Event} event - Event of Quantity Input
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
 CalculateTotalPrice = (e) => {
-    let inputQuantity = parseInt($(e).val());
-    let maxQuantityOfProduct = parseInt($(e).prop("max"));
+    let $trOfCartItem = $(e).closest("tr");
 
-    // #region Check Input Quantity more than Max Quantity
+    let $totalPriceElement = $trOfCartItem.find(".product_total");
 
-    if (inputQuantity <= maxQuantityOfProduct) {
-        let $trOfCartItem = $(e).closest("tr");
+    let $productUnitPrice = parseInt($trOfCartItem.find(".product-price").text());
+    let $productQuantity = parseInt($trOfCartItem.find("[name='ProductQuantity']").val());
 
-        let $totalPriceElement = $trOfCartItem.find(".product_total");
+    let $totalPrice = $productUnitPrice * $productQuantity;
 
-        let $productUnitPrice = parseInt($trOfCartItem.find(".product-price").text());
-        let $productQuantity = parseInt($trOfCartItem.find("[name='ProductQuantity']").val());
+    $totalPriceElement.text($totalPrice);
 
-        let $totalPrice = $productUnitPrice * $productQuantity;
+    UpdateCartItemList($trOfCartItem, $productQuantity, $totalPrice);
 
-        $totalPriceElement.text($totalPrice);
-
-        UpdateCartItemList($trOfCartItem, $productQuantity, $totalPrice);
-
-        UpdateTotalOfSummary();
-    } else {
-        swal("จำนวนสินค้าเกิน", "", "error");
-        // If Input Quantity more than Max Quantity to Remove last Character
-        $(e).val(inputQuantity.toString().substr(0, inputQuantity.toString().length - 1));
-    }
-
-    // #endregion
+    UpdateTotalOfSummary();
 };
 
 /**
