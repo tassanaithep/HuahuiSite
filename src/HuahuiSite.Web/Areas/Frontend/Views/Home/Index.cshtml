@@ -56,7 +56,7 @@
                     @foreach (var item in Model.HomeViewModel.ProductList.Where(x => x.IsPromotion).Take(10))
                     {
 
-                        <form class="form-product-item" id="form-product-@No" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
+                    <form class="form-product-item" id="form-product-@No" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
 
                         <!-- Hidden Value Start -->
 
@@ -65,13 +65,18 @@
                         <input type="hidden" name="ProductName" value="@item.Name" />
                         <input type="hidden" name="ProductUnitPrice" value="@item.UnitPrice" />
                         <input type="hidden" name="ProductPictureFileName" value="@item.PictureFileName" />
-                        <input type="hidden" name="IsPromotion" value="@(@item.IsPromotion ? "true" : "false")" />
+                        <input type="hidden" name="IsPromotion" value="@(item.IsPromotion ? "true" : "false")" />
                         <input type="hidden" name="PromotionPrice" value="@item.PromotionPrice" />
                         <input type="hidden" name="MinQuantity" value="@item.MinQuantity" />
                         <input type="hidden" name="MaxQuantity" value="@item.MaxQuantity" />
 
+                        <!-- Add Cart Start -->
+
+                        <input type="hidden" name="ProductIsPromotion" value="@(item.IsPromotion ? "true" : "false")" />
+                        <input type="hidden" name="ProductPromotionPrice" value="@item.PromotionPrice" />
                         <input type="hidden" name="QuantityOfItem" />
 
+                        <!-- Add Cart End -->
                         <!-- Hidden Value End -->
 
                         <div class="col-lg-3">

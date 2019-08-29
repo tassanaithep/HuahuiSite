@@ -60,8 +60,10 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         CreatedDateTime = cartItemList.CreatedDateTime,
                         ProductName = product.Name,
                         UnitPrice = productGroup.UnitPrice,
+                        PromotionPrice = productGroup.PromotionPrice.Value,
                         MinQuantity = productGroup.MinQuantity,
                         MaxQuantity = productGroup.MaxQuantity,
+                        IsPromotion = product.IsPromotion,
                         PictureFileName = product.PictureFileName
                     }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
         }

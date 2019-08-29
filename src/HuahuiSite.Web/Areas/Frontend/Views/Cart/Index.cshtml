@@ -107,7 +107,7 @@
 
                                                 <td class="product_thumb"><a href="#"><img src="~/images/upload/@item.PictureFileName" alt=""></a></td>
                                                 <td class="product_name"><a href="#">@item.ProductName</a></td>
-                                                <td class="product-price">@item.UnitPrice</td>
+                                                <td class="product-price">@(!item.IsPromotion ? @item.UnitPrice : @item.PromotionPrice)</td>
                                                 <td class="product_quantity">
 
                                                     @if (Model.CartViewModel.Status != "Approve")

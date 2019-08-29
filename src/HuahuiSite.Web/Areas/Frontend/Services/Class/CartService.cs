@@ -106,7 +106,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                     CardId = cartOfUser == null ? cart.Id : cartOfUser.Id,
                     ProductId = cartViewModel.ProductId,
                     Quantity = cartViewModel.QuantityOfItem,
-                    TotalPrice = (cartViewModel.ProductUnitPrice * cartViewModel.QuantityOfItem),
+                    TotalPrice = (!cartViewModel.ProductIsPromotion) ? (cartViewModel.ProductUnitPrice * cartViewModel.QuantityOfItem) : (cartViewModel.ProductPromotionPrice * cartViewModel.QuantityOfItem),
                     CreatedDateTime = DateTime.Now
                 };
 
