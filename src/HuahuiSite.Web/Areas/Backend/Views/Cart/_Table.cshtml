@@ -16,7 +16,6 @@
                             <th>Order Id</th>
                             <th>Customer Name</th>
                             <th>Status</th>
-                            @*<th>Approve</th>*@
                             <th>Edit / Approve</th>
                             <th>Delete</th>
                         </tr>
@@ -62,11 +61,12 @@
                                                                     </div>
                                                                     <div class="card-body collapse show">
                                                                         <div class="table-responsive">
-                                                                            <table class="table" id="table-data">
+                                                                            <table class="table table-data-item">
                                                                                 <thead>
                                                                                     <tr>
                                                                                         <th>Product Name</th>
                                                                                         <th>Picture</th>
+                                                                                        <th>Unit Price</th>
                                                                                         <th>Quantity</th>
                                                                                         <th>Total Price</th>
                                                                                         <th>Delete</th>
@@ -84,48 +84,52 @@
                                                                                     @foreach (var itemOfCartItem in Model.CartItemListModelList.Where(w => w.CardId.Equals(itemOfCart.Id)))
                                                                                     {
 
-                                                                                        <tr class="tr-data-row">
+                                                                                    <tr class="tr-data-item-row">
 
-                                                                                            <!-- Hidden Value of Cart Item Start -->
+                                                                                        <!-- Hidden Value of Cart Item Start -->
 
-                                                                                            <input type="hidden" name="hid-cart-item-id" value="@itemOfCartItem.Id" />
-                                                                                            <input type="hidden" name="hid-cart-item-cart-id" value="@itemOfCartItem.CardId" />
-                                                                                            <input type="hidden" name="hid-cart-item-product-id" value="@itemOfCartItem.ProductId" />
-                                                                                            @*<input type="hidden" name="hid-cart-item-quantity" value="@itemOfCartItem.Quantity" />*@
-                                                                                            @*<input type="hidden" name="hid-cart-item-total-price" value="@itemOfCartItem.TotalPrice" />*@
-                                                                                            <input type="hidden" name="hid-cart-item-created-datetime" value="@itemOfCartItem.CreatedDateTime" />
+                                                                                        <input type="hidden" name="hid-cart-item-id" value="@itemOfCartItem.Id" />
+                                                                                        <input type="hidden" name="hid-cart-item-cart-id" value="@itemOfCartItem.CardId" />
+                                                                                        <input type="hidden" name="hid-cart-item-product-id" value="@itemOfCartItem.ProductId" />
+                                                                                        <input type="hidden" name="hid-cart-item-created-datetime" value="@itemOfCartItem.CreatedDateTime" />
 
-                                                                                            <input type="hidden" name="hid-cart-item-unit-price" value="@itemOfCartItem.UnitPrice" />
+                                                                                        <input type="hidden" name="hid-cart-item-unit-price" value="@itemOfCartItem.UnitPrice" />
 
-                                                                                            <!-- Hidden Value of Cart Item End -->
+                                                                                        <input type="hidden" name="hid-cart-product-group-code" value="@itemOfCartItem.ProductGroupCode" />
+                                                                                        <input type="hidden" name="hid-cart-is-promotion" value="@(itemOfCartItem.IsPromotion ? "true" : "false")" />
 
-                                                                                            <td>@itemOfCartItem.ProductName</td>
-                                                                                            <td>
-                                                                                                <img src="~/images/upload/@itemOfCartItem.PictureFileName" alt="Picture" width="80" />
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <input type="number" class="form-control col-sm-4" name="Quantity" value="@itemOfCartItem.Quantity" onchange="CalculateTotalPrice(this)" />
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <input type="text" class="form-control col-sm-6" name="TotalPrice" value="@itemOfCartItem.TotalPrice" />
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <a href="#" onclick="DeleteCartItem(this)"><i class="fas fa-trash-alt text-inverse m-r-10"></i></a>
-                                                                                            </td>
-                                                                                        </tr>
+                                                                                        <!-- Hidden Value of Cart Item End -->
+
+                                                                                        <td>@itemOfCartItem.ProductName</td>
+                                                                                        <td>
+                                                                                            <img src="~/images/upload/@itemOfCartItem.PictureFileName" alt="Picture" width="80" />
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <input type="text" class="form-control col-sm-6" name="UnitPrice" value="@itemOfCartItem.UnitPrice" />
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <input type="number" class="form-control col-sm-5" name="Quantity" value="@itemOfCartItem.Quantity" onchange="CalculateTotalPrice(this)" />
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <input type="text" class="form-control col-sm-8" name="TotalPrice" value="@itemOfCartItem.TotalPrice" />
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <a href="#" onclick="DeleteCartItem(this)"><i class="fas fa-trash-alt text-inverse m-r-10"></i></a>
+                                                                                        </td>
+                                                                                    </tr>
 
                                                                                         SummaryQuantityOfProduct += itemOfCartItem.Quantity;
                                                                                         SummaryTotalOfProduct += itemOfCartItem.TotalPrice;
 
                                                                                     }
 
-                                                                                        <tr>
-                                                                                            <td><b>Total</b></td>
-                                                                                            <td></td>
-                                                                                            <td><input type="text" class="form-control col-sm-4" value="@SummaryQuantityOfProduct" disabled /></td>
-                                                                                            <td><input type="text" class="form-control col-sm-6" value="@SummaryTotalOfProduct" disabled /></td>
-                                                                                            <td></td>
-                                                                                        </tr>
+                                                                                    <tr>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td><b>Total</b></td>
+                                                                                        <td><input type="text" class="form-control col-sm-5" value="@SummaryQuantityOfProduct" disabled /></td>
+                                                                                        <td><input type="text" class="form-control col-sm-8" value="@SummaryTotalOfProduct" disabled /></td>
+                                                                                    </tr>
 
                                                                                 </tbody>
                                                                             </table>

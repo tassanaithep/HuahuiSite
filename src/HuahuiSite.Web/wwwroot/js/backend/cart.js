@@ -8,6 +8,7 @@ $(function () {
     //RenderImage();
     //BindData();
     $("#table-data").DataTable();
+    BindProductPriceByQuantity();
 });
 
 // #endregion
@@ -82,6 +83,36 @@ BindData = () => {
     });
 
     // #endregion
+};
+
+BindProductPriceByQuantity = () => {
+    $("#table-data").find(".tr-data-item-row").each(function (index, element) {
+        let $productGroupCode = $(element).find("[name='hid-cart-product-group-code']").val();
+        let $quantity = $(element).find("[name='Quantity']").val();
+        let $isPromotion = JSON.parse($(element).find("[name='hid-cart-is-promotion']").val());
+
+        $.ajax({
+            type: "GET",
+            url: "/Home/GetProductPriceByQuantity",
+            data: { productGroupCode: $productGroupCode, quantity: $quantity },
+            success: function (res) {
+                let productGroupModel = res;
+
+                if (productGroupModel !== null) {
+                    let unitPrice = productGroupModel.unitPrice;
+                    let promotionPrice = productGroupModel.promotionPrice;
+
+                    if (!$isPromotion) {
+                        $(element).find("[name='UnitPrice']").val(unitPrice);
+                    }
+                    else {
+                        $(element).find("[name='UnitPrice']").val(promotionPrice);
+                    }
+                }
+            },
+            error: function () { }
+        });
+    });
 };
 
 // #endregion

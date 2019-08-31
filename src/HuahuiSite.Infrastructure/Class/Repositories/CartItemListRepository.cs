@@ -36,6 +36,8 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         TotalPrice = cartItemList.TotalPrice,
                         CreatedDateTime = cartItemList.CreatedDateTime,
                         ProductName = product.Name,
+                        ProductGroupCode = product.ProductGroupCode,
+                        IsPromotion = product.IsPromotion,
                         UnitPrice = productGroup.UnitPrice,
                         PictureFileName = product.PictureFileName
                     }).GroupBy(g => g.Id).Select(s => s.First()).ToList();

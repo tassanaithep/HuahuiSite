@@ -62,6 +62,7 @@
                                                                                 <tr>
                                                                                     <th>Product Name</th>
                                                                                     <th>Picture</th>
+                                                                                    <th>Unit Price</th>
                                                                                     <th>Quantity</th>
                                                                                     <th>Total Price</th>
                                                                                 </tr>
@@ -78,22 +79,25 @@
                                                                                 @foreach (var itemOfOrderItem in Model.OrderItemList.Where(w => w.OrderId.Equals(itemOfOrder.Id)))
                                                                                 {
 
-                                                                                    <tr class="tr-data-row">
+                                                                                <tr class="tr-data-row">
 
-                                                                                        <!-- Hidden Value of Cart Item Start -->
-                                                                                        <!-- Hidden Value of Cart Item End -->
+                                                                                    <!-- Hidden Value of Cart Item Start -->
+                                                                                    <!-- Hidden Value of Cart Item End -->
 
-                                                                                        <td>@itemOfOrderItem.ProductName</td>
-                                                                                        <td>
-                                                                                            <img src="~/images/upload/@itemOfOrderItem.PictureFileName" alt="Picture" width="80" />
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <input type="number" class="form-control col-sm-4" name="Quantity" value="@itemOfOrderItem.Quantity" onchange="CalculateTotalPrice(this)" disabled />
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <input type="text" class="form-control col-sm-6" name="TotalPrice" value="@itemOfOrderItem.TotalPrice" disabled />
-                                                                                        </td>
-                                                                                    </tr>
+                                                                                    <td>@itemOfOrderItem.ProductName</td>
+                                                                                    <td>
+                                                                                        <img src="~/images/upload/@itemOfOrderItem.PictureFileName" alt="Picture" width="80" />
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <input type="text" class="form-control col-sm-6" name="UnitPrice" value="@itemOfOrderItem.UnitPrice" disabled />
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <input type="number" class="form-control col-sm-5" name="Quantity" value="@itemOfOrderItem.Quantity" onchange="CalculateTotalPrice(this)" disabled />
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <input type="text" class="form-control col-sm-8" name="TotalPrice" value="@itemOfOrderItem.TotalPrice" disabled />
+                                                                                    </td>
+                                                                                </tr>
 
                                                                                     SummaryQuantityOfProduct += itemOfOrderItem.Quantity;
                                                                                     SummaryTotalOfProduct += itemOfOrderItem.TotalPrice;
@@ -101,11 +105,11 @@
                                                                                 }
 
                                                                                 <tr>
+                                                                                    <td></td>
+                                                                                    <td></td>
                                                                                     <td><b>Total</b></td>
-                                                                                    <td></td>
-                                                                                    <td><input type="text" class="form-control col-sm-4" value="@SummaryQuantityOfProduct" disabled /></td>
-                                                                                    <td><input type="text" class="form-control col-sm-6" value="@SummaryTotalOfProduct" disabled /></td>
-                                                                                    <td></td>
+                                                                                    <td><input type="text" class="form-control col-sm-5" value="@SummaryQuantityOfProduct" disabled /></td>
+                                                                                    <td><input type="text" class="form-control col-sm-8" value="@SummaryTotalOfProduct" disabled /></td>
                                                                                 </tr>
 
                                                                             </tbody>
