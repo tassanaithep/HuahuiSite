@@ -16,8 +16,19 @@ namespace HuahuiSite.Web.Areas.Backend.Models
         public string CustomerName { get; set; }
         public string SaleName { get; set; }
 
+        #region Order
+
         public IEnumerable<OrderModel> OrderList { get; set; }
         public IEnumerable<OrderItemListModel> OrderItemList { get; set; }
         public IEnumerable<OrderItemListModel> CompleteOrderItemList { get; set; }
+
+        #endregion
+
+        #region Cart
+
+        public IEnumerable<CartModel> CartList { get; set; }
+        public IEnumerable<CartItemListModel> CartItemList { get; set; }
+
+        #endregion
     }
 }

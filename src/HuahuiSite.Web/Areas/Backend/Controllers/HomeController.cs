@@ -43,11 +43,14 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         // Updated: 07/07/2019
         public IActionResult Index()
         {
-            // Check Login Status
+            #region Check Login
+
             if (!_loginService.CheckLoginStatus())
             {
                 return RedirectToAction("Index", "Login");
             }
+
+            #endregion
 
             HomeViewModel homeViewModel = new HomeViewModel();
 
@@ -121,5 +124,27 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
             return PartialView("_Table", homeViewModel);
         }
+
+        #region Actions
+
+        [HttpGet]
+        public JsonResult GetProductPriceByQuantity(string productGroupCode, int quantity)
+        {
+            ProductGroupViewModel productGroupViewModel = new ProductGroupViewModel();
+
+            try
+            {
+                _homeService.GetProductPriceByQuantity(ref productGroupViewModel, productGroupCode, quantity);
+            }
+            catch (Exception exception)
+            {
+
+                throw;
+            }
+
+            return Json(productGroupViewModel);
+        }
+
+        #endregion
     }
 }

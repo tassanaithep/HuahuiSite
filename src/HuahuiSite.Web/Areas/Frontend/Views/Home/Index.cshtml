@@ -56,15 +56,16 @@
                     @foreach (var item in Model.HomeViewModel.ProductList.Where(x => x.IsPromotion).Take(10))
                     {
 
-                    <form class="form-product-item" id="form-product-@No" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
+                    <form class="form-product-item" id="form-product-promotion-@No" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
 
                         <!-- Hidden Value Start -->
 
-                        <input type="hidden" name="hid-form-product-id" value="form-product-@No" />
+                        <input type="hidden" name="hid-form-product-id" value="form-product-promotion-@No" />
                         <input type="hidden" name="ProductId" value="@item.Id" />
                         <input type="hidden" name="ProductName" value="@item.Name" />
                         <input type="hidden" name="ProductUnitPrice" value="@item.UnitPrice" />
                         <input type="hidden" name="ProductPictureFileName" value="@item.PictureFileName" />
+                        <input type="hidden" name="ProductGroupCode" value="@item.ProductGroupCode" />
                         <input type="hidden" name="IsPromotion" value="@(item.IsPromotion ? "true" : "false")" />
                         <input type="hidden" name="PromotionPrice" value="@item.PromotionPrice" />
                         <input type="hidden" name="MinQuantity" value="@item.MinQuantity" />
@@ -77,6 +78,7 @@
                         <input type="hidden" name="QuantityOfItem" />
 
                         <!-- Add Cart End -->
+
                         <!-- Hidden Value End -->
 
                         <div class="col-lg-3">
@@ -90,19 +92,6 @@
                                     else
                                     {
                                         <a href="#" onclick="OpenProductPictureModal(this)"><img src="~/images/upload/@item.PictureFileName" alt="" width="200"></a>
-                                        @*<div class="modal fade" id="modal-row-table-@No" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
-                            <div class="modal-dialog modal-lg" role="document">
-                                <div class="modal-content text-center">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title" id="myModalLabel">@item.Name</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <img src="~/images/upload/@item.PictureFileName" alt="" width="600">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>*@
                                     }
 
                                     @if (Model.LoginViewModel.IsLogin)
@@ -205,7 +194,7 @@
                         @foreach (var itemOfProduct in Model.HomeViewModel.ProductList.Where(w => w.ProductCategorieCode.Equals(itemOfProductCategorie.Code)).Take(10))
                         {
                            
-                            <form class="form-product-item" id="form-product-@NoOfCategorie-@NoOfproduct" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
+                        <form class="form-product-item" id="form-product-@NoOfCategorie-@NoOfproduct" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
 
                             <!-- Hidden Value Start -->
 
@@ -214,13 +203,19 @@
                             <input type="hidden" name="ProductName" value="@itemOfProduct.Name" />
                             <input type="hidden" name="ProductUnitPrice" value="@itemOfProduct.UnitPrice" />
                             <input type="hidden" name="ProductPictureFileName" value="@itemOfProduct.PictureFileName" />
+                            <input type="hidden" name="ProductGroupCode" value="@itemOfProduct.ProductGroupCode" />
                             <input type="hidden" name="IsPromotion" value="@(itemOfProduct.IsPromotion ? "true" : "false")" />
                             <input type="hidden" name="PromotionPrice" value="@itemOfProduct.PromotionPrice" />
                             <input type="hidden" name="MinQuantity" value="@itemOfProduct.MinQuantity" />
                             <input type="hidden" name="MaxQuantity" value="@itemOfProduct.MaxQuantity" />
 
+                            <!-- Add Cart Start -->
+
+                            <input type="hidden" name="ProductIsPromotion" value="@(itemOfProduct.IsPromotion ? "true" : "false")" />
+                            <input type="hidden" name="ProductPromotionPrice" value="@itemOfProduct.PromotionPrice" />
                             <input type="hidden" name="QuantityOfItem" />
 
+                            <!-- Add Cart End -->
                             <!-- Hidden Value End -->
 
                             <div class="col-lg-3">

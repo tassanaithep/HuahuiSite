@@ -29,8 +29,6 @@ OpenProductModal = (e) => {
     let $pictureFileName = $form.find("[name='ProductPictureFileName']").val();
     let $isPromotion = JSON.parse($form.find("[name='IsPromotion']").val());
     let $promotionPrice = $form.find("[name='PromotionPrice']").val();
-    let $minQuantity = $form.find("[name='MinQuantity']").val();
-    let $maxQuantity = $form.find("[name='MaxQuantity']").val();
 
     let $quantityOfItem = $form.find("[name='QuantityOfItem']");
 
@@ -101,7 +99,7 @@ OpenProductModal = (e) => {
                                         <div class="variants_selects">
                                             <div class="modal_add_to_cart">
                                                 <form action="#">
-                                                    <input type="number" min="${ $minQuantity}" max="${$maxQuantity}" step="1" onkeyup="ChangeQuantityOfProduct('${$formId}', this.value)" onclick="ChangeQuantityOfProduct('${$formId }', this.value)" value="${ (quantity !== null ? quantity : 1) }" />
+                                                    <input type="number" step="1" onkeyup="ChangeQuantityOfProduct('${$formId}', this.value)" onclick="ChangeQuantityOfProduct('${$formId }', this.value)" value="${ (quantity !== null ? quantity : 1) }" />
                                                     <button type="button" onclick="ProductModalSubmit('${ $formId }')">add to cart</button>
                                                 </form>
                                             </div>
@@ -117,6 +115,9 @@ OpenProductModal = (e) => {
     `);
 
     // #endregion
+
+    // Bind Price of Product By Quantity of Product Group
+    ChangeProductPriceByQuantity($formId, quantity !== null ? quantity : 1);
 
     $("#modal-product").modal("show");
 };
@@ -140,6 +141,43 @@ ClearProductModal = () => {
 */
 ChangeQuantityOfProduct = (formId, quantity) => {
     $("#" + formId).find("[name='QuantityOfItem']").val(quantity);
+
+    ChangeProductPriceByQuantity(formId, quantity);
+};
+
+/**
+  * @desc Change Product Price By Quantity
+  * @param {String} formId - Id Name of Product Form
+  * @param {Number} quantity - Quantity of Product
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+ChangeProductPriceByQuantity = (formId, quantity) => {
+    let $productGroupCode = $("#" + formId).find("[name='ProductGroupCode']").val();
+    let $isPromotion = JSON.parse($("#" + formId).find("[name='IsPromotion']").val());
+
+    $.ajax({
+        type: "GET",
+        url: "/Home/GetProductPriceByQuantity",
+        data: { productGroupCode: $productGroupCode, quantity: quantity },
+        success: function (res) {
+            let productGroupModel = res;
+
+            let unitPrice = productGroupModel.unitPrice;
+            let promotionPrice = productGroupModel.promotionPrice;
+
+            $("#" + formId).find("[name='ProductUnitPrice']").val(unitPrice);
+            $("#" + formId).find("[name='ProductPromotionPrice']").val(promotionPrice);
+
+            if (!$isPromotion) {
+                $("#modal-product").find(".new_price").text(unitPrice + " บาท");
+            }
+            else {
+                $("#modal-product").find(".old_price").text(unitPrice + " บาท");
+                $("#modal-product").find(".new_price").text(promotionPrice + " บาท");
+            }
+        },
+        error: function () { }
+    });
 };
 
 /**

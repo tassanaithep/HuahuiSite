@@ -10,6 +10,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Interface
     {
         void GetCompleteOrderList(ref HomeViewModel homeViewModel);
         void Search(ref HomeViewModel homeViewModel);
+        void GetProductPriceByQuantity(ref ProductGroupViewModel productGroup, string productGroupCode, int quantity);
         void ExportToFile(ref byte[] result, string orderId);
     }
 }

@@ -83,7 +83,7 @@
                                     <td>@itemOfOrder.Id</td>
                                     <td>@itemOfOrder.CustomerName</td>
                                     <td>@itemOfOrder.SaleName</td>
-                                    <td>@(itemOfOrder.Status.Equals("Cart") ? "รอการยืนยัน" : itemOfOrder.Status.Equals("Confirm") ? "ยืนยันการสั่งซื้อแล้ว" : itemOfOrder.Status.Equals("Approve") ? "ระบบรับ Order แล้ว" : "ปิดการขาย")</td>
+                                    <td>@(itemOfOrder.Status.Equals("Complete") ? "ปิดการขาย" : string.Empty)</td>
                                     <td>
                                         <a href="#" data-toggle="modal" data-target="#modal-row-table-order-complete-@NoOfOrderComplete">รายละเอียดการสั่งซื้อ</a>
                                         <div class="modal fade" id="modal-row-table-order-complete-@NoOfOrderComplete" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
@@ -117,6 +117,7 @@
                                                                                         <tr>
                                                                                             <th>Product Name</th>
                                                                                             <th>Picture</th>
+                                                                                            <th>Unit Price</th>
                                                                                             <th>Quantity</th>
                                                                                             <th>Total Price</th>
                                                                                         </tr>
@@ -133,22 +134,29 @@
                                                                                         @foreach (var itemOfItemOrder in Model.OrderItemList.Where(w => w.OrderId.Equals(itemOfOrder.Id)))
                                                                                         {
 
-                                                                                            <tr class="tr-data-row">
+                                                                                        <tr class="tr-data-row">
 
-                                                                                                <!-- Hidden Value of Cart Item Start -->
-                                                                                                <!-- Hidden Value of Cart Item End -->
+                                                                                            <!-- Hidden Value Start -->
 
-                                                                                                <td>@itemOfItemOrder.ProductName</td>
-                                                                                                <td>
-                                                                                                    <img src="~/images/upload/@itemOfItemOrder.PictureFileName" alt="Picture" width="80" />
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <input type="number" class="form-control col-sm-4" name="Quantity" value="@itemOfItemOrder.Quantity" onchange="CalculateTotalPrice(this)" disabled />
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <input type="text" class="form-control col-sm-6" name="TotalPrice" value="@itemOfItemOrder.TotalPrice" disabled />
-                                                                                                </td>
-                                                                                            </tr>
+                                                                                            <input type="hidden" name="ProductGroupCode" value="@itemOfItemOrder.ProductGroupCode" />
+                                                                                            <input type="hidden" name="IsPromotion" value="@(itemOfItemOrder.IsPromotion ? "true" : "false")" />
+
+                                                                                            <!-- Hidden Value End -->
+
+                                                                                            <td>@itemOfItemOrder.ProductName</td>
+                                                                                            <td>
+                                                                                                <img src="~/images/upload/@itemOfItemOrder.PictureFileName" alt="Picture" width="80" />
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <input type="text" class="form-control col-sm-6" name="UnitPrice" value="@itemOfItemOrder.UnitPrice" disabled />
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <input type="number" class="form-control col-sm-5" name="Quantity" value="@itemOfItemOrder.Quantity" onchange="CalculateTotalPrice(this)" disabled />
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <input type="text" class="form-control col-sm-8" name="TotalPrice" value="@itemOfItemOrder.TotalPrice" disabled />
+                                                                                            </td>
+                                                                                        </tr>
 
                                                                                             SummaryQuantityOfProductComplete += itemOfItemOrder.Quantity;
                                                                                             SummaryTotalOfProductComplete += itemOfItemOrder.TotalPrice;
@@ -156,11 +164,11 @@
                                                                                         }
 
                                                                                         <tr>
+                                                                                            <td></td>
+                                                                                            <td></td>
                                                                                             <td><b>Total</b></td>
-                                                                                            <td></td>
-                                                                                            <td><input type="text" class="form-control col-sm-4" value="@SummaryQuantityOfProductComplete" disabled /></td>
-                                                                                            <td><input type="text" class="form-control col-sm-6" value="@SummaryTotalOfProductComplete" disabled /></td>
-                                                                                            <td></td>
+                                                                                            <td><input type="text" class="form-control col-sm-5" value="@SummaryQuantityOfProductComplete" disabled /></td>
+                                                                                            <td><input type="text" class="form-control col-sm-8" value="@SummaryTotalOfProductComplete" disabled /></td>
                                                                                         </tr>
 
                                                                                     </tbody>
@@ -211,7 +219,7 @@
                     <h4 class="card-title">รายการสั่งซื้อสินค้าที่คงค้าง</h4>
                 </div>
                 <div class="table-responsive m-t-20">
-                    <table class="table stylish-table">
+                    <table class="table stylish-table" id="table-data-2">
                         <thead>
                             <tr>
                                 <th>เลขที่การสั่งซื้อ</th>
@@ -225,114 +233,249 @@
 
                             @{ int NoOfOrderNotComplete = 0; }
 
-                            @foreach (var itemOfOrder in Model.OrderList.Where(w => w.Status.Equals("Cart") || w.Status.Equals("Confirm") || w.Status.Equals("Approve")))
+                            @foreach (var itemOfCart in Model.CartList)
                             {
 
-                                <tr>
-                                    <td>@itemOfOrder.Id</td>
-                                    <td>@itemOfOrder.CustomerName</td>
-                                    <td>@itemOfOrder.SaleName</td>
-                                    <td>@(itemOfOrder.Status.Equals("Cart") ? "รอการยืนยัน" : itemOfOrder.Status.Equals("Confirm") ? "ยืนยันการสั่งซื้อแล้ว" : itemOfOrder.Status.Equals("Approve") ? "ระบบรับ Order แล้ว" : "ปิดการขาย")</td>
+                                <tr class="tr-data-row">
+                                    <td>@itemOfCart.OrderId</td>
+                                    <td>@itemOfCart.CustomerName</td>
+                                    <td>@itemOfCart.SaleName</td>
+                                    <td>@(itemOfCart.Status.Equals("Confirm") ? "ยืนยันการสั่งซื้อแล้ว" : string.Empty)</td>
                                     <td>
                                         <a href="#" data-toggle="modal" data-target="#modal-row-table-order-not-complete-@NoOfOrderNotComplete">รายละเอียดการสั่งซื้อ</a>
                                         <div class="modal fade" id="modal-row-table-order-not-complete-@NoOfOrderNotComplete" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg" role="document">
-                                            <div class="modal-content">
-                                                <form class="form-row-table">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <form class="form-row-table">
 
-                                                    <!-- Hidden Value Start -->
+                                                        <!-- Hidden Value Start -->
 
-                                                    <input type="hidden" name="hid-cart-id" value="@itemOfOrder.Id" />
+                                                        <input type="hidden" name="hid-cart-id" value="@itemOfCart.Id" />
 
-                                                    <!-- Hidden Value End -->
+                                                        <!-- Hidden Value End -->
 
-                                                    <div class="modal-header" style="background-color: #ff6a00;">
-                                                        <h4 class="modal-title text-white">View Order: @itemOfOrder.Id</h4>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="text-white">×</span></button>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                            <div class="modal-body">
-                                                                <div class="card">
-                                                                    <div class="card-header">
-                                                                        <div class="card-actions">
-                                                                            <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                                                        <div class="modal-header" style="background-color: #ff6a00;">
+                                                            <h4 class="modal-title text-white">View Order: @itemOfCart.OrderId</h4>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="text-white">×</span></button>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                                <div class="modal-body">
+                                                                    <div class="card">
+                                                                        <div class="card-header">
+                                                                            <div class="card-actions">
+                                                                                <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="card-body collapse show">
-                                                                        <div class="table-responsive">
-                                                                            <table class="table" id="table-data">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>Product Name</th>
-                                                                                        <th>Picture</th>
-                                                                                        <th>Quantity</th>
-                                                                                        <th>Total Price</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
+                                                                        <div class="card-body collapse show">
+                                                                            <div class="table-responsive">
+                                                                                <table class="table table-data-item">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>Product Name</th>
+                                                                                            <th>Picture</th>
+                                                                                            <th>Unit Price</th>
+                                                                                            <th>Quantity</th>
+                                                                                            <th>Total Price</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
 
-                                                                                    @{
+                                                                                        @{
 
-                                                                                        int SummaryQuantityOfProductNotComplete = 0;
-                                                                                        decimal SummaryTotalOfProductNotComplete = 0;
+                                                                                            int SummaryQuantityOfProductNotComplete = 0;
+                                                                                            decimal SummaryTotalOfProductNotComplete = 0;
 
-                                                                                    }
+                                                                                        }
 
-                                                                                    @foreach (var itemOfItemOrder in Model.OrderItemList.Where(w => w.OrderId.Equals(itemOfOrder.Id)))
-                                                                                    {
+                                                                                        @foreach (var itemOfItemOrder in Model.CartItemList.Where(w => w.CardId.Equals(itemOfCart.Id)))
+                                                                                        {
 
-                                                                                        <tr class="tr-data-row">
+                                                                                        <tr class="tr-data-item-row">
 
-                                                                                            <!-- Hidden Value of Cart Item Start -->
-                                                                                            <!-- Hidden Value of Cart Item End -->
+                                                                                            <!-- Hidden Value Start -->
+
+                                                                                            <input type="hidden" name="ProductGroupCode" value="@itemOfItemOrder.ProductGroupCode" />
+                                                                                            <input type="hidden" name="IsPromotion" value="@(itemOfItemOrder.IsPromotion ? "true" : "false")" />
+
+                                                                                            <!-- Hidden Value End -->
 
                                                                                             <td>@itemOfItemOrder.ProductName</td>
                                                                                             <td>
                                                                                                 <img src="~/images/upload/@itemOfItemOrder.PictureFileName" alt="Picture" width="80" />
                                                                                             </td>
                                                                                             <td>
-                                                                                                <input type="number" class="form-control col-sm-4" name="Quantity" value="@itemOfItemOrder.Quantity" onchange="CalculateTotalPrice(this)" disabled />
+                                                                                                <input type="text" class="form-control col-sm-6" name="UnitPrice" value="@itemOfItemOrder.UnitPrice" disabled />
                                                                                             </td>
                                                                                             <td>
-                                                                                                <input type="text" class="form-control col-sm-6" name="TotalPrice" value="@itemOfItemOrder.TotalPrice" disabled />
+                                                                                                <input type="number" class="form-control col-sm-5" name="Quantity" value="@itemOfItemOrder.Quantity" onchange="CalculateTotalPrice(this)" disabled />
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <input type="text" class="form-control col-sm-8" name="TotalPrice" value="@itemOfItemOrder.TotalPrice" disabled />
                                                                                             </td>
                                                                                         </tr>
 
-                                                                                        SummaryQuantityOfProductNotComplete += itemOfItemOrder.Quantity;
-                                                                                        SummaryTotalOfProductNotComplete += itemOfItemOrder.TotalPrice;
+                                                                                            SummaryQuantityOfProductNotComplete += itemOfItemOrder.Quantity;
+                                                                                            SummaryTotalOfProductNotComplete += itemOfItemOrder.TotalPrice;
 
-                                                                                    }
+                                                                                        }
 
-                                                                                    <tr>
-                                                                                        <td><b>Total</b></td>
-                                                                                        <td></td>
-                                                                                        <td><input type="text" class="form-control col-sm-4" value="@SummaryQuantityOfProductNotComplete" disabled /></td>
-                                                                                        <td><input type="text" class="form-control col-sm-6" value="@SummaryTotalOfProductNotComplete" disabled /></td>
-                                                                                        <td></td>
-                                                                                    </tr>
+                                                                                        <tr>
+                                                                                            <td></td>
+                                                                                            <td></td>
+                                                                                            <td><b>Total</b></td>
+                                                                                            <td><input type="text" class="form-control col-sm-5" value="@SummaryQuantityOfProductNotComplete" disabled /></td>
+                                                                                            <td><input type="text" class="form-control col-sm-8" value="@SummaryTotalOfProductNotComplete" disabled /></td>
+                                                                                        </tr>
 
-                                                                                </tbody>
-                                                                            </table>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+
                                                                         </div>
-
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        @*<button type="button" class="btn btn-success" onclick="UpdateCart(this)"><i class="fa fa-check"></i> Success</button>*@
-                                                    </div>
-                                                </form>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
 
-                            NoOfOrderNotComplete++;
+                                NoOfOrderNotComplete++;
+
+                            }
+
+                            @{ int NoOfOrderComplete2 = 0; }
+
+                            @foreach (var itemOfOrder in Model.OrderList.Where(w => w.Status.Equals("Approve")))
+                            {
+
+                                <tr class="tr-data-row">
+                                    <td>@itemOfOrder.Id</td>
+                                    <td>@itemOfOrder.CustomerName</td>
+                                    <td>@itemOfOrder.SaleName</td>
+                                    <td>@(itemOfOrder.Status.Equals("Approve") ? "ระบบรับ Order แล้ว" : string.Empty)</td>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target="#modal-row-table-order-not-complete-@NoOfOrderComplete2">รายละเอียดการสั่งซื้อ</a>
+                                        <div class="modal fade" id="modal-row-table-order-not-complete-@NoOfOrderComplete2" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <form class="form-row-table">
+
+                                                        <!-- Hidden Value Start -->
+
+                                                        <input type="hidden" name="hid-cart-id" value="@itemOfOrder.Id" />
+
+                                                        <!-- Hidden Value End -->
+
+                                                        <div class="modal-header" style="background-color: #ff6a00;">
+                                                            <h4 class="modal-title text-white">View Order: @itemOfOrder.Id</h4>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="text-white">×</span></button>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                                <div class="modal-body">
+                                                                    <div class="card">
+                                                                        <div class="card-header">
+                                                                            <div class="card-actions">
+                                                                                <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="card-body collapse show">
+                                                                            <div class="table-responsive">
+                                                                                <table class="table table-data-item">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>Product Name</th>
+                                                                                            <th>Picture</th>
+                                                                                            <th>Unit Price</th>
+                                                                                            <th>Quantity</th>
+                                                                                            <th>Total Price</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+
+                                                                                        @{
+
+                                                                                            int SummaryQuantityOfProductComplete = 0;
+                                                                                            decimal SummaryTotalOfProductComplete = 0;
+
+                                                                                        }
+
+                                                                                        @foreach (var itemOfItemOrder in Model.OrderItemList.Where(w => w.OrderId.Equals(itemOfOrder.Id)))
+                                                                                        {
+
+                                                                                        <tr class="tr-data-item-row">
+
+                                                                                            <!-- Hidden Value Start -->
+
+                                                                                            <input type="hidden" name="ProductGroupCode" value="@itemOfItemOrder.ProductGroupCode" />
+                                                                                            <input type="hidden" name="IsPromotion" value="@(itemOfItemOrder.IsPromotion ? "true" : "false")" />
+                                                                                            <input type="hidden" name="Quantity" value="@itemOfItemOrder.Quantity" />
+
+                                                                                            <!-- Hidden Value End -->
+
+                                                                                            <td>@itemOfItemOrder.ProductName</td>
+                                                                                            <td>
+                                                                                                <img src="~/images/upload/@itemOfItemOrder.PictureFileName" alt="Picture" width="80" />
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <input type="text" class="form-control col-sm-6" name="UnitPrice" value="@itemOfItemOrder.UnitPrice" disabled />
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <input type="number" class="form-control col-sm-6" name="Quantity" value="@itemOfItemOrder.Quantity" onchange="CalculateTotalPrice(this)" disabled />
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <input type="text" class="form-control col-sm-8" name="TotalPrice" value="@itemOfItemOrder.TotalPrice" disabled />
+                                                                                            </td>
+                                                                                        </tr>
+
+                                                                                            SummaryQuantityOfProductComplete += itemOfItemOrder.Quantity;
+                                                                                            SummaryTotalOfProductComplete += itemOfItemOrder.TotalPrice;
+
+                                                                                        }
+
+                                                                                            <tr>
+                                                                                                <td></td>
+                                                                                                <td></td>
+                                                                                                <td><b>Total</b></td>
+                                                                                                <td><input type="text" class="form-control col-sm-6" value="@SummaryQuantityOfProductComplete" disabled /></td>
+                                                                                                <td><input type="text" class="form-control col-sm-8" value="@SummaryTotalOfProductComplete" disabled /></td>
+                                                                                            </tr>
+
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <div class="col-sm-6">
+                                                                
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div class="float-right">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                NoOfOrderComplete2++;
 
                             }
 

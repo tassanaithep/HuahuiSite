@@ -51,11 +51,21 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void GetCompleteOrderList(ref HomeViewModel homeViewModel)
         {
-            #region Bind Order List Data
+            #region Bind Order List and Cart List to Model
+
+            #region Order
 
             homeViewModel.OrderList = _unitOfWork.Orders.GetOrderList();
             homeViewModel.OrderItemList = _unitOfWork.OrderItemLists.GetOrderItemList();
-            homeViewModel.CompleteOrderItemList = _unitOfWork.OrderItemLists.GetCompleteOrderItemList();
+
+            #endregion
+
+            #region Cart
+
+            homeViewModel.CartList = _unitOfWork.Carts.GetConfirmCartList();
+            homeViewModel.CartItemList = _unitOfWork.CartItemLists.GetCartItemListOfConfirmCart();
+
+            #endregion
 
             #endregion
 
@@ -65,13 +75,6 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
             homeViewModel.EndDate = DateTime.Today.AddMonths(+1).AddDays(-(DateTime.Today.Day - 1)).AddDays(-1).ToString("MM/dd/yyyy");
 
             #endregion
-
-            //#region Bind StartDate and EndDate of Last Month
-
-            //homeViewModel.StartDate = DateTime.Today.AddMonths(-1).AddDays(-(DateTime.Today.Day - 1)).ToString("MM/dd/yyyy");
-            //homeViewModel.EndDate = DateTime.Today.AddDays(-(DateTime.Today.Day - 1)).AddDays(-1).ToString("MM/dd/yyyy");
-
-            //#endregion
         }
 
         #endregion
@@ -97,6 +100,11 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
                 homeViewModel.OrderItemList = _unitOfWork.OrderItemLists.GetOrderItemList();
                 homeViewModel.CompleteOrderItemList = _unitOfWork.OrderItemLists.GetCompleteOrderItemList();
             }
+        }
+
+        public void GetProductPriceByQuantity(ref ProductGroupViewModel productGroup, string productGroupCode, int quantity)
+        {
+            productGroup = Mapper.Map<ProductGroup, ProductGroupViewModel>(_unitOfWork.ProductGroups.GetProductGroupByCodeAndQuantity(productGroupCode, quantity));
         }
 
         #endregion

@@ -108,17 +108,29 @@
                                     <tr>
                                         <td>
                                             <form class="form-product-item" id="form-product-@NoOfProduct" asp-controller="Cart" asp-action="AddToCart" data-ajax="true" data-ajax-method="post" data-ajax-success="OnAddToCartSuccess">
+
+                                                <!-- Hidden Value Start -->
+
                                                 <input type="hidden" name="hid-form-product-id" value="form-product-@NoOfProduct" />
                                                 <input type="hidden" name="ProductId" value="@item.Id" />
                                                 <input type="hidden" name="ProductName" value="@item.Name" />
                                                 <input type="hidden" name="ProductUnitPrice" value="@item.UnitPrice" />
                                                 <input type="hidden" name="ProductPictureFileName" value="@item.PictureFileName" />
-                                                <input type="hidden" name="IsPromotion" value="@(@item.IsPromotion ? "true" : "false")" />
+                                                <input type="hidden" name="ProductGroupCode" value="@item.ProductGroupCode" />
+                                                <input type="hidden" name="IsPromotion" value="@(item.IsPromotion ? "true" : "false")" />
                                                 <input type="hidden" name="PromotionPrice" value="@item.PromotionPrice" />
                                                 <input type="hidden" name="MinQuantity" value="@item.MinQuantity" />
                                                 <input type="hidden" name="MaxQuantity" value="@item.MaxQuantity" />
 
+                                                <!-- Add Cart Start -->
+
+                                                <input type="hidden" name="ProductIsPromotion" value="@(item.IsPromotion ? "true" : "false")" />
+                                                <input type="hidden" name="ProductPromotionPrice" value="@item.PromotionPrice" />
                                                 <input type="hidden" name="QuantityOfItem" />
+
+                                                <!-- Add Cart End -->
+
+                                                <!-- Hidden Value End -->
 
                                                 <div class="single_product">
                                                     <div class="product_thumb" style="text-align: center;">
@@ -173,8 +185,8 @@
                                                                     }
                                                                     else
                                                                     {
-                                                                        <span class="old_price">@item.PromotionPrice บาท</span>
-                                                                        <span class="current_price">@item.UnitPrice บาท</span>
+                                                                        <span class="old_price">@item.UnitPrice บาท</span>
+                                                                        <span class="current_price">@item.PromotionPrice บาท</span>
                                                                     }
 
                                                                 </div>
@@ -210,8 +222,8 @@
                                                                     }
                                                                     else
                                                                     {
-                                                                        <span class="old_price">@item.PromotionPrice บาท </span>
-                                                                        <span class="current_price">@item.UnitPrice บาท</span>
+                                                                        <span class="old_price">@item.UnitPrice บาท </span>
+                                                                        <span class="current_price">@item.PromotionPrice บาท</span>
                                                                     }
 
                                                                 </div>

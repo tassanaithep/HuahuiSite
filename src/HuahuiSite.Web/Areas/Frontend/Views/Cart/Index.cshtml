@@ -88,40 +88,42 @@
                                         @foreach (var item in Model.CartViewModel.CartItemModelList)
                                         {
 
-                                            <tr class="tr-data-row">
+                                    <tr class="tr-data-row">
 
-                                                <!-- Hidden Value Start -->
+                                        <!-- Hidden Value Start -->
 
-                                                <input type="hidden" name="hid-cart-item-id" value="@item.Id" />
+                                        <input type="hidden" name="hid-cart-item-id" value="@item.Id" />
+                                        <input type="hidden" name="hid-product-group-code" value="@item.ProductGroupCode" />
+                                        <input type="hidden" name="hid-product-is-promotion" value="@(item.IsPromotion ? "true" : "false")" />
 
-                                                <!-- Hidden Value End -->
+                                        <!-- Hidden Value End -->
 
-                                                @if (!Model.CartViewModel.Status.Equals("Approve"))
-                                                {
-                                                    <td class="product_remove"><a onclick="RemoveCartItem(this)"><i class="fa fa-trash-o"></i></a></td>
-                                                }
-                                                else
-                                                {
-                                                    <td class="product_remove"></td>
-                                                }
+                                        @if (!Model.CartViewModel.Status.Equals("Approve"))
+                                        {
+                                            <td class="product_remove"><a onclick="RemoveCartItem(this)"><i class="fa fa-trash-o"></i></a></td>
+                                        }
+                                        else
+                                        {
+                                            <td class="product_remove"></td>
+                                        }
 
-                                                <td class="product_thumb"><a href="#"><img src="~/images/upload/@item.PictureFileName" alt=""></a></td>
-                                                <td class="product_name"><a href="#">@item.ProductName</a></td>
-                                                <td class="product-price">@(!item.IsPromotion ? @item.UnitPrice : @item.PromotionPrice)</td>
-                                                <td class="product_quantity">
+                                        <td class="product_thumb"><a href="#"><img src="~/images/upload/@item.PictureFileName" alt=""></a></td>
+                                        <td class="product_name">@item.ProductName</td>
+                                        <td class="product-price">@(!item.IsPromotion ? @item.UnitPrice : @item.PromotionPrice)</td>
+                                        <td class="product_quantity">
 
-                                                    @if (Model.CartViewModel.Status != "Approve")
-                                                    {
-                                                        <input type="number" name="ProductQuantity" min="@item.MinQuantity" max="@item.MaxQuantity" value="@item.Quantity" oninput="CalculateTotalPrice(this)" onkeyup="CalculateTotalPrice(this)" />
-                                                    }
-                                                    else
-                                                    {
-                                                        <input type="number" name="ProductQuantity" value="@item.Quantity" disabled />
-                                                    }
+                                            @if (Model.CartViewModel.Status != "Approve")
+                                            {
+                                                <input type="number" name="ProductQuantity" step="1" value="@item.Quantity" oninput="CalculateTotalPrice(this)" onkeyup="CalculateTotalPrice(this)" />
+                                            }
+                                            else
+                                            {
+                                                <input type="number" name="ProductQuantity" value="@item.Quantity" disabled />
+                                            }
 
-                                                </td>
-                                                <td class="product_total">@item.TotalPrice</td>
-                                            </tr>
+                                        </td>
+                                        <td class="product_total">@item.TotalPrice</td>
+                                    </tr>
 
                                             SummaryQuantityOfProduct += @item.Quantity;
                                             SummaryTotalOfProduct += @item.TotalPrice;

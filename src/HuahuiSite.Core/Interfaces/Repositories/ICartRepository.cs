@@ -9,6 +9,7 @@ namespace HuahuiSite.Core.Interfaces.Repositories
     public interface ICartRepository : IRepository<Cart>
     {
         IEnumerable<CartModel> GetCartList();
+        IEnumerable<CartModel> GetConfirmCartList();
         Cart GetCartActiveByUser(int userId);
         Cart GetCartByOrder(string orderId);
     }
