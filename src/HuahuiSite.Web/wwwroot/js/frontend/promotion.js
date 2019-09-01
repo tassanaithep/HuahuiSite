@@ -99,7 +99,7 @@ OpenProductModal = (e) => {
                                         <div class="variants_selects">
                                             <div class="modal_add_to_cart">
                                                 <form action="#">
-                                                    <input type="number" step="1" onkeyup="ChangeQuantityOfProduct('${$formId}', this.value)" onclick="ChangeQuantityOfProduct('${$formId }', this.value)" value="${ (quantity !== null ? quantity : 1) }" />
+                                                    <input type="number" step="1" min="1" onkeyup="ChangeQuantityOfProduct('${ $formId }', this.value)" onclick="ChangeQuantityOfProduct('${ $formId }', this.value)" value="${ (quantity !== null ? quantity : 1) }" />
                                                     <button type="button" onclick="ProductModalSubmit('${ $formId }')">add to cart</button>
                                                 </form>
                                             </div>

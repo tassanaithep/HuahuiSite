@@ -114,7 +114,7 @@
 
                                             @if (Model.CartViewModel.Status != "Approve")
                                             {
-                                                <input type="number" name="ProductQuantity" step="1" value="@item.Quantity" oninput="CalculateTotalPrice(this)" onkeyup="CalculateTotalPrice(this)" />
+                                                <input type="number" name="ProductQuantity" step="1" min="1" value="@item.Quantity" oninput="CalculateTotalPrice(this)" onkeyup="CalculateTotalPrice(this)" />
                                             }
                                             else
                                             {
