@@ -115,6 +115,15 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         {
             var orderList = _unitOfWork.OrderItemLists.GetOrderItemListDataByOrderId(orderId);
 
+            orderList.ToList().ForEach(i =>
+            {
+                ProductGroupViewModel productGroupViewModel = new ProductGroupViewModel();
+
+                GetProductPriceByQuantity(ref productGroupViewModel, i.ProductGroupCode, i.Quantity);
+
+                i.UnitPrice = !i.IsPromotion ? productGroupViewModel.UnitPrice : productGroupViewModel.PromotionPrice.Value;
+            });
+
             #region Add Column Header
 
             //var comlumHeadrsOrderId = new string[]
