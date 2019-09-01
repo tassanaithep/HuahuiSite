@@ -57,7 +57,7 @@
                                                                 </div>
                                                                 <div class="card-body collapse show">
                                                                     <div class="table-responsive">
-                                                                        <table class="table" id="table-data">
+                                                                        <table class="table table-data-item">
                                                                             <thead>
                                                                                 <tr>
                                                                                     <th>Product Name</th>
@@ -79,9 +79,18 @@
                                                                                 @foreach (var itemOfOrderItem in Model.OrderItemList.Where(w => w.OrderId.Equals(itemOfOrder.Id)))
                                                                                 {
 
-                                                                                <tr class="tr-data-row">
+                                                                                <tr class="tr-data-item-row">
 
                                                                                     <!-- Hidden Value of Cart Item Start -->
+
+                                                                                    <input type="hidden" name="hid-order-item-product-id" value="@itemOfOrderItem.ProductId" />
+                                                                                    <input type="hidden" name="hid-order-item-created-datetime" value="@itemOfOrderItem.CreatedDateTime" />
+
+                                                                                    <input type="hidden" name="hid-order-item-unit-price" value="@itemOfOrderItem.UnitPrice" />
+
+                                                                                    <input type="hidden" name="hid-order-product-group-code" value="@itemOfOrderItem.ProductGroupCode" />
+                                                                                    <input type="hidden" name="hid-order-is-promotion" value="@(itemOfOrderItem.IsPromotion ? "true" : "false")" />
+
                                                                                     <!-- Hidden Value of Cart Item End -->
 
                                                                                     <td>@itemOfOrderItem.ProductName</td>
@@ -92,10 +101,10 @@
                                                                                         <input type="text" class="form-control col-sm-6" name="UnitPrice" value="@itemOfOrderItem.UnitPrice" disabled />
                                                                                     </td>
                                                                                     <td>
-                                                                                        <input type="number" class="form-control col-sm-5" name="Quantity" value="@itemOfOrderItem.Quantity" onchange="CalculateTotalPrice(this)" disabled />
+                                                                                        <input type="number" class="form-control col-sm-6" name="Quantity" value="@itemOfOrderItem.Quantity" onchange="CalculateTotalPrice(this)" disabled />
                                                                                     </td>
                                                                                     <td>
-                                                                                        <input type="text" class="form-control col-sm-8" name="TotalPrice" value="@itemOfOrderItem.TotalPrice" disabled />
+                                                                                        <input type="text" class="form-control col-sm-10" name="TotalPrice" value="@itemOfOrderItem.TotalPrice" disabled />
                                                                                     </td>
                                                                                 </tr>
 
@@ -108,8 +117,8 @@
                                                                                     <td></td>
                                                                                     <td></td>
                                                                                     <td><b>Total</b></td>
-                                                                                    <td><input type="text" class="form-control col-sm-5" value="@SummaryQuantityOfProduct" disabled /></td>
-                                                                                    <td><input type="text" class="form-control col-sm-8" value="@SummaryTotalOfProduct" disabled /></td>
+                                                                                    <td><input type="text" class="form-control col-sm-6" value="@SummaryQuantityOfProduct" disabled /></td>
+                                                                                    <td><input type="text" class="form-control col-sm-10" value="@SummaryTotalOfProduct" disabled /></td>
                                                                                 </tr>
 
                                                                             </tbody>

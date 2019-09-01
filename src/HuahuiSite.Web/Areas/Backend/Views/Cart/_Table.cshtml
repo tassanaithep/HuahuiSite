@@ -108,10 +108,10 @@
                                                                                             <input type="text" class="form-control col-sm-6" name="UnitPrice" value="@itemOfCartItem.UnitPrice" />
                                                                                         </td>
                                                                                         <td>
-                                                                                            <input type="number" class="form-control col-sm-5" name="Quantity" value="@itemOfCartItem.Quantity" onchange="CalculateTotalPrice(this)" />
+                                                                                            <input type="number" class="form-control col-sm-6" name="Quantity" step="1" value="@itemOfCartItem.Quantity" oninput="CalculateTotalPrice(this)" onkeyup="CalculateTotalPrice(this)" />
                                                                                         </td>
                                                                                         <td>
-                                                                                            <input type="text" class="form-control col-sm-8" name="TotalPrice" value="@itemOfCartItem.TotalPrice" />
+                                                                                            <input type="text" class="form-control col-sm-10" name="TotalPrice" value="@itemOfCartItem.TotalPrice" />
                                                                                         </td>
                                                                                         <td>
                                                                                             <a href="#" onclick="DeleteCartItem(this)"><i class="fas fa-trash-alt text-inverse m-r-10"></i></a>
@@ -127,8 +127,8 @@
                                                                                         <td></td>
                                                                                         <td></td>
                                                                                         <td><b>Total</b></td>
-                                                                                        <td><input type="text" class="form-control col-sm-5" value="@SummaryQuantityOfProduct" disabled /></td>
-                                                                                        <td><input type="text" class="form-control col-sm-8" value="@SummaryTotalOfProduct" disabled /></td>
+                                                                                        <td><input type="text" class="form-control col-sm-6" name="summary-quantity" value="@SummaryQuantityOfProduct" disabled /></td>
+                                                                                        <td><input type="text" class="form-control col-sm-10" name="summary-total-price" value="@SummaryTotalOfProduct" disabled /></td>
                                                                                     </tr>
 
                                                                                 </tbody>

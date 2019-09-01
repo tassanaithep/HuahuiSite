@@ -66,7 +66,7 @@ CalculateTotalPrice = (e) => {
     $.ajax({
         type: "GET",
         async: false,
-        url: "/Home/GetProductPriceByQuantity",
+        url: "/Backend/Home/GetProductPriceByQuantity",
         data: { productGroupCode: $productGroupCode, quantity: $quantity },
         success: function (res) {
             let productGroupModel = res;
