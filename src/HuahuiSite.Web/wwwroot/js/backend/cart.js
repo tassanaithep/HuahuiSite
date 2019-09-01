@@ -343,7 +343,7 @@ DeleteCartItem = (e) => {
 UpdateCart = (e) => {
     let cartItemList = [];
 
-    $(e).closest(".form-row-table").find(".tr-data-row").each(function (index, element) {
+    $(e).closest(".form-row-table").find(".tr-data-item-row").each(function (index, element) {
         // #region Get Value from Data Row
 
         let $id = parseInt($(element).find("[name='hid-cart-item-id']").val());

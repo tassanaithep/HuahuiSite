@@ -15,9 +15,11 @@ $(function () {
 /**
   * @desc Open Picture Modal of Product
   * @param {Object} e - Element of Open Modal Button
+  * @param {Object} event - Event of Open Modal Button
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
-OpenProductPictureModal = (e) => {
+OpenProductPictureModal = (e, event) => {
+    event.preventDefault();
     // #region Get Value form Form
 
     let $form = $(e).closest(".form-product-item");
@@ -30,12 +32,12 @@ OpenProductPictureModal = (e) => {
     // #region Create Product Picture Modal
 
     $("body").append(`
-        <div class="modal fade" id="modal-product-picture" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+        <div class="modal fade" id="modal-product-picture" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true" data-backdrop="static">
 	        <div class="modal-dialog modal-lg" role="document">
 		        <div class="modal-content text-center">
 			        <div class="modal-header">
 				        <h4 class="modal-title" id="myModalLabel">${ $productName }</h4>
-				        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="ClearProductPictureModal()">×</button>
+				        <button type="button" class="close" style="border: 0px;" data-dismiss="modal" aria-hidden="true" onclick="ClearProductPictureModal()">×</button>
 			        </div>
 			        <div class="modal-body">
 				        <img src="/images/upload/${ $pictureFileName }" alt="" width="600">
