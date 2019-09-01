@@ -97,7 +97,7 @@ OpenProductModal = (e) => {
     // #region Create Modal of Product
 
     $("body").append(`
-        <div class="modal fade" id="modal-product" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal fade" id="modal-product" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="ClearProductModal()">

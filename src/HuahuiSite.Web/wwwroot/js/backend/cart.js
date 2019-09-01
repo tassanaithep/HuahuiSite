@@ -179,7 +179,7 @@ CalculateTotalPrice = (e) => {
 
     let $totalPriceElement = $trOfCartItem.find("[name='TotalPrice']");
 
-    let $productUnitPrice = parseInt($trOfCartItem.find("[name='hid-cart-item-unit-price']").val());
+    let $productUnitPrice = parseInt($trOfCartItem.find("[name='UnitPrice']").val());
     let $productQuantity = parseInt($trOfCartItem.find("[name='Quantity']").val());
 
     let $totalPrice = $productUnitPrice * $productQuantity;
