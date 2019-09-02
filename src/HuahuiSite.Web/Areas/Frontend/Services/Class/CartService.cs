@@ -294,15 +294,28 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             orderId += "OR";
             orderId += DateTime.Now.ToString("yyyyMMdd");
 
+            // Get Cart like Order Id
+            var cartByOrderId = _unitOfWork.Carts.GetCartByLikeOrderId(orderId);
+
+            // Get Order like Order Id
             var orderByOrderId = _unitOfWork.Orders.GetOrderByLikeOrderId(orderId);
 
-            if (orderByOrderId.Count() == 0)
+            if (cartByOrderId.Count() > 0 && orderByOrderId.Count() > 0)
             {
-                orderId += "001";
-            }
-            else
-            {
-                string lastOrderId = orderByOrderId.OrderByDescending(o => o.Id).First().Id.ToString();
+                List<string> orderIdList = new List<string>();
+
+                cartByOrderId.ToList().ForEach(i =>
+                {
+                    orderIdList.Add(i.OrderId);
+                });
+
+                orderByOrderId.ToList().ForEach(i =>
+                {
+                    orderIdList.Add(i.Id);
+                });
+
+                string lastOrderId = orderIdList.OrderByDescending(o => o).First();
+
                 int lastOrderIdNumber = Convert.ToInt16(lastOrderId.Substring(lastOrderId.Length - 3));
 
                 if (lastOrderIdNumber.ToString().Length == 1)
@@ -316,6 +329,52 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                 else if (lastOrderIdNumber.ToString().Length == 3)
                 {
                     orderId += (lastOrderIdNumber + 1).ToString();
+                }
+            }
+            else
+            {
+                if (cartByOrderId.Count() == 0)
+                {
+                    if (orderByOrderId.Count() == 0)
+                    {
+                        orderId += "001";
+                    }
+                    else
+                    {
+                        string lastOrderId = orderByOrderId.OrderByDescending(o => o.Id).First().Id.ToString();
+                        int lastOrderIdNumber = Convert.ToInt16(lastOrderId.Substring(lastOrderId.Length - 3));
+
+                        if (lastOrderIdNumber.ToString().Length == 1)
+                        {
+                            orderId += "00" + (lastOrderIdNumber + 1).ToString();
+                        }
+                        else if (lastOrderIdNumber.ToString().Length == 2)
+                        {
+                            orderId += "0" + (lastOrderIdNumber + 1).ToString();
+                        }
+                        else if (lastOrderIdNumber.ToString().Length == 3)
+                        {
+                            orderId += (lastOrderIdNumber + 1).ToString();
+                        }
+                    }
+                }
+                else
+                {
+                    string lastOrderId = cartByOrderId.OrderByDescending(o => o.OrderId).First().OrderId.ToString();
+                    int lastOrderIdNumber = Convert.ToInt16(lastOrderId.Substring(lastOrderId.Length - 3));
+
+                    if (lastOrderIdNumber.ToString().Length == 1)
+                    {
+                        orderId += "00" + (lastOrderIdNumber + 1).ToString();
+                    }
+                    else if (lastOrderIdNumber.ToString().Length == 2)
+                    {
+                        orderId += "0" + (lastOrderIdNumber + 1).ToString();
+                    }
+                    else if (lastOrderIdNumber.ToString().Length == 3)
+                    {
+                        orderId += (lastOrderIdNumber + 1).ToString();
+                    }
                 }
             }
 

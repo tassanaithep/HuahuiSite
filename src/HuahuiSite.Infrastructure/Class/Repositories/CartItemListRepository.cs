@@ -46,7 +46,7 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
         public IEnumerable<CartItemListModel> GetCartItemListByUser(int userId)
         {
             return (from cartItemList in HuahuiDbContext.CartItemList
-                    join cartJoin in HuahuiDbContext.Cart.Where(w => w.UserId.Equals(userId) && w.Status.Equals("Cart") || w.Status.Equals("Confirm") && w.IsActive.Equals(true)) on cartItemList.CardId equals cartJoin.Id into CartItemListJoinCart
+                    join cartJoin in HuahuiDbContext.Cart.Where(w => w.UserId.Equals(userId) && w.IsActive.Equals(true)) on cartItemList.CardId equals cartJoin.Id into CartItemListJoinCart
                     from cart in CartItemListJoinCart
                     join productJoin in HuahuiDbContext.Product on cartItemList.ProductId equals productJoin.Id into CartItemListJoinProduct
                     from product in CartItemListJoinProduct.DefaultIfEmpty()
@@ -74,7 +74,7 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
         public IEnumerable<CartItemListModel> GetCartItemListNotApproveByUser(int userId)
         {
             return (from cartItemList in HuahuiDbContext.CartItemList
-                    join cartJoin in HuahuiDbContext.Cart.Where(w => w.UserId.Equals(userId) && w.Status.Equals("Cart") || w.Status.Equals("Confirm") && w.IsActive.Equals(true)) on cartItemList.CardId equals cartJoin.Id into CartItemListJoinCart
+                    join cartJoin in HuahuiDbContext.Cart.Where(w => w.UserId.Equals(userId) && w.IsActive.Equals(true)) on cartItemList.CardId equals cartJoin.Id into CartItemListJoinCart
                     from cart in CartItemListJoinCart
                     join productJoin in HuahuiDbContext.Product on cartItemList.ProductId equals productJoin.Id into CartItemListJoinProduct
                     from product in CartItemListJoinProduct.DefaultIfEmpty()

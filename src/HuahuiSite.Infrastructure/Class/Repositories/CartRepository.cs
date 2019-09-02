@@ -41,7 +41,7 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
 
         public IEnumerable<CartModel> GetConfirmCartList()
         {
-            return (from cart in HuahuiDbContext.Cart.Where(w => w.Status.Equals("Confirm"))
+            return (from cart in HuahuiDbContext.Cart
                     join customerJoin in HuahuiDbContext.Customer on cart.UserId equals customerJoin.Id into CartJoinCustomer
                     from customer in CartJoinCustomer
                     join saleJoin in HuahuiDbContext.Sale on customer.SaleId equals saleJoin.Id into CustomerJoinSale
@@ -58,12 +58,17 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
 
         public Cart GetCartActiveByUser(int userId)
         {
-            return HuahuiDbContext.Cart.FirstOrDefault(w => w.UserId.Equals(userId) && w.Status.Equals("Cart") || w.Status.Equals("Confirm") && w.IsActive.Equals(true));
+            return HuahuiDbContext.Cart.FirstOrDefault(w => w.UserId.Equals(userId) && w.IsActive.Equals(true));
         }
 
         public Cart GetCartByOrder(string orderId)
         {
             return HuahuiDbContext.Cart.First(w => w.OrderId.Equals(orderId));
+        }
+
+        public IEnumerable<Cart> GetCartByLikeOrderId(string orderId)
+        {
+            return HuahuiDbContext.Cart.Where(w => w.OrderId.Contains(orderId)).ToList();
         }
     }
 }

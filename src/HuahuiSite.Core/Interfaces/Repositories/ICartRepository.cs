@@ -12,5 +12,6 @@ namespace HuahuiSite.Core.Interfaces.Repositories
         IEnumerable<CartModel> GetConfirmCartList();
         Cart GetCartActiveByUser(int userId);
         Cart GetCartByOrder(string orderId);
+        IEnumerable<Cart> GetCartByLikeOrderId(string orderId);
     }
 }
