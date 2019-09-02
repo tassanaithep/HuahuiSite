@@ -20,6 +20,7 @@ $(function () {
 */
 OpenProductPictureModal = (e, event) => {
     event.preventDefault();
+
     // #region Get Value form Form
 
     let $form = $(e).closest(".form-product-item");

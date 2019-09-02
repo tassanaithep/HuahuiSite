@@ -135,6 +135,7 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         ProductName = product.Name,
                         PictureFileName = product.PictureFileName,
                         ProductGroupCode = product.ProductGroupCode,
+                        IsPromotion = product.IsPromotion,
                         UnitPrice = productGroup.UnitPrice,
                     }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
         }

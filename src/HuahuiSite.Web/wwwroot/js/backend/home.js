@@ -17,14 +17,14 @@ $(function () {
 // #region Render
 
 BindProductPriceByQuantity = () => {
-    $("#table-data-2").find(".tr-data-item-row").each(function (index, element) {
+    $(".tr-data-item-row").each(function (index, element) {
         let $productGroupCode = $(element).find("[name='ProductGroupCode']").val();
         let $quantity = $(element).find("[name='Quantity']").val();
         let $isPromotion = JSON.parse($(element).find("[name='IsPromotion']").val());
   
         $.ajax({
             type: "GET",
-            url: "/Home/GetProductPriceByQuantity",
+            url: "/Backend/Home/GetProductPriceByQuantity",
             data: { productGroupCode: $productGroupCode, quantity: $quantity },
             success: function (res) {
                 let productGroupModel = res;

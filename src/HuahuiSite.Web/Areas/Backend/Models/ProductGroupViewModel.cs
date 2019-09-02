@@ -21,6 +21,8 @@ namespace HuahuiSite.Web.Areas.Backend.Models
         public string ProductCategorieCode { get; set; }
         public DateTime CreatedDateTime { get; set; }
 
+        public bool ProductIsPromotion { get; set; }
+
         public IEnumerable<SelectListItem> ProductCategorieSelectList { get; set; }
 
         public IEnumerable<ProductGroup> ProductGroupList { get; set; }

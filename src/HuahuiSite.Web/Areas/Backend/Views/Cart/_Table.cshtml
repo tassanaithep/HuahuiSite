@@ -105,10 +105,10 @@
                                                                                             <img src="~/images/upload/@itemOfCartItem.PictureFileName" alt="Picture" width="80" />
                                                                                         </td>
                                                                                         <td>
-                                                                                            <input type="text" class="form-control col-sm-6" name="UnitPrice" value="@itemOfCartItem.UnitPrice" />
+                                                                                            <input type="text" class="form-control col-sm-6" name="UnitPrice" value="@itemOfCartItem.UnitPrice" disabled />
                                                                                         </td>
                                                                                         <td>
-                                                                                            <input type="number" class="form-control col-sm-6" name="Quantity" step="1" value="@itemOfCartItem.Quantity" oninput="CalculateTotalPrice(this)" onkeyup="CalculateTotalPrice(this)" />
+                                                                                            <input type="number" class="form-control col-sm-6" name="Quantity" step="1" min="1" value="@itemOfCartItem.Quantity" oninput="CalculateTotalPrice(this)" onkeyup="CalculateTotalPrice(this)" />
                                                                                         </td>
                                                                                         <td>
                                                                                             <input type="text" class="form-control col-sm-10" name="TotalPrice" value="@itemOfCartItem.TotalPrice" />

@@ -85,6 +85,10 @@ BindData = () => {
     // #endregion
 };
 
+/**
+  * @desc Bind Product Price By Quantity
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
 BindProductPriceByQuantity = () => {
     $("#table-data").find(".tr-data-item-row").each(function (index, element) {
         let $productGroupCode = $(element).find("[name='hid-cart-product-group-code']").val();
