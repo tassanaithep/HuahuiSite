@@ -38,8 +38,8 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         ProductName = product.Name,
                         ProductGroupCode = product.ProductGroupCode,
                         IsPromotion = product.IsPromotion,
-                        UnitPrice = productGroup.UnitPrice,
-                        PictureFileName = product.PictureFileName
+                        PictureFileName = product.PictureFileName,
+                        UnitPrice = productGroup.UnitPrice
                     }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
         }
 

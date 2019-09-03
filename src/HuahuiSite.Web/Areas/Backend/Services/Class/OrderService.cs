@@ -78,6 +78,20 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
             #endregion
         }
 
+        public void CancelOrder(string orderId)
+        {
+            #region Delete Order Status
+
+            Order order = new Order()
+            {
+                Id = orderId
+            };
+
+            _unitOfWork.Orders.Remove(order);
+
+            #endregion
+        }
+
         #endregion
     }
 }

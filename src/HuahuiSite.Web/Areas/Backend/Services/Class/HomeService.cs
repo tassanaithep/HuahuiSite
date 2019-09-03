@@ -53,16 +53,17 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         {
             #region Bind Order List and Cart List to Model
 
-            #region Order
+            #region Order Complete
 
-            homeViewModel.OrderList = _unitOfWork.Orders.GetOrderList();
+            homeViewModel.OrderListForComplete = _unitOfWork.Orders.GetOrderList();
+            homeViewModel.OrderListForNotComplete = _unitOfWork.Orders.GetOrderList();
             homeViewModel.OrderItemList = _unitOfWork.OrderItemLists.GetOrderItemList();
 
             #endregion
 
             #region Cart
 
-            homeViewModel.CartList = _unitOfWork.Carts.GetConfirmCartList();
+            homeViewModel.CartList = _unitOfWork.Carts.GetCartListData();
             homeViewModel.CartItemList = _unitOfWork.CartItemLists.GetCartItemListOfConfirmCart();
 
             #endregion
@@ -71,8 +72,21 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #region Bind StartDate and EndDate of Current Month
 
-            homeViewModel.StartDate = DateTime.Today.AddDays(-(DateTime.Today.Day - 1)).ToString("MM/dd/yyyy");
-            homeViewModel.EndDate = DateTime.Today.AddMonths(+1).AddDays(-(DateTime.Today.Day - 1)).AddDays(-1).ToString("MM/dd/yyyy");
+            #region Complete Order
+
+            homeViewModel.SearchModelForCompleteOrder = new SearchModel();
+            homeViewModel.SearchModelForCompleteOrder.StartDate = DateTime.Today.AddDays(-(DateTime.Today.Day - 1)).ToString("MM/dd/yyyy");
+            homeViewModel.SearchModelForCompleteOrder.EndDate = DateTime.Today.AddMonths(+1).AddDays(-(DateTime.Today.Day - 1)).AddDays(-1).ToString("MM/dd/yyyy");
+
+            #endregion
+
+            #region Not Complete Order
+
+            homeViewModel.SearchModelForNotCompleteOrder = new SearchModel();
+            homeViewModel.SearchModelForNotCompleteOrder.StartDate = DateTime.Today.AddDays(-(DateTime.Today.Day - 1)).ToString("MM/dd/yyyy");
+            homeViewModel.SearchModelForNotCompleteOrder.EndDate = DateTime.Today.AddMonths(+1).AddDays(-(DateTime.Today.Day - 1)).AddDays(-1).ToString("MM/dd/yyyy");
+
+            #endregion
 
             #endregion
         }
@@ -93,13 +107,44 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
         public void Search(ref HomeViewModel homeViewModel)
         {
-            homeViewModel.OrderList = _unitOfWork.Orders.GetOrderListOfSearch(homeViewModel.StartDate, homeViewModel.EndDate, homeViewModel.CustomerName, homeViewModel.SaleName);
+            #region Search Complete Order
 
-            if (homeViewModel.OrderList.Count() > 0)
+            if (homeViewModel.SearchModelForCompleteOrder != null)
             {
-                homeViewModel.OrderItemList = _unitOfWork.OrderItemLists.GetOrderItemList();
-                homeViewModel.CompleteOrderItemList = _unitOfWork.OrderItemLists.GetCompleteOrderItemList();
+                homeViewModel.OrderListForComplete = _unitOfWork.Orders.GetOrderListOfSearch(homeViewModel.SearchModelForCompleteOrder.StartDate, homeViewModel.SearchModelForCompleteOrder.EndDate, homeViewModel.SearchModelForCompleteOrder.CustomerName, homeViewModel.SearchModelForCompleteOrder.SaleName);
             }
+            else
+            {
+                homeViewModel.SearchModelForCompleteOrder = new SearchModel();
+                homeViewModel.SearchModelForCompleteOrder.StartDate = DateTime.Today.AddDays(-(DateTime.Today.Day - 1)).ToString("MM/dd/yyyy");
+                homeViewModel.SearchModelForCompleteOrder.EndDate = DateTime.Today.AddMonths(+1).AddDays(-(DateTime.Today.Day - 1)).AddDays(-1).ToString("MM/dd/yyyy");
+
+                homeViewModel.OrderListForComplete = _unitOfWork.Orders.GetOrderList();
+            }
+
+            #endregion
+
+            #region Search Not Complete Order
+
+            if (homeViewModel.SearchModelForNotCompleteOrder != null)
+            {
+                homeViewModel.CartList = _unitOfWork.Carts.GetCartListOfSearch(homeViewModel.SearchModelForNotCompleteOrder.StartDate, homeViewModel.SearchModelForNotCompleteOrder.EndDate, homeViewModel.SearchModelForNotCompleteOrder.CustomerName, homeViewModel.SearchModelForNotCompleteOrder.SaleName);
+                homeViewModel.OrderListForNotComplete = _unitOfWork.Orders.GetOrderListOfSearch(homeViewModel.SearchModelForNotCompleteOrder.StartDate, homeViewModel.SearchModelForNotCompleteOrder.EndDate, homeViewModel.SearchModelForNotCompleteOrder.CustomerName, homeViewModel.SearchModelForNotCompleteOrder.SaleName);
+            }
+            else
+            {
+                homeViewModel.SearchModelForNotCompleteOrder = new SearchModel();
+                homeViewModel.SearchModelForNotCompleteOrder.StartDate = DateTime.Today.AddDays(-(DateTime.Today.Day - 1)).ToString("MM/dd/yyyy");
+                homeViewModel.SearchModelForNotCompleteOrder.EndDate = DateTime.Today.AddMonths(+1).AddDays(-(DateTime.Today.Day - 1)).AddDays(-1).ToString("MM/dd/yyyy");
+
+                homeViewModel.CartList = _unitOfWork.Carts.GetCartListData();
+                homeViewModel.OrderListForNotComplete = _unitOfWork.Orders.GetOrderList();
+            }
+
+            #endregion
+
+            homeViewModel.OrderItemList = _unitOfWork.OrderItemLists.GetOrderItemList();
+            homeViewModel.CartItemList = _unitOfWork.CartItemLists.GetCartItemList();
         }
 
         public void GetProductPriceByQuantity(ref ProductGroupViewModel productGroup, string productGroupCode, int quantity)
