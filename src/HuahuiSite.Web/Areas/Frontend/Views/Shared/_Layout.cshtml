@@ -164,11 +164,9 @@
                                         {
 
                                             <li class="menu_item_children">
-                                                <a asp-controller="ShopList" asp-action="Index" asp-route-param="@itemOfProductCategorie.Code"> 
-                                                    @*<img src="~/lib/themeforest-venezo-ecommerce-bootstrap-4-template/assets/img/icon/menu2.png" alt="">*@
+                                                <a asp-area="Frontend" asp-controller="ShopList" asp-action="Index" asp-route-param="@itemOfProductCategorie.Code"> 
                                                     <span class="menu-item-categorie" onclick="SelectCategorieMenu(this)">
                                                         @itemOfProductCategorie.Name        |
-                                                        @*<i class="fa fa-angle-down"></i>*@
                                                     </span>
                                                 </a>
                                             </li>

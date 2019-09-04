@@ -42,7 +42,7 @@
                             <div class="form-group row">
                                 <div class="col-6">
                                     <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">ค้นหา</button>
-                                    <button type="reset" class="btn btn-inverse waves-effect waves-light">ยกเลิก</button>
+                                    @*<button type="reset" class="btn btn-inverse waves-effect waves-light">ยกเลิก</button>*@
                                 </div>
                             </div>
                         </form>
@@ -72,7 +72,7 @@
 
                             <tr>
                                 <td>@itemOfOrder.Id</td>
-                                <td>@itemOfOrder.CreatedDateTime.Date</td>
+                                <td>@itemOfOrder.CreatedDateTime.ToShortDateString()</td>
                                 <td>@itemOfOrder.CustomerName</td>
                                 <td>@itemOfOrder.SaleName</td>
                                 <td>@(itemOfOrder.Status.Equals("Complete") ? "ปิดการขาย" : string.Empty)</td>
@@ -242,7 +242,7 @@
                             <div class="form-group row">
                                 <div class="col-6">
                                     <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">ค้นหา</button>
-                                    <button type="reset" class="btn btn-inverse waves-effect waves-light">ยกเลิก</button>
+                                    @*<button type="reset" class="btn btn-inverse waves-effect waves-light">ยกเลิก</button>*@
                                 </div>
                             </div>
                         </form>
@@ -271,7 +271,7 @@
 
                             <tr class="tr-data-row">
                                 <td>@itemOfCart.OrderId</td>
-                                <td>@itemOfCart.CreatedDateTime</td>
+                                <td>@itemOfCart.CreatedDateTime.ToShortDateString()</td>
                                 <td>@itemOfCart.CustomerName</td>
                                 <td>@itemOfCart.SaleName</td>
                                 <td>@(itemOfCart.Status.Equals("Cart") ? "รอยืนยันการสั่งซื้อ" : itemOfCart.Status.Equals("Confirm") ? "ยืนยันการสั่งซื้อแล้ว" : string.Empty)</td>

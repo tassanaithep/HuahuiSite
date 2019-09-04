@@ -43,11 +43,14 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         // Updated: 07/07/2019
         public IActionResult Index()
         {
-            // Check Login Status
-            //if (!_loginService.CheckLoginStatus())
-            //{
-            //    return RedirectToAction("Index", "Login");
-            //}
+            #region Check Login
+
+            if (!_loginService.CheckLoginStatus())
+            {
+                return Redirect("/Backend/Login/Index");
+            }
+
+            #endregion
 
             ProductViewModel productViewModel = new ProductViewModel();
 

@@ -47,7 +47,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
             if (!_loginService.CheckLoginStatus())
             {
-                return RedirectToAction("Index", "Login");
+                return Redirect("/Backend/Login/Index");
             }
 
             #endregion
