@@ -27,6 +27,8 @@ namespace HuahuiSite.Web.Areas.Frontend.Models
 
         public int ProductId { get; set; }
         public decimal  ProductUnitPrice { get; set; }
+        public bool ProductIsPromotion { get; set; }
+        public decimal ProductPromotionPrice { get; set; }
 
         #endregion
 

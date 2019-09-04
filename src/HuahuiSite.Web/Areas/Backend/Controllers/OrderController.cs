@@ -87,6 +87,26 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
             return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
         }
 
+        [HttpGet]
+        public JsonResult Cancel(string orderId)
+        {
+            bool isSuccess;
+            string exceptionMessage = string.Empty;
+
+            try
+            {
+                _orderService.CancelOrder(orderId);
+                isSuccess = true;
+            }
+            catch (Exception exception)
+            {
+                exceptionMessage = exception.Message;
+                isSuccess = false;
+            }
+
+            return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
+        }
+
         /// <summary>
         /// Update Table.
         /// </summary>

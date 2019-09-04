@@ -95,5 +95,14 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         #endregion
 
         #endregion
+
+        #region Actions
+
+        public void GetProductPriceByQuantity(ref ProductGroupViewModel productGroup, string productGroupCode, int quantity)
+        {
+            productGroup = Mapper.Map<ProductGroup, ProductGroupViewModel>(_unitOfWork.ProductGroups.GetProductGroupByCodeAndQuantity(productGroupCode, quantity));
+        }
+
+        #endregion
     }
 }

@@ -53,38 +53,20 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             #region Save Cart and Order
 
             var cartOfUser = _unitOfWork.Carts.GetCartActiveByUser(loginViewModelSession.RoleId);
-            var orderOfUser = _unitOfWork.Orders.GetOrderActiveByUser(loginViewModelSession.RoleId);
 
             Cart cart = new Cart();
             Order order = new Order();
 
             if (cartOfUser == null)
             {
-                #region Save Order
-
                 // Generate Order Id
                 string orderId = GenerateOrderId();
-
-                #region Create Object to Save
-
-                order.Id = orderId;
-                order.UserRole = loginViewModelSession.RoleName;
-                order.UserId = loginViewModelSession.RoleId;
-                order.Status = "Cart";
-                order.IsActive = true;
-                order.CreatedDateTime = DateTime.Now;
-
-                #endregion
-
-                _unitOfWork.Orders.Add(order);
-
-                #endregion
 
                 #region Save Cart
 
                 #region Create Object to Save
 
-                cart.OrderId = order.Id;
+                cart.OrderId = orderId;
                 cart.UserRole = loginViewModelSession.RoleName;
                 cart.UserId = loginViewModelSession.RoleId;
                 cart.Status = "Cart";
@@ -103,16 +85,12 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             #region Save Cart Item List
 
             CartItemListModel cartItemOfProduct = null;
-            OrderItemListModel orderItemOfProduct = null;
 
             // If Already Cart
             if (cartOfUser != null)
             {
                 // Get Cart Item List of Cart
                 cartItemOfProduct = _unitOfWork.CartItemLists.GetCartItemListByCardAndProduct(cartOfUser.Id, cartViewModel.ProductId);
-
-                // Get Order Item List of Order
-                orderItemOfProduct = _unitOfWork.OrderItemLists.GetOrderItemListByCardAndProduct(orderOfUser.Id, cartViewModel.ProductId);
             }
 
             #region Save Cart Item List and Order Item List
@@ -128,32 +106,13 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                     CardId = cartOfUser == null ? cart.Id : cartOfUser.Id,
                     ProductId = cartViewModel.ProductId,
                     Quantity = cartViewModel.QuantityOfItem,
-                    TotalPrice = (cartViewModel.ProductUnitPrice * cartViewModel.QuantityOfItem),
+                    TotalPrice = (!cartViewModel.ProductIsPromotion) ? (cartViewModel.ProductUnitPrice * cartViewModel.QuantityOfItem) : (cartViewModel.ProductPromotionPrice * cartViewModel.QuantityOfItem),
                     CreatedDateTime = DateTime.Now
                 };
 
                 #endregion
 
                 _unitOfWork.CartItemLists.Add(cartItemList);
-
-                #endregion
-
-                #region Save Order Item List 
-
-                #region Create Object to Save
-
-                OrderItemList orderItemList = new OrderItemList()
-                {
-                    OrderId = cartOfUser == null ? order.Id : orderOfUser.Id,
-                    ProductId = cartViewModel.ProductId,
-                    Quantity = cartViewModel.QuantityOfItem,
-                    TotalPrice = (cartViewModel.ProductUnitPrice * cartViewModel.QuantityOfItem),
-                    CreatedDateTime = DateTime.Now
-                };
-
-                #endregion
-
-                _unitOfWork.OrderItemLists.Add(orderItemList);
 
                 #endregion
             }
@@ -172,27 +131,6 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                 {
                     Id = cartItemOfProduct.Id,
                     CardId = cartOfUser.Id,
-                    ProductId = cartViewModel.ProductId,
-                    Quantity = cartViewModel.QuantityOfItem,
-                    TotalPrice = (cartViewModel.ProductUnitPrice * cartViewModel.QuantityOfItem),
-                    CreatedDateTime = cartItemOfProduct.CreatedDateTime,
-                    UpdatedDateTime = DateTime.Now
-                };
-
-                #endregion
-
-                _unitOfWork.CartItemLists.Update(cartItemList);
-
-                #endregion
-
-                #region Update Order Item List
-
-                #region Create Object to Update
-
-                OrderItemList orderItemList = new OrderItemList()
-                {
-                    Id = cartItemOfProduct.Id,
-                    OrderId = orderItemOfProduct.OrderId,
                     ProductId = cartViewModel.ProductId,
                     Quantity = cartViewModel.QuantityOfItem,
                     TotalPrice = (cartViewModel.ProductUnitPrice * cartViewModel.QuantityOfItem),
@@ -299,14 +237,6 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
             #endregion
 
-            #region Delete Old Order Item List
-
-            var orderOfUser = _unitOfWork.Orders.GetOrderActiveByUser(loginViewModelSession.RoleId);
-            var orderItemListToRemove = _unitOfWork.OrderItemLists.GetOrderItemListByOrderId(orderOfUser.Id);
-            _unitOfWork.OrderItemLists.RemoveRange(orderItemListToRemove);
-
-            #endregion
-
             #region Update Cart Item List
 
             if (cartViewModel.CartItemModelList.Count() > 0)
@@ -315,31 +245,6 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                 cartViewModel.CartItemModelList.ToList().ForEach(i => i.UpdatedDateTime = DateTime.Now);
 
                 _unitOfWork.CartItemLists.AddRange(cartViewModel.CartItemModelList);
-            }
-
-            #endregion
-
-            #region Update Order Item List
-
-            if (cartViewModel.CartItemModelList.Count() > 0)
-            {
-                List<OrderItemList> orderItemList = new List<OrderItemList>();
-
-                cartViewModel.CartItemModelList.ToList().ForEach(i => 
-                {
-                    orderItemList.Add(new OrderItemList
-                    {
-                        Id = 0,
-                        OrderId = orderOfUser.Id,
-                        ProductId = i.ProductId,
-                        Quantity = i.Quantity,
-                        TotalPrice = i.TotalPrice,
-                        CreatedDateTime = i.CreatedDateTime,
-                        UpdatedDateTime = DateTime.Now
-                    });
-                });
-
-                _unitOfWork.OrderItemLists.AddRange(orderItemList);
             }
 
             #endregion
@@ -362,21 +267,6 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             cart.Status = "Confirm";
 
             _unitOfWork.Carts.Update(cart);
-
-            #endregion
-
-            #region Update Order Status
-
-            var order = _unitOfWork.Orders.GetOrderByOrderId(cart.OrderId);
-
-            if (loginViewModelSession.RoleName.Equals("Sale"))
-            {
-                order.CustomerId = customerId;
-            }
-
-            order.Status = "Confirm";
-
-            _unitOfWork.Orders.Update(order);
 
             #endregion
         }
@@ -404,15 +294,28 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             orderId += "OR";
             orderId += DateTime.Now.ToString("yyyyMMdd");
 
+            // Get Cart like Order Id
+            var cartByOrderId = _unitOfWork.Carts.GetCartByLikeOrderId(orderId);
+
+            // Get Order like Order Id
             var orderByOrderId = _unitOfWork.Orders.GetOrderByLikeOrderId(orderId);
 
-            if (orderByOrderId.Count() == 0)
+            if (cartByOrderId.Count() > 0 && orderByOrderId.Count() > 0)
             {
-                orderId += "001";
-            }
-            else
-            {
-                string lastOrderId = orderByOrderId.OrderByDescending(o => o.Id).First().Id.ToString();
+                List<string> orderIdList = new List<string>();
+
+                cartByOrderId.ToList().ForEach(i =>
+                {
+                    orderIdList.Add(i.OrderId);
+                });
+
+                orderByOrderId.ToList().ForEach(i =>
+                {
+                    orderIdList.Add(i.Id);
+                });
+
+                string lastOrderId = orderIdList.OrderByDescending(o => o).First();
+
                 int lastOrderIdNumber = Convert.ToInt16(lastOrderId.Substring(lastOrderId.Length - 3));
 
                 if (lastOrderIdNumber.ToString().Length == 1)
@@ -426,6 +329,52 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                 else if (lastOrderIdNumber.ToString().Length == 3)
                 {
                     orderId += (lastOrderIdNumber + 1).ToString();
+                }
+            }
+            else
+            {
+                if (cartByOrderId.Count() == 0)
+                {
+                    if (orderByOrderId.Count() == 0)
+                    {
+                        orderId += "001";
+                    }
+                    else
+                    {
+                        string lastOrderId = orderByOrderId.OrderByDescending(o => o.Id).First().Id.ToString();
+                        int lastOrderIdNumber = Convert.ToInt16(lastOrderId.Substring(lastOrderId.Length - 3));
+
+                        if (lastOrderIdNumber.ToString().Length == 1)
+                        {
+                            orderId += "00" + (lastOrderIdNumber + 1).ToString();
+                        }
+                        else if (lastOrderIdNumber.ToString().Length == 2)
+                        {
+                            orderId += "0" + (lastOrderIdNumber + 1).ToString();
+                        }
+                        else if (lastOrderIdNumber.ToString().Length == 3)
+                        {
+                            orderId += (lastOrderIdNumber + 1).ToString();
+                        }
+                    }
+                }
+                else
+                {
+                    string lastOrderId = cartByOrderId.OrderByDescending(o => o.OrderId).First().OrderId.ToString();
+                    int lastOrderIdNumber = Convert.ToInt16(lastOrderId.Substring(lastOrderId.Length - 3));
+
+                    if (lastOrderIdNumber.ToString().Length == 1)
+                    {
+                        orderId += "00" + (lastOrderIdNumber + 1).ToString();
+                    }
+                    else if (lastOrderIdNumber.ToString().Length == 2)
+                    {
+                        orderId += "0" + (lastOrderIdNumber + 1).ToString();
+                    }
+                    else if (lastOrderIdNumber.ToString().Length == 3)
+                    {
+                        orderId += (lastOrderIdNumber + 1).ToString();
+                    }
                 }
             }
 

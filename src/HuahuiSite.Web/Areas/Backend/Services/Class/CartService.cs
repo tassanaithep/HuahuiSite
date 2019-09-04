@@ -111,39 +111,51 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #endregion
 
-            #region Update Cart Status
-
-            cart.Status = "Approve";
-
-            _unitOfWork.Carts.Update(cart);
-
-            #endregion
-
-
-            //============ Tassanai ===============
-            Order order = new Order();
-            string orderId = cart.OrderId;
+            #region Save Order
 
             #region Create Object to Save
 
-            order.Id = orderId;
-            order.UserRole = cart.UserRole;
-            order.UserId = cart.UserId;
-            order.Status = "Approve";
-            order.IsActive = true;
-            order.CreatedDateTime = DateTime.Now;
+            Order order = new Order()
+            {
+                Id = cart.OrderId,
+                UserRole = cart.UserRole,
+                UserId = cart.UserId,
+                CustomerId = cart.CustomerId,
+                Status = "Approve",
+                IsActive = true,
+                CreatedDateTime = DateTime.Now
+            };
 
             #endregion
 
             _unitOfWork.Orders.Add(order);
 
-            #region Update Order Status
+            #endregion
 
-            //var order = _unitOfWork.Orders.GetOrderByOrderId(cart.OrderId);
+            #region Save Order Item List
 
-            //order.Status = "Approve";
+            List<OrderItemList> orderItemList = new List<OrderItemList>();
 
-            //_unitOfWork.Orders.Update(order);
+            cartItemList.ToList().ForEach(i =>
+            {
+                orderItemList.Add(new OrderItemList
+                {
+                    OrderId = cart.OrderId,
+                    ProductId = i.ProductId,
+                    Quantity = i.Quantity,
+                    TotalPrice = i.TotalPrice,
+                    CreatedDateTime = DateTime.Now
+                });
+            });
+
+            _unitOfWork.OrderItemLists.AddRange(orderItemList);
+
+            #endregion
+
+            #region Remove Cart
+
+            _unitOfWork.Carts.Remove(cart);
+            _unitOfWork.CartItemLists.RemoveRange(cartItemList);
 
             #endregion
         }

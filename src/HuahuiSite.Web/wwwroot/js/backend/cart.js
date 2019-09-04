@@ -8,6 +8,7 @@ $(function () {
     //RenderImage();
     //BindData();
     $("#table-data").DataTable();
+    BindProductPriceByQuantity();
 });
 
 // #endregion
@@ -84,6 +85,40 @@ BindData = () => {
     // #endregion
 };
 
+/**
+  * @desc Bind Product Price By Quantity
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+BindProductPriceByQuantity = () => {
+    $("#table-data").find(".tr-data-item-row").each(function (index, element) {
+        let $productGroupCode = $(element).find("[name='hid-cart-product-group-code']").val();
+        let $quantity = $(element).find("[name='Quantity']").val();
+        let $isPromotion = JSON.parse($(element).find("[name='hid-cart-is-promotion']").val());
+
+        $.ajax({
+            type: "GET",
+            url: "/Home/GetProductPriceByQuantity",
+            data: { productGroupCode: $productGroupCode, quantity: $quantity },
+            success: function (res) {
+                let productGroupModel = res;
+
+                if (productGroupModel !== null) {
+                    let unitPrice = productGroupModel.unitPrice;
+                    let promotionPrice = productGroupModel.promotionPrice;
+
+                    if (!$isPromotion) {
+                        $(element).find("[name='UnitPrice']").val(unitPrice);
+                    }
+                    else {
+                        $(element).find("[name='UnitPrice']").val(promotionPrice);
+                    }
+                }
+            },
+            error: function () { }
+        });
+    });
+};
+
 // #endregion
 
 // #region Functions
@@ -117,16 +152,63 @@ RemoveCartItem = (e) => {
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
 CalculateTotalPrice = (e) => {
-    let $trOfCartItem = $(e).closest("tr");
+    let $trOfCartItem = $(e).closest(".tr-data-item-row");
+
+    let $productGroupCode = $trOfCartItem.find("[name='hid-cart-product-group-code']").val();
+    let $quantity = $trOfCartItem.find("[name='Quantity']").val();
+    let $isPromotion = JSON.parse($trOfCartItem.find("[name='hid-cart-is-promotion']").val());
+
+    $.ajax({
+        type: "GET",
+        async: false,
+        url: "/Backend/Home/GetProductPriceByQuantity",
+        data: { productGroupCode: $productGroupCode, quantity: $quantity },
+        success: function (res) {
+            let productGroupModel = res;
+
+            let unitPrice = productGroupModel.unitPrice;
+            let promotionPrice = productGroupModel.promotionPrice;
+
+            if (!$isPromotion)
+            {
+                $trOfCartItem.find("[name='UnitPrice']").val(unitPrice);
+            }
+            else
+            {
+                $trOfCartItem.find("[name='UnitPrice']").val(promotionPrice);
+            }
+        },
+        error: function () { }
+    });
 
     let $totalPriceElement = $trOfCartItem.find("[name='TotalPrice']");
 
-    let $productUnitPrice = parseInt($trOfCartItem.find("[name='hid-cart-item-unit-price']").val());
+    let $productUnitPrice = parseInt($trOfCartItem.find("[name='UnitPrice']").val());
     let $productQuantity = parseInt($trOfCartItem.find("[name='Quantity']").val());
 
     let $totalPrice = $productUnitPrice * $productQuantity;
 
     $totalPriceElement.val($totalPrice);
+
+    UpdateTotalOfSummary(e);
+};
+
+/**
+  * @desc Update Total Of Summary
+  * @param {Object} e - Element of Quantity Input
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+UpdateTotalOfSummary = (e) => {
+    let $totalQuantity = 0;
+    let $totalPrice = 0;
+
+    $(e).closest(".table-data-item").find(".tr-data-item-row").each(function (index, element) {
+        $totalQuantity += parseInt($(element).find("[name='Quantity']").val());
+        $totalPrice += parseInt($(element).find("[name='TotalPrice']").val());
+    });
+
+    $(e).closest(".table-data-item").find("[name='summary-quantity']").val($totalQuantity);
+    $(e).closest(".table-data-item").find("[name='summary-total-price']").val($totalPrice);
 };
 
 /**
@@ -265,7 +347,7 @@ DeleteCartItem = (e) => {
 UpdateCart = (e) => {
     let cartItemList = [];
 
-    $(e).closest(".form-row-table").find(".tr-data-row").each(function (index, element) {
+    $(e).closest(".form-row-table").find(".tr-data-item-row").each(function (index, element) {
         // #region Get Value from Data Row
 
         let $id = parseInt($(element).find("[name='hid-cart-item-id']").val());

@@ -66,17 +66,6 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
         public void CompleteOrder(string orderId)
         {
-            #region Update Cart Status
-
-            var cart = _unitOfWork.Carts.GetCartByOrder(orderId);
-
-            cart.Status = "Complete";
-            cart.IsActive = false;
-
-            _unitOfWork.Carts.Update(cart);
-
-            #endregion
-
             #region Update Order Status
 
             var order = _unitOfWork.Orders.GetOrderByOrderId(orderId);
@@ -85,6 +74,20 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
             order.IsActive = false;
 
             _unitOfWork.Orders.Update(order);
+
+            #endregion
+        }
+
+        public void CancelOrder(string orderId)
+        {
+            #region Delete Order Status
+
+            Order order = new Order()
+            {
+                Id = orderId
+            };
+
+            _unitOfWork.Orders.Remove(order);
 
             #endregion
         }

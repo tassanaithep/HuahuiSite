@@ -8,6 +8,7 @@ $(function () {
     //RenderImage();
     //BindData();
     $("#table-data").DataTable();
+    BindProductPriceByQuantity();
 });
 
 // #endregion
@@ -82,6 +83,36 @@ BindData = () => {
     });
 
     // #endregion
+};
+
+BindProductPriceByQuantity = () => {
+    $("#table-data").find(".tr-data-item-row").each(function (index, element) {
+        let $productGroupCode = $(element).find("[name='hid-order-product-group-code']").val();
+        let $quantity = $(element).find("[name='Quantity']").val();
+        let $isPromotion = JSON.parse($(element).find("[name='hid-order-is-promotion']").val());
+
+        $.ajax({
+            type: "GET",
+            url: "/Home/GetProductPriceByQuantity",
+            data: { productGroupCode: $productGroupCode, quantity: $quantity },
+            success: function (res) {
+                let productGroupModel = res;
+
+                if (productGroupModel !== null) {
+                    let unitPrice = productGroupModel.unitPrice;
+                    let promotionPrice = productGroupModel.promotionPrice;
+
+                    if (!$isPromotion) {
+                        $(element).find("[name='UnitPrice']").val(unitPrice);
+                    }
+                    else {
+                        $(element).find("[name='UnitPrice']").val(promotionPrice);
+                    }
+                }
+            },
+            error: function () { }
+        });
+    });
 };
 
 // #endregion
@@ -301,8 +332,8 @@ UpdateCart = (e) => {
 };
 
 /**
-  * @desc Approve Cart
-  * @param {Object} e - Element of Submit Button
+  * @desc Complete Order
+  * @param {Object} e - Element of Complete Order Button
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
 CompleteOrder = (e) => {
@@ -328,6 +359,42 @@ CompleteOrder = (e) => {
                         swal("Complete Success", "", "success");
                     } else {
                         swal("Complete Failed", "", "error");
+                    }
+                },
+                error: function () { }
+            });
+        }
+    });
+};
+
+/**
+  * @desc Cancel Order
+  * @param {Object} e - Element of Cancel Order Button
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+CancelOrder = (e) => {
+    let $orderId = $(e).closest(".tr-data-row").find(".form-row-table").find("[name='hid-order-id']").val();
+
+    swal({
+        title: 'Are you sure ?',
+        text: "คุณต้องการยกเลิกการสั่งซื้อ ใช่หรือไม่ ?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Confirm it!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                type: "GET",
+                url: "/Backend/Order/Cancel",
+                data: { orderId: $orderId },
+                success: function (res) {
+                    if (res.isSuccess) {
+                        UpdatePage();
+                        swal("Cancel Success", "", "success");
+                    } else {
+                        swal("Cancel Failed", "", "error");
                     }
                 },
                 error: function () { }

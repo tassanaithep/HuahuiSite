@@ -13,5 +13,7 @@ namespace HuahuiSite.Core.Interfaces.Repositories
         IEnumerable<CartItemListModel> GetCartItemListNotApproveByUser(int userId);
         IEnumerable<CartItemList> GetCartItemListByCard(int cardId);
         CartItemListModel GetCartItemListByCardAndProduct(int cardId, int productId);
+        IEnumerable<CartItemListModel> GetCartItemListOfConfirmCart();
+        IEnumerable<CartItemListModel> GetCompleteOrderItemListData();
     }
 }

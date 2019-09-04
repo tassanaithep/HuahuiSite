@@ -5,7 +5,7 @@
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
 $(function () {
- 
+    BindProductPriceByQuantity();
 });
 
 // #endregion
@@ -36,8 +36,11 @@ RemoveCartItem = (e) => {
                 data: { cartItemId: $cartItemId },
                 success: function (res) {
                     if (res.isSuccess) {
-                        Swal('Deleted!', 'ลบข้อมูลสำเร็จ', 'success');
-                        window.location = "/Cart/Index";
+                        Swal("ทำรายการเรียบร้อย !", "ลบข้อมูลสำเร็จ", "success").then((result) => {
+                            if (result.value) {
+                                window.location = "/Cart/Index";
+                            }
+                        });
                     } else {
                         swal("Deleted Failed", "", "error");
                     }
@@ -51,37 +54,48 @@ RemoveCartItem = (e) => {
 /**
   * @desc Calculate Total Price of Unit Product
   * @param {Object} e - Element of Quantity Input
-  * @param {Event} event - Event of Quantity Input
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
 CalculateTotalPrice = (e) => {
-    let inputQuantity = parseInt($(e).val());
-    let maxQuantityOfProduct = parseInt($(e).prop("max"));
+    let $trOfCartItem = $(e).closest(".tr-data-row");
 
-    // #region Check Input Quantity more than Max Quantity
+    let $productGroupCode = $trOfCartItem.find("[name='hid-product-group-code']").val();
+    let $quantity = $trOfCartItem.find("[name='ProductQuantity']").val();
+    let $isPromotion = JSON.parse($trOfCartItem.find("[name='hid-product-is-promotion']").val());
 
-    if (inputQuantity <= maxQuantityOfProduct) {
-        let $trOfCartItem = $(e).closest("tr");
+    $.ajax({
+        type: "GET",
+        async: false,
+        url: "/Backend/Home/GetProductPriceByQuantity",
+        data: { productGroupCode: $productGroupCode, quantity: $quantity },
+        success: function (res) {
+            let productGroupModel = res;
 
-        let $totalPriceElement = $trOfCartItem.find(".product_total");
+            let unitPrice = productGroupModel.unitPrice;
+            let promotionPrice = productGroupModel.promotionPrice;
 
-        let $productUnitPrice = parseInt($trOfCartItem.find(".product-price").text());
-        let $productQuantity = parseInt($trOfCartItem.find("[name='ProductQuantity']").val());
+            if (!$isPromotion) {
+                $trOfCartItem.find(".product-price").text(unitPrice);
+            }
+            else {
+                $trOfCartItem.find(".product-price").text(promotionPrice);
+            }
+        },
+        error: function () { }
+    });
 
-        let $totalPrice = $productUnitPrice * $productQuantity;
+    let $totalPriceElement = $trOfCartItem.find(".product_total");
 
-        $totalPriceElement.text($totalPrice);
+    let $productUnitPrice = parseInt($trOfCartItem.find(".product-price").text());
+    let $productQuantity = parseInt($trOfCartItem.find("[name='ProductQuantity']").val());
 
-        UpdateCartItemList($trOfCartItem, $productQuantity, $totalPrice);
+    let $totalPrice = $productUnitPrice * $productQuantity;
 
-        UpdateTotalOfSummary();
-    } else {
-        swal("จำนวนสินค้าเกิน", "", "error");
-        // If Input Quantity more than Max Quantity to Remove last Character
-        $(e).val(inputQuantity.toString().substr(0, inputQuantity.toString().length - 1));
-    }
+    $totalPriceElement.text($totalPrice);
 
-    // #endregion
+    UpdateCartItemList($trOfCartItem, $productQuantity, $totalPrice);
+
+    UpdateTotalOfSummary();
 };
 
 /**
@@ -123,6 +137,36 @@ UpdateCartItemList = (trOfProduct, productQuantity, totalPrice) => {
 // #endregion
 
 // #region Render
+
+BindProductPriceByQuantity = () => {
+    $("#table-data").find(".tr-data-row").each(function (index, element) {
+        let $productGroupCode = $(element).find("[name='hid-product-group-code']").val();
+        let $quantity = $(element).find("[name='ProductQuantity']").val();
+        let $isPromotion = JSON.parse($(element).find("[name='hid-product-is-promotion']").val());
+       
+        $.ajax({
+            type: "GET",
+            url: "/Home/GetProductPriceByQuantity",
+            data: { productGroupCode: $productGroupCode, quantity: $quantity },
+            success: function (res) {
+                let productGroupModel = res;
+
+                let unitPrice = productGroupModel.unitPrice;
+                let promotionPrice = productGroupModel.promotionPrice;
+
+                if (!$isPromotion)
+                {
+                    $(element).find(".product-price").text(unitPrice);
+                }
+                else
+                {
+                    $(element).find(".product-price").text(promotionPrice);
+                }
+            },
+            error: function () { }
+        });
+    });
+};
 
 // #endregion
 

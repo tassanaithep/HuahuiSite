@@ -15,9 +15,12 @@ $(function () {
 /**
   * @desc Open Picture Modal of Product
   * @param {Object} e - Element of Open Modal Button
+  * @param {Object} event - Event of Open Modal Button
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
-OpenProductPictureModal = (e) => {
+OpenProductPictureModal = (e, event) => {
+    event.preventDefault();
+
     // #region Get Value form Form
 
     let $form = $(e).closest(".form-product-item");
@@ -30,12 +33,12 @@ OpenProductPictureModal = (e) => {
     // #region Create Product Picture Modal
 
     $("body").append(`
-        <div class="modal fade" id="modal-product-picture" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+        <div class="modal fade" id="modal-product-picture" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true" data-backdrop="static">
 	        <div class="modal-dialog modal-lg" role="document">
 		        <div class="modal-content text-center">
 			        <div class="modal-header">
 				        <h4 class="modal-title" id="myModalLabel">${ $productName }</h4>
-				        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="ClearProductPictureModal()">×</button>
+				        <button type="button" class="close" style="border: 0px;" data-dismiss="modal" aria-hidden="true" onclick="ClearProductPictureModal()">×</button>
 			        </div>
 			        <div class="modal-body">
 				        <img src="/images/upload/${ $pictureFileName }" alt="" width="600">
@@ -68,8 +71,6 @@ OpenProductModal = (e) => {
     let $pictureFileName = $form.find("[name='ProductPictureFileName']").val();
     let $isPromotion = JSON.parse($form.find("[name='IsPromotion']").val());
     let $promotionPrice = $form.find("[name='PromotionPrice']").val();
-    let $minQuantity = $form.find("[name='MinQuantity']").val();
-    let $maxQuantity = $form.find("[name='MaxQuantity']").val();
 
     let $quantityOfItem = $form.find("[name='QuantityOfItem']");
 
@@ -99,7 +100,7 @@ OpenProductModal = (e) => {
     // #region Create Modal of Product
 
     $("body").append(`
-        <div class="modal fade" id="modal-product" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal fade" id="modal-product" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="ClearProductModal()">
@@ -140,7 +141,7 @@ OpenProductModal = (e) => {
                                         <div class="variants_selects">
                                             <div class="modal_add_to_cart">
                                                 <form action="#">
-                                                    <input type="number" min="${ $minQuantity}" max="${ $maxQuantity }" step="1" onkeyup="ChangeQuantityOfProduct(this, '${ $formId }')" onclick="ChangeQuantityOfProduct(this, '${ $formId }')" value="${ (quantity !== null ? quantity : 1) }" />
+                                                    <input type="number" step="1" min="1" onkeyup="ChangeQuantityOfProduct('${ $formId }', this.value)" onclick="ChangeQuantityOfProduct('${ $formId }', this.value)" value="${ (quantity !== null ? quantity : 1) }" />
                                                     <button type="button" onclick="ProductModalSubmit('${ $formId }')">add to cart</button>
                                                 </form>
                                             </div>
@@ -157,29 +158,60 @@ OpenProductModal = (e) => {
 
     // #endregion
 
+    // Bind Price of Product By Quantity of Product Group
+    ChangeProductPriceByQuantity($formId, quantity !== null ? quantity : 1);
+
     // Show Product Picture Modal
     $("#modal-product").modal("show");
 };
 
 /**
   * @desc Change Quantity of Product
-  * @param {Object} e - Element of Input Quantity
   * @param {String} formId - Id Name of Product Form
+  * @param {Number} quantity - Quantity of Product
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
-ChangeQuantityOfProduct = (e, formId) => {
-    let inputQuantity = parseInt($(e).val());
-    let maxQuantityOfProduct = parseInt($(e).prop("max"));
+ChangeQuantityOfProduct = (formId, quantity) => {
+    $("#" + formId).find("[name='QuantityOfItem']").val(quantity);
 
-    // #region Check Input Quantity more than Max Quantity
+    ChangeProductPriceByQuantity(formId, quantity);
+};
 
-    if (inputQuantity <= maxQuantityOfProduct) {
-        $("#" + formId).find("[name='QuantityOfItem']").val(quantity);
-    } else {
-        swal("จำนวนสินค้าเกิน", "", "error");
-        // If Input Quantity more than Max Quantity to Remove last Character
-        $(e).val(inputQuantity.toString().substr(0, inputQuantity.toString().length - 1));
-    }
+/**
+  * @desc Change Product Price By Quantity
+  * @param {String} formId - Id Name of Product Form
+  * @param {Number} quantity - Quantity of Product
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+ChangeProductPriceByQuantity = (formId, quantity) => {
+    let $productGroupCode = $("#" + formId).find("[name='ProductGroupCode']").val();
+    let $isPromotion = JSON.parse($("#" + formId).find("[name='IsPromotion']").val());
+
+    $.ajax({
+        type: "GET",
+        url: "/Home/GetProductPriceByQuantity",
+        data: { productGroupCode: $productGroupCode, quantity: quantity },
+        success: function (res) {
+            let productGroupModel = res;
+
+            let unitPrice = productGroupModel.unitPrice;
+            let promotionPrice = productGroupModel.promotionPrice;
+
+            $("#" + formId).find("[name='ProductUnitPrice']").val(unitPrice);
+            $("#" + formId).find("[name='ProductPromotionPrice']").val(promotionPrice);
+
+            if (!$isPromotion)
+            {
+                $("#modal-product").find(".new_price").text(unitPrice + " บาท");
+            }
+            else
+            {
+                $("#modal-product").find(".old_price").text(unitPrice + " บาท");
+                $("#modal-product").find(".new_price").text(promotionPrice + " บาท");
+            }
+        },
+        error: function () { }
+    });
 };
 
 /**

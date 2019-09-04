@@ -46,5 +46,27 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
         }
 
         #endregion
+
+        #region Actions
+
+        [HttpGet]
+        public JsonResult GetProductPriceByQuantity(string productGroupCode, int quantity)
+        {
+            ProductGroupViewModel productGroupViewModel = new ProductGroupViewModel();
+
+            try
+            {
+                _homeService.GetProductPriceByQuantity(ref productGroupViewModel, productGroupCode, quantity);
+            }
+            catch (Exception exception)
+            {
+
+                throw;
+            }
+
+            return Json(productGroupViewModel);
+        }
+
+        #endregion
     }
 }

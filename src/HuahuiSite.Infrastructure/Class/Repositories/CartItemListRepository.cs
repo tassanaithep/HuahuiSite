@@ -36,15 +36,17 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         TotalPrice = cartItemList.TotalPrice,
                         CreatedDateTime = cartItemList.CreatedDateTime,
                         ProductName = product.Name,
-                        UnitPrice = productGroup.UnitPrice,
-                        PictureFileName = product.PictureFileName
+                        ProductGroupCode = product.ProductGroupCode,
+                        IsPromotion = product.IsPromotion,
+                        PictureFileName = product.PictureFileName,
+                        UnitPrice = productGroup.UnitPrice
                     }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
         }
 
         public IEnumerable<CartItemListModel> GetCartItemListByUser(int userId)
         {
             return (from cartItemList in HuahuiDbContext.CartItemList
-                    join cartJoin in HuahuiDbContext.Cart.Where(w => w.UserId.Equals(userId) && w.Status.Equals("Cart") || w.Status.Equals("Confirm") && w.IsActive.Equals(true)) on cartItemList.CardId equals cartJoin.Id into CartItemListJoinCart
+                    join cartJoin in HuahuiDbContext.Cart.Where(w => w.UserId.Equals(userId) && w.IsActive.Equals(true)) on cartItemList.CardId equals cartJoin.Id into CartItemListJoinCart
                     from cart in CartItemListJoinCart
                     join productJoin in HuahuiDbContext.Product on cartItemList.ProductId equals productJoin.Id into CartItemListJoinProduct
                     from product in CartItemListJoinProduct.DefaultIfEmpty()
@@ -59,9 +61,12 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         TotalPrice = cartItemList.TotalPrice,
                         CreatedDateTime = cartItemList.CreatedDateTime,
                         ProductName = product.Name,
+                        ProductGroupCode = product.ProductGroupCode,
                         UnitPrice = productGroup.UnitPrice,
+                        PromotionPrice = productGroup.PromotionPrice.Value,
                         MinQuantity = productGroup.MinQuantity,
                         MaxQuantity = productGroup.MaxQuantity,
+                        IsPromotion = product.IsPromotion,
                         PictureFileName = product.PictureFileName
                     }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
         }
@@ -69,7 +74,7 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
         public IEnumerable<CartItemListModel> GetCartItemListNotApproveByUser(int userId)
         {
             return (from cartItemList in HuahuiDbContext.CartItemList
-                    join cartJoin in HuahuiDbContext.Cart.Where(w => w.UserId.Equals(userId) && w.Status.Equals("Cart") || w.Status.Equals("Confirm") && w.IsActive.Equals(true)) on cartItemList.CardId equals cartJoin.Id into CartItemListJoinCart
+                    join cartJoin in HuahuiDbContext.Cart.Where(w => w.UserId.Equals(userId) && w.IsActive.Equals(true)) on cartItemList.CardId equals cartJoin.Id into CartItemListJoinCart
                     from cart in CartItemListJoinCart
                     join productJoin in HuahuiDbContext.Product on cartItemList.ProductId equals productJoin.Id into CartItemListJoinProduct
                     from product in CartItemListJoinProduct.DefaultIfEmpty()
@@ -108,6 +113,54 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                 CreatedDateTime = s.CreatedDateTime,
                 UpdatedDateTime = s.UpdatedDateTime
             }).FirstOrDefault();
+        }
+
+        public IEnumerable<CartItemListModel> GetCartItemListOfConfirmCart()
+        {
+            return (from cartItemList in HuahuiDbContext.CartItemList
+                    join cartJoin in HuahuiDbContext.Cart.Where(w => w.Status.Equals("Confirm")) on cartItemList.CardId equals cartJoin.Id into CartItemListJoinCart
+                    from cart in CartItemListJoinCart.DefaultIfEmpty()
+                    join productJoin in HuahuiDbContext.Product on cartItemList.ProductId equals productJoin.Id into CartItemListJoinProduct
+                    from product in CartItemListJoinProduct.DefaultIfEmpty()
+                    join productGroupJoin in HuahuiDbContext.ProductGroup on product.ProductGroupCode equals productGroupJoin.Code into ProductJoinProductGroup
+                    from productGroup in ProductJoinProductGroup.DefaultIfEmpty()
+                    select new CartItemListModel
+                    {
+                        Id = cartItemList.Id,
+                        CardId = cartItemList.CardId,
+                        ProductId = cartItemList.ProductId,
+                        Quantity = cartItemList.Quantity,
+                        TotalPrice = cartItemList.TotalPrice,
+                        CreatedDateTime = cartItemList.CreatedDateTime,
+                        ProductName = product.Name,
+                        PictureFileName = product.PictureFileName,
+                        ProductGroupCode = product.ProductGroupCode,
+                        IsPromotion = product.IsPromotion,
+                        UnitPrice = productGroup.UnitPrice,
+                    }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
+        }
+
+        public IEnumerable<CartItemListModel> GetCompleteOrderItemListData()
+        {
+            return (from cartItemList in HuahuiDbContext.CartItemList
+                    join cartJoin in HuahuiDbContext.Cart.Where(w => w.Status.Equals("Approve")) on cartItemList.CardId equals cartJoin.Id into CartItemListJoinCart
+                    from cart in CartItemListJoinCart.DefaultIfEmpty()
+                    join productJoin in HuahuiDbContext.Product on cartItemList.ProductId equals productJoin.Id into CartItemListJoinProduct
+                    from product in CartItemListJoinProduct.DefaultIfEmpty()
+                    join productGroupJoin in HuahuiDbContext.ProductGroup on product.ProductGroupCode equals productGroupJoin.Code into ProductJoinProductGroup
+                    from productGroup in ProductJoinProductGroup.DefaultIfEmpty()
+                    select new CartItemListModel
+                    {
+                        Id = cartItemList.Id,
+                        OrderId = cart.OrderId,
+                        ProductId = cartItemList.ProductId,
+                        Quantity = cartItemList.Quantity,
+                        TotalPrice = cartItemList.TotalPrice,
+                        CreatedDateTime = cartItemList.CreatedDateTime,
+                        ProductName = product.Name,
+                        UnitPrice = productGroup.UnitPrice,
+                        PictureFileName = product.PictureFileName
+                    }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
         }
     }
 }

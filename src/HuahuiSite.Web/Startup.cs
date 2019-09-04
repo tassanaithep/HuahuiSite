@@ -108,7 +108,9 @@ namespace HuahuiSite.Web
                 cfg.CreateMap<Cart, Areas.Frontend.Models.CartViewModel>();
                 cfg.CreateMap<CartItemListModel, Areas.Frontend.Models.CartItemListViewModel>();
                 cfg.CreateMap<ProductModel, Areas.Frontend.Models.ProductViewModel>();
+                cfg.CreateMap<ProductGroup, Areas.Frontend.Models.ProductGroupViewModel>();
 
+                cfg.CreateMap<ProductGroup, Areas.Backend.Models.ProductGroupViewModel>();
             });
 
             #endregion

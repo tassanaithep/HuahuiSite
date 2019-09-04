@@ -46,6 +46,8 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         TotalPrice = orderItemList.TotalPrice,
                         CreatedDateTime = orderItemList.CreatedDateTime,
                         ProductName = product.Name,
+                        IsPromotion = product.IsPromotion,
+                        ProductGroupCode = product.ProductGroupCode,
                         UnitPrice = productGroup.UnitPrice,
                         PictureFileName = product.PictureFileName,
                         CustomerName = customer.Firstname + " " + customer.Lastname,
@@ -71,8 +73,10 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         TotalPrice = orderItemList.TotalPrice,
                         CreatedDateTime = orderItemList.CreatedDateTime,
                         ProductName = product.Name,
-                        UnitPrice = productGroup.UnitPrice,
-                        PictureFileName = product.PictureFileName
+                        ProductGroupCode = product.ProductGroupCode,
+                        PictureFileName = product.PictureFileName,
+                        IsPromotion = product.IsPromotion,
+                        UnitPrice = productGroup.UnitPrice
                     }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
         }
 
