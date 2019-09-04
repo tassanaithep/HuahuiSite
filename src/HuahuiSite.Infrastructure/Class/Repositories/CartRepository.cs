@@ -70,7 +70,8 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         OrderId = cart.OrderId,
                         CustomerName = customer.Firstname + " " + customer.Lastname,
                         SaleName = sale.Firstname + " " + sale.Lastname,
-                        Status = cart.Status
+                        Status = cart.Status,
+                        CreatedDateTime = cart.CreatedDateTime
                     }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
         }
 

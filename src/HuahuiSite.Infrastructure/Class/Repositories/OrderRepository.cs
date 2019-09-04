@@ -36,7 +36,8 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         Id = order.Id,
                         CustomerName = customer.Firstname + " " + customer.Lastname,
                         SaleName = sale.Firstname + " " + sale.Lastname,
-                        Status = order.Status
+                        Status = order.Status,
+                        CreatedDateTime = order.CreatedDateTime
                     }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
         }
 
