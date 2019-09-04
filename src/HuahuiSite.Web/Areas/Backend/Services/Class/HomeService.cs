@@ -339,7 +339,8 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
                 {
                     worksheet.Cells[indexOfCell, i + 1].Value = BottomRow2[i];
                 }
-
+             
+            
                 result = package.GetAsByteArray();
             }
         }
