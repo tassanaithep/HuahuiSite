@@ -2273,9 +2273,15 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   background-size: cover;
 }
 @media only screen and (max-width: 767px) {
-  .single_slider {
-    background-position: 10%;
-  }
+    .single_slider {
+        /*background-position: 50%;*/
+        background-repeat: no-repeat;
+      
+        background-position: center center;
+       /* background-size: 100%;
+        display: block;*/
+        
+    }
 }
 .single_slider .row {
   height: 490px;
