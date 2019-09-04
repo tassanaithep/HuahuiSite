@@ -119,13 +119,31 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #endregion
 
+
+            //============ Tassanai ===============
+            Order order = new Order();
+            string orderId = cart.OrderId;
+
+            #region Create Object to Save
+
+            order.Id = orderId;
+            order.UserRole = cart.UserRole;
+            order.UserId = cart.UserId;
+            order.Status = "Approve";
+            order.IsActive = true;
+            order.CreatedDateTime = DateTime.Now;
+
+            #endregion
+
+            _unitOfWork.Orders.Add(order);
+
             #region Update Order Status
 
-            var order = _unitOfWork.Orders.GetOrderByOrderId(cart.OrderId);
+            //var order = _unitOfWork.Orders.GetOrderByOrderId(cart.OrderId);
 
-            order.Status = "Approve";
+            //order.Status = "Approve";
 
-            _unitOfWork.Orders.Update(order);
+            //_unitOfWork.Orders.Update(order);
 
             #endregion
         }

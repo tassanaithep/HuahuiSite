@@ -6,6 +6,7 @@ using HuahuiSite.Web.Areas.Backend.Models;
 using HuahuiSite.Web.Areas.Backend.Services.Interface;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -185,6 +186,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
                 // add a new worksheet to the empty workbook
 
                 var worksheet = package.Workbook.Worksheets.Add("Report-Order-"+orderId); //Worksheet name
+               
                 using (var cells = worksheet.Cells[1, 1, 1, 5]) //(1,1) (1,5)
                 {
                     cells.Style.Font.Bold = true;
@@ -230,6 +232,11 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
                 for (var i = 0; i < comlumHeadrs.Count(); i++)
                 {
                     worksheet.Cells[8, i + 1].Value = comlumHeadrs[i];
+                    worksheet.Cells[8, i + 1].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells[8, i + 1].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells[8, i + 1].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells[8, i + 1].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+
                 }
 
                 int indexOfCell = 9;
@@ -244,9 +251,16 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
                     worksheet.Cells["E" + indexOfCell].Value = item.Quantity;
                     worksheet.Cells["F" + indexOfCell].Value = item.TotalPrice;
 
+
+                    worksheet.Cells["A" + indexOfCell+":F"+ indexOfCell].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells["A" + indexOfCell + ":F" + indexOfCell].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells["A" + indexOfCell + ":F" + indexOfCell].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells["A" + indexOfCell + ":F" + indexOfCell].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+
                     indexOfCell++;
                 }
-
+             
+            
                 result = package.GetAsByteArray();
             }
         }
