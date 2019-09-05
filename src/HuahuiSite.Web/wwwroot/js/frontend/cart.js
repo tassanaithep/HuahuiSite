@@ -13,45 +13,6 @@ $(function () {
 // #region Functions
 
 /**
-  * @desc Remove Cart Item from Cart
-  * @param {Object} e - Element of Remove Button
-  * @author Mod Nattasit mod.nattasit@gmail.com
-*/
-RemoveCartItem = (e) => {
-    swal({
-        title: 'Are you sure ?',
-        text: "คุณต้องการลบข้อมูล ใช่หรือไม่?",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-        if (result.value) {
-            let $cartItemId = parseInt($(e).closest(".tr-data-row").find("[name='hid-cart-item-id']").val());
-
-            $.ajax({
-                type: "GET",
-                url: "/Cart/DeleteCartItem",
-                data: { cartItemId: $cartItemId },
-                success: function (res) {
-                    if (res.isSuccess) {
-                        Swal("ทำรายการเรียบร้อย !", "ลบข้อมูลสำเร็จ", "success").then((result) => {
-                            if (result.value) {
-                                window.location = "/Cart/Index";
-                            }
-                        });
-                    } else {
-                        swal("Deleted Failed", "", "error");
-                    }
-                },
-                error: function () { }
-            });
-        }
-    });
-};
-
-/**
   * @desc Calculate Total Price of Unit Product
   * @param {Object} e - Element of Quantity Input
   * @author Mod Nattasit mod.nattasit@gmail.com
@@ -175,6 +136,46 @@ BindProductPriceByQuantity = () => {
 // #endregion
 
 // #region Actions
+
+/**
+  * @desc Remove Cart Item from Cart
+  * @param {Object} e - Element of Remove Button
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+RemoveCartItem = (e) => {
+    swal({
+        title: 'Are you sure ?',
+        text: "คุณต้องการลบข้อมูล ใช่หรือไม่ ?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.value) {
+            let $cartId = $(e).closest("#form-cart-item").find("[name='hid-cart-id']").val();
+            let $cartItemId = $(e).closest(".tr-data-row").find("[name='hid-cart-item-id']").val();
+
+            $.ajax({
+                type: "GET",
+                url: "/Cart/DeleteCartItem",
+                data: { cartId: $cartId, cartItemId: $cartItemId },
+                success: function (res) {
+                    if (res.isSuccess) {
+                        Swal("ทำรายการเรียบร้อย !", "ลบข้อมูลสำเร็จ", "success").then((result) => {
+                            if (result.value) {
+                                window.location = "/Cart/Index";
+                            }
+                        });
+                    } else {
+                        swal("Deleted Failed", "", "error");
+                    }
+                },
+                error: function () { }
+            });
+        }
+    });
+};
 
 /**
   * @desc Update Cart

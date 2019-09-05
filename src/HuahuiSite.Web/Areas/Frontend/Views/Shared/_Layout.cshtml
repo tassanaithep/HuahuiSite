@@ -165,8 +165,10 @@
 
                                             <li class="menu_item_children">
                                                 <a asp-area="Frontend" asp-controller="ShopList" asp-action="Index" asp-route-param="@itemOfProductCategorie.Code"> 
-                                                    <span class="menu-item-categorie" onclick="SelectCategorieMenu(this)">
+                                                    <span class="menu-item-categorie" product-categorie-code="@itemOfProductCategorie.Code" onclick="SelectCategorieMenu(this)">
+
                                                         @itemOfProductCategorie.Name        |
+
                                                     </span>
                                                 </a>
                                             </li>
@@ -194,7 +196,7 @@
                         <nav>
                             <ul>
                                 <li><a asp-action="" asp-controller="Home">หน้าแรก</a></li>
-                                <li><a asp-controller="Shoplist" asp-action="index">สินค้าทั้งหมด</a></li>
+                                <li><a asp-controller="ShopList" asp-action="index">สินค้าทั้งหมด</a></li>
                                 <li><a asp-controller="Promotion" asp-action="index">โปรโมชั่น</a></li>
                                 <li><a asp-controller="AboutUs" asp-action="index">เกี่ยวกับเรา</a></li>
                                 <li><a asp-controller="ContactUs" asp-action="index">ติดต่อเรา</a></li>
@@ -360,6 +362,25 @@
     </environment>
 
     <script>
+
+        $(function () {
+            // #region Bind Select Categorie Menu
+
+            let currentUrl = window.location.href;
+            let productCategorieCodeOfUrl = currentUrl.substring(currentUrl.indexOf("=") + 1);
+
+            $(".menu-item-categorie").each(function (index, element) {
+                let productCategorieCode = $(element).attr("product-categorie-code");
+
+                if (productCategorieCode === productCategorieCodeOfUrl)
+                {
+                    $(element).css("color", "#E55427");
+                    return false;
+                }
+            });
+
+            // #endregion
+        });
 
         SelectCategorieMenu = (e) => {
             let categorieMenuLink = $(e).closest("a").prop("href");

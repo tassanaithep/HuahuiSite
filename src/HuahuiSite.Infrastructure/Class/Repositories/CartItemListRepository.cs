@@ -96,7 +96,7 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                     }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
         }
 
-        public IEnumerable<CartItemList> GetCartItemListByCard(int cardId)
+        public IEnumerable<CartItemList> GetCartItemListByCardId(int cardId)
         {
             return HuahuiDbContext.CartItemList.Where(w => w.CardId.Equals(cardId)).ToList();
         }

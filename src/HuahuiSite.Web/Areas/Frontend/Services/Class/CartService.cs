@@ -232,7 +232,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             #region Delete Old Cart Item List
 
             var cartOfUser = _unitOfWork.Carts.GetCartActiveByUser(loginViewModelSession.RoleId);
-            var cartItemListToRemove = _unitOfWork.CartItemLists.GetCartItemListByCard(cartOfUser.Id);
+            var cartItemListToRemove = _unitOfWork.CartItemLists.GetCartItemListByCardId(cartOfUser.Id);
             _unitOfWork.CartItemLists.RemoveRange(cartItemListToRemove);
 
             #endregion
@@ -275,8 +275,21 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
         #region Delete
 
-        public void DeleteCartItem(int cartItemId)
+        public void DeleteCartItem(int cartId, int cartItemId)
         {
+            var cartItemList = _unitOfWork.CartItemLists.GetCartItemListByCardId(cartId);
+
+            // If Cart Item List equal one item to Delete Cart
+            if (cartItemList.Count().Equals(1))
+            {
+                #region Delete Cart
+
+                var cart = _unitOfWork.Carts.Get(cartId);
+                _unitOfWork.Carts.Remove(cart);
+
+                #endregion
+            }
+
             var cartItemToDelete = _unitOfWork.CartItemLists.Get(cartItemId);
             _unitOfWork.CartItemLists.Remove(cartItemToDelete);
         }

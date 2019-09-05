@@ -53,16 +53,16 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
         #region Update
 
-        ///// <summary>
-        ///// Update Cart.
-        ///// </summary>
-        //// Author: Mod Nattasit
-        //// Updated: 07/07/2019
+        /// <summary>
+        /// Update Cart.
+        /// </summary>
+        // Author: Mod Nattasit
+        // Updated: 07/07/2019
         public void UpdateCart(CartViewModel cartViewModel)
         {
             #region Delete Old Cart Item List
 
-            var cartItemListToRemove = _unitOfWork.CartItemLists.GetCartItemListByCard(cartViewModel.CartItemList.First().CardId);
+            var cartItemListToRemove = _unitOfWork.CartItemLists.GetCartItemListByCardId(cartViewModel.CartItemList.First().CardId);
             _unitOfWork.CartItemLists.RemoveRange(cartItemListToRemove);
 
             #endregion
@@ -92,7 +92,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
             _unitOfWork.Carts.Remove(cart);
 
             // Delete Cart Item
-            var cartItemList = _unitOfWork.CartItemLists.GetCartItemListByCard(cartId);
+            var cartItemList = _unitOfWork.CartItemLists.GetCartItemListByCardId(cartId);
             _unitOfWork.CartItemLists.RemoveRange(cartItemList);
         }
 
@@ -107,7 +107,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
             #region Get Cart
 
             var cart = _unitOfWork.Carts.Get(cartId);
-            var cartItemList = _unitOfWork.CartItemLists.GetCartItemListByCard(cartId);
+            var cartItemList = _unitOfWork.CartItemLists.GetCartItemListByCardId(cartId);
 
             #endregion
 

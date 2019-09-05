@@ -42,17 +42,17 @@
 
                     @if (@Model.CartViewModel != null)
                     {
-                        <h4>ORDER ID: @Model.CartViewModel.OrderId</h4>
-                        <h4>Status: @(Model.CartViewModel.Status.Equals("Cart") ? "รอยืนยันการสั่งซื้อ" : Model.CartViewModel.Status.Equals("Confirm") ? "ยืนยันการสั่งซื้อแล้ว" : "อนุมัติการสั่งซื้อแล้ว")</h4>
+                        <h4>หมายเลขการสั่งซื้อ: @Model.CartViewModel.OrderId</h4>
+                        <h4>สถานะ: @(Model.CartViewModel.Status.Equals("Cart") ? "รอยืนยันการสั่งซื้อ" : Model.CartViewModel.Status.Equals("Confirm") ? "ยืนยันการสั่งซื้อแล้ว" : "อนุมัติการสั่งซื้อแล้ว")</h4>
 
                         if (@Model.CartViewModel.UserRole.Equals("Customer"))
                         {
-                            <h4>Sale Name: @Model.CartViewModel.Sale.Firstname  @Model.CartViewModel.Sale.Lastname</h4>
+                            <h4>เซลล์: @Model.CartViewModel.Sale.Firstname  @Model.CartViewModel.Sale.Lastname</h4>
                         }
                         else if (@Model.CartViewModel.UserRole.Equals("Sale") && @Model.CartViewModel.Status.Equals("Cart"))
                         {
                             <div class="row">
-                                <h4 class="col-sm-1">Customer Name: </h4><select name="select-customer" asp-items="@Model.CartViewModel.CustomerSelectList" class="form-control col-sm-3"></select>
+                                <h4 class="col-sm-1">ชื่อลูกค้า: </h4><select name="select-customer" asp-items="@Model.CartViewModel.CustomerSelectList" class="form-control col-sm-3"></select>
                             </div>
                         }
                         else if (@Model.CartViewModel.UserRole.Equals("Sale") && !@Model.CartViewModel.Status.Equals("Cart"))
@@ -152,7 +152,7 @@
                                 
                                 @if (Model.CartViewModel.Status.Equals("Cart"))
                                 {
-                                    <span class="text-info"> เมื่อต้องการสั่งซื้อสินค้ากรุณากดที่ปุ่ม =></span><button type = "button" onclick="CheckOutCart(this)">สั่งซื้อสินค้า</button>
+                                    <span class="text-info"> <b>เมื่อต้องการสั่งซื้อสินค้ากรุณากดที่ปุ่ม</b> <i class="fa fa-arrow-right"></i> </span><button type = "button" onclick="CheckOutCart(this)">สั่งซื้อสินค้า</button>
                                 }
 
                             </div>
