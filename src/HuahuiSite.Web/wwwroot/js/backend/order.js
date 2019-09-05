@@ -13,7 +13,7 @@ $(function () {
 
 // #endregion
 
-// #region Render
+// #region Renders
 
 /**
   * @desc Render Image of Datatable
@@ -85,6 +85,10 @@ BindData = () => {
     // #endregion
 };
 
+/**
+  * @desc Bind Product Price By Quantity
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
 BindProductPriceByQuantity = () => {
     $("#table-data").find(".tr-data-item-row").each(function (index, element) {
         let $productGroupCode = $(element).find("[name='hid-order-product-group-code']").val();
@@ -160,18 +164,9 @@ CalculateTotalPrice = (e) => {
     $totalPriceElement.val($totalPrice);
 };
 
-/**
-  * @desc Change Quantity of Cart Item
-  * @param {Object} e - Element of Input Quantity
-  * @author Mod Nattasit mod.nattasit@gmail.com
-*/
-//ChangeQuantityOfCartItem = (e) => {
-//    $(e).closest(".tr-data-row").find("[name='hid-cart-item-quantity']").val($(e).val());
-//};
-
 // #endregion
 
-// #region Affect
+// #region Affects
 
 /**
   * @desc Update Page
@@ -225,7 +220,7 @@ UpdateTable = () => {
 
 // #endregion
 
-// #region Action
+// #region Actions
 
 /**
   * @desc Delete Cart
@@ -405,7 +400,7 @@ CancelOrder = (e) => {
 
 // #endregion
 
-// #region Validate
+// #region Validates
 
 /**
   * @desc Validate before Update Submit
@@ -428,7 +423,7 @@ ValidateUpdateSubmit = (e) => {
 
 // #endregion
 
-// #region Response
+// #region Responses
 
 /**
   * @desc On Form Action Save Success

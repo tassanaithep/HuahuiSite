@@ -11,7 +11,7 @@ $(function () {
 
 // #endregion
 
-// #region Render
+// #region Renders
 
 /**
   * @desc Render Image of Datatable
@@ -31,7 +31,7 @@ RenderImage = () => {
 
 // #endregion
 
-// #region Affect
+// #region Affects
 
 /**
   * @desc Update Page
@@ -84,7 +84,7 @@ UpdateTable = () => {
 
 // #endregion
 
-// #region Action
+// #region Actions
 
 /**
   * @desc Delete Data
@@ -131,7 +131,7 @@ Delete = (e) => {
 
 // #endregion
 
-// #region Validate
+// #region Validates
 
 /**
   * @desc Validate before Update Submit
@@ -153,7 +153,7 @@ ValidateUpdateSubmit = (e) => {
 
 // #endregion
 
-// #region Response
+// #region Responses
 
 /**
   * @desc On Form Action Save Success

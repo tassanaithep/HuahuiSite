@@ -392,7 +392,7 @@
 
                             <tr class="tr-data-row">
                                 <td>@itemOfOrder.Id</td>
-                                <td>@itemOfOrder.CreatedDateTime.Date</td>
+                                <td>@itemOfOrder.CreatedDateTime.ToShortDateString()</td>
                                 <td>@itemOfOrder.CustomerName</td>
                                 <td>@itemOfOrder.SaleName</td>
                                 <td>@(itemOfOrder.Status.Equals("Approve") ? "ระบบรับ Order แล้ว" : string.Empty)</td>

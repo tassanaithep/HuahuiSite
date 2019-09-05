@@ -10,18 +10,14 @@ $(function () {
 
 // #endregion
 
-// #region Functions
-
-// #endregion
-
-// #region Render
+// #region Renders
 
 BindProductPriceByQuantity = () => {
     $(".tr-data-item-row").each(function (index, element) {
         let $productGroupCode = $(element).find("[name='ProductGroupCode']").val();
         let $quantity = $(element).find("[name='Quantity']").val();
         let $isPromotion = JSON.parse($(element).find("[name='IsPromotion']").val());
-  
+
         $.ajax({
             type: "GET",
             url: "/Backend/Home/GetProductPriceByQuantity",
@@ -29,17 +25,14 @@ BindProductPriceByQuantity = () => {
             success: function (res) {
                 let productGroupModel = res;
 
-                if (productGroupModel !== null)
-                {
+                if (productGroupModel !== null) {
                     let unitPrice = productGroupModel.unitPrice;
                     let promotionPrice = productGroupModel.promotionPrice;
-   
-                    if (!$isPromotion)
-                    {
+
+                    if (!$isPromotion) {
                         $(element).find("[name='UnitPrice']").val(unitPrice);
                     }
-                    else
-                    {
+                    else {
                         $(element).find("[name='UnitPrice']").val(promotionPrice);
                     }
                 }
@@ -51,11 +44,15 @@ BindProductPriceByQuantity = () => {
 
 // #endregion
 
-// #region Affect
+// #region Functions
 
 // #endregion
 
-// #region Action
+// #region Affects
+
+// #endregion
+
+// #region Actions
 
 /**
   * @desc Export Order to File
@@ -68,10 +65,10 @@ ExportToFile = (orderId) => {
 
 // #endregion
 
-// #region Validate
+// #region Validates
 
 // #endregion
 
-// #region Response
+// #region Responses
 
 // #endregion

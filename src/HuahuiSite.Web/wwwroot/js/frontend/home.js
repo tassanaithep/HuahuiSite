@@ -247,22 +247,22 @@ ProductModalSubmit = (formId) => {
 
 // #endregion
 
-// #region Render
+// #region Renders
   
 // #endregion
 
-// #region Affect
+// #region Affects
 
 // #endregion
 
-// #region Action
+// #region Actions
 
 // #endregion
 
-// #region Validate
+// #region Validates
 
 // #endregion
 
-// #region Response
+// #region Responses
 
 // #endregion

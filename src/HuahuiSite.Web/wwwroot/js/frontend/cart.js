@@ -136,7 +136,7 @@ UpdateCartItemList = (trOfProduct, productQuantity, totalPrice) => {
 
 // #endregion
 
-// #region Render
+// #region Renders
 
 BindProductPriceByQuantity = () => {
     $("#table-data").find(".tr-data-row").each(function (index, element) {
@@ -170,11 +170,11 @@ BindProductPriceByQuantity = () => {
 
 // #endregion
 
-// #region Affect
+// #region Affects
 
 // #endregion
 
-// #region Action
+// #region Actions
 
 /**
   * @desc Update Cart
@@ -230,10 +230,10 @@ CheckOutCart = (e) => {
 
 // #endregion
 
-// #region Validate
+// #region Validates
 
 // #endregion
 
-// #region Response
+// #region Responses
 
 // #endregion
