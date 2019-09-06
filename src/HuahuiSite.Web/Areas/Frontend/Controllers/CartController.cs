@@ -13,17 +13,22 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
     [Area("Frontend")]
     public class CartController : Controller
     {
-
         #region Members
 
+        private readonly ILoginService _loginService;
         private readonly ICartService _cartService;
 
         #endregion
 
         #region Constructor
 
-        public CartController(ICartService cartService)
+        public CartController
+        (
+            ILoginService loginService,
+            ICartService cartService
+        )
         {
+            _loginService = loginService;
             _cartService = cartService;
         }
 
@@ -33,6 +38,15 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
 
         public IActionResult Index()
         {
+            #region Check Login
+
+            if (!_loginService.CheckLoginStatus())
+            {
+                return Redirect("/Home/Index");
+            }
+
+            #endregion
+
             MainViewModel mainViewModel = new MainViewModel();
 
             try

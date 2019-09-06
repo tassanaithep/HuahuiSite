@@ -94,6 +94,29 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         }
 
         [HttpGet]
+        public JsonResult Update(int cartId)
+        {
+            CartViewModel cartViewModel = new CartViewModel();
+            cartViewModel.Id = cartId;
+
+            bool isSuccess;
+            string exceptionMessage = string.Empty;
+
+            try
+            {
+                _cartService.UpdateCart(cartViewModel);
+                isSuccess = true;
+            }
+            catch (Exception exception)
+            {
+                exceptionMessage = exception.Message;
+                isSuccess = false;
+            }
+
+            return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
+        }
+
+        [HttpGet]
         public JsonResult Delete(int cartId)
         {
             bool isSuccess;
@@ -112,10 +135,6 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
             return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
         }
-
-        #endregion
-
-        #region Actions
 
         [HttpGet]
         public JsonResult Approve(int cartId)

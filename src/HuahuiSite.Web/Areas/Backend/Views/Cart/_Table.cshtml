@@ -114,7 +114,7 @@
                                                                                             <input type="text" class="form-control col-sm-10" name="TotalPrice" value="@itemOfCartItem.TotalPrice" />
                                                                                         </td>
                                                                                         <td>
-                                                                                            <a href="#" onclick="DeleteCartItem(this)"><i class="fas fa-trash-alt text-inverse m-r-10"></i></a>
+                                                                                            <a href="#" onclick="RemoveCartItem(this, event)"><i class="fas fa-trash-alt text-inverse m-r-10"></i></a>
                                                                                         </td>
                                                                                     </tr>
 
@@ -123,7 +123,7 @@
 
                                                                                     }
 
-                                                                                    <tr>
+                                                                                    <tr class="tr-data-total-row">
                                                                                         <td></td>
                                                                                         <td></td>
                                                                                         <td><b>Total</b></td>

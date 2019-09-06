@@ -315,28 +315,29 @@ Delete = (e) => {
 };
 
 /**
-  * @desc Delete Cart Item of Cart
+  * @desc Remove Cart Item of Cart
   * @param {Object} e - Element of Delete Button
+  * @param {Event} event - Event of Delete Button
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
-DeleteCartItem = (e) => {
-    swal({
-        title: 'Are you sure ?',
-        text: "คุณต้องการลบข้อมูล ใช่หรือไม่ ?",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-        if (result.value) {
-            // Remove Cart Item of Cart
-            $(e).closest("tr").remove();
+RemoveCartItem = (e, event) => {
+    event.preventDefault();
 
-            // Alert Result of Delete
-            Swal('Deleted!', 'Your file has been deleted.', 'success');
-        }
+    // Count remaining of Cart Item
+    let countCartItem = 0;
+
+    // Loop for Count Cart Item
+    $(e).closest(".form-row-table").find(".tr-data-item-row").each(function (index, element) {
+        countCartItem++;
     });
+
+    // If Cart Item remaining one Item to Remove Total
+    if (countCartItem === 1) {
+        $(e).closest(".form-row-table").find(".tr-data-total-row").remove();
+    }
+
+    // Remove Cart Item of Cart
+    $(e).closest("tr").remove();
 };
 
 /**
@@ -345,6 +346,8 @@ DeleteCartItem = (e) => {
   * @author Mod Nattasit mod.nattasit@gmail.com
 */
 UpdateCart = (e) => {
+    let $cartId = $(e).closest(".form-row-table").find("[name='hid-cart-id']").val();
+
     let cartItemList = [];
 
     $(e).closest(".form-row-table").find(".tr-data-item-row").each(function (index, element) {
@@ -364,22 +367,42 @@ UpdateCart = (e) => {
         cartItemList.push({ id: $id, cardId: $cartId, productId: $productId, quantity: $quantity, totalPrice: $totalPrice, isActive: $isActive, createdDateTime: $createdDateTime, updatedDateTime: null });
     });
 
-    $.ajax({
-        type: "POST",
-        url: "/Backend/Cart/Update",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: JSON.stringify(cartItemList),
-        success: function (res) {
-            if (res.isSuccess) {
-                UpdatePage();
-                swal("Update Success", "", "success");
-            } else {
-                swal("Update Success", "", "error");
-            }
-        },
-        error: function () { }
-    });
+    if (cartItemList.length === 0)
+    {
+        $.ajax({
+            type: "GET",
+            url: "/Backend/Cart/Update",
+            data: { cartId: $cartId },
+            success: function (res) {
+                if (res.isSuccess) {
+                    UpdatePage();
+                    swal("Update Success", "", "success");
+                } else {
+                    swal("Update Success", "", "error");
+                }
+            },
+            error: function () { }
+        });
+    }
+    else
+    {
+        $.ajax({
+            type: "POST",
+            url: "/Backend/Cart/Update",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(cartItemList),
+            success: function (res) {
+                if (res.isSuccess) {
+                    UpdatePage();
+                    swal("Update Success", "", "success");
+                } else {
+                    swal("Update Success", "", "error");
+                }
+            },
+            error: function () { }
+        });
+    }
 };
 
 /**

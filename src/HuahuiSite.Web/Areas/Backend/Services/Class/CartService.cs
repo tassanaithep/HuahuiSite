@@ -60,20 +60,41 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void UpdateCart(CartViewModel cartViewModel)
         {
-            #region Delete Old Cart Item List
+            // Delete Cart Item
+            if (cartViewModel.CartItemList == null)
+            {
+                #region Delete Cart
 
-            var cartItemListToRemove = _unitOfWork.CartItemLists.GetCartItemListByCardId(cartViewModel.CartItemList.First().CardId);
-            _unitOfWork.CartItemLists.RemoveRange(cartItemListToRemove);
+                var cartItemToRemove = _unitOfWork.Carts.Get(cartViewModel.Id);
+                _unitOfWork.Carts.Remove(cartItemToRemove);
 
-            #endregion
+                #endregion
 
-            #region Update Cart Item List
+                #region Delete Cart Item List
 
-            cartViewModel.CartItemList.ToList().ForEach(i => i.Id = 0);
+                var cartItemListToRemove = _unitOfWork.CartItemLists.GetCartItemListByCardId(cartViewModel.Id);
+                _unitOfWork.CartItemLists.RemoveRange(cartItemListToRemove);
 
-            _unitOfWork.CartItemLists.AddRange(cartViewModel.CartItemList);
+                #endregion
+            }
+            // Delete Cart Item List Only
+            else
+            {
+                #region Delete Old Cart Item List
 
-            #endregion
+                var cartItemListToRemove = _unitOfWork.CartItemLists.GetCartItemListByCardId(cartViewModel.CartItemList.First().CardId);
+                _unitOfWork.CartItemLists.RemoveRange(cartItemListToRemove);
+
+                #endregion
+
+                #region Update Cart Item List
+
+                cartViewModel.CartItemList.ToList().ForEach(i => i.Id = 0);
+
+                _unitOfWork.CartItemLists.AddRange(cartViewModel.CartItemList);
+
+                #endregion
+            }
         }
 
         #endregion
