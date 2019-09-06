@@ -82,14 +82,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         {
             var loginViewModel = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserSessionFrontend");
 
-            if (loginViewModel != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return loginViewModel != null ? true : false;
         }
 
         /// <summary>
