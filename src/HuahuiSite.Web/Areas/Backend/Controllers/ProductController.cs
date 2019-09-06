@@ -6,6 +6,7 @@ using HuahuiSite.Core.Entities;
 using HuahuiSite.Web.Areas.Backend.Models;
 using HuahuiSite.Web.Areas.Backend.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
+using ReflectionIT.Mvc.Paging;
 
 namespace HuahuiSite.Web.Areas.Backend.Controllers
 {
@@ -41,7 +42,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
             #region Check Login
 
@@ -57,6 +58,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
             try
             {
                 _productService.GetProductList(ref productViewModel);
+                productViewModel.ProductPagingList = await PagingList.CreateAsync(productViewModel.ProductList, 10, page);
             }
             catch (Exception ex)
             {

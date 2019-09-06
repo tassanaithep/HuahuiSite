@@ -1,6 +1,7 @@
 ﻿using HuahuiSite.Core.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using ReflectionIT.Mvc.Paging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace HuahuiSite.Web.Areas.Backend.Models
         public IEnumerable<SelectListItem> ProductCategorieSelectList { get; set; }
         public IEnumerable<SelectListItem> ProductGroupSelectList { get; set; }
 
-        public IEnumerable<Product> ProductList { get; set; }
+        public IOrderedQueryable<Product> ProductList { get; set; }
+        public IPagingList<Product> ProductPagingList { get; set; }
     }
 }

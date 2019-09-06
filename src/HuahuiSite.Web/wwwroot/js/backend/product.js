@@ -7,7 +7,7 @@
 $(function () {
     RenderImage();
     BindData();
-    $("#table-data").DataTable();
+    //$("#table-data").DataTable();
 });
 
 // #endregion
@@ -134,7 +134,7 @@ UpdatePage = () => {
     DropifyScriptRender();
     RenderImage();
     BindData();
-    $("#table-data").DataTable();
+    //$("#table-data").DataTable();
     $("body").removeAttr("style");
 };
 

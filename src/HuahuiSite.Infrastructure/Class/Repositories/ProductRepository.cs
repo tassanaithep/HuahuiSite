@@ -1,6 +1,7 @@
 ﻿using HuahuiSite.Core.Entities;
 using HuahuiSite.Core.Interfaces.Repositories;
 using HuahuiSite.Core.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,11 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
         public HuahuiDbContext HuahuiDbContext
         {
             get { return Context as HuahuiDbContext; }
+        }
+
+        public IOrderedQueryable<Product> GetProductListData()
+        {
+            return HuahuiDbContext.Product.AsNoTracking().OrderBy(o => o.Id);
         }
 
         public IEnumerable<ProductModel> GetProductList()

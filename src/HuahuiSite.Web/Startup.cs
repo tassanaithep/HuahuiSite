@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ReflectionIT.Mvc.Paging;
 
 namespace HuahuiSite.Web
 {
@@ -43,6 +44,16 @@ namespace HuahuiSite.Web
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            #region Initialize Paging
+
+            services.AddPaging(options => {
+                options.ViewName = "Bootstrap4";
+                options.HtmlIndicatorDown = " <span>&darr;</span>";
+                options.HtmlIndicatorUp = " <span>&uarr;</span>";
+            });
+
+            #endregion
 
             #region Initialize Session
 

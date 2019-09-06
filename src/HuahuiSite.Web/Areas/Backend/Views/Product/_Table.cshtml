@@ -1,4 +1,7 @@
-﻿@model HuahuiSite.Web.Areas.Backend.Models.ProductViewModel
+﻿@using ReflectionIT.Mvc.Paging
+@addTagHelper *, ReflectionIT.Mvc.Paging
+
+@model HuahuiSite.Web.Areas.Backend.Models.ProductViewModel
 
 <div class="col-md-12">
     <div class="card">
@@ -28,7 +31,7 @@
 
                         @{ int No = 1; }
 
-                        @foreach (var item in Model.ProductList)
+                        @foreach (var item in Model.ProductPagingList)
                         {
                             <tr>
                                 <td>@No</td>
@@ -176,6 +179,15 @@
 
                     </tbody>
                 </table>
+
+                <!-- Paging Start -->
+
+                <nav aria-label="table-data">
+                    <vc:pager paging-list="Model.ProductPagingList" />
+                </nav>
+
+                <!-- Paging End -->
+
             </div>
         </div>
     </div>

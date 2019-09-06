@@ -90,7 +90,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         {
             #region Get List
 
-            productViewModel.ProductList = _unitOfWork.Products.GetAll();
+            productViewModel.ProductList = _unitOfWork.Products.GetProductListData();
 
             #endregion
 
