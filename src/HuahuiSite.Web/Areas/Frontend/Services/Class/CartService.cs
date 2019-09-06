@@ -165,7 +165,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
             mainViewModel.LoginViewModel = new LoginViewModel();
 
-            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
+            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserSessionFrontend");
 
             if (loginViewModelSession != null)
             {
