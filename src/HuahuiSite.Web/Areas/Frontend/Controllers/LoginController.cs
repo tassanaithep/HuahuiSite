@@ -13,7 +13,6 @@ namespace HuahuiSite.Web.Areas.Frontend.Controllers
     [Area("Frontend")]
     public class LoginController : Controller
     {
-
         #region Members
 
         private readonly ILoginService _loginService;

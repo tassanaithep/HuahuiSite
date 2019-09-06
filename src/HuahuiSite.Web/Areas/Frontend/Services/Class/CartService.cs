@@ -255,20 +255,27 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             // Get Login User Data from Sesssion
             var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
 
-            #region Update Cart Status
-
-            var cart = _unitOfWork.Carts.Get(cartId);
-
-            if (loginViewModelSession.RoleName.Equals("Sale"))
+            if (loginViewModelSession != null)
             {
-                cart.CustomerId = customerId;
+                #region Update Cart Status
+
+                var cart = _unitOfWork.Carts.Get(cartId);
+
+                if (loginViewModelSession.RoleName.Equals("Sale"))
+                {
+                    cart.CustomerId = customerId;
+                }
+
+                cart.Status = "Confirm";
+
+                _unitOfWork.Carts.Update(cart);
+
+                #endregion
             }
-        
-            cart.Status = "Confirm";
-
-            _unitOfWork.Carts.Update(cart);
-
-            #endregion
+            else
+            {
+                throw new Exception("Session Timeout");
+            }
         }
 
         #endregion
