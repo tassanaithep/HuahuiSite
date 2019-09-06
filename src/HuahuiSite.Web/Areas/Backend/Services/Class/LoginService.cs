@@ -32,6 +32,8 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
         #endregion
 
+        #region Actions
+
         /// <summary>
         /// Check Login.
         /// </summary>
@@ -43,7 +45,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             if (user.RoleName.Equals("Admin"))
             {
-                Extensions.SessionExtensions.SetObject(_httpContextAccessor.HttpContext.Session, "UserData", loginViewModel);
+                Extensions.SessionExtensions.SetObject(_httpContextAccessor.HttpContext.Session, "UserSessionBackend", loginViewModel);
             }
             else
             {
@@ -58,7 +60,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public bool CheckLoginStatus()
         {
-            var loginViewModel = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserData");
+            var loginViewModel = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserSessionBackend");
 
             if (loginViewModel != null)
             {
@@ -77,7 +79,9 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void Logout()
         {
-            _httpContextAccessor.HttpContext.Session.Remove("UserData");
+            _httpContextAccessor.HttpContext.Session.Remove("UserSessionBackend");
         }
+
+        #endregion
     }
 }

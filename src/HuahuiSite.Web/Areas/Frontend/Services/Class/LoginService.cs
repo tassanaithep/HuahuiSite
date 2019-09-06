@@ -32,6 +32,8 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
         #endregion
 
+        #region Actions
+
         /// <summary>
         /// Check Login.
         /// </summary>
@@ -50,7 +52,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                 loginViewModel.RoleId = user.RoleId.Value;
                 loginViewModel.Name = user.Name;
 
-                Extensions.SessionExtensions.SetObject(_httpContextAccessor.HttpContext.Session, "UserDataSession", loginViewModel);
+                Extensions.SessionExtensions.SetObject(_httpContextAccessor.HttpContext.Session, "UserSessionFrontend", loginViewModel);
             }
             else
             {
@@ -65,7 +67,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         // Updated: 07/07/2019
         public void InitialLoginStatus(ref LoginViewModel loginViewModel)
         {
-            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
+            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserSessionFrontend");
 
             loginViewModel = new LoginViewModel();
             loginViewModel.IsLogin = loginViewModelSession != null ? true : false;
@@ -78,7 +80,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         // Updated: 07/07/2019
         public bool CheckLoginStatus()
         {
-            var loginViewModel = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
+            var loginViewModel = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserSessionFrontend");
 
             if (loginViewModel != null)
             {
@@ -97,7 +99,9 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         // Updated: 07/07/2019
         public void Logout()
         {
-            _httpContextAccessor.HttpContext.Session.Remove("UserDataSession");
+            _httpContextAccessor.HttpContext.Session.Remove("UserSessionFrontend");
         }
+
+#endregion
     }
 }
