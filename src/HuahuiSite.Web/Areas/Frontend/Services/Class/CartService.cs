@@ -227,7 +227,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         public void UpdateCart(CartViewModel cartViewModel)
         {
             // Get Login User Data from Sesssion
-            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
+            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserSessionFrontend");
 
             #region Delete Old Cart Item List
 
@@ -253,7 +253,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         public void CheckOut(int cartId, int customerId)
         {
             // Get Login User Data from Sesssion
-            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
+            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserSessionFrontend");
 
             if (loginViewModelSession != null)
             {

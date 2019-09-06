@@ -31,7 +31,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
         public void GetShopList(ref MainViewModel mainViewModel)
         {
-            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
+            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserSessionFrontend");
 
             mainViewModel.LoginViewModel = new LoginViewModel();
 
@@ -52,7 +52,6 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
 
             mainViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();
             mainViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
-
         }
     }
 }

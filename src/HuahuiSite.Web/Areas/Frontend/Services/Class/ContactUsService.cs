@@ -49,7 +49,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         // Updated: 12/08/2019
         public void GetContactUs(ref MainViewModel mainViewModel)
         {
-            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
+            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserSessionFrontend");
 
             mainViewModel.LoginViewModel = new LoginViewModel();
 
