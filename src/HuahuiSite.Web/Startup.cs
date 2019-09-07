@@ -49,6 +49,7 @@ namespace HuahuiSite.Web
 
             // Add Session
             services.AddDistributedMemoryCache();
+            services.AddHttpContextAccessor();
 
             services.AddSession(options =>
             {
@@ -70,8 +71,6 @@ namespace HuahuiSite.Web
             });
 
             #endregion
-
-            services.AddHttpContextAccessor();
 
             // Initialize DbContext
             services.AddDbContext<HuahuiDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("HuahuiDatabase")));
