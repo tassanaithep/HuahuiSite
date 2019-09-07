@@ -110,6 +110,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #endregion
 
+            // Set Keyword for Search to Session
             _httpContextAccessor.HttpContext.Session.SetString("KeywordForSearch", keywordForSearch);
 
             #region Get Select List
