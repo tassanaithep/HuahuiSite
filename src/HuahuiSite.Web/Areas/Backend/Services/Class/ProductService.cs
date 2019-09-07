@@ -2,6 +2,7 @@
 using HuahuiSite.Core.Interfaces;
 using HuahuiSite.Web.Areas.Backend.Models;
 using HuahuiSite.Web.Areas.Backend.Services.Interface;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -15,14 +16,20 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
     {
         #region Members
 
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUnitOfWork _unitOfWork;
 
         #endregion
 
         #region Constructor
 
-        public ProductService(IUnitOfWork unitOfWork)
+        public ProductService
+        (
+            IHttpContextAccessor httpContextAccessor,
+            IUnitOfWork unitOfWork
+        )
         {
+            _httpContextAccessor = httpContextAccessor;
             _unitOfWork = unitOfWork;
         }
 
@@ -88,11 +95,15 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void GetProductList(ref ProductViewModel productViewModel, string keywordForSearch)
         {
+            keywordForSearch = _httpContextAccessor.HttpContext.Session.GetString("KeywordForSearch") != null && _httpContextAccessor.HttpContext.Session.GetString("KeywordForSearch") != string.Empty ? _httpContextAccessor.HttpContext.Session.GetString("KeywordForSearch") : keywordForSearch;
+
             #region Get List
 
             productViewModel.ProductList = _unitOfWork.Products.GetProductListData(keywordForSearch);
 
             #endregion
+
+            _httpContextAccessor.HttpContext.Session.SetString("KeywordForSearch", keywordForSearch);
 
             #region Get Select List
 

@@ -46,8 +46,6 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         MaxQuantity = productGroup.MaxQuantity,
                         ProductCategorieName = productCategorie.Name
                     }).Where(w => w.Code.Contains(keywordForSearch) || w.Name.Contains(keywordForSearch) || w.ProductCategorieCode.Contains(keywordForSearch) || w.ProductGroupCode.Contains(keywordForSearch) || w.ProductCategorieName.Contains(keywordForSearch) || w.ProductGroupName.Contains(keywordForSearch)).GroupBy(g => g.Id).Select(s => s.First()).OrderBy(o => o.Id);
-
-            //return HuahuiDbContext.Product.Where(w => w.Code.Contains(keywordForSearch) || w.Name.Contains(keywordForSearch) || w.ProductCategorieCode.Contains(keywordForSearch) || w.ProductGroupCode.Contains(keywordForSearch)).AsNoTracking().OrderBy(o => o.Id);
         }
 
         public IEnumerable<ProductModel> GetProductList()

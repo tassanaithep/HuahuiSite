@@ -22,7 +22,8 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
         #region Constructor
 
-        public LoginService(
+        public LoginService
+        (
             IHttpContextAccessor httpContextAccessor,
             IUnitOfWork unitOfWork)
         {
