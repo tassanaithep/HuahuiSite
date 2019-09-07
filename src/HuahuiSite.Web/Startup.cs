@@ -45,16 +45,6 @@ namespace HuahuiSite.Web
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            #region Initialize Paging
-
-            services.AddPaging(options => {
-                options.ViewName = "Bootstrap4";
-                options.HtmlIndicatorDown = " <span>&darr;</span>";
-                options.HtmlIndicatorUp = " <span>&uarr;</span>";
-            });
-
-            #endregion
-
             #region Initialize Session
 
             // Add Session
@@ -67,6 +57,16 @@ namespace HuahuiSite.Web
                 options.Cookie.HttpOnly = true;
                 // Make the session cookie essential
                 options.Cookie.IsEssential = true;
+            });
+
+            #endregion
+
+            #region Initialize Paging
+
+            services.AddPaging(options => {
+                options.ViewName = "Bootstrap4";
+                options.HtmlIndicatorDown = " <span>&darr;</span>";
+                options.HtmlIndicatorUp = " <span>&uarr;</span>";
             });
 
             #endregion
