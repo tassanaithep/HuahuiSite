@@ -16,7 +16,6 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         #region Members
 
         private readonly ILoginService _loginService;
-
         private readonly IProductService _productService;
 
         #endregion
@@ -42,7 +41,8 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
-        public async Task<IActionResult> Index(int page = 1)
+        [HttpGet]
+        public async Task<IActionResult> Index(int page = 1, string keywordForSearch = "")
         {
             #region Check Login
 
@@ -57,15 +57,42 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
             try
             {
-                _productService.GetProductList(ref productViewModel);
+                _productService.GetProductList(ref productViewModel, keywordForSearch);
+
+                // Bind Model to Paging Model
                 productViewModel.ProductPagingList = await PagingList.CreateAsync(productViewModel.ProductList, 10, page);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
 
             }
 
             return View(productViewModel);
+        }
+
+        #endregion
+
+        #region Partial Views
+
+        /// <summary>
+        /// Update Table.
+        /// </summary>
+        // Author: Mod Nattasit
+        // Updated: 07/07/2019
+        public PartialViewResult UpdateTable()
+        {
+            ProductViewModel productViewModel = new ProductViewModel();
+
+            try
+            {
+                _productService.GetProductList(ref productViewModel, string.Empty);
+            }
+            catch (Exception exception)
+            {
+
+            }
+
+            return PartialView("_Table", productViewModel);
         }
 
         #endregion
@@ -145,27 +172,6 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
             }
 
             return Json(new { isSuccess = isSuccess, exceptionMessage = exceptionMessage });
-        }
-
-        /// <summary>
-        /// Update Table.
-        /// </summary>
-        // Author: Mod Nattasit
-        // Updated: 07/07/2019
-        public PartialViewResult UpdateTable()
-        {
-            ProductViewModel productViewModel = new ProductViewModel();
-
-            try
-            {
-                _productService.GetProductList(ref productViewModel);
-            }
-            catch (Exception exception)
-            {
-
-            }
-
-            return PartialView("_Table", productViewModel);
         }
 
         #endregion

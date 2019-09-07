@@ -9,7 +9,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Interface
 {
     public interface IProductService
     {
-        void GetProductList(ref ProductViewModel productViewModel);
+        void GetProductList(ref ProductViewModel productViewModel, string keywordForSearch);
         void SaveProduct(ProductViewModel productViewModel);
         void UpdateProduct(ProductViewModel productViewModel);
         void DeleteProduct(ProductViewModel productViewModel);

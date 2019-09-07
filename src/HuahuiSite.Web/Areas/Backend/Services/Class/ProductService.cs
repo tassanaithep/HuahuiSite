@@ -86,11 +86,11 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
-        public void GetProductList(ref ProductViewModel productViewModel)
+        public void GetProductList(ref ProductViewModel productViewModel, string keywordForSearch)
         {
             #region Get List
 
-            productViewModel.ProductList = _unitOfWork.Products.GetProductListData();
+            productViewModel.ProductList = _unitOfWork.Products.GetProductListData(keywordForSearch);
 
             #endregion
 

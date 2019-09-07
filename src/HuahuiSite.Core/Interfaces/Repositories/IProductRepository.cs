@@ -9,7 +9,7 @@ namespace HuahuiSite.Core.Interfaces.Repositories
 {
     public interface IProductRepository : IRepository<Product>
     {
-        IOrderedQueryable<Product> GetProductListData();
+        IOrderedQueryable<ProductModel> GetProductListData(string keywordForSearch);
         IEnumerable<ProductModel> GetProductList();
     }
 }

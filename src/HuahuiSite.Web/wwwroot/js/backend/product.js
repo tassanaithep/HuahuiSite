@@ -70,22 +70,22 @@ BindData = () => {
     $(".form-row-table").each(function (index, element) {
         // #region Get Element
 
-        let $tdOfCategoriesName = $(element).closest("tr").find(".td-categories-name");
-        let $tdOfProductGroupName = $(element).closest("tr").find(".td-productgroup-name");
+        //let $tdOfCategoriesName = $(element).closest("tr").find(".td-categories-name");
+        //let $tdOfProductGroupName = $(element).closest("tr").find(".td-productgroup-name");
 
-        // #endregion
+        //// #endregion
 
-        // #region Get Value
+        //// #region Get Value
 
-        let $categoriesName = $(element).find("[name='ProductCategorieCode'] :selected").text();
-        let $productgroupName = $(element).find("[name='ProductGroupCode'] :selected").text();
+        //let $categoriesName = $(element).find("[name='ProductCategorieCode'] :selected").text();
+        //let $productgroupName = $(element).find("[name='ProductGroupCode'] :selected").text();
 
-        // #endregion
+        //// #endregion
 
-        // #region Binding Value
+        //// #region Binding Value
 
-        $tdOfCategoriesName.text($categoriesName);
-        $tdOfProductGroupName.text($productgroupName);
+        //$tdOfCategoriesName.text($categoriesName);
+        //$tdOfProductGroupName.text($productgroupName);
 
         // #endregion
     });
@@ -176,6 +176,23 @@ UpdateTable = () => {
 // #endregion
 
 // #region Actions
+
+/**
+  * @desc Enter to Search of Table
+  * @param {Object} e - Element of Input Search
+  * @param {Event} event - Event of Input Search
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+EnterSearch = (e, event) => {
+    var code = (event.keyCode ? event.keyCode : event.which);
+
+    if (code === 13)
+    {
+        let $textOfSearch = $(e).val();
+
+        window.location = `/Backend/Product/Index?keywordForSearch=${ $textOfSearch }`;
+    }
+};
 
 /**
   * @desc Delete Data
