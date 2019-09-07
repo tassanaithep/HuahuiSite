@@ -95,8 +95,6 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void GetProductList(ref ProductViewModel productViewModel, string keywordForSearch)
         {
-            //keywordForSearch = _httpContextAccessor.HttpContext.Session.GetString("KeywordForSearch") != null && _httpContextAccessor.HttpContext.Session.GetString("KeywordForSearch") != string.Empty ? _httpContextAccessor.HttpContext.Session.GetString("KeywordForSearch") : keywordForSearch;
-
             if (keywordForSearch == string.Empty && (_httpContextAccessor.HttpContext.Session.GetString("KeywordForSearch") != null && _httpContextAccessor.HttpContext.Session.GetString("KeywordForSearch") != string.Empty))
             {
                 keywordForSearch = _httpContextAccessor.HttpContext.Session.GetString("KeywordForSearch");
