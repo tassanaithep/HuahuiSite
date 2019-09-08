@@ -22,5 +22,10 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
         {
             return HuahuiDbContext.ProductGroup.Where(w => w.Code.Equals(code) && w.MinQuantity <= quantity && w.MaxQuantity >= quantity).SingleOrDefault();
         }
+        public IEnumerable<ProductGroup> GetBySearch(string keywordForSearch)
+        {
+            return HuahuiDbContext.ProductGroup.Where(x => x.Name.Contains(keywordForSearch) || x.Code.Contains(keywordForSearch) || x.ProductCategorieCode.Contains(keywordForSearch)).ToList();
+        }
+      
     }
 }

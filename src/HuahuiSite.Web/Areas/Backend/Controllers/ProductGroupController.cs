@@ -6,6 +6,7 @@ using HuahuiSite.Core.Entities;
 using HuahuiSite.Web.Areas.Backend.Models;
 using HuahuiSite.Web.Areas.Backend.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
+using ReflectionIT.Mvc.Paging;
 
 namespace HuahuiSite.Web.Areas.Backend.Controllers
 {
@@ -16,7 +17,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
         private readonly ILoginService _loginService;
 
-        private readonly IProductGroupService _productCategorieService;
+        private readonly IProductGroupService _productGroupService;
 
         #endregion
 
@@ -25,11 +26,11 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         public ProductGroupController
         (
             ILoginService loginService,
-            IProductGroupService productCategorieService
+            IProductGroupService productGroupService
         )
         {
             _loginService = loginService;
-            _productCategorieService = productCategorieService;
+            _productGroupService = productGroupService;
         }
 
         #endregion
@@ -41,7 +42,9 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(int page = 1, string keywordForSearch = "", bool isUpdate = false)
+        //public async Task<IActionResult> Index(int page = 1, string keywordForSearch = "", bool isUpdate = false)
         {
             #region Check Login
 
@@ -52,18 +55,26 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
             #endregion
 
-            ProductGroupViewModel productCategorieViewModel = new ProductGroupViewModel();
+                ProductGroupViewModel productGroupViewModel = new ProductGroupViewModel();
 
             try
             {
-                _productCategorieService.GetProductGroupList(ref productCategorieViewModel);
+                _productGroupService.GetProductGroupList(ref productGroupViewModel, keywordForSearch, isUpdate, page);
+
+                // Bind Model to Paging Model
+                productGroupViewModel.ProductGroupPagingList =  PagingList.Create(productGroupViewModel.ProductGroupList, 10, page);
+              //  ViewBag.keywordForSearch = productGroupViewModel.keywordForSearch;
+
+
+
             }
+
             catch (Exception exception)
             {
 
             }
 
-            return View(productCategorieViewModel);
+            return View(productGroupViewModel);
         }
 
         #endregion
@@ -76,14 +87,14 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         // Author: Mod Nattasit
         // Updated: 07/07/2019
         [HttpPost]
-        public IActionResult Save(ProductGroupViewModel productCategorieViewModel)
+        public IActionResult Save(ProductGroupViewModel productGroupViewModel)
         {
             bool isSuccess;
             string exceptionMessage = string.Empty;
 
             try
             {
-                _productCategorieService.SaveProductGroup(productCategorieViewModel);
+                _productGroupService.SaveProductGroup(productGroupViewModel);
                 isSuccess = true;
             }
             catch (Exception exception)
@@ -101,14 +112,14 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         // Author: Mod Nattasit
         // Updated: 07/07/2019
         [HttpPost]
-        public IActionResult Update(ProductGroupViewModel productCategorieViewModel)
+        public IActionResult Update(ProductGroupViewModel productGroupViewModel)
         {
             bool isSuccess;
             string exceptionMessage = string.Empty;
 
             try
             {
-                _productCategorieService.UpdateProductGroup(productCategorieViewModel);
+                _productGroupService.UpdateProductGroup(productGroupViewModel);
                 isSuccess = true;
             }
             catch (Exception exception)
@@ -126,14 +137,14 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         // Author: Mod Nattasit
         // Updated: 07/07/2019
         [HttpPost]
-        public JsonResult Delete(ProductGroupViewModel productCategorieViewModel)
+        public JsonResult Delete(ProductGroupViewModel productGroupViewModel)
         {
             bool isSuccess;
             string exceptionMessage = string.Empty;
 
             try
             {
-                _productCategorieService.DeleteProductGroup(productCategorieViewModel);
+                _productGroupService.DeleteProductGroup(productGroupViewModel);
                 isSuccess = true;
             }
             catch (Exception exception)
@@ -152,18 +163,18 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         // Updated: 07/07/2019
         public PartialViewResult UpdateTable()
         {
-            ProductGroupViewModel productCategorieViewModel = new ProductGroupViewModel();
+            ProductGroupViewModel productGroupViewModel = new ProductGroupViewModel();
 
             try
             {
-                _productCategorieService.GetProductGroupList(ref productCategorieViewModel);
+                _productGroupService.GetProductGroupList(ref productGroupViewModel, string.Empty, false, 1);
             }
             catch (Exception exception)
             {
 
             }
 
-            return PartialView("_Table", productCategorieViewModel);
+            return PartialView("_Table", productGroupViewModel);
         }
 
         #endregion

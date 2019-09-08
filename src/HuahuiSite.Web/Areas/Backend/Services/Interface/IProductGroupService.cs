@@ -9,7 +9,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Interface
 {
     public interface IProductGroupService
     {
-        void GetProductGroupList(ref ProductGroupViewModel productGroupViewModel);
+        void GetProductGroupList(ref ProductGroupViewModel productGroupViewModel, string keywordForSearch, bool isUpdate, int page);
         void SaveProductGroup(ProductGroupViewModel productGroupViewModel);
         void UpdateProductGroup(ProductGroupViewModel productGroupViewModel);
         void DeleteProductGroup(ProductGroupViewModel productGroupViewModel);

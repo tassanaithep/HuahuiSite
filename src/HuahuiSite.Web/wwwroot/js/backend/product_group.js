@@ -7,7 +7,7 @@
 $(function () {
     //RenderImage();
     BindData();
-    $("#table-data").DataTable();
+    //$("#table-data").DataTable();
 });
 
 // #endregion
@@ -136,6 +136,22 @@ UpdateTable = () => {
 // #region Actions
 
 /**
+  * @desc Enter to Search of Table
+  * @param {Object} e - Element of Input Search
+  * @param {Event} event - Event of Input Search
+  * @author Mod Nattasit mod.nattasit@gmail.com     //Tassanai
+*/
+EnterSearch = (e, event) => {
+    var code = (event.keyCode ? event.keyCode : event.which);
+
+    if (code === 13) {
+        let $textOfSearch = $(e).val();
+
+        window.location = `/Backend/ProductGroup/Index?keywordForSearch=${$textOfSearch}`;
+    }
+};
+
+/**
   * @desc Delete Data
   * @param {Object} e - Element of Delete Button
   * @author Mod Nattasit mod.nattasit@gmail.com
@@ -214,7 +230,13 @@ ValidateUpdateSubmit = (e) => {
 OnSaveSuccess = (res) => {
     if (res.isSuccess) {
         UpdatePage();
-        swal("Save Success", "", "success");
+        //swal("Save Success", "", "success");
+        swal("Save Success", "", "success")
+            .then((value) => {
+                window.location = "/Backend/ProductGroup/Index?isUpdate=true";
+            });
+
+        window.location = "/Backend/ProductGroup/Index?isUpdate=true";
     } else {
         swal("Save Failed", "", "error");
     }
@@ -228,7 +250,19 @@ OnSaveSuccess = (res) => {
 OnUpdateSuccess = (res) => {
     if (res.isSuccess) {
         UpdatePage();
-        swal("Update Success", "", "success");
+       // swal("Update Success", "", "success");
+
+        let $textOfSearch = $("#keywordForSearch").val();
+     
+        swal("Update Success", "", "success")
+            .then((value) => {
+              //  window.location = "/Backend/ProductGroup/Index?isUpdate=true&keywordForSearch=${$textOfSearch}";
+                window.location = `/Backend/ProductGroup/Index?isUpdate=true&keywordForSearch=${$textOfSearch}`;
+            });
+
+
+       
+
     } else {
         swal("Update Success", "", "error");
     }

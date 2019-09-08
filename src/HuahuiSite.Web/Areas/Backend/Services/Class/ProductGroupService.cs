@@ -2,6 +2,7 @@
 using HuahuiSite.Core.Interfaces;
 using HuahuiSite.Web.Areas.Backend.Models;
 using HuahuiSite.Web.Areas.Backend.Services.Interface;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -15,14 +16,16 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
     {
         #region Members
 
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUnitOfWork _unitOfWork;
 
         #endregion
 
         #region Constructor
 
-        public ProductGroupService(IUnitOfWork unitOfWork)
+        public ProductGroupService(IHttpContextAccessor httpContextAccessor, IUnitOfWork unitOfWork)
         {
+            _httpContextAccessor = httpContextAccessor;
             _unitOfWork = unitOfWork;
         }
 
@@ -68,12 +71,35 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
-        public void GetProductGroupList(ref ProductGroupViewModel productGroupViewModel)
+        public void GetProductGroupList(ref ProductGroupViewModel productGroupViewModel, string keywordForSearch, bool isUpdate, int page)
         {
+
+            if (!isUpdate)
+            {
+                #region Check Keyword for Search from Session
+
+                if (keywordForSearch == string.Empty && (_httpContextAccessor.HttpContext.Session.GetString("KeywordForSearch") != null && _httpContextAccessor.HttpContext.Session.GetString("KeywordForSearch") != string.Empty))
+                {
+                    keywordForSearch = _httpContextAccessor.HttpContext.Session.GetString("KeywordForSearch");
+                    productGroupViewModel.keywordForSearch = keywordForSearch;
+                }
+
+                #endregion
+            }
+            else
+            {
+                _httpContextAccessor.HttpContext.Session.Remove("KeywordForSearch");
+            }
+
+
             #region Get List
 
-            productGroupViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
+            //productGroupViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
+            productGroupViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetBySearch(keywordForSearch);
+            productGroupViewModel.StartNoOfTable = ((page - 1) * 10) + 1;
 
+            _httpContextAccessor.HttpContext.Session.SetString("KeywordForSearch", keywordForSearch);
+            productGroupViewModel.keywordForSearch = keywordForSearch;
             #endregion
 
             #region Get Select List

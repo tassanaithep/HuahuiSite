@@ -8,5 +8,7 @@ namespace HuahuiSite.Core.Interfaces.Repositories
     public interface IProductGroupRepository : IRepository<ProductGroup>
     {
         ProductGroup GetProductGroupByCodeAndQuantity(string code, int quantity);
+        IEnumerable<ProductGroup> GetBySearch(string keywordForSearch);
+
     }
 }
