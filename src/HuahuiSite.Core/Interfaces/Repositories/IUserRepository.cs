@@ -9,6 +9,7 @@ namespace HuahuiSite.Core.Interfaces.Repositories
     {
         IEnumerable<User> GetAdminUserList();
         User GetUserOfLogin(string username, string password);
-        User GetUserByRole(int roleId);
+        User GetUserByRole(string roleName, int roleId);
+        User GetUserByRoleId(int roleId);
     }
 }

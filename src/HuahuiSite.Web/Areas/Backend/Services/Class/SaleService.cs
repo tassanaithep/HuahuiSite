@@ -117,7 +117,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             if (saleViewModel.IsChangePassword)
             {
-                var user = _unitOfWork.Users.GetUserByRole(saleViewModel.Id);
+                var user = _unitOfWork.Users.GetUserByRoleId(saleViewModel.Id);
 
                 user.Password = Crypto.Hash(saleViewModel.NewPassword);
 
@@ -138,6 +138,8 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void DeleteSale(SaleViewModel saleViewModel)
         {
+            #region Delete Sale
+
             #region Create Object to Delete
 
             Sale sale = new Sale()
@@ -148,6 +150,15 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
             #endregion
 
             _unitOfWork.Sales.Remove(sale);
+
+            #endregion
+
+            #region Delete User of Sale
+
+            var userOfCustomer = _unitOfWork.Users.GetUserByRole("Customer", saleViewModel.Id);
+            _unitOfWork.Users.Remove(userOfCustomer);
+
+            #endregion
         }
 
         #endregion
