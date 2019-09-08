@@ -57,7 +57,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
             try
             {
-                _productService.GetProductList(ref productViewModel, keywordForSearch, isUpdate);
+                _productService.GetProductList(ref productViewModel, keywordForSearch, isUpdate, page);
 
                 // Bind Model to Paging Model
                 productViewModel.ProductPagingList = await PagingList.CreateAsync(productViewModel.ProductList, 10, page);
@@ -85,7 +85,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
             try
             {
-                _productService.GetProductList(ref productViewModel, string.Empty, false);
+                _productService.GetProductList(ref productViewModel, string.Empty, false, 1);
             }
             catch (Exception exception)
             {

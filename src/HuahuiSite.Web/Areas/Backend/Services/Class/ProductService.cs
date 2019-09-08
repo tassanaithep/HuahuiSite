@@ -93,7 +93,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
-        public void GetProductList(ref ProductViewModel productViewModel, string keywordForSearch, bool isUpdate)
+        public void GetProductList(ref ProductViewModel productViewModel, string keywordForSearch, bool isUpdate, int page)
         {
             if (!isUpdate)
             {
@@ -116,6 +116,8 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
             productViewModel.ProductList = _unitOfWork.Products.GetProductListData(keywordForSearch);
 
             #endregion
+
+            productViewModel.StartNoOfTable = ((page - 1) * 10) + 1;
 
             // Set Keyword for Search to Session
             _httpContextAccessor.HttpContext.Session.SetString("KeywordForSearch", keywordForSearch);
