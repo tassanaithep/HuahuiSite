@@ -93,17 +93,24 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
-        public void GetProductList(ref ProductViewModel productViewModel, string keywordForSearch)
+        public void GetProductList(ref ProductViewModel productViewModel, string keywordForSearch, bool isUpdate)
         {
-            #region Check Keyword for Search from Session
-
-            if (keywordForSearch == string.Empty && (_httpContextAccessor.HttpContext.Session.GetString("KeywordForSearch") != null && _httpContextAccessor.HttpContext.Session.GetString("KeywordForSearch") != string.Empty))
+            if (!isUpdate)
             {
-                keywordForSearch = _httpContextAccessor.HttpContext.Session.GetString("KeywordForSearch");
+                #region Check Keyword for Search from Session
+
+                if (keywordForSearch == string.Empty && (_httpContextAccessor.HttpContext.Session.GetString("KeywordForSearch") != null && _httpContextAccessor.HttpContext.Session.GetString("KeywordForSearch") != string.Empty))
+                {
+                    keywordForSearch = _httpContextAccessor.HttpContext.Session.GetString("KeywordForSearch");
+                }
+
+                #endregion
             }
-
-            #endregion
-
+            else
+            {
+                _httpContextAccessor.HttpContext.Session.Remove("KeywordForSearch");
+            }
+            
             #region Get List
 
             productViewModel.ProductList = _unitOfWork.Products.GetProductListData(keywordForSearch);

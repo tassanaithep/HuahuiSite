@@ -42,7 +42,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         // Author: Mod Nattasit
         // Updated: 07/07/2019
         [HttpGet]
-        public async Task<IActionResult> Index(int page = 1, string keywordForSearch = "")
+        public async Task<IActionResult> Index(int page = 1, string keywordForSearch = "", bool isUpdate = false)
         {
             #region Check Login
 
@@ -57,7 +57,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
             try
             {
-                _productService.GetProductList(ref productViewModel, keywordForSearch);
+                _productService.GetProductList(ref productViewModel, keywordForSearch, isUpdate);
 
                 // Bind Model to Paging Model
                 productViewModel.ProductPagingList = await PagingList.CreateAsync(productViewModel.ProductList, 10, page);
@@ -85,7 +85,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
             try
             {
-                _productService.GetProductList(ref productViewModel, string.Empty);
+                _productService.GetProductList(ref productViewModel, string.Empty, false);
             }
             catch (Exception exception)
             {

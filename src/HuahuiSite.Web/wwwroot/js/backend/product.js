@@ -67,28 +67,28 @@ BindData = () => {
 
     // #region Column of Table
 
-    $(".form-row-table").each(function (index, element) {
-        // #region Get Element
+    //$(".form-row-table").each(function (index, element) {
+    //    // #region Get Element
 
-        //let $tdOfCategoriesName = $(element).closest("tr").find(".td-categories-name");
-        //let $tdOfProductGroupName = $(element).closest("tr").find(".td-productgroup-name");
+    //    let $tdOfCategoriesName = $(element).closest("tr").find(".td-categories-name");
+    //    let $tdOfProductGroupName = $(element).closest("tr").find(".td-productgroup-name");
 
-        //// #endregion
+    //    // #endregion
 
-        //// #region Get Value
+    //    // #region Get Value
 
-        //let $categoriesName = $(element).find("[name='ProductCategorieCode'] :selected").text();
-        //let $productgroupName = $(element).find("[name='ProductGroupCode'] :selected").text();
+    //    let $categoriesName = $(element).find("[name='ProductCategorieCode'] :selected").text();
+    //    let $productgroupName = $(element).find("[name='ProductGroupCode'] :selected").text();
 
-        //// #endregion
+    //    // #endregion
 
-        //// #region Binding Value
+    //    // #region Binding Value
 
-        //$tdOfCategoriesName.text($categoriesName);
-        //$tdOfProductGroupName.text($productgroupName);
+    //    $tdOfCategoriesName.text($categoriesName);
+    //    $tdOfProductGroupName.text($productgroupName);
 
-        // #endregion
-    });
+    //    // #endregion
+    //});
 
     // #endregion
 };
@@ -225,8 +225,9 @@ Delete = (e) => {
                 data: jsonObject,
                 success: function (res) {
                     if (res.isSuccess) {
-                        UpdatePage();
+                        //UpdatePage();
                         swal("Delete Success", "", "success");
+                        window.location = "/Backend/Product/Index?isUpdate=true";
                     } else {
                         swal("Delete Failed", "", "error");
                     }
@@ -271,8 +272,9 @@ ValidateUpdateSubmit = (e) => {
 */
 OnSaveSuccess = (res) => {
     if (res.isSuccess) {
-        UpdatePage();
+        //UpdatePage();
         swal("Save Success", "", "success");
+        window.location = "/Backend/Product/Index?isUpdate=true";
     } else {
         swal("Save Failed", "", "error");
     }
@@ -285,8 +287,9 @@ OnSaveSuccess = (res) => {
 */
 OnUpdateSuccess = (res) => {
     if (res.isSuccess) {
-        UpdatePage();
+        //UpdatePage();
         swal("Update Success", "", "success");
+        window.location = "/Backend/Product/Index?isUpdate=true";
     } else {
         swal("Update Success", "", "error");
     }
