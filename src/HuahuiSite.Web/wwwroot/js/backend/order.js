@@ -284,49 +284,6 @@ DeleteCartItem = (e) => {
 };
 
 /**
-  * @desc Update Cart
-  * @param {Object} e - Element of Submit Button
-  * @author Mod Nattasit mod.nattasit@gmail.com
-*/
-UpdateCart = (e) => {
-    let cartItemList = [];
-
-    $(e).closest(".form-row-table").find(".tr-data-row").each(function (index, element) {
-        // #region Get Value from Data Row
-
-        let $id = parseInt($(element).find("[name='hid-cart-item-id']").val());
-        let $cartId = parseInt($(element).find("[name='hid-cart-item-cart-id']").val());
-        let $productId = parseInt($(element).find("[name='hid-cart-item-product-id']").val());
-        let $quantity = parseInt($(element).find("[name='Quantity']").val());
-        let $totalPrice = parseInt($(element).find("[name='TotalPrice']").val());
-        let $isActive = $(element).find("[name='hid-cart-item-is-active']").val() === "true" ? true : false;
-        let $createdDateTime = $(element).find("[name='hid-cart-item-created-datetime']").val();
-
-        // #endregion
-
-        // Add Value to Cart Item List
-        cartItemList.push({ id: $id, cardId: $cartId, productId: $productId, quantity: $quantity, totalPrice: $totalPrice, isActive: $isActive, createdDateTime: $createdDateTime, updatedDateTime: null });
-    });
-
-    $.ajax({
-        type: "POST",
-        url: "/Backend/Cart/Update",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: JSON.stringify(cartItemList),
-        success: function (res) {
-            if (res.isSuccess) {
-                UpdatePage();
-                swal("Update Success", "", "success");
-            } else {
-                swal("Update Success", "", "error");
-            }
-        },
-        error: function () { }
-    });
-};
-
-/**
   * @desc Complete Order
   * @param {Object} e - Element of Complete Order Button
   * @author Mod Nattasit mod.nattasit@gmail.com
@@ -350,8 +307,9 @@ CompleteOrder = (e) => {
                 data: { orderId: $orderId },
                 success: function (res) {
                     if (res.isSuccess) {
-                        UpdatePage();
+                        //UpdatePage();
                         swal("Complete Success", "", "success");
+                        window.location = "/Backend/Order/Index?isUpdate=true";
                     } else {
                         swal("Complete Failed", "", "error");
                     }
@@ -386,8 +344,9 @@ CancelOrder = (e) => {
                 data: { orderId: $orderId },
                 success: function (res) {
                     if (res.isSuccess) {
-                        UpdatePage();
+                        //UpdatePage();
                         swal("Cancel Success", "", "success");
+                        window.location = "/Backend/Order/Index?isUpdate=true";
                     } else {
                         swal("Cancel Failed", "", "error");
                     }

@@ -4,6 +4,7 @@ using HuahuiSite.Core.Interfaces;
 using HuahuiSite.Core.Models;
 using HuahuiSite.Web.Areas.Backend.Models;
 using HuahuiSite.Web.Areas.Backend.Services.Interface;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,14 +17,16 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
     {
         #region Members
 
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUnitOfWork _unitOfWork;
 
         #endregion
 
         #region Constructor
 
-        public OrderService(IUnitOfWork unitOfWork)
+        public OrderService(IHttpContextAccessor httpContextAccessor, IUnitOfWork unitOfWork)
         {
+            _httpContextAccessor = httpContextAccessor;
             _unitOfWork = unitOfWork;
         }
 
@@ -42,9 +45,32 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         /// </summary>
         // Author: Mod Nattasit
         // Updated: 07/07/2019
-        public void GetOrderList(ref OrderViewModel orderViewModel)
+        public void GetOrderList(ref OrderViewModel orderViewModel, string keywordForSearch, bool isUpdate, int page)
         {
-            orderViewModel.OrderList = _unitOfWork.Orders.GetAll();
+            if (!isUpdate)
+            {
+                #region Check Keyword for Search from Session
+
+                if (keywordForSearch == string.Empty && (_httpContextAccessor.HttpContext.Session.GetString("KeywordForSearch") != null && _httpContextAccessor.HttpContext.Session.GetString("KeywordForSearch") != string.Empty))
+                {
+                    keywordForSearch = _httpContextAccessor.HttpContext.Session.GetString("KeywordForSearch");
+                }
+
+                #endregion
+            }
+            else
+            {
+                _httpContextAccessor.HttpContext.Session.Remove("KeywordForSearch");
+            }
+
+            #region Get List
+
+            orderViewModel.OrderList = _unitOfWork.Orders.GetAll().AsQueryable().OrderBy(o => o.Id);
+
+            #endregion
+
+
+
             orderViewModel.OrderItemList = _unitOfWork.OrderItemLists.GetOrderItemList();
         }
 
