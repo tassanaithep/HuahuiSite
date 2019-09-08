@@ -65,11 +65,11 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #region Get List
 
-            orderViewModel.OrderList = _unitOfWork.Orders.GetOrderListData();
+            orderViewModel.OrderList = _unitOfWork.Orders.GetOrderListData(keywordForSearch);
 
             #endregion
 
-
+            orderViewModel.StartNoOfTable = ((page - 1) * 10) + 1;
 
             orderViewModel.OrderItemList = _unitOfWork.OrderItemLists.GetOrderItemList();
         }

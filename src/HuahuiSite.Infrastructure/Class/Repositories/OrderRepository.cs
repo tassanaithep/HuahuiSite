@@ -1,6 +1,7 @@
 ﻿using HuahuiSite.Core.Entities;
 using HuahuiSite.Core.Interfaces.Repositories;
 using HuahuiSite.Core.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +25,9 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
             return HuahuiDbContext.Order.Where(w => w.Id.Equals(orderId)).SingleOrDefault();
         }
 
-        public IOrderedQueryable<Order> GetOrderListData()
+        public IOrderedQueryable<Order> GetOrderListData(string keywordForSearch)
         {
-            return HuahuiDbContext.Order.OrderBy(o => o.Id);
+            return HuahuiDbContext.Order.AsNoTracking().Where(w => w.Id.Contains(keywordForSearch) || w.Status.Contains(keywordForSearch)).OrderBy(o => o.Id);
         }
 
         public IEnumerable<OrderModel> GetOrderList()

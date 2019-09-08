@@ -10,7 +10,7 @@ namespace HuahuiSite.Core.Interfaces.Repositories
     public interface IOrderRepository : IRepository<Order>
     {
         Order GetOrderByOrderId(string orderId);
-        IOrderedQueryable<Order> GetOrderListData();
+        IOrderedQueryable<Order> GetOrderListData(string keywordForSearch);
         IEnumerable<OrderModel> GetOrderList();
         Order GetOrderActiveByUser(int userId);
         IEnumerable<OrderModel> GetOrderListOfSearch(string startDate, string endDate, string customerName, string saleName);
