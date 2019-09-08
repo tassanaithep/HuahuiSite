@@ -23,7 +23,7 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
         public IEnumerable<CustomerModel> GetCustomerList()
         {
             return (from customer in HuahuiDbContext.Customer
-                    join user in HuahuiDbContext.User on customer.Id equals user.RoleId
+                    join user in HuahuiDbContext.User.Where(w => w.RoleName.Equals("Customer")) on customer.Id equals user.RoleId
                     select new CustomerModel
                     {
                         Id = customer.Id,

@@ -9,7 +9,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Interface
 {
     public interface IOrderService
     {
-        void GetOrderList(ref OrderViewModel orderViewModel);
+        void GetOrderList(ref OrderViewModel orderViewModel, string keywordForSearch, bool isUpdate, int page);
         void CompleteOrder(string orderId);
         void CancelOrder(string orderId);
     }

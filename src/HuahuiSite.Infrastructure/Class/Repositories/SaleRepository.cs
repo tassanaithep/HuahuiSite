@@ -23,7 +23,7 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
         public IEnumerable<SaleModel> GetSaleList()
         {
             return (from sale in HuahuiDbContext.Sale
-                    join user in HuahuiDbContext.User on sale.Id equals user.RoleId
+                    join user in HuahuiDbContext.User.Where(w => w.RoleName.Equals("Sale")) on sale.Id equals user.RoleId
                     select new SaleModel
                     {
                         Id = sale.Id,
