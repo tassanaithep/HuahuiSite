@@ -48,7 +48,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
         // Updated: 07/07/2019
         public void SaveCart(CartViewModel cartViewModel)
         {
-            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserDataSession");
+            var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserSessionFrontend");
 
             #region Save Cart and Order
 
