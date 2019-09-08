@@ -65,7 +65,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             #region Get List
 
-            orderViewModel.OrderList = _unitOfWork.Orders.GetAll().AsQueryable().OrderBy(o => o.Id);
+            orderViewModel.OrderList = _unitOfWork.Orders.GetOrderListData();
 
             #endregion
 

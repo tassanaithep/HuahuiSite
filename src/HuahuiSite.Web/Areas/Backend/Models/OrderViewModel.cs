@@ -18,11 +18,8 @@ namespace HuahuiSite.Web.Areas.Backend.Models
         public DateTime CreatedDateTime { get; set; }
         public IEnumerable<OrderItemListModel> OrderItemList { get; set; }
 
+        public int StartNoOfTable { get; set; }
         public IOrderedQueryable<Order> OrderList { get; set; }
         public IPagingList<Order> OrderPagingList { get; set; }
-
-        //public IEnumerable<CartModel> CartList { get; set; }
-        //public IEnumerable<CartItemList> CartItemList { get; set; }
-        //public IEnumerable<CartItemListModel> CartItemListModelList { get; set; }
     }
 }

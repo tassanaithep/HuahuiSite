@@ -7,7 +7,7 @@
 $(function () {
     //RenderImage();
     //BindData();
-    $("#table-data").DataTable();
+    //$("#table-data").DataTable();
     BindProductPriceByQuantity();
 });
 
@@ -221,6 +221,22 @@ UpdateTable = () => {
 // #endregion
 
 // #region Actions
+
+/**
+  * @desc Enter to Search of Table
+  * @param {Object} e - Element of Input Search
+  * @param {Event} event - Event of Input Search
+  * @author Mod Nattasit mod.nattasit@gmail.com
+*/
+EnterSearch = (e, event) => {
+    var code = (event.keyCode ? event.keyCode : event.which);
+
+    if (code === 13) {
+        let $textOfSearch = $(e).val();
+
+        window.location = `/Backend/Order/Index?keywordForSearch=${ $textOfSearch }`;
+    }
+};
 
 /**
   * @desc Delete Cart

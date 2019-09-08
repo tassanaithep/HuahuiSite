@@ -1,4 +1,7 @@
-﻿@model HuahuiSite.Web.Areas.Backend.Models.OrderViewModel
+﻿@using ReflectionIT.Mvc.Paging
+@addTagHelper *, ReflectionIT.Mvc.Paging
+
+@model HuahuiSite.Web.Areas.Backend.Models.OrderViewModel
 
 <div class="col-md-12">
     <div class="card">
@@ -9,6 +12,11 @@
         </div>
         <div class="card-body collapse show">
             <div class="table-responsive">
+
+                <div id="example23_filter" class="dataTables_filter">
+                    <label>Search:<input type="text" class="form-control form-control-sm" placeholder="" aria-controls="example23" onkeypress="EnterSearch(this, event)"></label>
+                </div>
+
                 <table class="table" id="table-data">
                     <thead>
                         <tr>
@@ -20,139 +28,139 @@
                     </thead>
                     <tbody>
 
-                        @{ int No = 1; }
+                        @{ int No = Model.StartNoOfTable; }
 
                         @foreach (var itemOfOrder in Model.OrderList)
                         {
 
                             <tr class="tr-data-row">
-                            <td>@No</td>
-                            <td>@itemOfOrder.Id</td>
-                            <td>@(itemOfOrder.Status.Equals("Cart") ? "รอการยืนยัน" : itemOfOrder.Status.Equals("Confirm") ? "ยืนยันการสั่งซื้อแล้ว" : itemOfOrder.Status.Equals("Approve") ? "ระบบรับ Order แล้ว" : "ปิดการขาย")</td>
-                            <td>
-                                <a href="#" data-toggle="modal" data-target="#modal-row-table-@No"> <i class="fas fa-eye text-inverse m-r-10"></i> </a>
-                                <div class="modal fade" id="modal-row-table-@No" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg" role="document">
-                                        <div class="modal-content">
-                                            <form class="form-row-table">
+                                <td>@No</td>
+                                <td>@itemOfOrder.Id</td>
+                                <td>@(itemOfOrder.Status.Equals("Cart") ? "รอการยืนยัน" : itemOfOrder.Status.Equals("Confirm") ? "ยืนยันการสั่งซื้อแล้ว" : itemOfOrder.Status.Equals("Approve") ? "ระบบรับ Order แล้ว" : "ปิดการขาย")</td>
+                                <td>
+                                    <a href="#" data-toggle="modal" data-target="#modal-row-table-@No"> <i class="fas fa-eye text-inverse m-r-10"></i> </a>
+                                    <div class="modal fade" id="modal-row-table-@No" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <form class="form-row-table">
 
-                                                <!-- Hidden Value Start -->
+                                                    <!-- Hidden Value Start -->
 
-                                                <input type="hidden" name="hid-order-id" value="@itemOfOrder.Id" />
+                                                    <input type="hidden" name="hid-order-id" value="@itemOfOrder.Id" />
 
-                                                <!-- Hidden Value End -->
+                                                    <!-- Hidden Value End -->
 
-                                                <div class="modal-header" style="background-color: #ff6a00;">
-                                                    <h4 class="modal-title text-white">View Order: @itemOfOrder.Id</h4>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="text-white">×</span></button>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                        <div class="modal-body">
-                                                            <div class="card">
-                                                                <div class="card-header">
-                                                                    <div class="card-actions">
-                                                                        <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                                                    <div class="modal-header" style="background-color: #ff6a00;">
+                                                        <h4 class="modal-title text-white">View Order: @itemOfOrder.Id</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="text-white">×</span></button>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                            <div class="modal-body">
+                                                                <div class="card">
+                                                                    <div class="card-header">
+                                                                        <div class="card-actions">
+                                                                            <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="card-body collapse show">
-                                                                    <div class="table-responsive">
-                                                                        <table class="table table-data-item">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <th>Product Name</th>
-                                                                                    <th>Picture</th>
-                                                                                    <th>Unit Price</th>
-                                                                                    <th>Quantity</th>
-                                                                                    <th>Total Price</th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody>
+                                                                    <div class="card-body collapse show">
+                                                                        <div class="table-responsive">
+                                                                            <table class="table table-data-item">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>Product Name</th>
+                                                                                        <th>Picture</th>
+                                                                                        <th>Unit Price</th>
+                                                                                        <th>Quantity</th>
+                                                                                        <th>Total Price</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
 
-                                                                                @{
+                                                                                    @{
 
-                                                                                    int SummaryQuantityOfProduct = 0;
-                                                                                    decimal SummaryTotalOfProduct = 0;
+                                                                                        int SummaryQuantityOfProduct = 0;
+                                                                                        decimal SummaryTotalOfProduct = 0;
 
-                                                                                }
+                                                                                    }
 
-                                                                                @foreach (var itemOfOrderItem in Model.OrderItemList.Where(w => w.OrderId.Equals(itemOfOrder.Id)))
-                                                                                {
+                                                                                    @foreach (var itemOfOrderItem in Model.OrderItemList.Where(w => w.OrderId.Equals(itemOfOrder.Id)))
+                                                                                    {
 
-                                                                                <tr class="tr-data-item-row">
+                                                                                        <tr class="tr-data-item-row">
 
-                                                                                    <!-- Hidden Value of Cart Item Start -->
+                                                                                            <!-- Hidden Value of Cart Item Start -->
 
-                                                                                    <input type="hidden" name="hid-order-item-product-id" value="@itemOfOrderItem.ProductId" />
-                                                                                    <input type="hidden" name="hid-order-item-created-datetime" value="@itemOfOrderItem.CreatedDateTime" />
+                                                                                            <input type="hidden" name="hid-order-item-product-id" value="@itemOfOrderItem.ProductId" />
+                                                                                            <input type="hidden" name="hid-order-item-created-datetime" value="@itemOfOrderItem.CreatedDateTime" />
 
-                                                                                    <input type="hidden" name="hid-order-item-unit-price" value="@itemOfOrderItem.UnitPrice" />
+                                                                                            <input type="hidden" name="hid-order-item-unit-price" value="@itemOfOrderItem.UnitPrice" />
 
-                                                                                    <input type="hidden" name="hid-order-product-group-code" value="@itemOfOrderItem.ProductGroupCode" />
-                                                                                    <input type="hidden" name="hid-order-is-promotion" value="@(itemOfOrderItem.IsPromotion ? "true" : "false")" />
+                                                                                            <input type="hidden" name="hid-order-product-group-code" value="@itemOfOrderItem.ProductGroupCode" />
+                                                                                            <input type="hidden" name="hid-order-is-promotion" value="@(itemOfOrderItem.IsPromotion ? "true" : "false")" />
 
-                                                                                    <!-- Hidden Value of Cart Item End -->
+                                                                                            <!-- Hidden Value of Cart Item End -->
 
-                                                                                    <td>@itemOfOrderItem.ProductName</td>
-                                                                                    <td>
-                                                                                        <img src="~/images/upload/@itemOfOrderItem.PictureFileName" alt="Picture" width="80" />
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <input type="text" class="form-control col-sm-6" name="UnitPrice" value="@itemOfOrderItem.UnitPrice" disabled />
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <input type="number" class="form-control col-sm-6" name="Quantity" value="@itemOfOrderItem.Quantity" onchange="CalculateTotalPrice(this)" disabled />
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <input type="text" class="form-control col-sm-10" name="TotalPrice" value="@itemOfOrderItem.TotalPrice" disabled />
-                                                                                    </td>
-                                                                                </tr>
+                                                                                            <td>@itemOfOrderItem.ProductName</td>
+                                                                                            <td>
+                                                                                                <img src="~/images/upload/@itemOfOrderItem.PictureFileName" alt="Picture" width="80" />
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <input type="text" class="form-control col-sm-6" name="UnitPrice" value="@itemOfOrderItem.UnitPrice" disabled />
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <input type="number" class="form-control col-sm-6" name="Quantity" value="@itemOfOrderItem.Quantity" onchange="CalculateTotalPrice(this)" disabled />
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <input type="text" class="form-control col-sm-10" name="TotalPrice" value="@itemOfOrderItem.TotalPrice" disabled />
+                                                                                            </td>
+                                                                                        </tr>
 
-                                                                                    SummaryQuantityOfProduct += itemOfOrderItem.Quantity;
-                                                                                    SummaryTotalOfProduct += itemOfOrderItem.TotalPrice;
+                                                                                        SummaryQuantityOfProduct += itemOfOrderItem.Quantity;
+                                                                                        SummaryTotalOfProduct += itemOfOrderItem.TotalPrice;
 
-                                                                                }
+                                                                                    }
 
-                                                                                <tr>
-                                                                                    <td></td>
-                                                                                    <td></td>
-                                                                                    <td><b>Total</b></td>
-                                                                                    <td><input type="text" class="form-control col-sm-6" value="@SummaryQuantityOfProduct" disabled /></td>
-                                                                                    <td><input type="text" class="form-control col-sm-10" value="@SummaryTotalOfProduct" disabled /></td>
-                                                                                </tr>
+                                                                                    <tr>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td><b>Total</b></td>
+                                                                                        <td><input type="text" class="form-control col-sm-6" value="@SummaryQuantityOfProduct" disabled /></td>
+                                                                                        <td><input type="text" class="form-control col-sm-10" value="@SummaryTotalOfProduct" disabled /></td>
+                                                                                    </tr>
 
-                                                                            </tbody>
-                                                                        </table>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <div class="col-sm-6">
+                                                    <div class="modal-footer">
+                                                        <div class="col-sm-6">
 
-                                                        @if (itemOfOrder.Status.Equals("Approve"))
-                                                        {
-                                                            <div class="float-left">
-                                                                <button type="button" class="btn btn-success waves-effect waves-light m-r-10" onclick="CompleteOrder(this)">Complete</button>
-                                                                <button type="button" class="btn btn-danger waves-effect waves-light m-r-10" onclick="CancelOrder(this)">Cancel</button>
+                                                            @if (itemOfOrder.Status.Equals("Approve"))
+                                                            {
+                                                                <div class="float-left">
+                                                                    <button type="button" class="btn btn-success waves-effect waves-light m-r-10" onclick="CompleteOrder(this)">Complete</button>
+                                                                    <button type="button" class="btn btn-danger waves-effect waves-light m-r-10" onclick="CancelOrder(this)">Cancel</button>
+                                                                </div>
+                                                            }
+
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="float-right">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                             </div>
-                                                        }
-
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="float-right">
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </form>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
 
                             No++;
 
@@ -160,6 +168,24 @@
 
                     </tbody>
                 </table>
+
+                <div class="row">
+                    <div class="col-sm-6">
+
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="float-right">
+                            <!-- Paging Start -->
+
+                            <nav aria-label="table-data">
+                                <vc:pager paging-list="Model.OrderPagingList" />
+                            </nav>
+
+                            <!-- Paging End -->
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
