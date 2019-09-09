@@ -32,6 +32,7 @@ namespace HuahuiSite.Web.Areas.Backend.Models
         public IEnumerable<SelectListItem> ProductGroupSelectList { get; set; }
 
         public int StartNoOfTable { get; set; }
+        public string keywordForSearch { get; set; }
         public IOrderedQueryable<ProductModel> ProductList { get; set; }
         public IPagingList<ProductModel> ProductPagingList { get; set; }
     }

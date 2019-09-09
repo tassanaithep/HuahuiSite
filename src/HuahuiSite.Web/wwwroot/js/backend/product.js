@@ -186,11 +186,14 @@ UpdateTable = () => {
 EnterSearch = (e, event) => {
     var code = (event.keyCode ? event.keyCode : event.which);
 
-    if (code === 13)
-    {
-        let $textOfSearch = $(e).val();
+    if (code === 13) {
 
-        window.location = `/Backend/Product/Index?keywordForSearch=${ $textOfSearch }`;
+        let $textOfSearch = $(e).val();
+        if ($textOfSearch != '') {
+            window.location = `/Backend/Product/Index?keywordForSearch=${$textOfSearch}`;
+        } else {
+            swal("กรอกคำค้นหาด้วยครับ", "", "warning");
+        }
     }
 };
 
@@ -219,6 +222,11 @@ Delete = (e) => {
             jsonObject.Id = $id;
             jsonObject.PictureFileName = $pictureFileName;
 
+            let $textOfSearch = $("#keywordForSearch").val();
+            //  swal("Update Success", "", "success");
+
+
+
             $.ajax({
                 type: "POST",
                 url: "/Backend/Product/Delete",
@@ -226,8 +234,17 @@ Delete = (e) => {
                 success: function (res) {
                     if (res.isSuccess) {
                         //UpdatePage();
-                        swal("Delete Success", "", "success");
-                        window.location = "/Backend/Product/Index?isUpdate=true";
+                        swal("Delete Success", "", "success")
+                            .then((value) => {
+                                //  window.location = "/Backend/ProductGroup/Index?isUpdate=true&keywordForSearch=${$textOfSearch}";
+
+                                if ($textOfSearch!='') {
+                                    window.location = `/Backend/Product/Index?isUpdate=true&keywordForSearch=${$textOfSearch}`;
+                                } else {
+                                    window.location = "/Backend/Product/";
+                                }
+
+                            });
                     } else {
                         swal("Delete Failed", "", "error");
                     }
@@ -273,8 +290,17 @@ ValidateUpdateSubmit = (e) => {
 OnSaveSuccess = (res) => {
     if (res.isSuccess) {
         //UpdatePage();
-        swal("Save Success", "", "success");
-        window.location = "/Backend/Product/Index?isUpdate=true";
+
+        swal("Save Success", "", "success")
+            .then((value) => {
+                window.location = "/Backend/Product/Index?isUpdate=true";
+
+            });
+
+
+
+        //swal("Save Success", "", "success");
+       // window.location = "/Backend/Product/Index?isUpdate=true";
     } else {
         swal("Save Failed", "", "error");
     }
@@ -287,9 +313,32 @@ OnSaveSuccess = (res) => {
 */
 OnUpdateSuccess = (res) => {
     if (res.isSuccess) {
-        //UpdatePage();
-        swal("Update Success", "", "success");
-        window.location = "/Backend/Product/Index?isUpdate=true";
+        
+
+        let $textOfSearch = $("#keywordForSearch").val();
+        //  swal("Update Success", "", "success");
+
+       // if ($textOfSearch != '') {
+            UpdatePage();
+            swal("Update Success", "", "success")
+                .then((value) => {
+
+                    if ($textOfSearch != '') {
+                        //  window.location = "/Backend/ProductGroup/Index?isUpdate=true&keywordForSearch=${$textOfSearch}";
+                        window.location = `/Backend/Product/Index?isUpdate=true&keywordForSearch=${$textOfSearch}`;
+                    } else {
+                        window.location = "/Backend/Product/Index";
+                    }
+                });
+        //} else {
+           
+        //    swal("Update Success", "", "success");
+        //    UpdatePage();
+        
+        //}
+
+       
+
     } else {
         swal("Update Success", "", "error");
     }

@@ -88,7 +88,10 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
             }
             else
             {
-                _httpContextAccessor.HttpContext.Session.Remove("KeywordForSearch");
+                if (keywordForSearch == "")
+                {
+                    _httpContextAccessor.HttpContext.Session.Remove("KeywordForSearch");
+                }
             }
 
 
