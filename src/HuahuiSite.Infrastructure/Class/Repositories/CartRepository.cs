@@ -22,21 +22,39 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
 
         public IEnumerable<CartModel> GetCartList()
         {
-            return (from cart in HuahuiDbContext.Cart.Where(w => w.Status.Equals("Cart") || w.Status.Equals("Confirm"))
-                    join userJoin in HuahuiDbContext.User on cart.UserId equals userJoin.RoleId into CartJoinUser
-                    from user in CartJoinUser.DefaultIfEmpty()
-                    select new CartModel
-                    {
-                        Id = cart.Id,
-                        OrderId = cart.OrderId,
-                        UserRole = cart.UserRole,
-                        UserId = cart.UserId,
-                        Status = cart.Status,
-                        IsActive = cart.IsActive,
-                        CreatedDateTime = cart.CreatedDateTime,
-                        UpdatedDateTime = cart.UpdatedDateTime,
-                        UserName = user.Name
-                    });
+            //return (from cart in HuahuiDbContext.Cart.Where(w => w.Status.Equals("Cart") || w.Status.Equals("Confirm"))
+            //        join userJoin in HuahuiDbContext.User on cart.UserId equals userJoin.RoleId into CartJoinUser
+            //        from user in CartJoinUser.DefaultIfEmpty()
+            //        select new CartModel
+            //        {
+            //            Id = cart.Id,
+            //            OrderId = cart.OrderId,
+            //            UserRole = cart.UserRole,
+            //            UserId = cart.UserId,
+            //            Status = cart.Status,
+            //            IsActive = cart.IsActive,
+            //            CreatedDateTime = cart.CreatedDateTime,
+            //            UpdatedDateTime = cart.UpdatedDateTime,
+            //            UserName = user.Name
+            //        });
+
+
+             return (from c in HuahuiDbContext.Cart.Where(w => w.Status.Equals("Cart") || w.Status.Equals("Confirm"))
+                     from u in HuahuiDbContext.User
+                            where c.UserId == u.RoleId && c.UserRole == u.RoleName
+                            select new CartModel
+                            {
+                                Id = c.Id,
+                                OrderId = c.OrderId,
+                                UserRole = c.UserRole,
+                                UserId = c.UserId,
+                                Status = c.Status,
+                                IsActive = c.IsActive,
+                                CreatedDateTime = c.CreatedDateTime,
+                                UpdatedDateTime = c.UpdatedDateTime,
+                                UserName = u.Name
+                            });
+
         }
 
         public IEnumerable<CartModel> GetCartListOfSearch(string startDate, string endDate, string customerName, string saleName)
