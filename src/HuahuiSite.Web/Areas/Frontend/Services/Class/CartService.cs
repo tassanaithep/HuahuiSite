@@ -166,10 +166,11 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             mainViewModel.LoginViewModel = new LoginViewModel();
 
             var loginViewModelSession = Extensions.SessionExtensions.GetObject<LoginViewModel>(_httpContextAccessor.HttpContext.Session, "UserSessionFrontend");
-
+            var roleid = 0;
             if (loginViewModelSession != null)
             {
                 mainViewModel.LoginViewModel = loginViewModelSession;
+                 roleid = mainViewModel.LoginViewModel.RoleId;
             }
 
             #endregion
@@ -201,7 +202,9 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
                 {
                     if (mainViewModel.CartViewModel.Status.Equals("Cart"))
                     {
-                        mainViewModel.CartViewModel.CustomerSelectList = _unitOfWork.Customers.GetAll().Select(s => new SelectListItem { Value = s.Id.ToString(), Text = s.Firstname + " " + s.Lastname });
+                       // mainViewModel.CartViewModel.CustomerSelectList = _unitOfWork.Customers.GetAll().Select(s => new SelectListItem { Value = s.Id.ToString(), Text = s.Firstname + " " + s.Lastname });
+                        mainViewModel.CartViewModel.CustomerSelectList = _unitOfWork.Customers.GetAll().Where(x=>x.SaleId== roleid).Select(s => new SelectListItem { Value = s.Id.ToString(), Text = s.Firstname + " " + s.Lastname });
+
                     }
                     else if (!mainViewModel.CartViewModel.Status.Equals("Cart"))
                     {

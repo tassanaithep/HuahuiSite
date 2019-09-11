@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using HuahuiSite.Core.Entities;
@@ -59,6 +60,17 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
 
         public IEnumerable<CartModel> GetCartListOfSearch(string startDate, string endDate, string customerName, string saleName)
         {
+
+            //DateTime datestart = DateTime.ParseExact(startDate, "MM/dd/yyyy",
+            //                 CultureInfo.InvariantCulture);
+
+            //DateTime datestart = DateTime.ParseExact("dd/MM/yyyy HH:mm:ss", new CultureInfo("en-US"));
+            System.Globalization.CultureInfo _cultureEnInfo = new System.Globalization.CultureInfo("en-US");
+DateTime datestart = Convert.ToDateTime(startDate, _cultureEnInfo);
+
+            DateTime dateend = DateTime.ParseExact(endDate, "MM/dd/yyyy",
+                                 CultureInfo.InvariantCulture);
+
             return (from cart in HuahuiDbContext.Cart
                     join customerJoin in HuahuiDbContext.Customer on cart.UserId equals customerJoin.Id into CartJoinCustomer
                     from customer in CartJoinCustomer
@@ -72,7 +84,25 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         SaleName = sale.Firstname + " " + sale.Lastname,
                         Status = cart.Status,
                         CreatedDateTime = cart.CreatedDateTime
-                    }).Where(w => w.CreatedDateTime.Date >= Convert.ToDateTime(startDate).Date && w.CreatedDateTime.Date <= Convert.ToDateTime(endDate).Date || w.CustomerName.Contains(customerName) || w.SaleName.Contains(saleName)).GroupBy(g => g.Id).Select(s => s.First()).ToList();
+                    }).Where(w => w.CreatedDateTime.Date >= datestart && w.CreatedDateTime.Date <= dateend || w.CustomerName.Contains(customerName) || w.SaleName.Contains(saleName)).GroupBy(g => g.Id).Select(s => s.First()).ToList();
+
+
+            //return (from cart in HuahuiDbContext.Cart
+            //        join customerJoin in HuahuiDbContext.Customer on cart.UserId equals customerJoin.Id into CartJoinCustomer
+            //        from customer in CartJoinCustomer
+            //        join saleJoin in HuahuiDbContext.Sale on customer.SaleId equals saleJoin.Id into CustomerJoinSale
+            //        from sale in CustomerJoinSale
+            //        select new CartModel
+            //        {
+            //            Id = cart.Id,
+            //            OrderId = cart.OrderId,
+            //            CustomerName = customer.Firstname + " " + customer.Lastname,
+            //            SaleName = sale.Firstname + " " + sale.Lastname,
+            //            Status = cart.Status,
+            //            CreatedDateTime = cart.CreatedDateTime
+            //        }).Where(w => w.CreatedDateTime.Date >= Convert.ToDateTime(startDate).Date && w.CreatedDateTime.Date <= Convert.ToDateTime(endDate).Date || w.CustomerName.Contains(customerName) || w.SaleName.Contains(saleName)).GroupBy(g => g.Id).Select(s => s.First()).ToList();
+
+
         }
 
         public IEnumerable<CartModel> GetCartListData()

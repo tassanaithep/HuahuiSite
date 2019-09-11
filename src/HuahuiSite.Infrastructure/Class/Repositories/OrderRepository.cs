@@ -4,6 +4,7 @@ using HuahuiSite.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -49,20 +50,56 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
 
         public IEnumerable<OrderModel> GetOrderListOfSearch(string startDate, string endDate, string customerName, string saleName)
         {
-            return (from order in HuahuiDbContext.Order
-                    join customerJoin in HuahuiDbContext.Customer on order.UserId equals customerJoin.Id into OrderJoinCustomer
-                    from customer in OrderJoinCustomer
-                    join saleJoin in HuahuiDbContext.Sale on customer.SaleId equals saleJoin.Id into CustomerJoinSale
-                    from sale in CustomerJoinSale
-                    select new OrderModel
-                    {
-                        Id = order.Id,
-                        CustomerName = customer.Firstname + " " + customer.Lastname,
-                        SaleName = sale.Firstname + " " + sale.Lastname,
-                        Status = order.Status,
-                        CreatedDateTime = order.CreatedDateTime
-                    }).Where(w => w.CreatedDateTime.Date >= Convert.ToDateTime(startDate).Date && w.CreatedDateTime.Date <= Convert.ToDateTime(endDate).Date || w.CustomerName.Contains(customerName) || w.SaleName.Contains(saleName)).GroupBy(g => g.Id).Select(s => s.First()).ToList();
+
+            //var dataresult = (from order in HuahuiDbContext.Order
+            //                  join customerJoin in HuahuiDbContext.Customer on order.UserId equals customerJoin.Id into OrderJoinCustomer
+            //                  from customer in OrderJoinCustomer
+            //                  join saleJoin in HuahuiDbContext.Sale on customer.SaleId equals saleJoin.Id into CustomerJoinSale
+            //                  from sale in CustomerJoinSale
+            //                  select new OrderModel
+            //                  {
+            //                      Id = order.Id,
+            //                      CustomerName = customer.Firstname + " " + customer.Lastname,
+            //                      SaleName = sale.Firstname + " " + sale.Lastname,
+            //                      Status = order.Status,
+            //                      CreatedDateTime = order.CreatedDateTime
+            //                  }).Where(w => w.CreatedDateTime.Date >= Convert.ToDateTime(startDate).Date && w.CreatedDateTime.Date <= Convert.ToDateTime(endDate).Date || w.CustomerName.Contains(customerName) || w.SaleName.Contains(saleName)).GroupBy(g => g.Id).Select(s => s.First()).ToList();
+
+            DateTime datestart = DateTime.ParseExact(startDate, "MM/dd/yyyy",
+                                    CultureInfo.InvariantCulture);
+
+            DateTime dateend = DateTime.ParseExact(endDate, "MM/dd/yyyy",
+                                 CultureInfo.InvariantCulture);
+            var dataresult = (from order in HuahuiDbContext.Order
+                              join customerJoin in HuahuiDbContext.Customer on order.UserId equals customerJoin.Id into OrderJoinCustomer
+                              from customer in OrderJoinCustomer
+                              join saleJoin in HuahuiDbContext.Sale on customer.SaleId equals saleJoin.Id into CustomerJoinSale
+                              from sale in CustomerJoinSale
+                              select new OrderModel
+                              {
+                                  Id = order.Id,
+                                  CustomerName = customer.Firstname + " " + customer.Lastname,
+                                  SaleName = sale.Firstname + " " + sale.Lastname,
+                                  Status = order.Status,
+                                  CreatedDateTime = order.CreatedDateTime
+                              }).Where(w => w.CreatedDateTime.Date >= datestart && w.CreatedDateTime.Date <= dateend && w.CustomerName.Contains(customerName) || w.SaleName.Contains(saleName)).GroupBy(g => g.Id).Select(s => s.First()).ToList();
+
+            return dataresult;
         }
+        //    return (from order in HuahuiDbContext.Order
+        //            join customerJoin in HuahuiDbContext.Customer on order.UserId equals customerJoin.Id into OrderJoinCustomer
+        //            from customer in OrderJoinCustomer
+        //            join saleJoin in HuahuiDbContext.Sale on customer.SaleId equals saleJoin.Id into CustomerJoinSale
+        //            from sale in CustomerJoinSale
+        //            select new OrderModel
+        //            {
+        //                Id = order.Id,
+        //                CustomerName = customer.Firstname + " " + customer.Lastname,
+        //                SaleName = sale.Firstname + " " + sale.Lastname,
+        //                Status = order.Status,
+        //                CreatedDateTime = order.CreatedDateTime
+        //            }).Where(w => w.CreatedDateTime.Date >= Convert.ToDateTime(startDate).Date && w.CreatedDateTime.Date <= Convert.ToDateTime(endDate).Date || w.CustomerName.Contains(customerName) || w.SaleName.Contains(saleName)).GroupBy(g => g.Id).Select(s => s.First()).ToList();
+        //}
 
         public Order GetOrderActiveByUser(int userId)
         {

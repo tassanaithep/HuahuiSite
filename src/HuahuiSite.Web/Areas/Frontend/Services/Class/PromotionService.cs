@@ -59,7 +59,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             }
 
             mainViewModel.PromotionViewModel = new PromotionViewModel();
-            mainViewModel.PromotionViewModel.ProductList = _unitOfWork.Products.GetProductList();
+            mainViewModel.PromotionViewModel.ProductList = _unitOfWork.Products.GetProductList().Where(x=>x.IsPromotion == true);
             mainViewModel.PromotionViewModel.ProductCategoriesList = _unitOfWork.ProductCategories.GetAll();
 
             if (mainViewModel.LoginViewModel.IsLogin)
