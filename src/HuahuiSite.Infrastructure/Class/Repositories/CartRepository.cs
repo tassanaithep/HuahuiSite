@@ -40,21 +40,57 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
             //        });
 
 
-             return (from c in HuahuiDbContext.Cart.Where(w => w.Status.Equals("Cart") || w.Status.Equals("Confirm"))
-                     from u in HuahuiDbContext.User
-                            where c.UserId == u.RoleId && c.UserRole == u.RoleName
-                            select new CartModel
-                            {
-                                Id = c.Id,
-                                OrderId = c.OrderId,
-                                UserRole = c.UserRole,
-                                UserId = c.UserId,
-                                Status = c.Status,
-                                IsActive = c.IsActive,
-                                CreatedDateTime = c.CreatedDateTime,
-                                UpdatedDateTime = c.UpdatedDateTime,
-                                UserName = u.Name
-                            });
+            //return (from c in HuahuiDbContext.Cart.Where(w => w.Status.Equals("Cart") || w.Status.Equals("Confirm"))
+            //        from u in HuahuiDbContext.User
+            //               where c.UserId == u.RoleId && c.UserRole == u.RoleName
+            //               select new CartModel
+            //               {
+            //                   Id = c.Id,
+            //                   OrderId = c.OrderId,
+            //                   UserRole = c.UserRole,
+            //                   UserId = c.UserId,
+            //                   Status = c.Status,
+            //                   IsActive = c.IsActive,
+            //                   CreatedDateTime = c.CreatedDateTime,
+            //                   UpdatedDateTime = c.UpdatedDateTime,
+            //                   UserName = u.Name
+            //               });
+
+            //return (from c in HuahuiDbContext.Cart.Where(w => w.Status.Equals("Cart") || w.Status.Equals("Confirm"))
+            //        from u in HuahuiDbContext.User
+            //        where c.UserId == u.RoleId && c.UserRole == u.RoleName
+            //        select new CartModel
+            //        {
+            //            Id = c.Id,
+            //            OrderId = c.OrderId,
+            //            UserRole = c.UserRole,
+            //            UserId = c.UserId,
+            //            Status = c.Status,
+            //            IsActive = c.IsActive,
+            //            CreatedDateTime = c.CreatedDateTime,
+            //            UpdatedDateTime = c.UpdatedDateTime,
+            //            UserName = u.Name
+            //        });
+
+            return (from cart in HuahuiDbContext.Cart.Where(w => w.Status.Equals("Cart") || w.Status.Equals("Confirm"))
+                    join customerJoin in HuahuiDbContext.Customer on cart.UserId equals customerJoin.Id into CartJoinCustomer
+                    from customer in CartJoinCustomer
+                    join saleJoin in HuahuiDbContext.Sale on customer.SaleId equals saleJoin.Id into CustomerJoinSale
+                    from sale in CustomerJoinSale
+                    select new CartModel
+                    {
+                        Id = cart.Id,
+                        OrderId = cart.OrderId,
+                        UserRole = cart.UserRole,
+                        UserId = cart.UserId,
+                        Status = cart.Status,
+                        IsActive = cart.IsActive,
+                        CustomerName = customer.Firstname + " " + customer.Lastname,
+                        SaleName = sale.Firstname + " " + sale.Lastname,            
+                        CreatedDateTime = cart.CreatedDateTime,
+                        UpdatedDateTime = cart.UpdatedDateTime
+                    });
+
 
         }
 

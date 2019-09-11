@@ -15,6 +15,7 @@
                             <th>No</th>
                             <th>Order Id</th>
                             <th>Customer Name</th>
+                            <th>Sale Name</th>
                             <th>Status</th>
                             <th>Edit / Approve</th>
                             <th>Delete</th>
@@ -27,82 +28,83 @@
                         @foreach (var itemOfCart in Model.CartList)
                         {
 
-                                <tr class="tr-data-row">
+                        <tr class="tr-data-row">
 
-                                <td>@No</td>
-                                <td>@itemOfCart.OrderId</td>
-                                <td>@itemOfCart.UserName</td>
-                                <td>
-                                    @if (itemOfCart.Status.Equals("Approve"))
-                                    {
-                                        <span class="label label-warning">ระบบรับ Order แล้ว</span>
-                                    }
-                                    else if (itemOfCart.Status.Equals("Complete"))
-                                    {
-                                        <span class="label label-success">ปิดการขาย</span>
+                            <td>@No</td>
+                            <td>@itemOfCart.OrderId</td>
+                            <td>@itemOfCart.CustomerName</td>
+                            <td>@itemOfCart.SaleName</td>
+                            <td>
+                                @if (itemOfCart.Status.Equals("Approve"))
+                                {
+                                    <span class="label label-warning">ระบบรับ Order แล้ว</span>
+                                }
+                                else if (itemOfCart.Status.Equals("Complete"))
+                                {
+                                    <span class="label label-success">ปิดการขาย</span>
 
-                                    }
-                                    else if (itemOfCart.Status.Equals("Cart"))
-                                    {
-                                        <span class="label label-danger">รอการยืนยัน</span>
+                                }
+                                else if (itemOfCart.Status.Equals("Cart"))
+                                {
+                                    <span class="label label-danger">รอการยืนยัน</span>
 
-                                    }
-                                    else if (itemOfCart.Status.Equals("Confirm"))
-                                    {
-                                        <span class="label label-warning">ยืนยันการสั่งซื้อแล้ว</span>
+                                }
+                                else if (itemOfCart.Status.Equals("Confirm"))
+                                {
+                                    <span class="label label-warning">ยืนยันการสั่งซื้อแล้ว</span>
 
-                                    }
-                                </td>
-                                <td>
-                                    <a href="#" data-toggle="modal" data-target="#modal-row-table-@No"> <i class="fas fa-pencil-alt text-inverse m-r-10"></i> </a>
-                                    <div class="modal fade" id="modal-row-table-@No" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg" role="document">
-                                            <div class="modal-content">
-                                                <form class="form-row-table">
+                                }
+                            </td>
+                            <td>
+                                <a href="#" data-toggle="modal" data-target="#modal-row-table-@No"> <i class="fas fa-pencil-alt text-inverse m-r-10"></i> </a>
+                                <div class="modal fade" id="modal-row-table-@No" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <form class="form-row-table">
 
-                                                    <!-- Hidden Value Start -->
+                                                <!-- Hidden Value Start -->
 
-                                                    <input type="hidden" name="hid-cart-id" value="@itemOfCart.Id" />
+                                                <input type="hidden" name="hid-cart-id" value="@itemOfCart.Id" />
 
-                                                    <!-- Hidden Value End -->
+                                                <!-- Hidden Value End -->
 
-                                                    <div class="modal-header" style="background-color: #ff6a00;">
-                                                        <h4 class="modal-title text-white">Edit Cart</h4>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="text-white">×</span></button>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                            <div class="modal-body">
-                                                                <div class="card">
-                                                                    <div class="card-header">
-                                                                        <div class="card-actions">
-                                                                            <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
-                                                                        </div>
+                                                <div class="modal-header" style="background-color: #ff6a00;">
+                                                    <h4 class="modal-title text-white">Edit Cart</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="text-white">×</span></button>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                        <div class="modal-body">
+                                                            <div class="card">
+                                                                <div class="card-header">
+                                                                    <div class="card-actions">
+                                                                        <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
                                                                     </div>
-                                                                    <div class="card-body collapse show">
-                                                                        <div class="table-responsive">
-                                                                            <table class="table table-data-item">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>Product Name</th>
-                                                                                        <th>Picture</th>
-                                                                                        <th>Unit Price</th>
-                                                                                        <th>Quantity</th>
-                                                                                        <th>Total Price</th>
-                                                                                        <th>Delete</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
+                                                                </div>
+                                                                <div class="card-body collapse show">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-data-item">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Product Name</th>
+                                                                                    <th>Picture</th>
+                                                                                    <th>Unit Price</th>
+                                                                                    <th>Quantity</th>
+                                                                                    <th>Total Price</th>
+                                                                                    <th>Delete</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
 
-                                                                                    @{ 
+                                                                                @{
 
-                                                                                        int SummaryQuantityOfProduct = 0;
-                                                                                        decimal SummaryTotalOfProduct = 0;
+                                                                                    int SummaryQuantityOfProduct = 0;
+                                                                                    decimal SummaryTotalOfProduct = 0;
 
-                                                                                    }
+                                                                                }
 
-                                                                                    @foreach (var itemOfCartItem in Model.CartItemListModelList.Where(w => w.CardId.Equals(itemOfCart.Id)))
-                                                                                    {
+                                                                                @foreach (var itemOfCartItem in Model.CartItemListModelList.Where(w => w.CardId.Equals(itemOfCart.Id)))
+                                                                                {
 
                                                                                     <tr class="tr-data-item-row">
 
@@ -138,55 +140,55 @@
                                                                                         </td>
                                                                                     </tr>
 
-                                                                                        SummaryQuantityOfProduct += itemOfCartItem.Quantity;
-                                                                                        SummaryTotalOfProduct += itemOfCartItem.TotalPrice;
+                                                                                    SummaryQuantityOfProduct += itemOfCartItem.Quantity;
+                                                                                    SummaryTotalOfProduct += itemOfCartItem.TotalPrice;
 
-                                                                                    }
+                                                                                }
 
-                                                                                    <tr class="tr-data-total-row">
-                                                                                        <td></td>
-                                                                                        <td></td>
-                                                                                        <td><b>Total</b></td>
-                                                                                        <td><input type="text" class="form-control col-sm-6" name="summary-quantity" value="@SummaryQuantityOfProduct" disabled /></td>
-                                                                                        <td><input type="text" class="form-control col-sm-10" name="summary-total-price" value="@SummaryTotalOfProduct" disabled /></td>
-                                                                                    </tr>
+                                                                                <tr class="tr-data-total-row">
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td><b>Total</b></td>
+                                                                                    <td><input type="text" class="form-control col-sm-6" name="summary-quantity" value="@SummaryQuantityOfProduct" disabled /></td>
+                                                                                    <td><input type="text" class="form-control col-sm-10" name="summary-total-price" value="@SummaryTotalOfProduct" disabled /></td>
+                                                                                </tr>
 
-                                                                                </tbody>
-                                                                            </table>
-                                                                        </div>
-
+                                                                            </tbody>
+                                                                        </table>
                                                                     </div>
+
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <div class="col-sm-6">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div class="col-sm-6">
 
-                                                            @if (@itemOfCart.Status.Equals("Confirm"))
-                                                            {
-                                                                <div class="float-left">
-                                                                    <button type="button" class="btn btn-success waves-effect waves-light m-r-10" onclick="ApproveCart(this)">Approve</button>
-                                                                </div>
-                                                            }
-
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <div class="float-right">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                <button type="button" class="btn btn-success" onclick="UpdateCart(this)"><i class="fa fa-check"></i> Success</button>
+                                                        @if (@itemOfCart.Status.Equals("Confirm"))
+                                                        {
+                                                            <div class="float-left">
+                                                                <button type="button" class="btn btn-success waves-effect waves-light m-r-10" onclick="ApproveCart(this)">Approve</button>
                                                             </div>
+                                                        }
+
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="float-right">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-success" onclick="UpdateCart(this)"><i class="fa fa-check"></i> Success</button>
                                                         </div>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
-                                </td>
-                                <td>
-                                    <a href="#" onclick="Delete(this)"><i class="fas fa-trash-alt text-inverse m-r-10"></i></a>
-                                </td>
-                            </tr>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="#" onclick="Delete(this)"><i class="fas fa-trash-alt text-inverse m-r-10"></i></a>
+                            </td>
+                        </tr>
 
                             No++;
 

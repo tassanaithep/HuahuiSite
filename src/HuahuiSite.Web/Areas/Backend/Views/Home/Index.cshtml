@@ -75,7 +75,20 @@
                                 <td>@itemOfOrder.CreatedDateTime.ToShortDateString()</td>
                                 <td>@itemOfOrder.CustomerName</td>
                                 <td>@itemOfOrder.SaleName</td>
-                                <td> <span class="label label-success">@(itemOfOrder.Status.Equals("Complete") ? "ปิดการขาย" : string.Empty)<span></span></td>
+                                <td>
+
+                                    @if (itemOfOrder.Status.Equals("Complete"))
+                                    {
+                                        <span class="label label-success">ปิดการขาย</span>
+
+                                    }
+                                    else 
+                                    {
+                                        <span class="label label-danger"></span>
+
+                                    }
+                                   
+                                </td>
                                 <td>
                                     <a href="#" data-toggle="modal" data-target="#modal-row-table-order-complete-@NoOfOrderComplete">รายละเอียดการสั่งซื้อ</a>
                                     <div class="modal fade" id="modal-row-table-order-complete-@NoOfOrderComplete" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
