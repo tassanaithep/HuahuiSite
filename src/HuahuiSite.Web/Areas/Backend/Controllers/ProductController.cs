@@ -57,6 +57,8 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
             try
             {
+                
+
                 _productService.GetProductList(ref productViewModel, keywordForSearch, isUpdate, page);
 
                 // Bind Model to Paging Model

@@ -79,7 +79,7 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
             }
             catch (Exception exception)
             {
-
+                throw exception;
             }
 
             return View("Index", homeViewModel);

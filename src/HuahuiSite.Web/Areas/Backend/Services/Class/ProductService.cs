@@ -95,6 +95,9 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
         // Updated: 07/07/2019
         public void GetProductList(ref ProductViewModel productViewModel, string keywordForSearch, bool isUpdate, int page)
         {
+            
+
+
             if (!isUpdate)
             {
                 #region Check Keyword for Search from Session
@@ -108,7 +111,10 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
             }
             else
             {
+                if(keywordForSearch =="") {
+               
                 _httpContextAccessor.HttpContext.Session.Remove("KeywordForSearch");
+                }
             }
             
             #region Get List
@@ -121,6 +127,8 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             // Set Keyword for Search to Session
             _httpContextAccessor.HttpContext.Session.SetString("KeywordForSearch", keywordForSearch);
+
+            productViewModel.keywordForSearch = keywordForSearch;
 
             #region Get Select List
 

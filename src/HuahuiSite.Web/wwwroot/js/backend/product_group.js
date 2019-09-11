@@ -143,11 +143,18 @@ UpdateTable = () => {
 */
 EnterSearch = (e, event) => {
     var code = (event.keyCode ? event.keyCode : event.which);
-
+    //alert($(e).val());
     if (code === 13) {
-        let $textOfSearch = $(e).val();
+       // let $textOfSearch = $(e).val();
 
-        window.location = `/Backend/ProductGroup/Index?keywordForSearch=${$textOfSearch}`;
+       // window.location = `/Backend/ProductGroup/Index?keywordForSearch=${$textOfSearch}`;
+
+        let $textOfSearch = $(e).val();
+        if ($textOfSearch != '') {
+            window.location = `/Backend/ProductGroup/Index?keywordForSearch=${$textOfSearch}`;
+        } else {
+            swal("กรอกคำค้นหาด้วยครับ", "", "warning");
+        }
     }
 };
 
@@ -177,17 +184,39 @@ Delete = (e) => {
             jsonObject.Id = $id;
             //jsonObject.TitlePictureFileName = $titlePictureFileName;
 
+            let $textOfSearch = $("#keywordForSearch").val();
+
             $.ajax({
                 type: "POST",
                 url: "/Backend/ProductGroup/Delete",
                 data: jsonObject,
                 success: function (res) {
+                    //if (res.isSuccess) {
+                    //    UpdatePage();
+                    //    swal("Delete Success", "", "success");
+                    //} else {
+                    //    swal("Delete Failed", "", "error");
+                    //}
+
+
                     if (res.isSuccess) {
-                        UpdatePage();
-                        swal("Delete Success", "", "success");
+                        //UpdatePage();
+                        swal("Delete Success", "", "success")
+                            .then((value) => {
+                                //  window.location = "/Backend/ProductGroup/Index?isUpdate=true&keywordForSearch=${$textOfSearch}";
+
+                                if ($textOfSearch != '') {
+                                    window.location = `/Backend/ProductGroup/Index?isUpdate=true&keywordForSearch=${$textOfSearch}`;
+                                } else {
+                                    window.location = "/Backend/ProductGroup/";
+                                }
+
+                            });
                     } else {
                         swal("Delete Failed", "", "error");
                     }
+
+
                 },
                 error: function () { }
             });
@@ -229,14 +258,23 @@ ValidateUpdateSubmit = (e) => {
 */
 OnSaveSuccess = (res) => {
     if (res.isSuccess) {
-        UpdatePage();
-        //swal("Save Success", "", "success");
+    //    //UpdatePage();
+    //    //swal("Save Success", "", "success");
+    //    swal("Save Success", "", "success")
+    //        .then((value) => {
+    //            window.location = "/Backend/ProductGroup/Index?isUpdate=true";
+    //        });
+
+    //    window.location = "/Backend/ProductGroup/Index?isUpdate=true";
+    //} else {
+    //    swal("Save Failed", "", "error");
+
         swal("Save Success", "", "success")
             .then((value) => {
                 window.location = "/Backend/ProductGroup/Index?isUpdate=true";
+
             });
 
-        window.location = "/Backend/ProductGroup/Index?isUpdate=true";
     } else {
         swal("Save Failed", "", "error");
     }
@@ -254,10 +292,22 @@ OnUpdateSuccess = (res) => {
 
         let $textOfSearch = $("#keywordForSearch").val();
      
+        //swal("Update Success", "", "success")
+        //    .then((value) => {
+        //      //  window.location = "/Backend/ProductGroup/Index?isUpdate=true&keywordForSearch=${$textOfSearch}";
+        //        window.location = `/Backend/ProductGroup/Index?isUpdate=true&keywordForSearch=${$textOfSearch}`;
+        //    });
+
+        UpdatePage();
         swal("Update Success", "", "success")
             .then((value) => {
-              //  window.location = "/Backend/ProductGroup/Index?isUpdate=true&keywordForSearch=${$textOfSearch}";
-                window.location = `/Backend/ProductGroup/Index?isUpdate=true&keywordForSearch=${$textOfSearch}`;
+
+                if ($textOfSearch != '') {
+                    //  window.location = "/Backend/ProductGroup/Index?isUpdate=true&keywordForSearch=${$textOfSearch}";
+                    window.location = `/Backend/ProductGroup/Index?isUpdate=true&keywordForSearch=${$textOfSearch}`;
+                } else {
+                    window.location = "/Backend/ProductGroup/Index";
+                }
             });
 
 
