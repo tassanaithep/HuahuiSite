@@ -32,7 +32,27 @@
                                 <td>@No</td>
                                 <td>@itemOfCart.OrderId</td>
                                 <td>@itemOfCart.UserName</td>
-                                <td>@(@itemOfCart.Status.Equals("Cart") ? "รอการยืนยัน" : itemOfCart.Status.Equals("Confirm") ? "ยืนยันการสั่งซื้อแล้ว" : itemOfCart.Status.Equals("Approve") ? "ระบบรับ Order แล้ว" : "ปิดการขาย")</td>
+                                <td>
+                                    @if (itemOfCart.Status.Equals("Approve"))
+                                    {
+                                        <span class="label label-warning">ระบบรับ Order แล้ว</span>
+                                    }
+                                    else if (itemOfCart.Status.Equals("Complete"))
+                                    {
+                                        <span class="label label-success">ปิดการขาย</span>
+
+                                    }
+                                    else if (itemOfCart.Status.Equals("Cart"))
+                                    {
+                                        <span class="label label-danger">รอการยืนยัน</span>
+
+                                    }
+                                    else if (itemOfCart.Status.Equals("Confirm"))
+                                    {
+                                        <span class="label label-warning">ยืนยันการสั่งซื้อแล้ว</span>
+
+                                    }
+                                </td>
                                 <td>
                                     <a href="#" data-toggle="modal" data-target="#modal-row-table-@No"> <i class="fas fa-pencil-alt text-inverse m-r-10"></i> </a>
                                     <div class="modal fade" id="modal-row-table-@No" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">

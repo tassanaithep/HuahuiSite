@@ -67,6 +67,8 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
 
             orderViewModel.OrderList = _unitOfWork.Orders.GetOrderListData(keywordForSearch);
 
+            orderViewModel.OrderListForComplete = _unitOfWork.Orders.GetOrderList();
+
             #endregion
 
             orderViewModel.StartNoOfTable = ((page - 1) * 10) + 1;

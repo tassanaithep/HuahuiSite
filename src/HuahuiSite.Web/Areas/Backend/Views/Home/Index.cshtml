@@ -75,7 +75,7 @@
                                 <td>@itemOfOrder.CreatedDateTime.ToShortDateString()</td>
                                 <td>@itemOfOrder.CustomerName</td>
                                 <td>@itemOfOrder.SaleName</td>
-                                <td>@(itemOfOrder.Status.Equals("Complete") ? "ปิดการขาย" : string.Empty)</td>
+                                <td> <span class="label label-success">@(itemOfOrder.Status.Equals("Complete") ? "ปิดการขาย" : string.Empty)<span></span></td>
                                 <td>
                                     <a href="#" data-toggle="modal" data-target="#modal-row-table-order-complete-@NoOfOrderComplete">รายละเอียดการสั่งซื้อ</a>
                                     <div class="modal fade" id="modal-row-table-order-complete-@NoOfOrderComplete" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
@@ -274,7 +274,23 @@
                                 <td>@itemOfCart.CreatedDateTime.ToShortDateString()</td>
                                 <td>@itemOfCart.CustomerName</td>
                                 <td>@itemOfCart.SaleName</td>
-                                <td>@(itemOfCart.Status.Equals("Cart") ? "รอยืนยันการสั่งซื้อ" : itemOfCart.Status.Equals("Confirm") ? "ยืนยันการสั่งซื้อแล้ว" : string.Empty)</td>
+                                <td>
+                                    @*@(itemOfCart.Status.Equals("Cart") ? "รอยืนยันการสั่งซื้อ" : itemOfCart.Status.Equals("Confirm") ? "ยืนยันการสั่งซื้อแล้ว" : string.Empty)*@
+                                    @if (itemOfCart.Status.Equals("Cart"))
+                                    {
+                                    <span class="label label-danger">รอยืนยันการสั่งซื้อ</span>
+
+                                    }
+                                    else if (itemOfCart.Status.Equals("Confirm"))
+                                    {
+                                        <span class="label label-warning">ยืนยันการสั่งซื้อแล้ว</span>
+
+                                    }
+                                    else
+                                    {
+                                        <span></span>
+                                    }
+                                </td>
                                 <td>
                                     <a href="#" data-toggle="modal" data-target="#modal-row-table-order-1-not-complete-@NoOfOrderNotComplete">รายละเอียดการสั่งซื้อ</a>
                                     <div class="modal fade" id="modal-row-table-order-1-not-complete-@NoOfOrderNotComplete" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">

@@ -61,7 +61,10 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
                 _orderService.GetOrderList(ref orderViewModel, keywordForSearch, isUpdate, page);
 
                 // Bind Model to Paging Model
-                orderViewModel.OrderPagingList = await PagingList.CreateAsync(orderViewModel.OrderList, 10, page);
+                //orderViewModel.OrderPagingList = await PagingList.CreateAsync(orderViewModel.OrderList, 10, page);
+                orderViewModel.OrderPagingList =  PagingList.Create(orderViewModel.OrderListForComplete, 10, page);
+
+
             }
             catch (Exception exception)
             {

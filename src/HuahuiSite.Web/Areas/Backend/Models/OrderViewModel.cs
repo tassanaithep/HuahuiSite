@@ -20,6 +20,15 @@ namespace HuahuiSite.Web.Areas.Backend.Models
 
         public int StartNoOfTable { get; set; }
         public IOrderedQueryable<Order> OrderList { get; set; }
-        public IPagingList<Order> OrderPagingList { get; set; }
+        //public IPagingList<Order> OrderPagingList { get; set; }
+        public IPagingList<OrderModel> OrderPagingList { get; set; }
+
+        //tassanai update 11/8/62
+        public IEnumerable<OrderModel> OrderListAll { get; set; }
+
+        public IEnumerable<OrderModel> OrderListForComplete { get; set; }
+
+
+
     }
 }
