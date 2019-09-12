@@ -9,5 +9,6 @@ namespace HuahuiSite.Core.Models
     {
         public string CustomerName { get; set; }
         public string SaleName { get; set; }
+        public string Username { get; set; }
     }
 }

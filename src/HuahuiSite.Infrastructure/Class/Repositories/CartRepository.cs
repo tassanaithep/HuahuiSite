@@ -72,24 +72,59 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
             //            UserName = u.Name
             //        });
 
-            return (from cart in HuahuiDbContext.Cart.Where(w => w.Status.Equals("Cart") || w.Status.Equals("Confirm"))
-                    join customerJoin in HuahuiDbContext.Customer on cart.UserId equals customerJoin.Id into CartJoinCustomer
-                    from customer in CartJoinCustomer
-                    join saleJoin in HuahuiDbContext.Sale on customer.SaleId equals saleJoin.Id into CustomerJoinSale
-                    from sale in CustomerJoinSale
+            //return (from cart in HuahuiDbContext.Cart.Where(w => w.Status.Equals("Cart") || w.Status.Equals("Confirm"))
+            //        join customerJoin in HuahuiDbContext.Customer on cart.UserId equals customerJoin.Id into CartJoinCustomer
+            //        from customer in CartJoinCustomer
+            //        join saleJoin in HuahuiDbContext.Sale on customer.SaleId equals saleJoin.Id into CustomerJoinSale
+            //        from sale in CustomerJoinSale
+            //        select new CartModel
+            //        {
+            //            Id = cart.Id,
+            //            OrderId = cart.OrderId,
+            //            UserRole = cart.UserRole,
+            //            UserId = cart.UserId,
+            //            Status = cart.Status,
+            //            IsActive = cart.IsActive,
+            //            CustomerName = customer.Firstname + " " + customer.Lastname,
+            //            SaleName = sale.Firstname + " " + sale.Lastname,            
+            //            CreatedDateTime = cart.CreatedDateTime,
+            //            UpdatedDateTime = cart.UpdatedDateTime
+            //        });
+
+            return (from u in HuahuiDbContext.User 
+                    join c in HuahuiDbContext.Cart.Where(w => w.Status.Equals("Cart") || w.Status.Equals("Confirm"))
+                    on u.RoleId equals c.UserId into  userjoincart 
+                    from cartuser in userjoincart 
+                    join cus in HuahuiDbContext.Customer on cartuser.CustomerId equals cus.Id into custjoincart 
+                    from custjoin in custjoincart.DefaultIfEmpty()
+                    join cus1 in HuahuiDbContext.Customer on u.RoleId equals cus1.Id into cust1joinuser
+                    from cust1join in cust1joinuser.DefaultIfEmpty() 
+                    join s in HuahuiDbContext.Sale on cust1join.SaleId equals s.Id into salejoincust1
+                    from sale in salejoincust1.DefaultIfEmpty()
+
+
+
                     select new CartModel
                     {
-                        Id = cart.Id,
-                        OrderId = cart.OrderId,
-                        UserRole = cart.UserRole,
-                        UserId = cart.UserId,
-                        Status = cart.Status,
-                        IsActive = cart.IsActive,
-                        CustomerName = customer.Firstname + " " + customer.Lastname,
-                        SaleName = sale.Firstname + " " + sale.Lastname,            
-                        CreatedDateTime = cart.CreatedDateTime,
-                        UpdatedDateTime = cart.UpdatedDateTime
+                        Id = cartuser.Id,
+                        OrderId = cartuser.OrderId,
+                        UserName = u.Name,
+                        UserRole = cartuser.UserRole,
+                        UserId = cartuser.UserId,
+                        Status = cartuser.Status,
+                        IsActive = cartuser.IsActive,
+                      //  CustomerName = custjoin.Firstname + " " + custjoin.Lastname,
+                        CustomerName = custjoin.Firstname ==null ? u.Name : custjoin.Firstname + " " + custjoin.Lastname,
+                        //SaleName = sale.Firstname + " " + sale.Lastname,
+                        SaleName = sale.Firstname == null ? u.Name : sale.Firstname + " " + sale.Lastname,
+                        CreatedDateTime = cartuser.CreatedDateTime,
+                        UpdatedDateTime = cartuser.UpdatedDateTime
                     });
+
+
+           
+
+
 
 
         }
@@ -107,20 +142,53 @@ DateTime datestart = Convert.ToDateTime(startDate, _cultureEnInfo);
             DateTime dateend = DateTime.ParseExact(endDate, "MM/dd/yyyy",
                                  CultureInfo.InvariantCulture);
 
-            return (from cart in HuahuiDbContext.Cart
-                    join customerJoin in HuahuiDbContext.Customer on cart.UserId equals customerJoin.Id into CartJoinCustomer
-                    from customer in CartJoinCustomer
-                    join saleJoin in HuahuiDbContext.Sale on customer.SaleId equals saleJoin.Id into CustomerJoinSale
-                    from sale in CustomerJoinSale
+            //return (from cart in HuahuiDbContext.Cart
+            //        join customerJoin in HuahuiDbContext.Customer on cart.UserId equals customerJoin.Id into CartJoinCustomer
+            //        from customer in CartJoinCustomer
+            //        join saleJoin in HuahuiDbContext.Sale on customer.SaleId equals saleJoin.Id into CustomerJoinSale
+            //        from sale in CustomerJoinSale
+            //        select new CartModel
+            //        {
+            //            Id = cart.Id,
+            //            OrderId = cart.OrderId,
+            //            CustomerName = customer.Firstname + " " + customer.Lastname,
+            //            SaleName = sale.Firstname + " " + sale.Lastname,
+            //            Status = cart.Status,
+            //            CreatedDateTime = cart.CreatedDateTime
+            //        }).Where(w => w.CreatedDateTime.Date >= datestart && w.CreatedDateTime.Date <= dateend || w.CustomerName.Contains(customerName) || w.SaleName.Contains(saleName)).GroupBy(g => g.Id).Select(s => s.First()).ToList();
+
+
+
+            return (from u in HuahuiDbContext.User
+                    join c in HuahuiDbContext.Cart
+                    on u.RoleId equals c.UserId into userjoincart
+                    from cartuser in userjoincart
+                    join cus in HuahuiDbContext.Customer on cartuser.CustomerId equals cus.Id into custjoincart
+                    from custjoin in custjoincart.DefaultIfEmpty()
+                    join cus1 in HuahuiDbContext.Customer on u.RoleId equals cus1.Id into cust1joinuser
+                    from cust1join in cust1joinuser.DefaultIfEmpty()
+                    join s in HuahuiDbContext.Sale on cust1join.SaleId equals s.Id into salejoincust1
+                    from sale in salejoincust1.DefaultIfEmpty()
+
+
+
                     select new CartModel
                     {
-                        Id = cart.Id,
-                        OrderId = cart.OrderId,
-                        CustomerName = customer.Firstname + " " + customer.Lastname,
-                        SaleName = sale.Firstname + " " + sale.Lastname,
-                        Status = cart.Status,
-                        CreatedDateTime = cart.CreatedDateTime
+                        Id = cartuser.Id,
+                        OrderId = cartuser.OrderId,
+                        UserName = u.Name,
+                        UserRole = cartuser.UserRole,
+                        UserId = cartuser.UserId,
+                        Status = cartuser.Status,
+                        IsActive = cartuser.IsActive,
+                        //  CustomerName = custjoin.Firstname + " " + custjoin.Lastname,
+                        CustomerName = custjoin.Firstname == null ? u.Name : custjoin.Firstname + " " + custjoin.Lastname,
+                        //SaleName = sale.Firstname + " " + sale.Lastname,
+                        SaleName = sale.Firstname == null ? u.Name : sale.Firstname + " " + sale.Lastname,
+                        CreatedDateTime = cartuser.CreatedDateTime,
+                        UpdatedDateTime = cartuser.UpdatedDateTime
                     }).Where(w => w.CreatedDateTime.Date >= datestart && w.CreatedDateTime.Date <= dateend || w.CustomerName.Contains(customerName) || w.SaleName.Contains(saleName)).GroupBy(g => g.Id).Select(s => s.First()).ToList();
+
 
 
             //return (from cart in HuahuiDbContext.Cart
@@ -143,20 +211,53 @@ DateTime datestart = Convert.ToDateTime(startDate, _cultureEnInfo);
 
         public IEnumerable<CartModel> GetCartListData()
         {
-            return (from cart in HuahuiDbContext.Cart
-                    join customerJoin in HuahuiDbContext.Customer on cart.UserId equals customerJoin.Id into CartJoinCustomer
-                    from customer in CartJoinCustomer
-                    join saleJoin in HuahuiDbContext.Sale on customer.SaleId equals saleJoin.Id into CustomerJoinSale
-                    from sale in CustomerJoinSale
+            //return (from cart in HuahuiDbContext.Cart
+            //        join customerJoin in HuahuiDbContext.Customer on cart.UserId equals customerJoin.Id into CartJoinCustomer
+            //        from customer in CartJoinCustomer
+            //        join saleJoin in HuahuiDbContext.Sale on customer.SaleId equals saleJoin.Id into CustomerJoinSale
+            //        from sale in CustomerJoinSale
+            //        select new CartModel
+            //        {
+            //            Id = cart.Id,
+            //            OrderId = cart.OrderId,
+            //            CustomerName = customer.Firstname + " " + customer.Lastname,
+            //            SaleName = sale.Firstname + " " + sale.Lastname,
+            //            Status = cart.Status,
+            //            CreatedDateTime = cart.CreatedDateTime
+            //        }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
+
+            return (from u in HuahuiDbContext.User
+                    join c in HuahuiDbContext.Cart 
+                    on u.RoleId equals c.UserId into userjoincart
+                    from cartuser in userjoincart
+                    join cus in HuahuiDbContext.Customer on cartuser.CustomerId equals cus.Id into custjoincart
+                    from custjoin in custjoincart.DefaultIfEmpty()
+                    join cus1 in HuahuiDbContext.Customer on u.RoleId equals cus1.Id into cust1joinuser
+                    from cust1join in cust1joinuser.DefaultIfEmpty()
+                    join s in HuahuiDbContext.Sale on cust1join.SaleId equals s.Id into salejoincust1
+                    from sale in salejoincust1.DefaultIfEmpty()
+
+
+
                     select new CartModel
                     {
-                        Id = cart.Id,
-                        OrderId = cart.OrderId,
-                        CustomerName = customer.Firstname + " " + customer.Lastname,
-                        SaleName = sale.Firstname + " " + sale.Lastname,
-                        Status = cart.Status,
-                        CreatedDateTime = cart.CreatedDateTime
+                        Id = cartuser.Id,
+                        OrderId = cartuser.OrderId,
+                        UserName = u.Name,
+                        UserRole = cartuser.UserRole,
+                        UserId = cartuser.UserId,
+                        Status = cartuser.Status,
+                        IsActive = cartuser.IsActive,
+                        //  CustomerName = custjoin.Firstname + " " + custjoin.Lastname,
+                        CustomerName = custjoin.Firstname == null ? u.Name : custjoin.Firstname + " " + custjoin.Lastname,
+                        //SaleName = sale.Firstname + " " + sale.Lastname,
+                        SaleName = sale.Firstname == null ? u.Name : sale.Firstname + " " + sale.Lastname,
+                        CreatedDateTime = cartuser.CreatedDateTime,
+                        UpdatedDateTime = cartuser.UpdatedDateTime
                     }).GroupBy(g => g.Id).Select(s => s.First()).ToList();
+
+
+
         }
 
         public Cart GetCartActiveByUser(int userId)

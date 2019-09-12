@@ -57,6 +57,7 @@
                             <tr>
                                 <th>เลขที่การสั่งซื้อ</th>
                                 <th>วันที่</th>
+                                <th>ผู้ซื้อ</th>
                                 <th>ชื่อลุกค้า</th>
                                 <th>Sale</th>
                                 <th>สถานะ</th>
@@ -73,6 +74,7 @@
                             <tr>
                                 <td>@itemOfOrder.Id</td>
                                 <td>@itemOfOrder.CreatedDateTime.ToShortDateString()</td>
+                                <td>@itemOfOrder.Username</td>
                                 <td>@itemOfOrder.CustomerName</td>
                                 <td>@itemOfOrder.SaleName</td>
                                 <td>
@@ -82,12 +84,12 @@
                                         <span class="label label-success">ปิดการขาย</span>
 
                                     }
-                                    else 
+                                    else
                                     {
                                         <span class="label label-danger"></span>
 
                                     }
-                                   
+
                                 </td>
                                 <td>
                                     <a href="#" data-toggle="modal" data-target="#modal-row-table-order-complete-@NoOfOrderComplete">รายละเอียดการสั่งซื้อ</a>
@@ -269,6 +271,7 @@
                             <tr>
                                 <th>เลขที่การสั่งซื้อ</th>
                                 <th>วันที่</th>
+                                <th>ชื่อผู้ซื้อ</th>
                                 <th>ชื่อลุกค้า</th>
                                 <th>Sale</th>
                                 <th>สถานะ</th>
@@ -285,13 +288,14 @@
                             <tr class="tr-data-row">
                                 <td>@itemOfCart.OrderId</td>
                                 <td>@itemOfCart.CreatedDateTime.ToShortDateString()</td>
+                                <td>@itemOfCart.UserName</td>
                                 <td>@itemOfCart.CustomerName</td>
                                 <td>@itemOfCart.SaleName</td>
                                 <td>
                                     @*@(itemOfCart.Status.Equals("Cart") ? "รอยืนยันการสั่งซื้อ" : itemOfCart.Status.Equals("Confirm") ? "ยืนยันการสั่งซื้อแล้ว" : string.Empty)*@
                                     @if (itemOfCart.Status.Equals("Cart"))
                                     {
-                                    <span class="label label-danger">รอยืนยันการสั่งซื้อ</span>
+                                        <span class="label label-danger">รอยืนยันการสั่งซื้อ</span>
 
                                     }
                                     else if (itemOfCart.Status.Equals("Confirm"))
@@ -422,9 +426,25 @@
                             <tr class="tr-data-row">
                                 <td>@itemOfOrder.Id</td>
                                 <td>@itemOfOrder.CreatedDateTime.ToShortDateString()</td>
+                                <td>@itemOfOrder.Username</td>
                                 <td>@itemOfOrder.CustomerName</td>
                                 <td>@itemOfOrder.SaleName</td>
-                                <td>@(itemOfOrder.Status.Equals("Approve") ? "ระบบรับ Order แล้ว" : string.Empty)</td>
+                                <td>
+                                    @*@(itemOfOrder.Status.Equals("Approve") ? "ระบบรับ Order แล้ว" : string.Empty)*@
+
+                                    @if (itemOfOrder.Status.Equals("Approve"))
+                                    {
+                                        <span class="label label-warning">ระบบรับ Order แล้ว</span>
+
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-danger"></span>
+
+                                    }
+
+
+                                </td>
                                 <td>
                                     <a href="#" data-toggle="modal" data-target="#modal-row-table-order-2-not-complete-@NoOfOrderComplete2">รายละเอียดการสั่งซื้อ</a>
                                     <div class="modal fade" id="modal-row-table-order-2-not-complete-@NoOfOrderComplete2" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">

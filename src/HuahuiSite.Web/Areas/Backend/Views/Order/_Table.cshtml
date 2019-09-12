@@ -20,11 +20,14 @@
                 <table class="table" id="table-data">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Order Id</th>
-                            <th>Customer Name</th>
-                            <th>Sale Name</th>
-                            <th>Status</th>
+
+
+                            <th>ลำดับ</th>
+                            <th>เลขที่การสั่งซื้อ</th>
+                            <th>ผู้ซื้อ</th>
+                            <th>ชื่อลุกค้า</th>
+                            <th>Sale</th>
+                            <th>สถานะ</th>
                             <th>View / Complete</th>
                         </tr>
                     </thead>
@@ -38,6 +41,7 @@
                         <tr class="tr-data-row">
                             <td>@No</td>
                             <td>@itemOfOrder.Id</td>
+                            <td>@itemOfOrder.Username</td>
                             <td>@itemOfOrder.CustomerName</td>
                             <td>@itemOfOrder.SaleName</td>
                             <td>
