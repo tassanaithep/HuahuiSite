@@ -102,8 +102,6 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                     join s in HuahuiDbContext.Sale on cust1join.SaleId equals s.Id into salejoincust1
                     from sale in salejoincust1.DefaultIfEmpty()
 
-
-
                     select new CartModel
                     {
                         Id = cartuser.Id,
@@ -119,7 +117,7 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
                         SaleName = sale.Firstname == null ? u.Name : sale.Firstname + " " + sale.Lastname,
                         CreatedDateTime = cartuser.CreatedDateTime,
                         UpdatedDateTime = cartuser.UpdatedDateTime
-                    });
+                    }).OrderBy(x=>x.OrderId);
 
 
            
