@@ -31,6 +31,25 @@ namespace HuahuiSite.Infrastructure.Class.Repositories
             return HuahuiDbContext.Order.AsNoTracking().Where(w => w.Id.Contains(keywordForSearch) || w.Status.Contains(keywordForSearch)).OrderBy(o => o.Id);
         }
 
+        //tassanai 
+        //GetOrderListSearch
+        public IEnumerable<OrderModel> GetOrderListSearch(string keywordForSearch)
+        {
+            return (from order in HuahuiDbContext.Order
+                    join customerJoin in HuahuiDbContext.Customer on order.UserId equals customerJoin.Id into OrderJoinCustomer
+                    from customer in OrderJoinCustomer
+                    join saleJoin in HuahuiDbContext.Sale on customer.SaleId equals saleJoin.Id into CustomerJoinSale
+                    from sale in CustomerJoinSale
+                    select new OrderModel
+                    {
+                        Id = order.Id,
+                        CustomerName = customer.Firstname + " " + customer.Lastname,
+                        SaleName = sale.Firstname + " " + sale.Lastname,
+                        Status = order.Status,
+                        CreatedDateTime = order.CreatedDateTime
+                    }).Where(x=>x.Id.Contains(keywordForSearch)||x.SaleName.Contains(keywordForSearch) || x.CustomerName.Contains(keywordForSearch)).GroupBy(g => g.Id).Select(s => s.First()).ToList();
+        }
+
         public IEnumerable<OrderModel> GetOrderList()
         {
             return (from order in HuahuiDbContext.Order

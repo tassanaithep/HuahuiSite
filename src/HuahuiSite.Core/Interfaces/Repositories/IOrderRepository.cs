@@ -12,6 +12,7 @@ namespace HuahuiSite.Core.Interfaces.Repositories
         Order GetOrderByOrderId(string orderId);
         IOrderedQueryable<Order> GetOrderListData(string keywordForSearch);
         IEnumerable<OrderModel> GetOrderList();
+        IEnumerable<OrderModel> GetOrderListSearch(string keywordForSearch);
         Order GetOrderActiveByUser(int userId);
         IEnumerable<OrderModel> GetOrderListOfSearch(string startDate, string endDate, string customerName, string saleName);
         IEnumerable<Order> GetOrderByLikeOrderId(string orderId);

@@ -233,8 +233,11 @@ EnterSearch = (e, event) => {
 
     if (code === 13) {
         let $textOfSearch = $(e).val();
-
-        window.location = `/Backend/Order/Index?keywordForSearch=${ $textOfSearch }`;
+        if ($textOfSearch != '') {
+            window.location = `/Backend/Order/Index?keywordForSearch=${$textOfSearch}`;
+        } else {
+            swal("กรอกคำค้นหาด้วยครับ", "", "warning");
+        }
     }
 };
 
