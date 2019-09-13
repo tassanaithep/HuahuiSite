@@ -47,7 +47,7 @@ namespace HuahuiSite.Web.Areas.Backend.Services.Class
             {
                 Firstname = customerViewModel.Firstname,
                 Lastname = customerViewModel.Lastname,
-                Address = customerViewModel.PhoneNumber,
+                Address = customerViewModel.Address,
                 PhoneNumber = customerViewModel.PhoneNumber,
                 Email = customerViewModel.Email,
                 SaleId = customerViewModel.SaleId
