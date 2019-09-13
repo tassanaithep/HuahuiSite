@@ -68,7 +68,7 @@ namespace HuahuiSite.Web.Areas.Frontend.Services.Class
             }
 
             mainViewModel.ProductCategorieList = _unitOfWork.ProductCategories.GetAll();
-            mainViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
+           // mainViewModel.ProductGroupList = _unitOfWork.ProductGroups.GetAll();
         }
 
         #endregion

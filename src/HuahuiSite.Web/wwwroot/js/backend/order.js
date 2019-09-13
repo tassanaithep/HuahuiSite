@@ -364,7 +364,7 @@ CancelOrder = (e) => {
                 success: function (res) {
                     if (res.isSuccess) {
                         //UpdatePage();
-                        swal("Cancel Success", "", "success");
+                        swal("Delete Order Success", "", "success");
                         window.location = "/Backend/Order/Index?isUpdate=true";
                     } else {
                         swal("Cancel Failed", "", "error");
