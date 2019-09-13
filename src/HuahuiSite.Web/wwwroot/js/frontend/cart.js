@@ -209,6 +209,11 @@ CheckOutCart = (e) => {
     let $cartId = $form.find("[name='hid-cart-id']").val();
     let $orderId = $form.find("[name='hid-order-id']").val();
     let $customerId = $form.find("[name='select-customer']").val();
+    if ($customerId == null) {
+        swal("คุณยังไม่ได้เลือกลูกค้า !!", "", "warning");
+    } else {
+
+  
 
     $.ajax({
         type: "GET",
@@ -239,7 +244,8 @@ CheckOutCart = (e) => {
             }
         },
         error: function () { }
-    });
+        });
+    }
 };
 
 // #endregion

@@ -52,7 +52,7 @@
                         else if (@Model.CartViewModel.UserRole.Equals("Sale") && @Model.CartViewModel.Status.Equals("Cart"))
                         {
                             <div class="row">
-                                <h4 class="col-sm-1">ชื่อลูกค้า: </h4><select name="select-customer" asp-items="@Model.CartViewModel.CustomerSelectList" class="form-control col-sm-3"></select>
+                                <h4 class="col-sm-2">ชื่อลูกค้า : <span class="text-danger">*</span> </h4><select name="select-customer" asp-items="@Model.CartViewModel.CustomerSelectList" class="form-control col-sm-5" ></select>
                             </div>
                         }
                         else if (@Model.CartViewModel.UserRole.Equals("Sale") && !@Model.CartViewModel.Status.Equals("Cart"))
