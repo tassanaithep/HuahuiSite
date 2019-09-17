@@ -15,7 +15,6 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
         #region Members
 
         private readonly ILoginService _loginService;
-
         private readonly ICartService _cartService;
 
         #endregion

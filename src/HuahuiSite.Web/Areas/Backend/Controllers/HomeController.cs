@@ -68,6 +68,31 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
         #endregion
 
+        #region Partial Views
+
+        /// <summary>
+        /// Update Table.
+        /// </summary>
+        // Author: Mod Nattasit
+        // Updated: 07/07/2019
+        public PartialViewResult UpdateTable()
+        {
+            HomeViewModel homeViewModel = new HomeViewModel();
+
+            try
+            {
+                _homeService.GetCompleteOrderList(ref homeViewModel);
+            }
+            catch (Exception exception)
+            {
+
+            }
+
+            return PartialView("_Table", homeViewModel);
+        }
+
+        #endregion
+
         #region Actions
 
         [HttpPost]
@@ -101,31 +126,6 @@ namespace HuahuiSite.Web.Areas.Backend.Controllers
 
             return File(result, "application/ms-excel", $"Report_"+ orderId + ".xlsx");
         }
-
-        #endregion
-
-        /// <summary>
-        /// Update Table.
-        /// </summary>
-        // Author: Mod Nattasit
-        // Updated: 07/07/2019
-        public PartialViewResult UpdateTable()
-        {
-            HomeViewModel homeViewModel = new HomeViewModel();
-
-            try
-            {
-                _homeService.GetCompleteOrderList(ref homeViewModel);
-            }
-            catch (Exception exception)
-            {
-
-            }
-
-            return PartialView("_Table", homeViewModel);
-        }
-
-        #region Actions
 
         [HttpGet]
         public JsonResult GetProductPriceByQuantity(string productGroupCode, int quantity)
